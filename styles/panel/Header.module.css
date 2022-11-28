@@ -1,0 +1,97 @@
+.bell svg,
+.message svg{
+    width: 35px;
+    height:35px;
+    cursor: pointer
+}
+.bell,.message{padding-right: 30px}
+.account svg{
+    width: 20px;
+    height:20px;
+    position:relative;
+    top:-14px;
+    cursor: pointer
+}
+.message path,
+.bell path,
+.account path{
+    fill:#7A7D7C !important;
+}
+.dot{
+    display:block;
+    width:7px;
+    height:7px;
+    background:orange;
+    border-radius:100%;
+    position: relative;
+    top: -28px;
+    left: 25px;
+}
+.account > span{
+    width:40px !important;
+    height:40px !important;
+    border-radius:100%;
+}
+.pername{
+    display:inline;
+    font-size: 15px;
+    padding: 0 20px 10px;
+    position: relative;
+    top: -14px;
+}
+@media  only screen and (max-width: 1400px) {
+}
+
+@media  only screen and (max-width: 1200px) {
+}  
+
+@media  only screen and (max-width: 992px) {
+    .pername{
+        display:none
+    }
+    .itholder{
+        position: relative;
+        top: -45px;
+    }
+}
+
+@media  only screen and (max-width: 768px) {
+    .itholder{
+        position: relative;
+        top: -45px;
+    }
+}
+
+@media  only screen and (max-width: 576px) {
+.bell,.message{padding-right: 5px}
+
+.bell svg,
+.message svg{
+    width: 25px;
+    height:25px;
+}
+.bell,
+.message{
+    position:relative; 
+    top:5px
+}
+.account > span{
+    width:30px !important;
+    height:30px !important;
+    border-radius:100%;
+}
+.account svg{
+    width: 17px;
+    height:17px;
+    position:relative;
+    top:-14px
+}
+.dot{
+    top: -22px;
+    left: 15px;
+}
+.account{
+    position: relative;
+    top: 4px;
+}
+}

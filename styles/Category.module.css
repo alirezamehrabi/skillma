@@ -1,0 +1,61 @@
+.title{
+    margin: 80px auto 60px;
+    font-weight: 700;
+    font-size: 33px;
+    color: #333
+}
+.catName{
+    position: relative;
+    top: -150px;
+    right: 50px;
+    font-size: 15px
+}
+.catImg > span{
+    cursor:pointer;
+    overflow:hidden !important;
+    transition: 0.5s;
+    border-radius: 20px;
+}
+.catImg img{
+    transition: 0.5s;
+
+}
+.catImg img:hover{
+    transform: scale(1.1);
+}
+.input{
+    position: relative;
+left: 95%;
+z-index: 1;
+width: 0 !important;
+height: 0 !important;
+top: -20px;
+transition:0.5s;
+}
+.input:checked{
+width: 35px !important;
+height: 35px !important;
+}
+
+.btn{
+    color:#fff;
+    font-weight: 700;
+    padding: 10px 80px 
+}
+@media  only screen and (max-width: 1400px) {
+}
+
+@media  only screen and (max-width: 1200px) {
+}  
+
+@media  only screen and (max-width: 992px) {
+    .catName{
+        top: -135px;
+    }
+}
+
+@media  only screen and (max-width: 768px) {
+}
+
+@media  only screen and (max-width: 576px) {
+}

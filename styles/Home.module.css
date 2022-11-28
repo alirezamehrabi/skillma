@@ -1,129 +1,1240 @@
-.container {
-  padding: 0 2rem;
+.MobileNavigation {
+  display: none;
+}
+.menu {
+  padding: 20px 0;
+}
+.menuHolder {
+  box-shadow: 1px 4px 10px #eee;
 }
 
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+.logBut {
+  color: #fff;
+  height: 41px;
+  background: #FF9D14;
+  font-weight:600
+}
+.logBut:hover {
+  background-color: #ffcf00;
+  color: #fff;
+}
+.cart,
+.logBut,
+.btn {
+  cursor: pointer;
+}
+.logo {
+  cursor: pointer;
+}
+.menuWrapper {
+  display: block;
+  float: left;
+  margin-top: 10px;
+  position: relative;
+  z-index: 2;
+}
+.menuWrapper a {
+  padding: 25px 45px 5px;
+  color: #333;
+  transition: 0.5s;
+  margin-top: 5px;
+  font-weight:600
+}
+.menuWrapper a:hover {
+  color: blue;
+}
+.active {
+  border-bottom: 1px solid blue;
+  color: blue !important;
+}
+.btn {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  height: 100%;
 }
-
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
+.drop {
+  border: 1px solid #222b;
 }
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+.favCat li {
+  display: block;
+  float: left;
+  padding: 14px;
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  margin: 0 2px;
+  transition: 0.5s;
 }
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.favCat li:hover {
+  color: #ffcf00;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+.favCat {
+}
+.header {
+  background: url(../src/assets/home/bg.png) no-repeat;
+  background-size: cover;
+  color: #fff;
+  text-align: justify;
+  min-height: 700px;
+}
+.header > div {
+  margin-top: 50px;
+}
+.header h2,
+.header h5 {
+  text-align: justify;
+  margin: 60px 120px;
+  line-height: 40px;
+}
+.header h2 {
+  font-weight:600
 }
 
 .title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+  margin: 60px auto;
+  text-align: center;
+  line-height: 100px;
+  font-size: 35px;
+  font-weight: 600;
+  color: #333;
+  background: url(../src/assets/home/why.png) no-repeat;
+  background-position: 49% 120%;
+}
+.leftWhy {
+  padding: 20px 125px;
+}
+.leftWhy h2,
+.leftWhy h6 {
+  line-height: 30px;
+  margin-bottom: 30px;
+}
+.pic1 {
+  position: absolute;
+  right: 0;
+  top: 80px;
+}
+.pic2 {
+  position: absolute;
+  left: 0%;
+  top: 285px;
+  width: 35%;
+}
+.pic3 {
+  position: absolute;
+  right: -40%;
+  top: 285px;
+  width: 100%;
+}
+.pic4 {
+  position: absolute;
+  position: absolute;
+  left: 7%;
+}
+.pic5 {
+  position: absolute;
+  left: 3%;
+  top: 185px;
+  width: 25%;
+  z-index: 1;
+}
+.pic6 {
+  position: absolute;
+  left: 0%;
+  top: 185px;
+  width: 100%;
+}
+.pic1 span,
+.pic2 span,
+.pic3 span,
+.pic4 span,
+.pic5 span,
+.pic6 span {
+  width: 100%;
 }
 
-.title,
-.description {
+.arrow {
+  background-color: #ffc107;
+  border-radius: 5px;
+  cursor: pointer;
+  padding:6px;
+}
+.arrow:hover {
+  background-color: #ffcf00;
+}
+.knowBut {
+  float: left;
+  cursor: pointer;
+  margin: 0 5px 0 0;
+  font-weight:600;
+  padding: 0px 28px;
+}
+.grid figure {
+  overflow: hidden;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+}
+
+.grid figure span {
+  transition: all 0.5s ease;
+  background: orange;
+}
+.grid figure:hover span {
+  transform: scale(1.1) skewX(1deg);
+  /* opacity: 0.95; */
+  background: orange;
+}
+.grid figure span img {
+  transition: all 0.5s ease;
+}
+.grid figure:hover span img {
+  /* opacity: 0.95; */
+  background: orange;
+}
+.titleVerified {
+  margin: 60px auto;
+  text-align: center;
+  line-height: 100px;
+  font-size: 35px;
+  font-weight: 600;
+  color: #333;
+  background: url(../src/assets/home/verified.png) no-repeat;
+  background-position: 50% 93%;
+}
+.varifyPic {
+  text-align: right;
+}
+.rightVarify {
+  padding: 40px 80px;
+  text-align: justify;
+}
+.rightVarify h2 {
+  line-height: 40px;
+}
+.rightVarify h6 {
+  line-height: 30px;
+}
+.bigImgEffect span,
+.bigImgEffect img {
+  transition: 0.6s;
+}
+.bigImgEffect:hover span {
+  transform: translateX(3px) scale(1.02);
+}
+.bigImgEffect:hover img {
+  transform: translateX(3px) scale(1.01);
+  opacity: 0.95;
+}
+.but {
+  display: inline-flex;
+  width: auto;
+  cursor: pointer;
+}
+.but2 {
+  margin-top: 72px;
+  position: absolute;
+  right: 17%;
+}
+.titleShort {
+  margin: 40px 0;
+  text-align: left;
+  line-height: 100px;
+  font-size: 35px;
+  font-weight: 600;
+  color: #333;
+  background: url(../src/assets/home/short.png) no-repeat;
+  background-position: 0% 80%;
+}
+.titleCourse {
+  margin: 40px 0;
+  text-align: left;
+  line-height: 100px;
+  font-size: 35px;
+  font-weight: 600;
+  color: #333;
+  background: url(../src/assets/home/courses.png) no-repeat;
+  background-position: 0% 90%;
+}
+.titleFree {
+  margin: 40px 0;
+  text-align: left;
+  line-height: 100px;
+  font-size: 35px;
+  font-weight: 600;
+  color: #333;
+  background: url(../src/assets/home/free.png) no-repeat;
+  background-position: 0% 180%;
+}
+.shortSlidePic {
+  overflow: hidden;
+  width: auto !important;
+  cursor: pointer;
+  max-height: 310px;
+}
+.rating {
+  position: relative;
+  top: -50px;
+  left: 90%;
+}
+.rating span svg {
+  width: 20px;
+  height: 20px;
+}
+.teacherBadge {
+  position: relative;
+  top: -250px;
+  left: 40px;
+  color: #fff;
+}
+.teacherBadge > span > img {
+  border: 2px solid #fff !important;
+  border-radius: 100%;
+}
+.teacherBadge h5 {
+  position: relative;
+  left: 50px;
+  top: -45px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 19px;
+}
+.teacherBadge h6 {
+  position: relative;
+  left: 50px;
+  top: -45px;
+  color: #f5f5f5;
+  font-size: 14px;
+}
+.shortContent {
+  position: relative;
+  top: -330px;
+}
+.shortContent h6 {
+  position: relative;
+  top: -75px;
+  left: 90px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #fff;
+}
+.botton {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 245, 250, 1) 0%,
+    rgba(255, 255, 255, 1) 5%,
+    rgba(246, 246, 246, 1) 100%
+  );
+  border-radius: 5px;
+  padding: 10px 5px;
+  text-align: center;
+  color: #555;
+}
+.botton div svg {
+  margin-right: 5px;
+}
+.topCourses {
+  margin-top: 100px;
+}
+.courseContent {
+  position: relative;
+  top: -295px;
+}
+.courseContent h6 {
+  position: relative;
+  top: -75px;
+  color: #fff;
+  left: 80px;
+  padding: 0 100px 0 0;
+}
+.studentBadge {
+  position: relative;
+  top: -20px;
+}
+.studentBadge > span > img {
+  border: 2px solid #fff !important;
+  border-radius: 100%;
+}
+.certificate {
+  position: relative;
+  top: -240px;
+  left: 65%;
+}
+.courseSlidePic {
+  overflow: hidden;
+  width: auto !important;
+  cursor: pointer;
+  max-height: 520px;
+  border-radius: 10px;
+}
+.courseBotton {
+  /* background: linear-gradient(
+    90deg,
+    rgba(245, 245, 250, 1) 0%,
+    rgba(255, 255, 255, 1) 5%,
+    rgba(246, 246, 246, 1) 100%
+  ); */
+  background: #F1F6F2;
+  padding: 10px 5px;
+  text-align: center;
+  color: #555;
+  position: relative;
+  border-radius: 0 0 25px 25px;
+}
+.courseBotton div svg {
+  margin-right: 5px;
+}
+.courseKey {
+  color: #333 !important;
+  top: -10px !important;
+  line-height: 30px;
+  text-align: justify;
+  left: 40px !important;
+}
+.courseKey span {
+  font-weight: 600;
+}
+.courseBut {
+  width: 49%;
+  float: left;
+  margin: 0 1px;
+  height: 50px;
+  font-weight: 600
+}
+.coursePicHolder span {
+  width: 100% !important;
+  height: auto !important;
+}
+.FreeImg span{
+  width: 107px !important;
+  height:auto !important;
+}
+
+.FreePlay span{
+  top: -130px !important;
+}
+.teacherBadgeFree {
+  position: relative;
+  top: 15px;
+  /* left: 40px; */
+  color: #555;
+}
+.teacherBadgeFree > span > img {
+  border: 2px solid #fff !important;
+  border-radius: 100%;
+}
+.teacherBadgeFree h5 {
+  position: relative;
+  left: 50px;
+  top: -45px;
+  color: #555;
+  font-weight: 600;
+  font-size: 16px;
+}
+.teacherBadgeFree h6 {
+  position: relative;
+  left: 50px;
+  top: -45px;
+  color: #555;
+  font-size: 14px;
+}
+.nowrap{
+  max-width: 70% !important;
+}
+.FreeName{
+  font-size: 15px !important;
+}
+.FreeDuration{
+  font-size: 13px !important;
+  color: #888 !important;
+}
+.freeWrap{
+  max-height: 150px;
+  overflow: hidden;
+}
+.discount {
+  margin: 40px auto;
+  text-align: center;
+  line-height: 100px;
+  font-size: 35px;
+  font-weight: 600;
+  color: #333;
+  background: url(../src/assets/home/Discount.png) no-repeat;
+    background-position-x: 0%;
+    background-position-y: 0%;
+  background-position: 50% 100%;
+}
+.discountTitle{
+  line-height: 50px;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 85px 15px 0;
+}
+.discounttxt{
+  line-height: 35px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 25px 15px 0;
+}
+.subscribeTitle {
+  margin: 40px auto;
+  text-align: center;
+  line-height: 60px;
+  font-size: 33px;
+  font-weight: 600;
+  color: #333;
+}
+.subscribeDes {
+  margin: 0px auto;
+  text-align: center;
+  line-height: 50px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #555;
+}
+.inputWraper{
+  box-shadow: -15px 14px 20px 5px #ccc;
+  border-radius: 10px;
+  margin: 50px auto 100px;
+}
+.inputWraper input{
+  height: 66px;
+}
+.inputWraper button{
+  color:#fff;
+  background: #FF9D14
+}
+.inputWraper button:hover{
+  color:#eee;
+}
+
+.footerTitle{
+  font-weight: 600;
+  font-size: 23px;
+  padding: 110px 100px 20px;
+}
+.footerDes{
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 100px 30px;
+}
+.footer {
+  background: url(../src/assets/home/footer.png) no-repeat;
+  background-size: 100% 100%;
+  text-align: justify;
+  min-height: 400px;
+}
+.links{
+  padding: 5px 0 30px 100px;
+}
+.links a{
+  color: #444;
+  transition: 0.5s;
+}
+.links a:hover{
+  color: #b35218;
+}
+.Follow{
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 0 20px 100px;
+  margin-bottom: 30px;
+}
+.Follow svg{
+  cursor: pointer;
+  margin: 0 5px;
+}
+.Copyright{
+  border-top: 2px solid #9193f7;
+  padding: 40px 0 30px; 
+}
+.Navigation2 {
+  position: relative;
+  top: -20px;
+}
+.Hambur{
+  display: none;
+}
+ .MobileFav{
+  display: none;
+}
+.master{
+  background: url(../src/assets/home/masterbg.png) no-repeat;
+  background-size: cover;
+  text-align: justify;
+  min-height: 800px;
+}
+.slidePic{
+  background: url(../src/assets/home/rotate.png) 0% 70% no-repeat;
+  background-size: 100%;
+  text-align: justify;
+  height: 800px;
+}
+.slideHolder{
   text-align: center;
 }
-
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
+.slideHolder > div{
+  width: 350px !important;
+  margin: 220px auto;
 }
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+.slideHolder span{
+  display: block !important;
+  width: 100px !important;
+  margin: auto !important;
 }
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
+.rate{
+  position: relative;
+  margin: 20px auto
 }
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+.rate span svg {
+  width: 20px;
+  height: 20px;
+  margin: 20px auto
 }
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+.masterDesc{
+  text-align: justify;
+  line-height: 30px
 }
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+.masterName{
+  margin: 20px auto;
+  font-weight: 600
 }
-
-.card p {
+.introHolder{
+  border-radius: 3%;
+  overflow: hidden;
+  width: 100%;
   margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
+  padding: 0;
+}
+.introHolder  video{
+  width: 100%;
+}
+.introHolder >  span{
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+}
+.teacherBadgeModal {
+  position: relative;
+  top: 20px;
+  left: 0px;
+  color: #fff;
+}
+.teacherBadgeModal > span > img {
+  border: 2px solid #fff !important;
+  border-radius: 100%;
+}
+.teacherBadgeModal h5 {
+  position: relative;
+  left: 50px;
+  top: -45px;
+  color: #444;
+  font-weight: 600;
+  font-size: 19px;
+}
+.teacherBadgeModal h6 {
+  position: relative;
+  left: 50px;
+  top: -45px;
+  color: #aaa;
+  font-size: 14px;
+}
+.conHolder{
+  width: 100% !important;
+}
+.bot{
+  text-align: center;
+color: #555;
+position: relative;
+top: 25px;
+}
+.subBTN{
+  display: block;
+  margin: auto;
+}
+.search > svg{
+  border: 1px solid #aaa;
+  border-right: none;
+height: 100%;
+width: 30px;
+cursor: pointer;
+}
+.search > button{
+  border-radius: 0 10px 10px 0;
+  border: 1px solid #aaa;
+  height: 100%;
+}
+.search > button:hover{
+  background: #ffc107;
+}
+.searchBox{
+  background:#eee;
+  margin: 0 auto 20px;
+  left:0;
+  border-radius: 5px;
+}
+.box2{
+  position: relative;
+  top: 2px;
+  transition: 0.7s;
+  z-index: 2;
+}
+.listHeader2 a:hover{
+  color: #777;
+  background: #fff;
+}
+.listHeader2{
+  position: relative;
+}
+.boxList2{
+  list-style: none;
+  padding: 0;
+  width:100%;
+  height: 38px;
+  background: #12839B;
+  font-size: 15px;
+  border-bottom: 1px solid #12839B;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+}
+.boxList2 span{
+width: 100%;
+height: 100%;
+display: block;
+line-height: 38px;
+color: #777;
+  background: #fff;
+  text-indent: 15px;
+  border-radius: 5px 5px 0 0;
+
+}
+.boxList2 a.listHeader2{
+  display:block;
+  height:41px;
+  text-align: left;
+  text-decoration: none;
+  color: #fff;
+  line-height: 41px;
+  font-weight: normal;
+  font-size: 15px;
+  text-indent: 20px;
+}
+.boxList2 li{
+  width: 100%;
+  height: 0px;
+  background: #777;
+  color: #fff;
+  text-align: justify;
+  margin: 0;
+  line-height: 36px;
+  text-indent: 20px;
+  border-bottom: 1px dotted #ccc;
+  display:none
+}
+.boxList2:hover li{
+  transition: 0.5s ;
+  height: 38px;
+  display:block
 }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+.listItem21:hover {
+  color: #F47F32 !important;
+  background: #12839B;
+  cursor: pointer;
+}
+.listItem21:first-child{
+  position: relative;
+  z-index: 10;
+}
+.cartSVG{
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  fill:blue
+}
+.rarrow{
+  width: 40px;
+  height: 40px;
+  fill: #fff;
+  background: #FF9D14;
+  border-radius: 5px;
+  cursor:pointer;
+  transition:0.5s;
+  padding: 9px;
+}
+.rarrow:hover{
+  background: #ffcf00;
+}
+.inputsearch{
+  overflow: hidden;
+  border-radius: 17px;
+  height: 60px;
+}
+.inputsearch > input{
+  height:100%
+}
+.searchbutton{
+  padding-top: 0;
+  border-radius: 0;
+}
+.btnsearch{
+  width: 60px;
+  height: 65px;
+  fill: #fff;
+  transition: 0.5s
+}
+.searchsvg{
+  transition: 0.5s;
+  background:#FFEBB4
+}
+.searchsvg:hover svg{
+  fill: #fff;
+}
+.btnsearch:hover{
+  fill: #ccc;
+}
+.spic{
+  width:100%;
+  height:auto;
+  border-radius:15px;
+}
+.spic > span{
+  width:100% !important;
+  height:auto !important;
+}
+.courseBut{
+  width: 42%;
+margin: 0 auto;
+}
+.conHoldertxt{
+  margin-top: -70px;
 }
 
-@media (max-width: 600px) {
-  .grid {
+.slidePic1 > span{
+  width:100px !important;
+  height:100px !important;
+  border-radius:100%;
+}
+
+.slidePic2 > span,
+.slidePic3 > span,
+.slidePic4 > span,
+.slidePic5 > span,
+.slidePic6 > span,
+.slidePic7 > span{
+  width:60px !important;
+  height:60px !important;
+  border-radius:100%;
+}
+.slidePic7 > span{
+  width:70px !important;
+  height:70px !important;
+  border-radius:100%;
+}
+.slidePic1{
+  margin: 40px 280px;
+  width: 200px;
+}
+.slidePic2{
+  margin: 40px 420px;
+  width: 200px;
+}
+.slidePic3,
+.slidePic5,
+.slidePic7{
+  margin: 40px 220px;
+  width: 200px;
+}
+
+.slidePic4,
+.slidePic6{
+  margin: 40px 365px;
+  width: 200px;
+}
+@media only screen and (max-width: 1400px) {
+  .pic6 {
+    left: 10%;
+  }
+  .shortSlidePic {
+    margin: 0 20px;
+  }
+  .slidePic1{
+    margin: 100px 280px;
+  }
+  .slidePic3{
+    margin: 40px 205px;
+  }
+  .slidePic4{
+    margin: -65px 365px;
+  }
+  .slidePic5{
+    margin: 60px 240px;
+  }
+  .slidePic6{
+    margin: -60px 365px;
+  }
+  .slidePic7{
+    margin: 100px 220px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .menuWrapper a {
+    padding: 25px 30px 5px;
+  }
+  .teacherBadge {
+    top: -200px;
+  }
+  .teacherBadge h5 {
+    font-size: 15px;
+  }
+  .shortContent {
+    top: -300px;
+  }
+  .shortContent h6 {
+    font-size: 12px;
+  }
+  .certificate {
+    top: -200px;
+  }
+  .header h2, .header h5 {
+    text-align: justify;
+    margin: 28px 60px;
+    line-height: 30px;
+  }
+  .header h5 {
+    font-size: 18px;
+  }
+  .botHolder{
+    position: relative;
+    top: -20px;
+  }
+  .slidePic1{
+    margin: 165px 200px;
+  }
+  .slidePic2{
+    margin: 40px 380px;
+  }
+  .slidePic3{
+    margin: -100px 162px;
+  }
+  .slidePic4{
+    margin: 86px 290px;
+  }
+  .slidePic5{
+    margin: -60px 150px;
+  }
+  .slidePic6{
+    margin: -60px 365px;
+  }
+  .slidePic7{
+    display:none
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .Navigation {
+    display: none;
+  }
+  
+  .MobileNavigation {
+    display: block;
+    position: absolute;
     width: 100%;
-    flex-direction: column;
+    left: 0;
+    z-index: 10;
+  }
+  .MobileFav{
+    display: block;
+  }
+  .Hamburger {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    top: 0;
+    left: 3%;
+    width: 60px;
+    z-index: 100;
+  }
+  .Hambur{
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+    line-height: 40px;
+    text-indent: 50px;
+  }
+  .menu {
+    display: block;
+    margin: 20px auto 20px;
+    line-height: 18px;
+    width: 100%;
+    padding: 0;
+  }
+  .menu a {
+    display: block;
+    text-align: justify;
+  }
+  .menuWrapper {
+    float: none;
+    background-color: #ffcf00;
+    margin-top: 25px;
+    opacity: 0.97;
+    padding-bottom: 20px;
+  }
+  .active {
+    border: none;
+  }
+  .btn {
+    justify-content: right;
+    cursor: pointer;
+  }
+  .pic6 {
+    left: 0%;
+  }
+  .varPart {
+    margin-top: 500px;
+  }
+  .varifyPic {
+    text-align: center;
+  }
+  .certificate {
+    top: -215px;
+  }
+  .favItem{
+    display:flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    left:0;
+    margin:10px auto;
+  }
+  .favItem li{
+    font-size: 13px
+  }
+  .menuHolder{
+    box-shadow: none;
+    color:#b35218
+  }
+  .header h2 {
+    font-weight:600;
+    font-size: 20px;
+  }
+  .header h2, .header h5 {
+    text-align: justify;
+    margin: 28px 60px;
+    line-height: 30px;
+  }
+  .title {
+    margin: 40px auto 10px;
+  }
+  .titleVerified {
+    margin: 60px auto 0px;
+  }
+  .varifyPic{
+    margin-top:90px;
+  }
+  .slideHolder > div {
+    margin: 100px auto;
+  }
+  .slidePic1{
+    margin: 10px 200px;
+  }
+  .slidePic2{
+    margin: 40px 440px;
+  }
+  .slidePic3{
+    margin: -100px 230px;
+  }
+  .slidePic4{
+    margin: 120px 290px;
+  }
+  .slidePic5{
+    margin: -60px 85px;
+  }
+  .slidePic6{
+    margin: -60px 410px;
+  }
+  .slidePic7{
+    display:block;
+    margin: 350px 365px;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
+@media only screen and (max-width: 768px) {
+  .Hamburger {
+    width: 25px;
   }
-  .code {
-    background: #111;
+  .logo {
+    width: 110px;
   }
-  .logo img {
-    filter: invert(1);
+  .logBut {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  .header {
+    min-height: 900px;
+  }
+  .header h2,
+  .header h5 {
+    margin: 30px 60px;
+    line-height: 30px;
+  }
+  .title {
+    font-size: 30px;
+  }
+  .pic6 {
+    left: 8%;
+  }
+  .rightVarify h6 {
+    text-align: justify;
+  }
+  .teacherBadge {
+    top: -170px;
+    left: 20px;
+  }
+  .teacherBadge h5 {
+    font-size: 13px;
+  }
+  .teacherBadge h6 {
+    font-size: 10px;
+  }
+  .shortContent {
+    top: -270px;
+    left: -25px;
+  }
+  .shortContent h6 {
+    font-size: 10px;
+  }
+  .certificate {
+    top: -230px;
+  }
+  .leftWhy {
+    padding: 20px 40px;
+  }
+  .inputsearch{
+    height: 60px;
+  }
+  .titleShort, .titleCourse, .titleFree {
+    margin: 40px auto;
+    text-align: center;
+    background-position: 60% 80%;
+  }
+  .discount{
+    margin: 0 auto;
+  }
+  .but2{
+    position: relative;
+    right: 0;
+    margin-top: 0;
+  }
+  .subscribeTitle{line-height: 40px;font-size: 28px;}
+.subscribeDes{line-height: 30px;font-size: 18px;}
+.botHolder {
+  top: -40px;
+  left: 20px;
+}
+.shortSlidePic {
+  max-height: 310px;
+}
+.FreePlay span {
+  top: -115px !important;
+}
+.footerTitle {
+  padding: 10px 100px 20px;
+}
+.footskill{
+  padding-top:60px
+}
+.footerDes{
+  padding: 5px 10px 30px 100px;
+}
+.sinput{
+  font-size:13px
+}
+.slidePic1{
+  margin: 130px 200px;
+}
+.slidePic2{
+  margin: 40px 420px;
+}
+.slidePic3{
+  margin: -100px 230px;
+}
+.slidePic4{
+  margin: 175px 300px;
+}
+.slidePic5{
+  margin: -230px 85px;
+}
+.slidePic6{
+  margin: 260px 410px;
+}
+.slidePic7{
+  margin: -275px 230px;
+}
+}
+
+@media only screen and (max-width: 576px) {
+  .header h2,
+  .header h5 {
+    margin: 30px 40px;
+    line-height: 25px;
+  }
+  .header > div {
+    margin-top: 20px;
+  }
+  .title {
+    font-size: 26px;
+  }
+  .pic2 {
+    top: 200px;
+  }
+  .pic3 {
+    top: 265px;
+  }
+  .pic6 {
+    left: 20%;
+  }
+  .teacherBadge {
+    top: -200px;
+    left: 40px;
+  }
+  .teacherBadge h5 {
+    font-size: 16px;
+  }
+  .shortContent {
+    top: -300px;
+    left: 0px;
+  }
+  .shortContent h6 {
+    font-size: 12px;
+  }
+  .leftWhy {
+    padding: 20px;
+  }
+  .Hambur{
+    text-indent: 70px;
+    font-size: 12px;
+  }
+  .subscribeTitle{line-height: 38px;font-size: 24px;}
+  .botHolder {
+    top: -20px;
+    left: 0px;
+  }
+  .shortSlidePic {
+    max-height: 310px;
+  }
+  .FreePlay span {
+    top: -130px !important;
+  }
+  .sinput{
+    font-size:11px
+  }
+  .slidePic{
+    display:none;
   }
 }

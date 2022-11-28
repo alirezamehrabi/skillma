@@ -1,0 +1,158 @@
+.work{
+font-weight: 600;
+font-size: 13px;
+position: relative;
+top: -10px;
+padding: 15px 35px;
+margin: 15px 0 15px 30px;
+}
+.work:hover{
+    color: #FFF;
+}
+.con{
+    padding: 30px 72px 30px;
+}
+.contitle{
+    margin-bottom: 30px
+}
+.conpicholder{
+    display: inline !important;
+    position:relative;
+}
+.conpicholder > span{
+    width:40px !important;
+    height:40px !important;
+    border-radius: 100%;
+}
+.conpicholder:nth-child(3){left: -10px}
+.conpicholder:nth-child(4){left: -20px}
+.conpicholder:nth-child(5){left: -30px}
+.conpicholder:nth-child(6){left: -40px}
+.conpicholder:nth-child(7){left: -50px}
+
+.connum{
+    position:relative;
+    right: 34px;
+    top:-16px;
+    font-size:13px;
+}
+.skilltitle{
+    text-align: left;
+    margin: 100px auto 50px;
+    font-size: 30px;
+    padding-left:40px;
+    color:#333;
+    font-weight:600;
+    line-height:80px;
+    background: url(../src/assets/student/skill.png) no-repeat;
+    background-position: 0% 135%;
+}
+.skillholder svg{
+    width: 35px;
+    height:35px;
+}
+.certitle{
+    text-align: left;
+    margin: 100px auto 50px;
+    font-size: 30px;
+    padding-left:80px;
+    color:#333;
+    font-weight:600;
+    line-height:80px;
+    background: url(../src/assets/student/certifications.png) no-repeat;
+    background-position: 0% 135%;
+}
+.cerholder > div{
+    padding: 50px;
+    text-align:center;
+}
+.cerholder > div > svg{
+    display:block;
+    width: 120px;
+    height:120px;
+    fill: blue;
+    border-bottom: 5px solid blue;
+    padding-bottom: 15px;
+    margin: 0 auto 30px;
+}
+.cername{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 30px
+}
+.cerdes{
+    line-height:25px;
+    font-size: 15px;
+    color: #777
+}
+.cerbtn{
+    border: none;
+    background: transparent;
+    color: #FF9D14;
+    font-weight: 600;
+    text-decoration: underline;
+    padding: 5px 0
+}
+.segtitle{
+    text-align: left;
+    margin: 0 auto 50px;
+    font-size: 30px;
+    padding-left:100px;
+    color:#333;
+    font-weight:600;
+    line-height:80px;
+    background: url(../src/assets/student/recomendation.png) no-repeat;
+    background-position: 0% 135%;
+}
+.segitem{
+    border-radius: 15px;
+    background: #F1F6F2;
+}
+.leftseg,.rightseg{
+    padding: 40px
+}
+.segname{
+    font-size:18px;
+    font-weight:600;
+    line-height: 45px;
+}
+.segrole{
+    font-size:16px;
+    line-height: 25px;
+    color: #777
+}
+.segdate{
+    font-size:16px;
+    line-height: 25px;
+    color: #777
+}
+.segimg > span{
+    border-radius: 100%;
+    width: 90px !important;
+    height:90px !important;
+}
+.recdes{
+    font-size:18px;
+    line-height: 33px;
+}
+.rightseg a{
+    display:inline;
+    font-weight:600
+}
+@media  only screen and (max-width: 1400px) {
+}
+
+@media  only screen and (max-width: 1200px) {
+}  
+
+@media  only screen and (max-width: 992px) {
+}
+
+@media  only screen and (max-width: 768px) {
+    .skillholder{
+        padding-left: 35px;
+    }
+}
+
+@media  only screen and (max-width: 576px) {
+}

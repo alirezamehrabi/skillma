@@ -1,0 +1,178 @@
+.vitrin{
+    background: #FAFAFA;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 60px auto ;
+    max-height:320px;
+}
+.vitrinIMG{
+    margin-top: -100px;
+}
+.inputsearch{
+    overflow: hidden;
+    border-radius: 17px;
+    height: 60px;
+    border: 1px solid #ccc;
+  }
+  .inputsearch > input{
+    height:100%
+  }
+  .searchbutton{
+    padding-top: 0;
+    border-radius: 0;
+  }
+  .btnsearch{
+    width: 40px;
+    height: 60px;
+    fill: #fff;
+    transition: 0.5s
+  }
+  .searchsvg{
+    transition: 0.5s;
+    background:#FFD256
+  }
+  .searchsvg:hover svg{
+    fill: #fff;
+  }
+  .btnsearch:hover{
+    fill: #ccc;
+  }
+  .vitrinDes{
+    text-align: center;
+    line-height: 60px;
+    font-weight:600
+  }
+  .questionTitle{
+    font-size: 20px;
+    font-weight:600;
+    line-height: 80px;
+  }
+  .bullet{
+    border-radius: 100%;
+    background: blue;
+    padding: 10px;
+    width:10px;
+    height:10px;
+    margin: 13px 20px;
+  }
+
+  .item{
+      position: relative;
+      top: -33px;
+      left: 70px;
+      padding-right: 100px;
+  }
+  .topicItem{
+    padding: 45px;
+    background: #F1F6F2;
+    border-radius: 15px;
+
+  }
+  .topicItem h5{
+    text-align: center;
+    font-weight:600;
+    font-size:18px;
+    line-height:35px
+  }
+  .topicItem h6{
+    text-align: center;
+    font-size:16px;
+    line-height:30px
+  }
+  .topicimg svg{
+    width:70px;
+    height:70px;
+    fill: blue;
+    display: block;
+    margin: 0 auto 20px;
+    border-radius:10px;
+    box-shadow: 0px 5px 20px 4px rgba(150, 150, 150, 0.24)
+  }
+  .topictitle{
+    font-weight:600;
+    text-align:center;
+    padding: 40px 0 30px
+  }
+  .search{
+    margin: 60px auto;
+  }
+  .searchDes{
+    line-height: 60px;
+    font-weight:600;
+    margin-left: 20px;
+  }
+  .moreBTN{
+    margin-left: 70px;
+  }
+  .detailtitle{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 80px;
+  }
+  .detaildes{
+    font-size: 15px;
+    line-height: 35px
+  }
+  @media  only screen and (max-width: 1400px) {
+  }
+  
+  @media  only screen and (max-width: 1200px) {
+  }  
+  
+  @media  only screen and (max-width: 992px) {
+    .vitrin {
+      max-height: 300px;
+    }
+  }
+  
+  @media  only screen and (max-width: 768px) {
+    .vitrin {
+      max-height: 200px;
+    }
+    .vitrinDes{
+      font-size:18px;
+    }
+    .inputsearch{
+      height: 50px;
+    }
+    .inputsearch input{
+      height: 50px;
+      font-size:13px;
+      line-height:50px
+    }
+    .btnsearch {
+      width: 35px;
+      height: 50px;
+    }
+  }
+  
+  @media  only screen and (max-width: 576px) {
+    .vitrinDes{
+      font-size:15px;
+    }
+    .inputsearch{
+      height: 40px;
+    }
+    .btnsearch {
+      width: 20px;
+      height: 40px;
+    }
+    .inputsearch input{
+      height: 40px;
+    }
+  }
+  @media  only screen and (max-width: 500px) {
+    .vitrinIMG {
+      margin-top: -77px;
+    }
+  }
+  @media  only screen and (max-width: 450px) {
+    .vitrinIMG {
+      margin-top: -50px;
+    }
+  }
+  @media  only screen and (max-width: 400px) {
+    .vitrin {
+      max-height: 175px;
+    }
+  }

@@ -1,0 +1,305 @@
+.bot{
+    text-align: center;
+color: #555;
+position: relative;
+top: 25px;
+}
+.bot > div > svg{
+    margin: 4px;
+}
+
+.videoHolder{
+    background-color: #FAFAFA;
+    border-radius: 15px;
+    max-height: 500px;
+}
+
+.personHolder{
+    padding-left: 30px;
+}
+
+.session{
+    background-color: #FAFAFA;
+    border-radius: 15px;
+}
+.sessionName{
+    font-weight:700;
+    font-size: 22px;
+    margin: 30px
+}
+
+.session > div{
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 15px;
+
+}
+.Num{
+    background-color: blue;
+    border-radius:100%;
+    color:#fff;
+    padding: 1px 13px;
+    font-size: 20px;
+    position: relative;
+    top: 24px;
+    left: 5%;
+}
+
+.sessionTitle{
+    margin: 0 0 0 90px;
+    font-weight: 600;
+    font-size: 17px;
+    color: #444;
+}
+.sessionHolder{
+    padding-bottom: 20px;
+}
+.border{
+    border-left: 4px solid blue;
+    margin: 24px 95px;
+    display:inline-block
+}
+.sessionOption{
+    text-indent: 20px;
+    display: block;
+float: left;
+}
+.sessionOption2{
+    display: block;
+float: right;
+margin-left: 160px;
+}
+.sessionHolder svg{
+    display: block;
+float: right;
+position: relative;
+top: -23px;
+right: 30px;
+}
+
+.contentTitle{
+    font-weight:600;
+    margin: 80px 0 30px 20px;
+    font-size: 20px;
+}
+.year{
+    float: right;
+position: relative;
+top: 5px;
+right: 10px;
+font-weight: 500;
+font-size: 11px;
+}
+.contentDescription{
+    margin: 0  0 90px 20px;
+    text-align:justify;
+    line-height:30px;
+}
+.content{
+    color:#444;
+}
+.contentDescription svg{
+    margin-right: 15px
+}
+.contentDescription2{
+    margin: 0  0 25px 20px;
+}
+.contentDescription3{
+    margin: 0 0 0px 60px;
+}
+.circle{
+    padding: 10px;
+    top: 23px;
+    background:blue;
+    border-radius: 100%;
+    width: 10px;
+    height:10px;
+    position:relative;
+    left: 26px
+}
+
+.addtocart{
+    margin: 50px auto;
+    background-color: #FAFAFA;
+    border-radius: 15px;
+    padding: 40px 0 0 0;
+}
+.cartItem{
+}
+.cartItem svg{
+    fill: blue;
+width: 25px;
+height: 25px;
+margin: 0 60px;
+stroke:white;
+}
+.normal{
+    margin: 0 110px;
+    position: relative;
+    top: -20px;
+    font-size: 15px;
+}
+.bold{
+    font-weight: 600;
+}
+.cartButton{
+    margin: 20px 0;
+    width:100%;
+}
+.cartButton svg{
+    margin: 0px 20px;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    top: -2px;
+}
+.require{
+    background-color: #FAFAFA;
+    margin: 50px auto;
+    border-radius: 15px;
+    padding: 20px 0;
+}
+.require > div{
+    background-color: #fff;
+    margin: 50px auto;
+    border-radius: 15px;
+    padding: 20px;
+}
+.btnRequire{
+    float:right;
+    margin: 10px 0;
+}
+.requretxt{
+    font-size:15px;
+    line-height: 25px;
+}
+.related {
+    margin: 40px auto;
+    text-align: left;
+    line-height: 100px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #333;
+    background: url(../src/assets/maincourse/related.png) no-repeat;
+    background-position: 1% 40%;
+  }
+.videoHolder2{
+    max-height:750px;
+}
+.sounditem{
+    padding: 10px;
+    margin: 10px auto;
+    background: #fff;
+}
+.leftit > span{
+    width:100% !important;
+    height:100% !important;
+    border-radius:15px;
+}
+.soundname{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 40px;
+    margin-top: 10px;
+}
+.speecher > span{
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 100%;
+}
+.speechertime{
+    margin-top:5px
+}
+.speechername{
+    font-size:15px;
+    position:relative;
+    top:-15px;
+    left: 20px
+}
+.speechertime svg{
+    width: 35px;
+    height: 35px;
+    fill: #aaa
+}
+.speechertime span{
+    color: #aaa;
+    margin-left:15px
+}
+.rightit{
+    padding:10px
+}
+.toptext{
+    position: relative;
+    top: -320px;
+    text-align: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 30px;
+}
+.soundcontent{
+    margin-top: -330px;
+}
+.contenttext{
+    margin-top: -500px;
+}
+.videoHolder3{max-height:600px}
+  @media  only screen and (max-width: 1400px) {
+}
+
+@media  only screen and (max-width: 1200px) {
+    .session{
+        position: relative;
+        top: 120px;
+    }
+    .videoHolder{
+        margin:0 !important
+    }
+    .secwidth{
+        margin-bottom: 150px;
+    }
+    .contentDescription{
+        margin: 0 20px 50px 20px;
+    }
+    .contentDescription3{
+        margin: 0 0 0px 60px !important;
+    }
+    .soundcontent{
+        margin-top: 170px;
+    }
+    .contenttext{
+        margin-top: 100px;
+      }
+}  
+
+@media  only screen and (max-width: 992px) {
+    .videoHolder{
+        margin: 0 0 30px 0 !important;
+    }
+    .session{
+        top: 35px;
+    }
+    .secwidth{
+        margin-bottom: 60px;
+    }
+    .soundcontent{
+        margin-top: 80px;
+    }
+    .soundsession{
+        position: relative;
+        top: 80px;
+    }
+    
+}
+
+@media  only screen and (max-width: 768px) {
+}
+
+@media  only screen and (max-width: 576px) {
+    .contentDescription{
+        margin: 0 50px 90px 55px;
+    }
+    .year{
+        top: 30px;
+        right: 38px;
+    }
+}

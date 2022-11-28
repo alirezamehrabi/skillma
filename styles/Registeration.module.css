@@ -1,0 +1,233 @@
+.log{
+    background: url(../src/assets/register/logiin.png) no-repeat;
+  background-size:100%;
+  /* box-shadow: 50px 3px 99px 1px rgba(138, 163, 254, 0.24) inset  */
+}
+.reg{
+    background: url(../src/assets/register/forget.png) no-repeat;
+  background-size:100%;
+  /* box-shadow: 50px 3px 99px 1px rgba(138, 163, 254, 0.24) inset  */
+}
+.reset{
+    background: url(../src/assets/register/resetpass.png) no-repeat;
+  background-size:100%;
+  /* box-shadow: 50px 3px 99px 1px rgba(138, 163, 254, 0.24) inset  */
+}
+.login{
+    height: 100vh !important;
+}
+.logTitle{
+    font-size: 25px;
+    color:#fff;
+    font-weight:600;
+    margin: 35%;
+    line-height: 40px;
+}
+.loginTxt{
+    text-align: center;
+    margin: 100px auto 50px;
+    font-size: 30px;
+    color:#777;
+    font-weight:600;
+    line-height:80px;
+    background: url(../src/assets/register/login.png) no-repeat;
+    background-position: 50% 100%;
+}
+.haventaccount{
+    text-align: center;
+    margin: 50px auto;
+    font-size: 17px;
+    color:#777;
+    font-weight:500;
+    line-height:50px;
+}
+.worry{
+    text-align: center;
+    margin: 50px auto;
+    font-size: 14px;
+    color:#777;
+    font-weight:500;
+    line-height:30px;
+}
+.haventaccount a{
+    font-weight:600;
+}
+.google{
+    display: block;
+    margin: auto;
+    padding: 7px 70px;
+}
+.google svg{
+    margin: 0 10px
+}
+.eye{
+    background: none;
+    border:none;
+    position:relative;
+    top:-47px;
+    left: 92%;
+}
+.eye svg{
+    width: 25px;
+    height:25px;
+}
+.eye:hover{
+    background: none;
+    border:none;
+}
+.logBTN{
+    display: block;
+    margin: 30px auto;
+    padding: 17px 70px;
+    width: 100%;
+    color: #fff;
+    background:#FF9401;
+    font-weight:600;
+}
+.logBTN:hover{
+    color: #fff;
+}
+.line{
+    border: 2px dotted #777;
+    margin: 30px auto;
+    width:60%;
+}
+.or{
+    font-weight:700;
+    position:relative;
+    text-align:center;
+    color:blue;
+    padding: 5px;
+    background:#fff;
+    top:-50px;
+    width: 70px;
+    margin: auto;
+}
+.resTXT{
+    text-align: center;
+    margin: 100px auto 50px;
+    font-size: 30px;
+    color:#777;
+    font-weight:600;
+    line-height:80px;
+    background: url(../src/assets/register/reset.png) no-repeat;
+    background-position: 50% 100%;
+}
+
+.forgett{
+    text-align: center;
+    margin: 100px auto 50px;
+    font-size: 30px;
+    color:#777;
+    font-weight:600;
+    line-height:80px;
+    background: url(../src/assets/register/forgetpass.png) no-repeat;
+    background-position: 50% 100%;
+}
+.regTxt{
+    text-align: center;
+    margin: 100px auto 50px;
+    font-size: 30px;
+    color:#777;
+    font-weight:600;
+    line-height:80px;
+    background: url(../src/assets/register/signup.png) no-repeat;
+    background-position: 50% 100%;
+}
+.radio{
+    margin-left: 140px 
+}
+.radio > div > div> div{
+    padding:30px;
+    background:#eee;
+    border-radius:15px;
+    width:95%;
+}
+.radio > div > div> div{
+    padding:30px;
+    background:#eee;
+    border-radius:15px;
+    width:95%;
+}
+.radio > div > div> div> input{
+    margin: 2px 24px !important;
+}
+.radio > div > div:nth-child(2){
+    display: flex;
+    justify-content: flex-end;
+}
+.forgetbold{
+    font-size: 14px;
+    font-weight:600;
+    color:#444;
+}
+.forgetnormal{
+    font-size: 13px;
+    padding-bottom: 25px;
+    color:#444;
+    line-height:25px
+}
+.gotoskillma{
+    margin:0 auto 30px;
+    width:60%;
+    color:#fff;
+}
+.gotoskillma:hover{
+    color:#fff;
+}
+@media  only screen and (max-width: 1400px) {
+}
+
+@media  only screen and (max-width: 1200px) {
+    .eye{
+        left: 90%;
+    }
+}  
+
+@media  only screen and (max-width: 992px) {
+    .eye{
+        left: 85%;
+    }
+    .reg,.log,.reset{
+        display: none
+    }
+    .for{
+        background: url(/_next/static/media/forget.2a664ce2.png) no-repeat;
+        background-size: 100%;
+
+    }
+    .login{
+        background: url(../src/assets/register/logiin.png) no-repeat;
+        background-size:100%;
+    }
+    .res{
+        background: url(../src/assets/register/resetpass.png) no-repeat;
+        background-size:100%;
+    }
+    .forg,.logi,.rese{
+        background-color: #ffffffd1;
+    }
+}
+
+@media  only screen and (max-width: 768px) {
+    .eye{
+        left: 81%;
+    }
+    .radio{
+        margin-left: 100px;
+    }
+}
+
+@media  only screen and (max-width: 576px) {
+    .radio{
+        margin-left: 50px;
+    }
+    .radio > div > div > div > input{
+        margin: 5px 2px !important;
+        font-size: 13px;
+    }
+    .radio > div > div > div > label{
+        margin: 2px 2px !important;
+        font-size: 13px;
+    }
+}

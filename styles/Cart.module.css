@@ -1,0 +1,130 @@
+.cart{
+    margin: 40px auto;
+}
+
+.cartTitle{
+    margin: 40px auto 40px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #333;
+    background: url(../src/assets/cart/cart.png) no-repeat;
+    background-position: 50% -1000%;
+}
+
+.items{
+}
+
+.count{
+    background: #FAFAFA;
+    border-radius: 15px;
+    padding: 30px ;
+}
+
+.item{
+    background: #FAFAFA;
+    border-radius: 15px;
+    padding: 10px 15px;
+}
+.imgHolder span{
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 15px;
+}
+
+.name{
+    padding: 30px 20px;
+    line-height: 30px;
+}
+
+.price{
+    font-weight: 600;
+    line-height: 100px;
+}
+.delsvg{
+    width: 30px;
+    height: 30px;
+    fill:red;
+    cursor: pointer;
+}
+.del{
+    position: absolute;
+    bottom: 10px;
+}
+.input{
+    background: #FAFAFA;
+    width: 100%;
+    border-radius:15px;
+    border: 1px solid #707070;
+    padding: 15px 10px;
+    margin: 0 0 40px 0
+}
+.btn{
+    position:absolute;
+    right: 10px;
+    top: 10px;
+    border: 1px solid #707070;
+    border-radius: 10px;
+    background:#FAFAFA;
+    padding:7px;
+}
+.left{
+    text-align: left;
+    line-height: 50px
+}
+.right{
+    position: absolute;
+    font-weight: 600;
+    right: 10px;
+    line-height: 50px
+}
+.paybtn{
+    width: 100%;
+    background: #FF9D14;
+    color:#fff;
+    border:none;
+    padding: 17px 0;
+    border-radius: 15px;
+    margin: 20px auto 10px;
+    font-weight: 600;
+}
+
+.other{
+    padding: 20px 30px
+}
+.otherTitle{
+    margin: 40px auto 40px;
+    text-align: left;
+    line-height: 100px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    background: url(../src/assets/cart/related.png) no-repeat;
+    background-position: 0% -900%;
+}
+
+.otheritem{
+    background: #FAFAFA;
+    border-radius: 15px;
+    padding: 25px;
+}
+.otherimg span{
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 15px;
+}
+.otherdes{
+    font-size: 15px;
+    margin: 20px 0
+}
+.otherbtn{
+    background: #FF9D14;
+    color:#fff;
+    border:none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin: 20px auto 0px;
+    font-weight: 600;
+    float:right
+}

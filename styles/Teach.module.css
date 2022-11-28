@@ -1,0 +1,169 @@
+.student{
+    border-radius: 15px;
+    background: #FAFAFA;
+}
+.titleStudents{
+        margin: 30px 10px;
+        text-align: left;
+        line-height: 100px;
+        font-size: 35px;
+        font-weight: 600;
+        color: #333;
+        background: url(../src/assets/teacher/student.png) no-repeat;
+        background-position: 0% 100%;
+}
+.desStudents{
+    margin: 0px 20px 30px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+.listStudents{
+    padding: 20px 80px;
+}
+.listStudents > span{
+    border-radius: 100%;
+    width: 75px !important;
+    height: 75px !important;
+    margin: 0 16px !important;
+}
+.aboutTeacher{
+    border-radius: 15px;
+    background: #FAFAFA;
+    margin: 70px auto;
+    background: url(../src/assets/teacher/teacher.png) #FAFAFA no-repeat;
+    background-position: 70% 90%;
+}
+.teacherPic{
+    position: relative;
+    top: -50px;
+    left: 0px;
+}
+.teacherPic > span{
+    border-radius: 100%;
+}
+.teachHolder{
+    padding: 0 0 0 70px;
+}
+.name{
+    font-weight: 600;
+    position: relative;
+    top: -30px;
+}
+.follow{
+    font-weight: 500;
+    font-size: 13px;
+}
+.role{
+    font-weight: 500;
+    font-size: 13px;
+    position: relative;
+    top: -20px;
+}
+.connectbtn{
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    position: relative;
+    top: -10px;
+    padding: 15px 45px;
+    background: #FF9D14;
+    border:1px solid #FF9D14;
+    margin: 15px 0;
+}
+.connectbtn:hover{
+    color: #fff;
+}
+.about{
+    background: url(../src/assets/teacher/about.png) no-repeat;
+    background-position: 0% -1200%;
+    margin:  80px 0px;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 100px;
+    text-indent: 50px;
+}
+.social{
+    padding: 40px 0 0 40px
+}
+.social svg{
+    width: 22px;
+height: 22px;
+display: block;
+color: blue;
+margin: 10px 0;
+cursor: pointer;
+}
+.teachDes{
+    padding: 0 72px 30px;
+    font-size:15px;
+    text-align:justify;
+    line-height: 30px;
+}
+.teacherStatistic{
+    padding: 0 72px 40px;
+}
+.bold >svg{
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 10px !important;
+fill: blue !important;
+}
+.bold:nth-child(1) >svg{
+fill: yellow !important;
+}
+.bold:nth-child(2) >svg{
+    width: 18px !important;
+    height: 18px !important;
+    }
+    .bold{
+        font-weight: 600;
+        font-size:14px;
+        line-height:40px
+    }
+    .normal{
+        font-weight: 500;
+        font-size:11px
+    }
+
+    @media  only screen and (max-width: 1400px) {
+    }
+    
+    @media  only screen and (max-width: 1200px) {
+    }  
+    
+    @media  only screen and (max-width: 992px) {
+        .social{
+            padding: 40px 0 0 0;
+        }
+        .about{
+            background-position: 0% 0%;
+            background-size: 100%;
+        }
+    }
+    
+    @media  only screen and (max-width: 768px) {
+        .btnp{
+            padding: 10px  !important
+        }
+        .teacherStatistic {
+            padding: 0 72px 0px;
+          }
+    }
+    
+    @media  only screen and (max-width: 576px) {
+        .about{
+            font-size: 18px;
+        }
+        .btnp{
+            display: block;
+min-width: 120px !important;
+margin-left:0 !important;
+        }
+    }
+    @media  only screen and (max-width: 400px) {
+        .about{
+            font-size: 15px;
+        }
+    }

@@ -1,0 +1,166 @@
+.title {
+    margin: 40px auto 20px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #333;
+    background: url(../src/assets/about/about.png) no-repeat;
+    background-position: 50% 100%;
+  }
+  .des{
+    text-align: center;
+    padding: 0 50px 30px;
+    line-height:40px;
+    font-size: 14px;
+  }
+  .img > span{
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .team{
+    margin: 60px auto 30px;
+  }
+
+  .teamTitle{
+    margin: 40px auto 20px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #333;
+    background: url(../src/assets/about/team.png) no-repeat;
+    background-position: 50% 100%;
+  }
+
+  .imgSlide{
+    border-radius: 100%;
+  }
+
+  .join{
+    background: url(../src/assets/about/index.jpeg) no-repeat;
+    background-size: cover;
+    color:#fff;
+    margin-bottom: 90px;
+  }
+
+  .joinTitle{
+    margin: 40px auto 20px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #fff;
+    background: url(../src/assets/about/join.png) no-repeat;
+    background-position: 50% 100%;
+  }
+
+  .joinDes{
+    margin: 30px auto 20px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #fff;
+    padding: 0 140px;
+  }
+  .joinBTN{
+    color: #fff;
+    padding: 13px 80px;
+    font-weight: 600;
+    margin: 0 0 40px 0;
+    background:#FF9D14
+  }
+
+  .contact{
+    margin: 10px auto 60px;
+  }
+.contactTitle{
+  margin: 40px auto 40px;
+  text-align: center;
+  line-height: 100px;
+  font-size: 35px;
+  font-weight: 600;
+  color: #333;
+  background: url(../src/assets/about/contact.png) no-repeat;
+  background-position: 50% 140%;
+}
+.leftContact{
+  background:#FAFAFA;
+  border-radius: 15px;
+}
+.rightContact{
+  background: url(../src/assets/about/contactPic.png) no-repeat #FAFAFA;
+  background-position: bottom right;
+  border-radius: 15px;
+  height: 100%;
+}
+
+.field{
+  background: #fff;
+  margin: 20px 0;
+  padding: 20px 10px;
+}
+.err{
+  color:red
+}
+.form{
+  padding: 20px;
+}
+.conBTN{
+  background: #FF9D14;
+  color: #fff;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 0;
+  font-weight: 600;
+  margin: 10px auto 20px;
+}
+
+.icon{
+  width: 30px;
+  height:30px
+}
+.Social{
+  margin: 40px 0
+}
+.socialicon{
+  width: 30px;
+  height:30px;
+  margin: 20px 12px;
+  cursor: pointer
+}
+@media  only screen and (max-width: 1400px) {
+  .socialicon{
+    margin: 20px 8px;
+  }
+}
+
+@media  only screen and (max-width: 1200px) {
+  .socialicon{
+    margin: 20px 6px;
+  }
+  .Socialtxt{
+    text-align: left !important
+  }
+  .rightContact{
+    background-size: 100%;
+  }
+}  
+
+@media  only screen and (max-width: 992px) {
+  .rightContact{
+    background-size: 100%;
+  }
+}
+
+@media  only screen and (max-width: 768px) {
+  .rightContact{
+    background-size: 67%;
+  }
+
+}
+
+@media  only screen and (max-width: 576px) {
+}

@@ -1,0 +1,102 @@
+.vitrin{
+    background: #FAFAFA;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto 40px;
+}
+
+.imgHolder{
+    border-radius: 15px;
+    overflow:hidden;
+    transition: 0.5s;
+}
+.imgHolder > span{
+    width:100% !important;
+}
+.imgHolder img{
+    transition: 0.5s;
+}
+.imgHolder img:hover{
+    transform: scale(1.05);
+}
+
+.rightvitrin{
+    padding: 10px 30px;
+}
+.rightvitrin > h5{
+    font-weight: 600;
+    font-size: 18px;
+}
+.rightvitrin > h6{
+    font-size: 15px;
+    line-height:40px;
+}
+.infoholder{
+    margin: 40px auto;
+}
+.info svg{
+    width:24px;
+    height: 24px;
+    fill: #2d3ddf;
+    margin: 0 13px 
+}
+.norm{
+    font-size:15px;
+}
+.bold{
+    font-size:15px;
+    font-weight:600;
+}
+.btn{
+    background:#FF9D14;
+    color:#fff;
+    padding: 10px 140px;
+    border-radius: 15px;
+    border:none;
+    font-weight:600;
+    position:absolute;
+    bottom: 30px;
+    right:13px;
+}
+.desTitle{
+    margin: 40px auto 30px;
+    text-align: left;
+    line-height: 100px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #333;
+    background: url(../src/assets/home/desciption.png) no-repeat;
+    background-position: 0% 100%;
+    padding:0 15px
+  }
+  .des{
+    font-size:15px;
+    text-align: justify;
+    line-height: 35px;
+    padding:0 15px
+}
+.learnTitle{
+    margin: 40px auto 10px;
+    text-align: left;
+    line-height: 100px;
+    font-size: 35px;
+    font-weight: 600;
+    color: #333;
+}
+@media  only screen and (max-width: 1400px) {
+}
+
+@media  only screen and (max-width: 1200px) {
+}  
+
+@media  only screen and (max-width: 992px) {
+    .btn {
+        position: static;
+    }
+}
+
+@media  only screen and (max-width: 768px) {
+}
+
+@media  only screen and (max-width: 576px) {
+}
