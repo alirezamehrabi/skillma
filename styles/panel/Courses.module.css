@@ -17,6 +17,103 @@
     color:#fff;
     border:none;
     border-radius: 15px;
-    padding: 15px 20px;
-    font-weight:600
+    padding: 15px 30px;
+    font-weight:600;
+}
+.searchbtn{
+    display: block;
+    margin: auto;
+}
+.searchBox{
+    background:#FAFAFA !important;
+}
+.coursesection{
+    padding: 20px;
+    background:#fff;
+    border-radius:15px
+}
+.tablehead{
+    background: #F9F9FA;
+}
+.greenc{
+    color:green !important
+}
+.del:hover path{
+    fill: red;
+}
+.edit:hover path{
+    fill: blue;
+}
+.edit,.del{
+    float:left;
+    cursor:pointer;
+}
+.edit path,.del path{
+    transition:0.5s
+}
+.del{
+    margin-right:5px
+}
+.orangec{
+    color:orange
+}
+.redc{
+    color:red
+}
+.bluec{
+    color:blue
+}
+.paginationBttns{
+    /* width:80%; */
+    height:40px;
+    list-style: none;
+    display: flex;
+    justify-content: right;
+}
+.paginationBttns a{
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid #2b2eff;
+    color: #2b2eff !important;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.paginationBttns a:hover{
+    background-color: #2b2eff;
+    color: #fff !important;
+}
+.paginationDisabled a { background-color: #ccc;color: #7173c4 !important;border: 1px solid #7173c4;}
+.paginationDisabled a:hover { color: #fff !important;}
+.paginationActive a{
+    background-color: #2b2eff;
+    color: #fff !important;
+}
+.itemnum{
+    font-size:16px;
+    position:relative;
+    top:-30px;
+}
+.modalbody{
+    margin: auto;
+    text-align: center;
+    padding:40px;
+}
+.modalbody svg{
+    width:50px;
+    height:50px;
+    fill:red
+}
+.modalbody path{fill:red}
+.modalbody h5{
+    font-size: 16px;
+    font-weight: 600;
+    line-height:60px;
+}
+.modalbody h5{
+    font-size: 16px;
+    line-height:40px;
+}
+.coursetitle2{
+    padding: 15px 30px 30px;
 }

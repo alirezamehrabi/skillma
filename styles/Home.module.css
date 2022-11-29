@@ -679,7 +679,7 @@ cursor: pointer;
   position: relative;
   top: 2px;
   transition: 0.7s;
-  z-index: 2;
+  /* z-index: 2; */
 }
 .listHeader2 a:hover{
   color: #777;
@@ -736,7 +736,9 @@ color: #777;
 .boxList2:hover li{
   transition: 0.5s ;
   height: 38px;
-  display:block
+  display:block;
+  position: relative;
+  z-index: 100;
 }
 
 .listItem21:hover {

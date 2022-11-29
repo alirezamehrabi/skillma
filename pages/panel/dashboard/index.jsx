@@ -18,6 +18,7 @@ const Dashboard = () => {
     const income = <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><g id="Group_16433" data-name="Group 16433" transform="translate(-1474 -585)"><rect id="Rectangle_1221" data-name="Rectangle 1221" width="32" height="32" transform="translate(1474 585)" fill="#fff" /><path id="money-stack" d="M20.346,15.739H1.921a.921.921,0,1,0,0,1.842H20.346a.921.921,0,1,0,0-1.842Zm0,3.685H1.921a.921.921,0,1,0,0,1.842H20.346a.921.921,0,1,0,0-1.842ZM5.606,6.527a.921.921,0,1,0,.921.921A.921.921,0,0,0,5.606,6.527ZM18.5,1H3.764A2.764,2.764,0,0,0,1,3.764v7.37A2.764,2.764,0,0,0,3.764,13.9H18.5a2.764,2.764,0,0,0,2.764-2.764V3.764A2.764,2.764,0,0,0,18.5,1Zm.921,10.133a.921.921,0,0,1-.921.921H3.764a.921.921,0,0,1-.921-.921V3.764a.921.921,0,0,1,.921-.921H18.5a.921.921,0,0,1,.921.921ZM11.133,4.685A2.764,2.764,0,1,0,13.9,7.449,2.764,2.764,0,0,0,11.133,4.685Zm0,3.685a.921.921,0,1,1,.921-.921A.921.921,0,0,1,11.133,8.37Zm5.527-1.842a.921.921,0,1,0,.921.921A.921.921,0,0,0,16.661,6.527Z" transform="translate(1478.866 589.866)" fill="#2d3ddf" /></g></svg>
     const edit = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect className="cls-1" width="24" height="24" /><path d="M20.09,12a.91.91,0,0,0-.9.9v5.4a.9.9,0,0,1-.9.9H5.7a.9.9,0,0,1-.9-.9V5.71a.9.9,0,0,1,.9-.9h5.4a.9.9,0,1,0,0-1.8H5.7A2.7,2.7,0,0,0,3,5.71V18.3A2.7,2.7,0,0,0,5.7,21H18.29A2.7,2.7,0,0,0,21,18.3V12.9A.9.9,0,0,0,20.09,12ZM6.6,12.69V16.5a.9.9,0,0,0,.9.9h3.81a.9.9,0,0,0,.64-.26l6.23-6.23h0L20.73,8.4a.9.9,0,0,0,0-1.27h0L16.92,3.27a.9.9,0,0,0-1.27,0h0L13.1,5.81h0L6.86,12.05A.9.9,0,0,0,6.6,12.69Zm9.68-7.51,2.54,2.54L17.55,9,15,6.45ZM8.4,13.05l5.33-5.33,2.55,2.55L11,15.6H8.4Z" /></g></svg>
     const [value, onChange] = useState(new Date());
+    const [value1, onChange1] = useState(new Date());
     return (
         <SSRProvider>
             <Head>
@@ -67,7 +68,7 @@ const Dashboard = () => {
                                     </div>
                                     <div className={`col-12 ${dash.chart}`}>
                                         <div className={`${dash.datepicker}`}>
-                                            <DatePicker onChange={onChange} value={value} />
+                                            <DatePicker onChange={onChange1} value={value1} maxDetail={"year"} format={"MMMM yyyy"}/>
                                         </div>
                                         <Chart /></div>
                                 </div>

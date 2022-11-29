@@ -17,9 +17,8 @@ import {Button,Modal} from 'react-bootstrap';
 const Courses = () => {
   const [value, onChange] = useState(new Date());
 
-  const [title, setTitle] = useState("Price");
+  const [title, setTitle] = useState("Course");
   const [title2, setTitle2] = useState("State");
-  const [title3, setTitle3] = useState("Category");
   const [delid, setDelid] = useState();
 
   const [show, setShow] = useState(false);
@@ -39,12 +38,6 @@ const Courses = () => {
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
   };
-  const dropdown3 = (event) => {
-    setTitle3(event.target.textContent)
-    event.preventDefault()
-    event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
-  };
   const funcHandler = (e) => {
     e.stopPropagation();
     e.preventDefault()
@@ -56,12 +49,12 @@ const Courses = () => {
   const edit = <svg id="Group_20967" data-name="Group 20967" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect id="Rectangle_6196" data-name="Rectangle 6196" width="24" height="24" transform="translate(0)" fill="#7a7d7c" opacity="0"/><path id="Path_82777" data-name="Path 82777" d="M20.092,12a.9.9,0,0,0-.9.9v5.4a.9.9,0,0,1-.9.9H5.7a.9.9,0,0,1-.9-.9V5.706a.9.9,0,0,1,.9-.9h5.4a.9.9,0,0,0,0-1.8H5.7A2.7,2.7,0,0,0,3,5.706V18.3A2.7,2.7,0,0,0,5.7,21H18.294a2.7,2.7,0,0,0,2.7-2.7V12.9A.9.9,0,0,0,20.092,12ZM6.6,12.686V16.5a.9.9,0,0,0,.9.9h3.814a.892.892,0,0,0,.638-.261L18.177,10.9h0l2.554-2.5a.9.9,0,0,0,0-1.272l0-.005L16.917,3.269a.9.9,0,0,0-1.272-.005l-.005.005L13.1,5.814h0L6.862,12.048A.892.892,0,0,0,6.6,12.686Zm9.678-7.51,2.545,2.545L17.547,9,15,6.453ZM8.4,13.055l5.333-5.334,2.546,2.546L10.945,15.6H8.4Z" fill="#7a7d7c"/></svg>
 
   const [txt, setTxt] = useState([
-    {num:"1",Name:"Mark",Category:"Otto",Price:"2524",Student:"@mdo",Rate:"4/5",Progess:"Compelete",Status:"Publish",Verified:"1"},
-    {num:"2",Name:"Mark",Category:"Otto",Price:"2524",Student:"@mdo",Rate:"4/5",Progess:"Inprogress",Status:"Awaiting",Verified:"1"},
-    {num:"3",Name:"Mark",Category:"Otto",Price:"2524",Student:"@mdo",Rate:"2/5",Progess:"Inprogress",Status:"Awaiting",Verified:"1"},
-    {num:"4",Name:"Mark",Category:"Otto",Price:"2524",Student:"@mdo",Rate:"1/5",Progess:"Inprogress",Status:"Awaiting",Verified:"1"},
-    {num:"5",Name:"Mark",Category:"Otto",Price:"2524",Student:"@mdo",Rate:"3/5",Progess:"Compelete",Status:"Publish",Verified:"1"},
-    {num:"6",Name:"Mark",Category:"Otto",Price:"2524",Student:"@mdo",Rate:"4.5/5",Progess:"Compelete",Status:"Publish",Verified:"1"},
+    {num:"1",task:"Task name 1",course:"Course Name 1",Date:"sep 10 , 2022",Status:"To Do"},
+    {num:"2",task:"Task name 2",course:"Course Name 2",Date:"sep 10 , 2022",Status:"Doing"},
+    {num:"3",task:"Task name 3",course:"Course Name 3",Date:"sep 10 , 2022",Status:"Done"},
+    {num:"4",task:"Task name 4",course:"Course Name 4",Date:"sep 10 , 2022",Status:"Doing"},
+    {num:"5",task:"Task name 5",course:"Course Name 5",Date:"sep 10 , 2022",Status:"Done"},
+    {num:"6",task:"Task name 6",course:"Course Name 6",Date:"sep 10 , 2022",Status:"Done"},
   ])
   const [pageNum, setPageNum] = useState(0);
   const itemPerPage = 5;
@@ -76,14 +69,10 @@ const Courses = () => {
       return (
         <tr key={i.num}>
         <td>{i.num}</td>
-        <td>{i.Name}</td>
-        <td>{i.Category}</td>
-        <td>{i.Price}</td>
-        <td>{i.Student}</td>
-        <td>{i.Rate}</td>
-        {i.Progess === "Compelete" ?<td className={`${co.greenc}`}>{i.Progess}</td>: <td className={`${co.orangec}`}>{i.Progess}</td>}
-        {i.Status === "Publish" ?<td className={`${co.greenc}`}>{i.Status}</td>: <td className={`${co.orangec}`}>{i.Status}</td>}
-        {i.Verified === "1" ? <td>{tik}</td>: <td>{line}</td>}
+        <td>{i.task}</td>
+        <td>{i.course}</td>
+        {i.Status === "Done" ?<td className={`${co.greenc}`}>{i.Status}</td>: i.Status === "Doing"? <td className={`${co.orangec}`}>{i.Status}</td> : <td className={`${co.bluec}`}>{i.Status}</td>}
+        <td>{i.Date}</td>
         <td><div className={`${co.del}`} onClick={()=>handleShow(i.Rate)}>{delet}</div><div className={`${co.edit}`}>{edit}</div></td>
       </tr>
       );
@@ -104,8 +93,6 @@ const Courses = () => {
             <Menu /></div>
           <div className={`col-lg-10 ${dash.maincontainer}`}>
             <Header />
-            <div className={`col-12 ${co.coursetitle}`}><span className={``}>Course</span>
-              <div className={``}><button type="button" className={`${co.coursebtn}`}>Create New</button></div></div>
             <div className={`col-12`}>
 
 
@@ -122,21 +109,6 @@ const Courses = () => {
                   </div>
                   <div className={`col-6 col-xl-2 col-md-6 g-3 my-3`}>
                     <div className={styles.box2}>
-                      <ul className={styles.boxList2} onClick={dropdown3}>
-                        <Link passHref href="#" className={styles.listHeader2}>
-                          <span onClick={funcHandler}>
-                            {title3}
-                          </span>
-                        </Link>
-
-                        <li className={styles.listItem21}>cat1</li>
-                        <li className={styles.listItem21}>cat2</li>
-                        <li className={styles.listItem21}>cat3</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className={`col-6 col-xl-2 col-md-6 g-3 my-3`}>
-                    <div className={styles.box2}>
                       <ul className={styles.boxList2} onClick={dropdown}>
                         <Link passHref href="#" className={styles.listHeader2}>
                           <span onClick={funcHandler}>
@@ -144,8 +116,9 @@ const Courses = () => {
                           </span>
                         </Link>
 
-                        <li className={styles.listItem21}>Free</li>
-                        <li className={styles.listItem21}>Price</li>
+                        <li className={styles.listItem21}>video</li>
+                        <li className={styles.listItem21}>text</li>
+                        <li className={styles.listItem21}>sound</li>
                       </ul>
                     </div>
                   </div>
@@ -159,8 +132,8 @@ const Courses = () => {
                           </span>
                         </Link>
 
-                        <li className={styles.listItem21}>Completed</li>
-                        <li className={styles.listItem21}>onGoing</li>
+                        <li className={styles.listItem21}>Publish</li>
+                        <li className={styles.listItem21}>Awaiting</li>
                       </ul>
                     </div>
                   </div>
@@ -177,7 +150,7 @@ const Courses = () => {
             </div>
             <div className={`col-12`}>
               <div className={`row ${co.coursesection}`}>
-                <div className={`col-6 fw-bold`}>Course List</div>
+                <div className={`col-6 fw-bold`}>Task List</div>
                 <div className={`col-6`}>
                   <div className={`${dash.datepicker}`}>
                     <DatePicker onChange={onChange} value={value} format={"MMMM yyyy"} />
@@ -188,14 +161,10 @@ const Courses = () => {
       <thead>
         <tr className={co.tablehead}>
           <th></th>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Price</th>
-          <th>Student</th>
-          <th>Rate</th>
-          <th>Progess</th>
+          <th>Task Name</th>
+          <th>Course Name</th>
           <th>Status</th>
-          <th>Verified</th>
+          <th>Date</th>
           <th>Action</th>
         </tr>
       </thead>
