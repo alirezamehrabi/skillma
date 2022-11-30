@@ -106,6 +106,50 @@ const Courses = () => {
               </div>
 
             </div>
+          <div className={`row mt-5`}>
+            <div className={`col-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>To Do</h6>
+            <div className={`col-11`}>
+              <div className={`col-12`}>
+                <h5 className={`${co.tname}`}>Task Name</h5>
+                <h6 className={`${co.tdes}`}>Lorem Ipsum is simply dummy text of the printingand typesetting.</h6>
+                <div className={`${co.cname}`}>Course Name</div><div className={`${co.cdate}`}>Sep 10 ,2022</div>
+                <div className={`${co.conholder}`}>
+                <div className={`${co.conpicholder}`}>
+              <Image src={require(`../../../src/assets/student/1.png`)} alt="1" height="" width="" />
+            </div>
+            <div className={`${co.conpicholder}`}>
+              <Image src={require(`../../../src/assets/student/2.png`)} alt="1" height="" width="" />
+            </div>
+            <div className={`${co.conpicholder}`}>
+              <Image src={require(`../../../src/assets/student/3.png`)} alt="1" height="" width="" />
+            </div>
+            <div className={`${co.conpicholder}`}>
+              <Image src={require(`../../../src/assets/student/4.png`)} alt="1" height="" width="" />
+            </div>
+            <div className={`${co.conpicholder}`}>
+              <Image src={require(`../../../src/assets/panel/dash/1.png`)} alt="1" height="" width="" />
+            </div>
+            <div className={`${co.conpicholdernum}`}>
+              <Image src={require(`../../../src/assets/student/6.png`)} alt="1" height="" width="" /><span className={`${co.connum}`}>+124</span>
+            </div>
+            </div>
+              </div>
+              <div className={`col-12`}>1</div>
+            </div>
+            </div>
+            <div className={`col-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>Doing</h6>
+            <div className={`col-11`}>
+              <div className={`col-12`}>1</div>
+              <div className={`col-12`}>1</div>
+            </div>
+            </div>
+            <div className={`col-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>Done</h6>
+            <div className={`col-11`}>
+              <div className={`col-12`}>1</div>
+              <div className={`col-12`}>1</div>
+            </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>
