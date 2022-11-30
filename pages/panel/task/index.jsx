@@ -107,7 +107,7 @@ const Courses = () => {
 
             </div>
           <div className={`row mt-5`}>
-            <div className={`col-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>To Do</h6>
+            <div className={`col-lg-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>To Do</h6>
             <div className={`col-11`}>
               <div className={`col-12`}>
                 <h5 className={`${co.tname}`}>Task Name</h5>
@@ -137,13 +137,13 @@ const Courses = () => {
               <div className={`col-12`}>1</div>
             </div>
             </div>
-            <div className={`col-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>Doing</h6>
+            <div className={`col-lg-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>Doing</h6>
             <div className={`col-11`}>
               <div className={`col-12`}>1</div>
               <div className={`col-12`}>1</div>
             </div>
             </div>
-            <div className={`col-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>Done</h6>
+            <div className={`col-lg-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>Done</h6>
             <div className={`col-11`}>
               <div className={`col-12`}>1</div>
               <div className={`col-12`}>1</div>
