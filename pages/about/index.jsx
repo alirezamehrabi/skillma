@@ -10,7 +10,7 @@ import Footer from "./../../src/components/Footer/Footer";
 import TeamSlider from "./../../src/components/TeamSlider/TeamSlider";
 import { SSRProvider } from "react-bootstrap";
 import CountUp from "react-countup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 

@@ -173,3 +173,35 @@
     padding: 13px;
     border-radius: 12px;}
 .conholder{margin: 80px 0 0;}
+
+@media  only screen and (max-width: 1400px) {
+    .connum{
+        /* right: 20px; */
+    }
+    .conpicholdernum{
+        display:none !important
+    }
+}
+
+@media  only screen and (max-width: 1200px) {
+    .conpicholdernum{
+        display:inline !important
+    }
+}  
+
+@media  only screen and (max-width: 992px) {
+}
+
+@media  only screen and (max-width: 768px) {
+}
+
+@media  only screen and (max-width: 576px) {
+    .cdate {
+        font-size: 12px;
+        padding: 13px 9px;
+        border-radius: 9px;
+      }
+      .conpicholdernum{
+        left: 20px;
+    }
+}
