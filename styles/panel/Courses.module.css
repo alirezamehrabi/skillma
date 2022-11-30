@@ -117,3 +117,11 @@
 .coursetitle2{
     padding: 15px 30px 30px;
 }
+.datesection > div > button{
+    background:#ccc;
+    border-radius:100%;
+}
+.datesection > div > button:hover{
+    background:#ffd3d3;
+    border-radius:100%;
+}
