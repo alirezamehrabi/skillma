@@ -513,21 +513,22 @@
 .footerTitle{
   font-weight: 600;
   font-size: 23px;
-  padding: 110px 100px 20px;
+  padding: 110px 0px 20px;
 }
 .footerDes{
   font-weight: 500;
   font-size: 16px;
-  padding: 5px 100px 30px;
+  padding: 5px 100px 30px 0;
 }
 .footer {
   background: url(../src/assets/home/footer.png) no-repeat;
   background-size: 100% 100%;
   text-align: justify;
   min-height: 400px;
+  padding: 20px 40px;
 }
 .links{
-  padding: 5px 0 30px 100px;
+  padding: 5px 0 0px 0px;
 }
 .links a{
   color: #444;
@@ -565,6 +566,7 @@
   background-size: cover;
   text-align: justify;
   min-height: 800px;
+  overflow:hidden
 }
 .slidePic{
   background: url(../src/assets/home/rotate.png) 0% 70% no-repeat;
@@ -1146,13 +1148,13 @@ margin: 0 auto;
   top: -115px !important;
 }
 .footerTitle {
-  padding: 10px 100px 20px;
+  padding: 10px 0px 20px;
 }
 .footskill{
   padding-top:60px
 }
 .footerDes{
-  padding: 5px 10px 30px 100px;
+  padding: 5px 10px 30px 0px;
 }
 .sinput{
   font-size:13px
@@ -1217,6 +1219,7 @@ margin: 0 auto;
   }
   .leftWhy {
     padding: 20px;
+    padding-right: 0px;
   }
   .Hambur{
     text-indent: 70px;

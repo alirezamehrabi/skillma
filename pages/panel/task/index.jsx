@@ -28,18 +28,26 @@ const ContactSchema = Yup.object().shape({
 
     .required("Required"),
 
-    people: Yup.string()
+  people: Yup.string()
 
     .required("Required"),
-    description: Yup.string()
+  description: Yup.string()
 
     .min(4, "Too Short!")
+
+    .required("Required"),
+  startTime: Yup.string()
+
+    .required("Required"),
+  endTime: Yup.string()
 
     .required("Required"),
 });
 
 const Courses = () => {
   const [value, onChange] = useState(new Date());
+  const [value1, onChange1] = useState(new Date());
+  const [value2, onChange2] = useState(new Date());
 
   const [delid, setDelid] = useState();
 
@@ -210,7 +218,7 @@ const Courses = () => {
               </div>
               <div className={`col-xl-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>Doing</h6>
                 <div className={`col-11`}>
-                <div className={`col-12`}>
+                  <div className={`col-12`}>
                     <h5 className={`${co.tname}`}>Task Name</h5>
                     <h6 className={`${co.tdes}`}>Lorem Ipsum is simply dummy text of the printingand typesetting.</h6>
                     <div className={`${co.cname}`}>Course Name</div><div className={`${co.cdate}`}>Sep 10 ,2022</div>
@@ -264,7 +272,7 @@ const Courses = () => {
               </div>
               <div className={`col-xl-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>Done</h6>
                 <div className={`col-11`}>
-                <div className={`col-12`}>
+                  <div className={`col-12`}>
                     <h5 className={`${co.tname}`}>Task Name</h5>
                     <h6 className={`${co.tdes}`}>Lorem Ipsum is simply dummy text of the printingand typesetting.</h6>
                     <div className={`${co.cname}`}>Course Name</div><div className={`${co.cdate}`}>Sep 10 ,2022</div>
@@ -321,104 +329,124 @@ const Courses = () => {
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Body className={`${co.modalbody}`}> 
-        <h5 className={``}>Create new task</h5>
+      <Modal size="xl" show={show} onHide={handleClose} className={`${co.modalholder}`}>
+        <Modal.Body className={`${co.modalbody} ${co.modalbody2}`}>
+          <h5 className={``}>Create new task</h5>
 
 
 
-        <Formik
-                      initialValues={{
-                        title: "",
-                        people: "",
-                        startDate: "",
-                        endDate: "",
-                        startTime: "",
-                        endTime: "",
-                        description: "",
-                      }}
-                      validationSchema={ContactSchema}
-                      onSubmit={(values) => {
-                        // same shape as initial values
+          <Formik
+            initialValues={{
+              title: "",
+              people: "",
+              startDate: "",
+              endDate: "",
+              startTime: "",
+              endTime: "",
+              description: "",
+            }}
+            validationSchema={ContactSchema}
+            onSubmit={(values) => {
+              // same shape as initial values
 
-                        console.log(values);
-                      }}
-                    >
-                      {({ errors, touched }) => (
-                        <Form className={about.form}>
-                          <Field
-                            name="title"
-                            type="text"
-                            placeholder="Event Title"
-                            className={`col-12 mx-auto ${about.field}`}
-                          />
+              console.log(values);
+            }}
+          >
+            {({ errors, touched }) => (
+              <Form className={co.form}>
+                <label className={`${co.label}`}>
+                  Title
+                <Field
+                  name="title"
+                  type="text"
+                  placeholder="Event Title"
+                  className={`col-12 mx-auto ${co.field}`}
+                />
 
-                          {errors.title && touched.title ? (
-                            <div className={about.err}>{errors.title}</div>
-                          ) : null}
-                          <Field
-                            name="people"
-                            placeholder="People"
-                            className={`col-12 mx-auto ${about.field}`}
-                          />
+                {errors.title && touched.title ? (
+                  <div className={co.err}>{errors.title}</div>
+                ) : null}
+                </label>
+                <label className={`${co.label}`}>
+                People
+                <Field
+                  name="people"
+                  placeholder="People"
+                  className={`col-12 mx-auto ${co.field}`}
+                />
 
-                          {errors.people && touched.people ? (
-                            <div className={about.err}>{errors.people}</div>
-                          ) : null}
-                          <Field
-                            name="startDate"
-                            placeholder="Sep, 10,  2022"
-                            className={`col-12 mx-auto ${about.field}`}
-                          />
+                {errors.people && touched.people ? (
+                  <div className={co.err}>{errors.people}</div>
+                ) : null}
+                </label>
+                <div className={`row d-flex justify-content-between`}>
+                <label className={`col-lg-6 ${co.label} ${co.labelleft}`}>Start Date<br/><DatePicker onChange={onChange1} value={value1} className={`col-12 ${co.datepick}`} /></label><label className={`col-lg-6 ${co.label}`}>End Date<br/><DatePicker className={`col-12 ${co.datepick}`} onChange={onChange2} value={value2} /></label>
+                </div>
+                <div className={`row d-flex justify-content-between`}>
+                  <div className={`col-lg-6 ${co.timefield}`}>
+                  <label className={`col-12 ${co.label} ${co.labelleft}`}>
+                    Start Time
+                    <Field
+                      name="startTime"
+                      placeholder="10:00"
+                      className={`${co.field} `}
+                    />
+                  
+                    {errors.startTime && touched.startTime ? (
+                      <div className={co.err}>{errors.startTime}</div>
+                    ) : null}
+</label>
+                  </div>
+                  <div className={`col-lg-6 ${co.timefield}`}>
+                  <label className={`col-12 ${co.label}`}>
+                    End Time
+                    <Field
+                      name="endTime"
+                      placeholder="10:00"
+                      className={`${co.field} `}
+                    />
 
-                          {errors.startDate && touched.startDate ? (
-                            <div className={about.err}>{errors.startDate}</div>
-                          ) : null}
-                          <Field
-                            name="endtDate"
-                            placeholder="Sep, 10,  2022"
-                            className={`col-12 mx-auto ${about.field}`}
-                          />
+                    {errors.endTime && touched.endTime ? (
+                      <div className={co.err}>{errors.endTime}</div>
+                    ) : null}
+                    </label>
+                  </div>
+                </div>
+                <label className={`col-12 ${co.label} ${co.labelleft}`}>
+                Description
+                <Field
+                  name="description"
+                  placeholder="description"
+                  as="textarea"
+                  className={`col-12 mx-auto ${co.field}`}
+                />
 
-                          {errors.endtDate && touched.endtDate ? (
-                            <div className={about.err}>{errors.endtDate}</div>
-                          ) : null}
-                          <Field
-                            name="startTime"
-                            placeholder="10:00"
-                            className={`col-12 mx-auto ${about.field}`}
-                          />
+                {errors.description && touched.description ? (
+                  <div className={co.err}>{errors.description}</div>
+                ) : null}
+                </label>
+                <label for="upload-photo" className={co.uplodlabel}>Attach File</label>
+                <input type="file" name="photo" id="upload-photo" className={co.uplod} />
+                <div className={co.divider} />
+                <h6 className={`${co.notify}`}>Notification Setting</h6>
+                <label>
 
-                          {errors.startTime && touched.startTime ? (
-                            <div className={about.err}>{errors.startTime}</div>
-                          ) : null}
-                          <Field
-                            name="endTime"
-                            placeholder="10:00"
-                            className={`col-12 mx-auto ${about.field}`}
-                          />
+                  <Field type="checkbox" name="jobType" value="ck1" className={`${co.chek}`} />
 
-                          {errors.endTime && touched.endTime ? (
-                            <div className={about.err}>{errors.endTime}</div>
-                          ) : null}
+                  Send SMS
 
-                          <Field
-                            name="description"
-                            placeholder="description"
-                            as="textarea"
-                            className={`col-12 mx-auto ${about.field}`}
-                          />
+                </label><br />
+                <label>
 
-                          {errors.description && touched.description ? (
-                            <div className={about.err}>{errors.description}</div>
-                          ) : null}
+                  <Field type="checkbox" name="jobType1" value="ck2" className={`${co.chek}`} />
 
-                          <button type="submit" className={about.conBTN}>
-                            Submit
-                          </button>
-                        </Form>
-                      )}
-                    </Formik>
+                  Send Email
+
+                </label>
+              </Form>
+            )}
+
+          </Formik>
 
 
 
@@ -428,7 +456,7 @@ const Courses = () => {
 
 
 
-          <Button variant="danger mx-3 mt-3" onClick={handleClose}>
+          <Button variant="warning mt-4 mb-3" onClick={handleClose} className={`${co.frmBTN}`}>
             Create
           </Button></Modal.Body>
       </Modal>

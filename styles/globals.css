@@ -161,6 +161,12 @@ canvas{
     width: 100% !important;
     height: 100% !important;
 }
+.container-fluid{
+    padding: 0 !important;
+}
+.slick-arrow, .slick-prev, .slick-next{
+    display:none !important;
+}
 @media  only screen and (max-width: 1400px) {
 }
 
