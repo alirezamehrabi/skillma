@@ -1,0 +1,98 @@
+.content{
+    padding: 15px 30px 0px;
+    background: #fff;
+    border-radius:15px;
+    margin: 30px auto 60px;
+}
+.chattitle > span {
+    float:left;
+    font-weight:600;
+    line-height: 60px;
+    font-size: 18px;
+}
+.chatbtn{
+    display: block;
+    float: right;
+    background-color: #FF9401;
+    color:#fff;
+    border:none;
+    border-radius: 15px;
+    padding: 15px 30px;
+    font-weight:600;
+}
+.chat{
+    border-radius: 15px;
+    padding: 15px 30px;
+    background: #FAFAFA;
+}
+.searchperson{
+    position: relative;
+}
+.searchperson svg{
+    position: absolute;
+    cursor: pointer;
+    right:13px;
+    top: 10px;
+}
+.showperson{
+    max-height: 644px;
+    overflow-y: scroll;
+}
+.search{
+    border-radius: 10px;
+    background: #FAFAFA;
+    font-size: 15px;
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.massege{
+    text-align: center;
+    line-height: 40px;
+    font-weight: 600;
+    display: none;
+}
+.peritem{
+    padding: 13px ;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.perpic span{
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 100%;
+}
+.pertitle.unread{
+    font-size: 15px;
+    font-weight: 600;
+    color: #1A1C36;
+}
+.permessage.unread{
+    font-weight: 600;
+    font-size: 15px;
+    color: #7A7D7C;
+}
+.selected{
+    background: #FAFAFA;
+}
+.pertitle.read{
+    font-size: 15px;
+    font-weight: 500;
+    color: #A0A1AC;
+}
+.permessage.read{
+    font-size: 15px;
+    color: #A0A1AC;
+}
+.date{
+    color: #A0A1AC;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.chatpic span{
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 100%;
+    cursor: pointer;
+}
