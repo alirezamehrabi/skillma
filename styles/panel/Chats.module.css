@@ -1,98 +1,180 @@
-.content{
-    padding: 15px 30px 0px;
-    background: #fff;
-    border-radius:15px;
-    margin: 30px auto 60px;
+.content {
+  padding: 15px 30px 0px;
+  background: #fff;
+  border-radius: 15px;
+  margin: 30px auto 60px;
 }
 .chattitle > span {
-    float:left;
-    font-weight:600;
-    line-height: 60px;
-    font-size: 18px;
+  float: left;
+  font-weight: 600;
+  line-height: 60px;
+  font-size: 18px;
 }
-.chatbtn{
-    display: block;
-    float: right;
-    background-color: #FF9401;
-    color:#fff;
-    border:none;
-    border-radius: 15px;
-    padding: 15px 30px;
-    font-weight:600;
+.chatbtn {
+  display: block;
+  float: right;
+  background-color: #ff9401;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  padding: 15px 30px;
+  font-weight: 600;
 }
-.chat{
-    border-radius: 15px;
-    padding: 15px 30px;
-    background: #FAFAFA;
+.chat {
+  border-radius: 15px;
+  padding: 15px 30px;
+  background: #fafafa;
+  max-height: 700px;
+  overflow-y: scroll;
+  position: relative;
 }
-.searchperson{
-    position: relative;
+.searchperson {
+  position: relative;
 }
-.searchperson svg{
+.searchperson svg {
+  position: absolute;
+  cursor: pointer;
+  right: 13px;
+  top: 10px;
+}
+.showperson {
+  max-height: 644px;
+  overflow-y: scroll;
+}
+.search {
+  border-radius: 10px;
+  background: #fafafa;
+  font-size: 15px;
+  width: 97%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.massege {
+  text-align: center;
+  line-height: 40px;
+  font-weight: 600;
+  display: none;
+}
+.peritem {
+  padding: 13px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.perpic span {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 100%;
+}
+.pertitle.unread {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1c36;
+}
+.permessage.unread {
+  font-weight: 600;
+  font-size: 15px;
+  color: #7a7d7c;
+}
+.selected {
+  background: #fafafa;
+}
+.pertitle.read {
+  font-size: 15px;
+  font-weight: 500;
+  color: #a0a1ac;
+}
+.permessage.read {
+  font-size: 15px;
+  color: #a0a1ac;
+}
+.date {
+  color: #a0a1ac;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.chatpic{margin-right: 20px;}
+.chatpic span {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 100%;
+  cursor: pointer;
+}
+.posttxt {
+  background-color: #fff;
+  border-radius: 13px;
+  font-size: 15px;
+  line-height: 30px;
+  color: #707070;
+  padding: 15px;
+}
+.clock {
+  color: #a0a1ac;
+  font-size: 12px;
+  line-height: 30px;
+}
+.reply {
+  float: right;
+}
+.chatreplypic{margin-left: 20px;}
+.chatreplypic span {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 100%;
+  cursor: pointer;
+  float: right;
+}
+.postreplytxt {
+  background-color: #e5ffff;
+  border-radius: 13px;
+  font-size: 15px;
+  line-height: 30px;
+  color: #707070;
+  padding: 15px;
+}
+.clockreply {
+  color: #a0a1ac;
+  font-size: 12px;
+  line-height: 30px;
+  text-align: right;
+}
+.post,
+.reply {
+  margin-bottom: 25px;
+}
+.txtwidth {
+  width: auto;
+}
+.send {
+  resize: none;
+  overflow: hidden;
+  height: 40px;
+  min-height: 0px;
+  max-height: 80px;
+  background-color: #fff;
+  border-radius: 13px;
+  font-size: 16px;
+  padding: 10px 100px 10px 20px;
+  position: absolute;
+  bottom: 4px;
+  width: 94%;
+  box-shadow: 0px 15px 25px -4px rgba(150, 150, 150, 0.24);
+}
+.attach {
+  position: absolute;
+  left: 89%;
+  bottom: 10px;
+  width: 0px;
+  cursor: pointer;
+}
+.sen{
     position: absolute;
-    cursor: pointer;
-    right:13px;
-    top: 10px;
+  left: 93%;
+  bottom: 8px;
+  width: 0px;
+  cursor: pointer;
 }
-.showperson{
-    max-height: 644px;
-    overflow-y: scroll;
-}
-.search{
-    border-radius: 10px;
-    background: #FAFAFA;
-    font-size: 15px;
-    width: 97%;
-    padding: 10px;
-    margin-bottom: 15px;
-}
-.massege{
-    text-align: center;
-    line-height: 40px;
-    font-weight: 600;
-    display: none;
-}
-.peritem{
-    padding: 13px ;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-.perpic span{
-    width: 50px !important;
-    height: 50px !important;
-    border-radius: 100%;
-}
-.pertitle.unread{
-    font-size: 15px;
-    font-weight: 600;
-    color: #1A1C36;
-}
-.permessage.unread{
-    font-weight: 600;
-    font-size: 15px;
-    color: #7A7D7C;
-}
-.selected{
-    background: #FAFAFA;
-}
-.pertitle.read{
-    font-size: 15px;
-    font-weight: 500;
-    color: #A0A1AC;
-}
-.permessage.read{
-    font-size: 15px;
-    color: #A0A1AC;
-}
-.date{
-    color: #A0A1AC;
-    font-size: 15px;
-    margin-bottom: 20px;
-}
-.chatpic span{
-    width: 50px !important;
-    height: 50px !important;
-    border-radius: 100%;
-    cursor: pointer;
+.sen svg{
+    width: 23px;
+    height: 23px;
 }
