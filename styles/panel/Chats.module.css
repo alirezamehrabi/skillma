@@ -55,6 +55,12 @@
   font-weight: 600;
   display: none;
 }
+.massegee {
+  text-align: center;
+  line-height: 40px;
+  font-weight: 600;
+  display: block;
+}
 .peritem {
   padding: 13px;
   border-radius: 15px;
@@ -93,7 +99,9 @@
   font-size: 15px;
   margin-bottom: 20px;
 }
-.chatpic{margin-right: 20px;}
+.chatpic {
+  margin-right: 20px;
+}
 .chatpic span {
   width: 50px !important;
   height: 50px !important;
@@ -116,7 +124,9 @@
 .reply {
   float: right;
 }
-.chatreplypic{margin-left: 20px;}
+.chatreplypic {
+  margin-left: 20px;
+}
 .chatreplypic span {
   width: 50px !important;
   height: 50px !important;
@@ -167,14 +177,90 @@
   width: 0px;
   cursor: pointer;
 }
-.sen{
-    position: absolute;
+.sen {
+  position: absolute;
   left: 93%;
   bottom: 8px;
   width: 0px;
   cursor: pointer;
 }
-.sen svg{
-    width: 23px;
-    height: 23px;
+.sen svg {
+  width: 23px;
+  height: 23px;
+}
+.showper {
+  background: #fafafa;
+  padding: 15px;
+  border-radius: 15px;
+  border: 2px solid #2D3DDF
+}
+.showper span {
+  width: 88px !important;
+  height: 88px !important;
+  margin: 20px auto !important;
+  display: block !important;
+  border-radius: 100%;
+}
+.name {
+  text-align: center;
+  color: #1a1c36;
+  font-size: 20px;
+}
+.work {
+  text-align: center;
+  color: #7a7d7c;
+  font-size: 20px;
+}
+.file {
+  background: #e5ffff;
+  border-radius: 15px;
+  padding: 10px 25px;
+  color: #3a8944;
+  font-size: 20px;
+}
+.filename {
+  text-align: left;
+  line-height: 25px;
+}
+.filecount {
+  display: inline;
+  padding-left: 10px;
+  font-weight: 600;
+}
+.share {
+  background: #e6f3ff;
+  border-radius: 15px;
+  padding: 10px 25px;
+  color: #2d3ddf;
+  font-size: 20px;
+}
+.sharename {
+  text-align: left;
+  line-height: 25px;
+}
+.sharecount {
+  display: inline;
+  padding-left: 10px;
+  font-weight: 600;
+}
+.papersvg {
+  padding: 15px;
+  background: #e6f3ff;
+  border-radius: 15px;
+}
+.txtholder {
+  padding: 0 15px;
+}
+.arrow {
+  position: relative;
+  top: 30%;
+}
+.deldes{
+  font-size: 20px;
+  color: #FF4D4D;
+  display: inline;
+  padding: 3px 0 0 20px;
+  position: relative;
+  cursor: pointer;
+  top: 4px;
 }
