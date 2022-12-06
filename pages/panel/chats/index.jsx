@@ -264,13 +264,15 @@ const Courses = () => {
               <div className={`col-12 ${ch.chattitle}`}>
                 <span className={``}>Receive Message</span>
                 <div className={``}>
+                  <Link href="/panel/live">
                   <button type="button" className={`${ch.chatbtn}`}>
                     Live Now
                   </button>
+                  </Link>
                 </div>
               </div>
 
-              <div className={`row mx-auto my-5`}>
+              <div className={`row mx-auto my-5 position-relative`}>
                 {state ? (
                   <div className={`col-lg-3 gx-3`}>
                     <div className={`col-12 ${ch.searchperson}`}>
@@ -486,8 +488,8 @@ const Courses = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className={`col-lg-1 gx-3`}>
-                    <div className={`col-12 ${ch.showperson}`}>
+                  <div className={`col-xxl-1 gx-3`}>
+                    <div className={`col-12 ${ch.showperson} ${ch.showperson2}`}>
                       <h6 className={`${ch.massegee}`}>Messages</h6>
                       <div className={`row ${ch.peritem} ${ch.selected}`}>
                         <div className={`col-12 ${ch.perpic}`}>
@@ -643,7 +645,7 @@ const Courses = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className={`col-lg-7 gx-3 ${ch.chat}`}>
+                  <div className={`col-7 col-lg-7 col-lg-7 col-xxl-7 gx-3 ${ch.chat}`}>
                     <div className={`row`}>
                       <h6 className={`text-center ${ch.date}`}>
                         sep 10 , 2022
@@ -714,7 +716,7 @@ const Courses = () => {
                   </div>
                 )}
                 {state ? null : (
-                  <div className={`col-lg-4`}>
+                  <div className={`col-4 col-md-5 col-xxl-4 ${ch.personDetail}`}>
                     <div className={`col-lg-11 ${ch.showper} mx-auto`}>
                       <Image
                         src={require(`../../../src/assets/panel/chat/1big.png`)}
@@ -727,12 +729,12 @@ const Courses = () => {
                       <div
                         className={`row d-flex justify-content-around mx-auto mt-4 mb-5`}
                       >
-                        <div className={`col-5 ${ch.file}`}>
+                        <div className={`col-xl-5 mb-2 ${ch.file}`}>
                           <h6 className={`${ch.filename}`}>All Files</h6>
                           {file}
                           <h6 className={`${ch.filecount}`}>256</h6>
                         </div>
-                        <div className={`col-5 ${ch.share}`}>
+                        <div className={`col-xl-5 mb-2 ${ch.share}`}>
                           <h6 className={`${ch.sharename}`}>All Links</h6>
                           {share}
                           <h6 className={`${ch.sharecount}`}>256</h6>
@@ -767,7 +769,7 @@ const Courses = () => {
                         <h6 className={`${ch.deldes}`}>Delete Chat</h6>
                         </div>
                         <div className={`col-12 mt-4`}>{del}
-                        <h6 className={`${ch.deldes}`}>Delete Chat</h6>
+                        <h6 className={`${ch.deldes}`}>Remove connection</h6>
                         </div>
                       </div>
                     </div>

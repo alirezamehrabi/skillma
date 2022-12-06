@@ -192,7 +192,7 @@
   background: #fafafa;
   padding: 15px;
   border-radius: 15px;
-  border: 2px solid #2D3DDF
+  border: 2px solid #2d3ddf;
 }
 .showper span {
   width: 88px !important;
@@ -244,9 +244,13 @@
   font-weight: 600;
 }
 .papersvg {
-  padding: 15px;
   background: #e6f3ff;
   border-radius: 15px;
+  display: flex;
+}
+.papersvg svg {
+  align-self: center;
+  margin: auto;
 }
 .txtholder {
   padding: 0 15px;
@@ -255,12 +259,162 @@
   position: relative;
   top: 30%;
 }
-.deldes{
+.deldes {
   font-size: 20px;
-  color: #FF4D4D;
+  color: #ff4d4d;
   display: inline;
   padding: 3px 0 0 20px;
   position: relative;
   cursor: pointer;
   top: 4px;
+}
+.item {
+  padding: 10px;
+}
+.item span {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 100%;
+  display: block !important;
+  margin: auto !important;
+}
+.itdes {
+  color: #707070;
+  display: inline;
+  padding: 15px;
+  background: #fff;
+  border-radius: 15px;
+}
+.ittime {
+  text-align: right;
+  padding: 0px 20px;
+  color: #a0a1ab;
+  font-size: 13px;
+}
+.chatcontent {
+  max-height: 600px;
+  overflow-y: scroll;
+  background-color: #fafafa;
+}
+.videoChat {
+  background-color: #fff;
+  border-radius: 15px;
+}
+.chatlivehold {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+.tabstyle {
+}
+.tabstyle li {
+  width: 50%;
+}
+.tabstyle li button {
+  width: 100%;
+}
+.people {
+  background-color: #fafafa;
+  padding: 10px;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+.people > div {
+  background-color: #fff;
+  padding: 10px;
+}
+.peoplepic span {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 100%;
+  display: block !important;
+  margin: auto !important;
+}
+.peoplename {
+  position: relative;
+  top: 10px;
+}
+.peoplebtn {
+  position: relative;
+  top: 10px;
+  background: #ff9401;
+  color: #fff;
+}
+.peoplebtn:hover {
+  color: #fff;
+}
+.conreq {
+  border-radius: 15px;
+  background-color: #fafafa;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.conreqPic span {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 100%;
+  display: block !important;
+  margin: auto !important;
+}
+.conreqConfirm {
+  background: #198754;
+  color: #fff;
+}
+.conreqConfirm:hover {
+  color: #fff;
+}
+.conreqBTN button {
+  margin: 0 7px;
+  padding: 5px 20px;
+}
+.conreqDes {
+  color: #7a7d7c;
+}
+.conreqSec {
+  max-height: 712px;
+  overflow-y: scroll;
+}
+.conreqtitle {
+  padding: 20px 5px;
+  font-size: 22px;
+}
+.conList {
+  font-size: 22px;
+  padding: 5px 0px;
+}
+.conBTN {
+  width: 100%;
+}
+.conholder {
+  max-height: 842px;
+  overflow-y: scroll;
+}
+@media only screen and (max-width: 1400px) {
+  .showperson2 {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .chat {
+    max-height: 810px;
+    overflow-x: hidden;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+}
+
+@media only screen and (max-width: 768px) {
+  /* .personDetail {
+    position: absolute;
+    width: 100%;
+    top: 80px;
+  } */
+}
+
+@media only screen and (max-width: 576px) {
 }
