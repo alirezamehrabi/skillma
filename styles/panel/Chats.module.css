@@ -390,11 +390,23 @@
   max-height: 842px;
   overflow-y: scroll;
 }
+.showhideBTN,.ham{
+  display: none;
+}
+.statebtn{
+  display: none;
+}
+.height{
+  height: 100%;
+}
 @media only screen and (max-width: 1400px) {
   .showperson2 {
     display: flex;
     flex-direction: row;
     margin-bottom: 30px;
+  }
+  .perdetail{
+    padding-left:7px;
   }
 }
 
@@ -409,12 +421,59 @@
 }
 
 @media only screen and (max-width: 768px) {
-  /* .personDetail {
+  .personDetail2 {
     position: absolute;
     width: 100%;
-    top: 80px;
-  } */
+    top: 100px;
+    /* transition: 1s; */
+    z-index: 10;
+  }
+   .personDetail3 {
+    display: none;
+    /* width:0; */
+    /* overflow: hidden; */
+    /* transition: 1s; */
+  } 
+  .showhideBTN,.ham{
+    display: block;
+  }
+  .chat2{
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    /* transition: 1s; */
+    top: 100px;
+    max-height: auto;
+    height: auto;
+  }
+  .chat3{
+    display: none;
+    /* width:0; */
+    /* overflow: hidden; */
+    /* transition: 1s; */
+  }
+  .content{
+    padding: 0;
+  }
+  .chatbtn{
+    padding: 8px 20px;
+    font-weight: 500;
+    margin: 20px 20px 0 0;
+  }
+  .attach {
+    left: 88%;
+  }
+  .fchat1{display:none}
+  .fchat2{display: block;}
+  .fperson1{display:none}
+  .fperson2{display: block;}
+}
+.statebtn{
+  display: block;
 }
 
 @media only screen and (max-width: 576px) {
+  .attach {
+    left: 85%;
+  }
 }

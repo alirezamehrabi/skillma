@@ -14,9 +14,12 @@ import DatePicker from "react-date-picker/dist/entry.nostyle";
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
 import { Button, Modal } from "react-bootstrap";
+import { CgMenu } from "react-icons/cg";
+import { ImCross } from "react-icons/im";
 
 const Courses = () => {
   const [state, setState] = useState(true);
+  const [fstate, setFstate] = useState(false);
   const searc = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -233,7 +236,23 @@ const Courses = () => {
       </g>
     </svg>
   );
-
+  const [open, setOpen] = useState(false);
+  const HamOpen = (
+    <CgMenu
+      className={`${styles.Hamburger} ${ch.ham}`}
+      size="30px"
+      color="#ffcf00"
+      onClick={() => setOpen(!open)}
+    />
+  );
+  const HamClose = (
+    <ImCross
+      className={`${styles.Hamburger} ${ch.ham}`}
+      size="30px"
+      color="#ffcf00"
+      onClick={() => setOpen(!open)}
+    />
+  );
   const handleKeyDown = (e) => {
     e.target.style.height = "inherit";
     e.target.style.height = `${e.target.scrollHeight}px`;
@@ -242,8 +261,15 @@ const Courses = () => {
   };
   const changeStyle = () => {
     setState(!state);
-    console.log(state);
   };
+  const change = () => {
+    setFstate(!fstate);
+    console.log(fstate)
+  };
+  const changestate = () => {
+    setFstate(false);
+  };
+
   return (
     <SSRProvider>
       <Head>
@@ -265,16 +291,17 @@ const Courses = () => {
                 <span className={``}>Receive Message</span>
                 <div className={``}>
                   <Link href="/panel/live">
-                  <button type="button" className={`${ch.chatbtn}`}>
-                    Live Now
-                  </button>
+                    <button type="button" className={`${ch.chatbtn}`}>
+                      Live Now
+                    </button>
                   </Link>
                 </div>
               </div>
 
               <div className={`row mx-auto my-5 position-relative`}>
+                {!fstate ? null : <div className={state ?`${ch.statebtn}` : `${ch.chat3}`} onClick={changestate}>{HamClose}</div>}
                 {state ? (
-                  <div className={`col-lg-3 gx-3`}>
+                  <div className={fstate ? `col-md-4 col-lg-3 gx-3 ${ch.fperson1}`: `col-md-4 col-lg-3 gx-3 ${ch.fperson2}`}>
                     <div className={`col-12 ${ch.searchperson}`}>
                       <input
                         type="text"
@@ -285,7 +312,10 @@ const Courses = () => {
                     </div>
                     <div className={`col-12 ${ch.showperson}`}>
                       <h6 className={`${ch.massege}`}>Messages</h6>
-                      <div className={`row ${ch.peritem} ${ch.selected}`}>
+                      <div
+                        className={`row ${ch.peritem} ${ch.selected}`}
+                        onClick={change}
+                      >
                         <div className={`col-3 ${ch.perpic}`}>
                           <Image
                             src={require(`../../../src/assets/panel/chat/1.png`)}
@@ -489,7 +519,9 @@ const Courses = () => {
                   </div>
                 ) : (
                   <div className={`col-xxl-1 gx-3`}>
-                    <div className={`col-12 ${ch.showperson} ${ch.showperson2}`}>
+                    <div
+                      className={`col-12 ${ch.showperson} ${ch.showperson2}`}
+                    >
                       <h6 className={`${ch.massegee}`}>Messages</h6>
                       <div className={`row ${ch.peritem} ${ch.selected}`}>
                         <div className={`col-12 ${ch.perpic}`}>
@@ -574,8 +606,13 @@ const Courses = () => {
                     </div>
                   </div>
                 )}
+                {state ? null : (
+                  <div className={`${ch.showhideBTN}`}>
+                    {open ? HamOpen : HamClose}
+                  </div>
+                )}
                 {state ? (
-                  <div className={`col-lg-9 gx-3 ${ch.chat}`}>
+                  <div className={fstate ? `col-md-8 col-lg-9 gx-3 ${ch.chat} ${ch.fchat2}`:`col-md-8 col-lg-9 gx-3 ${ch.chat} ${ch.fchat1}` }>
                     <div className={`row`}>
                       <h6 className={`text-center ${ch.date}`}>
                         sep 10 , 2022
@@ -645,8 +682,14 @@ const Courses = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className={`col-7 col-lg-7 col-lg-7 col-xxl-7 gx-3 ${ch.chat}`}>
-                    <div className={`row`}>
+                  <div
+                    className={
+                      open
+                        ? `col-7 col-lg-7 col-lg-7 col-xxl-7 gx-3 ${ch.chat3}`
+                        : `col-7 col-lg-7 col-lg-7 col-xxl-7 gx-3 ${ch.chat} ${ch.chat2}`
+                    }
+                  >
+                    <div className={`row position-relative ${ch.height}`}>
                       <h6 className={`text-center ${ch.date}`}>
                         sep 10 , 2022
                       </h6>
@@ -715,8 +758,15 @@ const Courses = () => {
                     </div>
                   </div>
                 )}
+
                 {state ? null : (
-                  <div className={`col-4 col-md-5 col-xxl-4 ${ch.personDetail}`}>
+                  <div
+                    className={
+                      open
+                        ? `col-4 col-md-5 col-xxl-4 ${ch.personDetail} ${ch.personDetail2}`
+                        : `col-4 col-md-5 col-xxl-4 ${ch.personDetail3}`
+                    }
+                  >
                     <div className={`col-lg-11 ${ch.showper} mx-auto`}>
                       <Image
                         src={require(`../../../src/assets/panel/chat/1big.png`)}
@@ -742,9 +792,7 @@ const Courses = () => {
                       </div>
                       <div className={`col-12 mt-5`}>
                         <div className={`row`}>
-                          <div className={`col-2 ${ch.papersvg}`}>
-                            {paper}
-                          </div>
+                          <div className={`col-2 ${ch.papersvg}`}>{paper}</div>
                           <div className={`col-9 ${ch.txtholder}`}>
                             <h6 className={`fw-bold`}>Document</h6>
                             <h6 className={``}>124</h6>
@@ -754,9 +802,7 @@ const Courses = () => {
                       </div>
                       <div className={`col-12 mt-3 mb-5`}>
                         <div className={`row`}>
-                          <div className={`col-2 ${ch.papersvg}`}>
-                            {paper}
-                          </div>
+                          <div className={`col-2 ${ch.papersvg}`}>{paper}</div>
                           <div className={`col-9 ${ch.txtholder}`}>
                             <h6 className={`fw-bold`}>Media</h6>
                             <h6 className={``}>124</h6>
@@ -765,11 +811,13 @@ const Courses = () => {
                         </div>
                       </div>
                       <div className={`row`}>
-                        <div className={`col-12 mt-5`}>{del}
-                        <h6 className={`${ch.deldes}`}>Delete Chat</h6>
+                        <div className={`col-12 mt-5`}>
+                          {del}
+                          <h6 className={`${ch.deldes}`}>Delete Chat</h6>
                         </div>
-                        <div className={`col-12 mt-4`}>{del}
-                        <h6 className={`${ch.deldes}`}>Remove connection</h6>
+                        <div className={`col-12 mt-4`}>
+                          {del}
+                          <h6 className={`${ch.deldes}`}>Remove connection</h6>
                         </div>
                       </div>
                     </div>
