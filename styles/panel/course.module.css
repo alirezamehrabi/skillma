@@ -1,0 +1,51 @@
+.courseTitle{
+    padding: 30px 15px;
+    border-radius: 15px;
+    background-color: #fff;
+    margin: 30px auto 25px;
+}
+.courseTitle h6{
+    font-weight: 600;
+    font-size: 22px;
+}
+.courseSecTitle{
+    font-weight: bold;
+    text-align: center;
+    margin: 20px auto 50px;
+}
+.courseSec{
+    background-color: #fff;
+    padding: 20px;
+}
+.courseit{
+    padding: 13px;
+    background-color: #D6EBFF;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.onlinecourseit{
+    padding: 13px;
+    background-color: #FFE9D6;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.onlinecourseit svg,.courseit svg{
+    display: block;
+    margin: 20px auto;
+}
+.courseit h5{
+    font-weight: 600;
+    color: #1D7DD8;
+    text-align: center;
+}
+.onlinecourseit h5{
+    font-weight: 600;
+    color: #ED7208;
+    text-align: center;
+}
+.courseit h6,
+.onlinecourseit h6{
+    color: #707070;
+    text-align: center;
+    line-height: 25px;
+}

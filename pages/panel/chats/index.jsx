@@ -16,6 +16,7 @@ import ReactPaginate from "react-paginate";
 import { Button, Modal } from "react-bootstrap";
 import { CgMenu } from "react-icons/cg";
 import { ImCross } from "react-icons/im";
+import { TiArrowBackOutline } from "react-icons/ti";
 
 const Courses = () => {
   const [state, setState] = useState(true);
@@ -253,6 +254,14 @@ const Courses = () => {
       onClick={() => setOpen(!open)}
     />
   );
+  const HamBack = (
+    <TiArrowBackOutline
+      className={`${styles.Hamburger} ${ch.ham}`}
+      size="30px"
+      color="#ffcf00"
+      onClick={() => setOpen(!open)}
+    />
+  );
   const handleKeyDown = (e) => {
     e.target.style.height = "inherit";
     e.target.style.height = `${e.target.scrollHeight}px`;
@@ -299,7 +308,7 @@ const Courses = () => {
               </div>
 
               <div className={`row mx-auto my-5 position-relative`}>
-                {!fstate ? null : <div className={state ?`${ch.statebtn}` : `${ch.chat3}`} onClick={changestate}>{HamClose}</div>}
+                {!fstate ? null : <div className={state ?`${ch.statebtn}` : `${ch.chat3}`} onClick={changestate}>{HamBack}</div>}
                 {state ? (
                   <div className={fstate ? `col-md-4 col-lg-3 gx-3 ${ch.fperson1}`: `col-md-4 col-lg-3 gx-3 ${ch.fperson2}`}>
                     <div className={`col-12 ${ch.searchperson}`}>
