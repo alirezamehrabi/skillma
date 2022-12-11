@@ -23,7 +23,7 @@ const Courses = () => {
   return (
     <SSRProvider>
       <div className={`row ${co.preview}`}>
-        <h5 className={`co.prevTitle`}>Create new course</h5>
+        <h5 className={`${co.prevTitle}`}>Create new course</h5>
         <Formik
           initialValues={{
             subject: "",
@@ -41,39 +41,52 @@ const Courses = () => {
         >
           {({ errors, touched }) => (
             <Form className={co.form}>
+              <label htmlFor="email">How about a working title?</label>
               <Field
                 name="email"
                 type="email"
-                placeholder="abcd@gmail.com"
+                placeholder="e.g. Learn  ui/ux design"
                 className={`col-12 mx-auto ${co.field}`}
               />
 
               {errors.email && touched.email ? (
                 <div className={co.err}>{errors.email}</div>
               ) : null}
+              <label htmlFor="subject">What category best fits the knowledge you'll share?</label>
               <Field
+                as="select"
                 name="subject"
-                placeholder="Subject"
+                placeholder="Select category"
                 className={`col-12 mx-auto ${co.field}`}
-              />
-
+              >
+              <option value="red">1</option>
+              <option value="green">1</option>
+              <option value="blue">1</option>
+                </Field>
               {errors.subject && touched.subject ? (
                 <div className={co.err}>{errors.subject}</div>
               ) : null}
-
+              <label htmlFor="subject">select level</label>
               <Field
+                as="select"
                 name="message"
-                placeholder="message"
-                as="textarea"
+                placeholder="select level"
                 className={`col-12 mx-auto ${co.field}`}
-              />
-
+              >
+              <option value="red">1</option>
+              <option value="green">1</option>
+              <option value="blue">1</option>
+              </Field>
               {errors.message && touched.message ? (
                 <div className={co.err}>{errors.message}</div>
               ) : null}
-
-              <button type="submit" className={co.conBTN}>
-                Submit
+              <input type="checkbox" id="a"/>
+              <label htmlFor="a">This Course is Free</label>
+              <button type="button" className={co.conBTN}>
+              Previuse
+              </button>
+              <button type="button" className={co.conBTN}>
+                Contiue
               </button>
             </Form>
           )}

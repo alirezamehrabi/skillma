@@ -51,9 +51,11 @@
 }
 .preview{
     background-color: #fff;
-    padding: 15px;
+    padding: 25px;
     border-radius: 15px;
+    margin-top: 30px;
 }
 .prevTitle{
-    
+    font-weight: 600;
+    margin-bottom: 60px;
 }
