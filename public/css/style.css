@@ -1,7 +1,19 @@
 @font-face {
-    font-family: "IRANSans";
-    src: url("../fonts/IRANSans.ttf") format("eot"),
-        url("../fonts/IRANSans.woff") format("woff") format("truetype");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "IRANSans";
+  src: url("../fonts/IRANSans.otf") format("otf"),
+    url("../fonts/IRANSans.eot") format("eot"),
+    url("../fonts/IRANSans.ttf") format("ttf"),
+    url("../fonts/IRANSans.woff") format("woff") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "OpenSans";
+  src: url("../OpenSans-Medium.eot");
+  src: url("../OpenSans-Medium.eot?#iefix") format("embedded-opentype"),
+    url("../OpenSans-Medium.woff2") format("woff2"),
+    url("../OpenSans-Medium.woff") format("woff"),
+    url("../OpenSans-Medium.ttf") format("truetype"),
+    url("../OpenSans-Medium.svg#OpenSans-Medium") format("svg"),
+    url("../OpenSans-Medium.otf") format("otf");
 }

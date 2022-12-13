@@ -1,19 +1,29 @@
 @font-face {
   font-family: "IRANSans";
   src: url("../fonts/IRANSans.ttf") format("eot"),
-  url("../fonts/IRANSans.otf") format("otf"),
-  url("../fonts/IRANSans.woff2") format("woff2"),
-  url("../fonts/IRANSans.ttf") format("ttf"),
-      url("../fonts/IRANSans.woff") format("woff") format("truetype");
+    url("../fonts/IRANSans.otf") format("otf"),
+    url("../fonts/IRANSans.woff2") format("woff2"),
+    url("../fonts/IRANSans.ttf") format("ttf"),
+    url("../fonts/IRANSans.woff") format("woff") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+    font-family: "OpenSans";
+    src: url("../fonts/OpenSans-Medium.eot");
+    src: url("../fonts/OpenSans-Medium.eot?#iefix") format("embedded-opentype"),
+      url("../fonts/OpenSans-Medium.woff2") format("woff2"),
+      url("../fonts/OpenSans-Medium.woff") format("woff"),
+      url("../fonts/OpenSans-Medium.ttf") format("truetype"),
+      url("../fonts/OpenSans-Medium.svg#OpenSans-Medium") format("svg"),
+      url("../fonts/OpenSans-Medium.otf") format("otf");
+  }
 
 html,
 body {
   padding: 0 !important;
   margin: 0 !important;
-  font-family: "IRANSans" !important;
+  font-family: "OpenSans" !important;
   width: 100%;
 }
 
@@ -21,177 +31,292 @@ body {
   box-sizing: border-box;
 }
 
-
 .row {
   --bs-gutter-x: 0 !important;
 }
 
 /*  CSS RESET  */
 
-*:before, *:after , html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre, a,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,input, textarea,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
-    margin:0;
-    padding:0;
-    border:0;
-    outline:0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align:baseline;
-    background:transparent;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+*:before,
+*:after,
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+input,
+textarea,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  background: transparent;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    line-height:1;
-    color: #333;
+  line-height: 1;
+  color: #333;
 }
 
-article,aside,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section { 
-    display:block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 
-ol, ul {
-    list-style: none !important;
+ol,
+ul {
+  list-style: none !important;
 }
 
-blockquote, q {
-    quotes:none !important;
+blockquote,
+q {
+  quotes: none !important;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content:'';
-    content:none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 
 a {
-    text-decoration: none !important;
-    outline: none !important;
+  text-decoration: none !important;
+  outline: none !important;
 }
 
 ins {
-    background-color:#ff9;
-    color:#000;
-    text-decoration:none;
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
 }
 
 mark {
-    background-color:#ff9;
-    color:#000; 
-    font-style:italic;
-    font-weight:bold;
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
 }
 
 del {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
-abbr[title], dfn[title] {
-    border-bottom:1px dotted;
-    cursor:help;
+abbr[title],
+dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
 }
 
 table {
-    border-collapse:collapse;
-    border-spacing:0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 hr {
-    display:block;
-    height:1px;
-    border:0;   
-    border-top:1px solid #cccccc;
-    margin:1em 0;
-    padding:0;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
 }
 
-input, select {
-    vertical-align:middle;
+input,
+select {
+  vertical-align: middle;
 }
-.Toastify__toast{
+.Toastify__toast {
   font-family: "IRANSans" !important;
 }
-.changeTab li:nth-child(1) button{background: url("../src/assets/home/video.png") no-repeat 37% 50%  !important}
-.changeTab li:nth-child(2) button{background: url("../src/assets/home/text.png") no-repeat 37% 50%  !important}
-.changeTab li:nth-child(3) button{background: url("../src/assets/home/sound.png") no-repeat 37% 50%  !important}
-.changeTab li:nth-child(1) button.active{background: url("../src/assets/home/video2.png") no-repeat 37% 50% #2D3DDF !important;color:#fff !important}
-.changeTab li:nth-child(2) button.active{background: url("../src/assets/home/text2.png") no-repeat 37% 50% #2D3DDF !important;color:#fff !important}
-.changeTab li:nth-child(3) button.active{background: url("../src/assets/home/sound2.png") no-repeat 37% 50% #2D3DDF !important;color:#fff !important}
+.changeTab li:nth-child(1) button {
+  background: url("../src/assets/home/video.png") no-repeat 37% 50% !important;
+}
+.changeTab li:nth-child(2) button {
+  background: url("../src/assets/home/text.png") no-repeat 37% 50% !important;
+}
+.changeTab li:nth-child(3) button {
+  background: url("../src/assets/home/sound.png") no-repeat 37% 50% !important;
+}
+.changeTab li:nth-child(1) button.active {
+  background: url("../src/assets/home/video2.png") no-repeat 37% 50% #2d3ddf !important;
+  color: #fff !important;
+}
+.changeTab li:nth-child(2) button.active {
+  background: url("../src/assets/home/text2.png") no-repeat 37% 50% #2d3ddf !important;
+  color: #fff !important;
+}
+.changeTab li:nth-child(3) button.active {
+  background: url("../src/assets/home/sound2.png") no-repeat 37% 50% #2d3ddf !important;
+  color: #fff !important;
+}
 
 .nav-tabs {
-    --bs-nav-tabs-border-color: none !important;
-  }
-  
-  .nav-tabs .nav-link.active {
+  --bs-nav-tabs-border-color: none !important;
+}
+
+.nav-tabs .nav-link.active {
   color: blue !important;
-    border: none !important;
-    border-bottom: 1px solid blue !important;
+  border: none !important;
+  border-bottom: 1px solid blue !important;
+}
+.nav-tabs .nav-link {
+  color: #333 !important;
+}
+audio {
+  width: 100%;
+}
+.react-calendar {
+  border: none !important;
+}
+.react-date-picker__wrapper {
+  border-radius: 5px;
+  border: thin solid #d3cbcb;
+}
+.react-calendar {
+  margin: auto;
+  width: 100% !important;
+}
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+.container-fluid {
+  padding: 0 !important;
+}
+.slick-arrow,
+.slick-prev,
+.slick-next {
+  display: none !important;
+}
+@media only screen and (max-width: 1400px) {
+}
+
+@media only screen and (max-width: 1200px) {
+}
+
+@media only screen and (max-width: 992px) {
+  .changeTab li:nth-child(1) button {
+    background: url("../src/assets/home/video.png") no-repeat 25% 50% !important;
   }
-  .nav-tabs .nav-link {
-    color: #333 !important;
-    }
-audio{
-    width:100%;
-}
-.react-calendar{
-    border:none !important;
-}
-.react-date-picker__wrapper{
-    border-radius: 5px;
-    border: thin solid #d3cbcb;
-}
-.react-calendar{
-    margin: auto;
-    width: 100% !important;
-}
-canvas{
-    width: 100% !important;
-    height: 100% !important;
-}
-.container-fluid{
-    padding: 0 !important;
-}
-.slick-arrow, .slick-prev, .slick-next{
-    display:none !important;
-}
-@media  only screen and (max-width: 1400px) {
+  .changeTab li:nth-child(2) button {
+    background: url("../src/assets/home/text.png") no-repeat 25% 50% !important;
+  }
+  .changeTab li:nth-child(3) button {
+    background: url("../src/assets/home/sound.png") no-repeat 25% 50% !important;
+  }
+  .changeTab li:nth-child(1) button.active {
+    background: url("../src/assets/home/video2.png") no-repeat 25% 50% #2d3ddf !important;
+  }
+  .changeTab li:nth-child(2) button.active {
+    background: url("../src/assets/home/text2.png") no-repeat 25% 50% #2d3ddf !important;
+  }
+  .changeTab li:nth-child(3) button.active {
+    background: url("../src/assets/home/sound2.png") no-repeat 25% 50% #2d3ddf !important;
+  }
 }
 
-@media  only screen and (max-width: 1200px) {
-}  
-
-@media  only screen and (max-width: 992px) {
-    .changeTab li:nth-child(1) button{background: url("../src/assets/home/video.png") no-repeat 25% 50%  !important}
-.changeTab li:nth-child(2) button{background: url("../src/assets/home/text.png") no-repeat 25% 50%  !important}
-.changeTab li:nth-child(3) button{background: url("../src/assets/home/sound.png") no-repeat 25% 50%  !important}
-.changeTab li:nth-child(1) button.active{background: url("../src/assets/home/video2.png") no-repeat 25% 50% #2D3DDF !important;}
-.changeTab li:nth-child(2) button.active{background: url("../src/assets/home/text2.png") no-repeat 25% 50% #2D3DDF !important;}
-.changeTab li:nth-child(3) button.active{background: url("../src/assets/home/sound2.png") no-repeat 25% 50% #2D3DDF !important;}
-
-
+@media only screen and (max-width: 768px) {
 }
 
-@media  only screen and (max-width: 768px) {
-}
-
-@media  only screen and (max-width: 576px) {
-    .changeTab li:nth-child(1) button{background: url("../src/assets/home/video.png") no-repeat 10% 50%  !important}
-.changeTab li:nth-child(2) button{background: url("../src/assets/home/text.png") no-repeat 10% 50%  !important}
-.changeTab li:nth-child(3) button{background: url("../src/assets/home/sound.png") no-repeat 10% 50%  !important}
-.changeTab li:nth-child(1) button.active{background: url("../src/assets/home/video2.png") no-repeat 10% 50% #2D3DDF !important;}
-.changeTab li:nth-child(2) button.active{background: url("../src/assets/home/text2.png") no-repeat 10% 50% #2D3DDF !important;}
-.changeTab li:nth-child(3) button.active{background: url("../src/assets/home/sound2.png") no-repeat 10% 50% #2D3DDF !important;}
+@media only screen and (max-width: 576px) {
+  .changeTab li:nth-child(1) button {
+    background: url("../src/assets/home/video.png") no-repeat 10% 50% !important;
+  }
+  .changeTab li:nth-child(2) button {
+    background: url("../src/assets/home/text.png") no-repeat 10% 50% !important;
+  }
+  .changeTab li:nth-child(3) button {
+    background: url("../src/assets/home/sound.png") no-repeat 10% 50% !important;
+  }
+  .changeTab li:nth-child(1) button.active {
+    background: url("../src/assets/home/video2.png") no-repeat 10% 50% #2d3ddf !important;
+  }
+  .changeTab li:nth-child(2) button.active {
+    background: url("../src/assets/home/text2.png") no-repeat 10% 50% #2d3ddf !important;
+  }
+  .changeTab li:nth-child(3) button.active {
+    background: url("../src/assets/home/sound2.png") no-repeat 10% 50% #2d3ddf !important;
+  }
 }
