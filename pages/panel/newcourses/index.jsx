@@ -6,6 +6,7 @@ import { SSRProvider } from "react-bootstrap";
 import Header from "../../../src/components/panel/Header/Header.jsx";
 import CourseChoice from "../../../src/components/panel/CourseChoice/CourseChoice";
 import Coursepreview from "../../../src/components/panel/Coursepreview/Coursepreview";
+import CourseIntended from "../../../src/components/panel/CourseIntended/CourseIntended";
 import Menu from "../../../src/components/panel/Menu/Menu.jsx";
 import dash from "../../../styles/panel/Dashboard.module.css";
 import styles from "../../../styles/Home.module.css";
@@ -13,7 +14,15 @@ import co from "../../../styles/panel/course.module.css";
 import men from "../../../styles/panel/Menu.module.css";
 
 const Courses = () => {
-
+  const [formstep, setFormstep] = useState(2)
+  const completeFormStep = () => {
+    setFormstep((formstep) => formstep + 1);
+    console.log(formstep)
+  };
+  const backFormStep = () => {
+    setFormstep((formstep) => formstep - 1);
+    console.log(formstep)
+  };
   return (
     <SSRProvider>
       <Head>
@@ -30,8 +39,9 @@ const Courses = () => {
           </div>
           <div className={`col-lg-10 ${dash.maincontainer}`}>
             <Header />
-            {/* <CourseChoice/> */}
-            <Coursepreview/>
+             {formstep === 0 && <CourseChoice completeFormStep={completeFormStep} />}
+            {formstep === 1 && <Coursepreview completeFormStep={completeFormStep} back={backFormStep}/>}
+          {formstep === 2 && <CourseIntended completeFormStep={completeFormStep}/>}
           </div>
         </div>
       </div>

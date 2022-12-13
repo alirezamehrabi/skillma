@@ -19,12 +19,11 @@ const ContactSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const Courses = () => {
+const Courses = ({completeFormStep,back}) => {
   const [firstName, setFirstName] = useState('');
 
   const handleNameChange = event => {
     setFirstName(event.target.value);
-    console.log(event.target.value.length)
   };
   return (
     <SSRProvider>
@@ -94,11 +93,11 @@ const Courses = () => {
               <input type="checkbox" id="a" className={`${co.chkbox}`}/>
               <label htmlFor="a" className={`${co.label} ${co.chkboxlbl}`}>This Course is Free</label>
               <div className={`col-12 d-flex justify-content-end mt-4`}>
-              <button type="button" className={`${co.conBTN} ${co.prev}`}>
+              <button type="button" onClick={back} className={`${co.conBTN} ${co.prev}`}>
               Previuse
               </button>
-              <button type="button" className={`${co.conBTN} ${co.nxt}`}>
-                Contiue
+              <button onClick={completeFormStep} type="button" className={`${co.conBTN} ${co.nxt}`}>
+                Continue
               </button>
               </div>
             </Form>

@@ -3,8 +3,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { SSRProvider } from "react-bootstrap";
 import co from "../../../../styles/panel/course.module.css";
+import Coursepreview from "../../../../src/components/panel/Coursepreview/Coursepreview";
 
-const Courses = () => {
+const Courses = ({completeFormStep}) => {
   const cors = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -71,6 +72,7 @@ const Courses = () => {
       />
     </svg>
   );
+  const [formstep, setFormstep] = useState(0)
 
   return (
     <SSRProvider>
@@ -84,23 +86,24 @@ const Courses = () => {
                 </h6>
                 <div className={`col-lg-9 mx-auto`}>
                   <div className={`row justify-content-around`}>
-                    <Link href="#"><div className={`col-sm-5 mb-3 ${co.courseit}`}>
+                    <div onClick={completeFormStep} className={`col-sm-5 mb-3 ${co.courseit}`}>
                       {cors}
                       <h5 className={``}>Course</h5>
                       <h6 className={``}>
                         Lorem Ipsum is simply dummy text of the printing and
                         type setting industry.
                       </h6>
-                    </div></Link>
-                    <Link href="#"><div className={`col-sm-5 mb-3 ${co.onlinecourseit}`}>
+                    </div>
+                    <div onClick={completeFormStep} className={`col-sm-5 mb-3 ${co.onlinecourseit}`}>
                       {onlinecorse}
                       <h5 className={``}>Online Course</h5>
                       <h6 className={``}>
                         Lorem Ipsum is simply dummy text of the printing and
                         type setting industry.
                       </h6>
-                    </div></Link>
+                    </div>
                   </div>
+                  
                 </div>
               </div>
             </div>
