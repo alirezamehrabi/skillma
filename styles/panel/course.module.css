@@ -165,77 +165,77 @@
   border: 1px solid #ccc;
   border-radius: 15px;
 }
-.secDiv{
-    background-color: #FA9600;
-    padding: 14px;
-    border-radius: 50%;
-    margin:7px
+.secDiv {
+  background-color: #fa9600;
+  padding: 14px;
+  border-radius: 50%;
+  margin: 7px;
 }
-.firstDiv{
-    background-color: #fff;
-    border: 1px solid #FA9600;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
+.firstDiv {
+  background-color: #fff;
+  border: 1px solid #fa9600;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
 }
-.border{
-    border: 1px solid #FA9600;
-    width: 50%;
-    position: relative;
-    top: -15%;
-    left: 30%;
+.border {
+  border: 1px solid #fa9600;
+  width: 50%;
+  position: relative;
+  top: -15%;
+  left: 30%;
 }
-.navName{
-    color: #FA9600;
-    margin: 20px 0 60px -40px;
+.navName {
+  color: #fa9600;
+  margin: 20px 0 60px -40px;
 }
-.disable .secDiv{
-    background-color: #E9E9FE;
-    padding: 14px;
-    border-radius: 50%;
-    margin:7px
+.disable .secDiv {
+  background-color: #e9e9fe;
+  padding: 14px;
+  border-radius: 50%;
+  margin: 7px;
 }
-.disable .firstDiv{
-    background-color: #fff;
-    border: 1px solid #E9E9FE;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
+.disable .firstDiv {
+  background-color: #fff;
+  border: 1px solid #e9e9fe;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
 }
-.disable .border{
-    border: 1px solid #E9E9FE;
-    width: 50%;
-    position: relative;
-    top: -15%;
-    left: 30%;
+.disable .border {
+  border: 1px solid #e9e9fe;
+  width: 50%;
+  position: relative;
+  top: -15%;
+  left: 30%;
 }
-.disable .navName{
-    color: #E9E9FE;
-    margin: 20px 0 60px -40px;
+.disable .navName {
+  color: #e9e9fe;
+  margin: 20px 0 60px -40px;
 }
-.passed .secDiv{
-    background-color: #2FBC9E;
-    padding: 14px;
-    border-radius: 50%;
-    margin:7px
+.passed .secDiv {
+  background-color: #2fbc9e;
+  padding: 14px;
+  border-radius: 50%;
+  margin: 7px;
 }
-.passed .firstDiv{
-    background-color: #fff;
-    border: 1px solid #2FBC9E;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
+.passed .firstDiv {
+  background-color: #fff;
+  border: 1px solid #2fbc9e;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
 }
-.passed .border{
-    border: 1px solid #2FBC9E;
-    width: 50%;
-    position: relative;
-    top: -15%;
-    left: 30%;
+.passed .border {
+  border: 1px solid #2fbc9e;
+  width: 50%;
+  position: relative;
+  top: -15%;
+  left: 30%;
 }
-.passed .navName{
-    color: #2FBC9E;
-    margin: 20px 0 60px -40px;
+.passed .navName {
+  color: #2fbc9e;
+  margin: 20px 0 60px -40px;
 }
 @media only screen and (max-width: 1400px) {
 }
