@@ -237,6 +237,36 @@
   color: #2fbc9e;
   margin: 20px 0 60px -40px;
 }
+.courseContent > div {
+  background-color: #fff;
+  padding: 55px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+.navtitle{
+  float: left;
+  color: #2D3DDF;
+  font-weight: 600;
+  font-size: 18px;
+}
+.icon{
+  float: right;
+}
+.newItem{
+  background-color: #FAFAFA;
+  color: #7A7D7C;
+  padding: 10px;
+  min-height: 250px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.newItem svg{
+  margin-right: 10px;
+}
+.contentcourse{
+  margin-top: 70px;
+  border-radius: 15px;
+}
 @media only screen and (max-width: 1400px) {
 }
 
