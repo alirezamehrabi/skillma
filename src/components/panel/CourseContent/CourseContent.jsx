@@ -152,32 +152,51 @@ const CourseIntended = ({ completeFormStep }) => {
       </div>
       <div className={`row ${co.courseContent}`}>
         <div className={`col-12 mb-5 mt-5`}>
-          
-            <h6 className={`${co.navtitle}`}>Introduction</h6>
-            <div className={` mb-4 ${co.icon}`}>
-              {del} {edit}
+          <h6 className={`${co.navtitle}`}>Introduction</h6>
+          <div className={` mb-4 ${co.icon}`}>
+            {del} {edit}
+          </div>
+          <div className={`row ${co.contentcourse}`}>
+            <div
+              className={`col-3 d-flex justify-content-center ${co.newItem}`}
+            >
+              <div className={`d-flex align-self-center`}>
+                {plus} Add New Lecture
+              </div>
             </div>
-            <div className={`row ${co.contentcourse}`}>
-          <div className={`col-3 d-flex justify-content-center ${co.newItem}`}>
-            <div className={`d-flex align-self-center`}>
-            {plus} Add New Lecture</div>
+            <div
+              className={`col-3 offset-1 d-flex justify-content-center ${co.newItem}`}
+            >
+              <div className="row">
+              <div className={`col-12 ${co.courseIMG}`}>
+                <Image src={require(`../../../assets/panel/course/1.png`)} alt="course pic" />
+              </div>
+              <div className={`col-12`}>
+                <h6>create wireframe</h6>
+                <h6>sep 13 , 2022</h6>
+                <h6>24:00</h6>
+              </div>
+              <div className={`col-12 d-flex justify-content-end ${co.icon}`}>
+            {del} {edit}
+          </div>
+              </div>
             </div>
           </div>
-
         </div>
         <div className={`col-12 mb-5 mt-5`}>
-          
-            <h6 className={`${co.navtitle}`}>season 1</h6>
-            <div className={` mb-4 ${co.icon}`}>
-              {del} {edit}
-            </div>
-            <div className={`row ${co.contentcourse}`}>
-          <div className={`col-3 d-flex justify-content-center ${co.newItem}`}>
-            <div className={`d-flex align-self-center`}>
-            {plus} Add New Lecture</div>
+          <h6 className={`${co.navtitle}`}>season 1</h6>
+          <div className={` mb-4 ${co.icon}`}>
+            {del} {edit}
+          </div>
+          <div className={`row ${co.contentcourse}`}>
+            <div
+              className={`col-3 d-flex justify-content-center ${co.newItem}`}
+            >
+              <div className={`d-flex align-self-center`}>
+                {plus} Add New Lecture
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </SSRProvider>
