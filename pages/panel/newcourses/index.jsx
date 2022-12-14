@@ -44,8 +44,8 @@ const Courses = () => {
              {formstep === 0 && <CourseChoice completeFormStep={completeFormStep} />}
             {formstep === 1 && <Coursepreview completeFormStep={completeFormStep} back={backFormStep}/>}
           {formstep === 2 && <CourseIntended completeFormStep={completeFormStep}/>}
-          {formstep === 3 && <CourseSection completeFormStep={completeFormStep}/>}
-          {formstep === 4 && <CourseContent completeFormStep={CourseContent}/>}
+          {formstep === 3 && <CourseSection completeFormStep={completeFormStep} />}
+          {formstep === 4 && <CourseContent completeFormStep={CourseContent} backFormStep={backFormStep}/>}
           </div>
         </div>
       </div>

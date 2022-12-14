@@ -97,11 +97,11 @@
 .modalbody{
     margin:auto;
     text-align: center;
-    padding: 50px 70px;
+    padding: 50px 50px;
 }
 .modalbody2{
     text-align: left;
-    padding: 50px 70px;
+    padding: 50px 50px;
     background:#FAFAFA
 }
 .modalbody svg{

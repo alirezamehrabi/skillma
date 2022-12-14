@@ -12,7 +12,7 @@ const ContactSchema = Yup.object().shape({
   level: Yup.string().min(4, "Too Short!").required("Required"),
 });
 
-const CourseIntended = () => {
+const CourseIntended = ({completeFormStep}) => {
   const [f1, setF1] = useState("");
   const [f2, setF2] = useState("");
   const [f3, setF3] = useState("");
@@ -325,7 +325,7 @@ const CourseIntended = () => {
               <h5 className={`fw-bold`}>Description</h5>
               <div className={`${co.ckHolder}`}>Editor Holder</div>
               <div className={`col-12 d-flex justify-content-end mt-4`}>
-                <button type="button" className={`${co.conBTN} ${co.nxt}`}>
+                <button type="button" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
                   Continue
                 </button>
               </div>
