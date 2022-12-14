@@ -380,8 +380,35 @@
   background-color: transparent;
   color: #2d3ddf;
 }
-
+.tablebody td{
+  padding: 20px 10px;
+}
 @media only screen and (max-width: 1400px) {
+  .preview {
+    padding: 50px;
+    border-radius: 15px;
+    margin-top: 30px;
+  }
+  .firstDiv {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+  }
+  .secDiv {
+    padding: 14px;
+    border-radius: 50%;
+    margin: 7px;
+  }
+  .navName {
+    margin: 20px 0 60px -40px;
+    font-size: 14px;
+  }
+  .border,.passed .border,.disable .border {
+    width: 50%;
+    position: relative;
+    top: -15%;
+    left: 40%;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
@@ -391,6 +418,32 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .preview {
+    padding: 45px;
+    border-radius: 15px;
+    margin-top: 30px;
+  }
+  .firstDiv, .disable .firstDiv, .passed .firstDiv {
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+  }
+  .secDiv, .disable .secDiv , .passed .secDiv {
+    padding: 9px;
+    border-radius: 50%;
+    margin: 7px;
+  }
+  .navName {
+    margin: 20px 0 60px -40px;
+    font-size: 9px;
+    text-align: center;
+  }
+  .border,.passed .border,.disable .border {
+    width: 50%;
+    position: relative;
+    top: -15%;
+    left: 40%;
+  }
 }
 
 @media only screen and (max-width: 576px) {
