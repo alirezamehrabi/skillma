@@ -12,7 +12,7 @@ const ContactSchema = Yup.object().shape({
   level: Yup.string().min(4, "Too Short!").required("Required"),
 });
 
-const CourseIntended = ({completeFormStep}) => {
+const CourseIntended = ({completeFormStep,completeFormStep1,sec}) => {
   const [f1, setF1] = useState("");
   const [f2, setF2] = useState("");
   const [f3, setF3] = useState("");
@@ -156,7 +156,7 @@ const CourseIntended = ({completeFormStep}) => {
             <div className={`${co.border}`} />
             <div className={`col-12 ${co.navName}`}>Intended learners</div>
           </div>
-          <div className={`col-2 ${co.disable}`}>
+          {sec === false ? null : <div className={`col-2 ${co.disable}`}>
             <div className={`col-12`}>
               <div className={`${co.firstDiv}`}>
                 <div className={`${co.secDiv}`} />
@@ -164,7 +164,7 @@ const CourseIntended = ({completeFormStep}) => {
             </div>
             <div className={`${co.border}`} />
             <div className={`col-12 ${co.navName}`}>Course Section</div>
-          </div>
+          </div>}
           <div className={`col-2 ${co.disable}`}>
             <div className={`col-12`}>
               <div className={`${co.firstDiv}`}>

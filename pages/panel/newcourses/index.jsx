@@ -9,6 +9,9 @@ import Coursepreview from "../../../src/components/panel/Coursepreview/Coursepre
 import CourseIntended from "../../../src/components/panel/CourseIntended/CourseIntended";
 import CourseSection from "../../../src/components/panel/CourseSection/CourseSection";
 import CourseContent from "../../../src/components/panel/CourseContent/CourseContent";
+import CourseLanding from "../../../src/components/panel/CourseLanding/CourseLanding";
+import CoursePrice from "../../../src/components/panel/CoursePrice/CoursePrice";
+import CourseOnlineContent from "../../../src/components/panel/CourseOnlineContent/CourseOnlineContent";
 import Menu from "../../../src/components/panel/Menu/Menu.jsx";
 import dash from "../../../styles/panel/Dashboard.module.css";
 import styles from "../../../styles/Home.module.css";
@@ -16,15 +19,51 @@ import co from "../../../styles/panel/course.module.css";
 import men from "../../../styles/panel/Menu.module.css";
 
 const Courses = () => {
-  const [formstep, setFormstep] = useState(4)
+  const [formstep, setFormstep] = useState(0)
   const completeFormStep = () => {
     setFormstep((formstep) => formstep + 1);
-    console.log(formstep)
+    console.log(formstep + "normal")
   };
   const backFormStep = () => {
     setFormstep((formstep) => formstep - 1);
     console.log(formstep)
   };
+  const [formstep1, setFormstep1] = useState(0)
+  const completeFormStep1 = () => {
+    setFormstep1((formstep1) => formstep1 + 1);
+    console.log(formstep1 + "online")
+  };
+  const backFormStep1 = () => {
+    setFormstep1((formstep1) => formstep1 - 1);
+    console.log(formstep1)
+  };
+  const sec = false;
+  const data = ()=>{
+    if(formstep>=1){
+      return(
+        <>
+        {formstep === 1 && <Coursepreview completeFormStep={completeFormStep} back={backFormStep} />}
+          {formstep === 2 && <CourseIntended completeFormStep={completeFormStep}/>}
+          {formstep === 3 && <CourseSection completeFormStep={completeFormStep} />}
+          {formstep === 4 && <CourseContent completeFormStep={completeFormStep} backFormStep={backFormStep}/>}
+          {formstep === 5 && <CourseLanding completeFormStep={completeFormStep}/>}
+          {formstep === 6 && <CoursePrice completeFormStep={completeFormStep}/>}
+        </>
+      )
+    }
+    else if(formstep1>=1){
+      return(
+        <>
+          {formstep1 === 1 && <Coursepreview completeFormStep={completeFormStep1} back={backFormStep1}/>}
+          {formstep1 === 2 && <CourseIntended completeFormStep={completeFormStep1} sec={sec}/>}
+
+          {formstep1 === 3 && <CourseOnlineContent completeFormStep={completeFormStep1} backFormStep={backFormStep1}/>}
+          {formstep1 === 4 && <CourseLanding completeFormStep={completeFormStep1} sec={sec}/>}
+          {formstep1 === 5 && <CoursePrice completeFormStep={completeFormStep1} sec={sec}/>}
+        </>
+      )
+    }
+  }
   return (
     <SSRProvider>
       <Head>
@@ -41,11 +80,18 @@ const Courses = () => {
           </div>
           <div className={`col-lg-10 ${dash.maincontainer}`}>
             <Header />
-             {formstep === 0 && <CourseChoice completeFormStep={completeFormStep} />}
-            {formstep === 1 && <Coursepreview completeFormStep={completeFormStep} back={backFormStep}/>}
+          {formstep === 0 && formstep1===0  && <CourseChoice completeFormStep={completeFormStep} completeFormStep1={completeFormStep1}/>}
+          {data()}
+          {/* {formstep === 1 && <Coursepreview completeFormStep={completeFormStep} back={backFormStep} />}
           {formstep === 2 && <CourseIntended completeFormStep={completeFormStep}/>}
           {formstep === 3 && <CourseSection completeFormStep={completeFormStep} />}
-          {formstep === 4 && <CourseContent completeFormStep={CourseContent} backFormStep={backFormStep}/>}
+          {formstep === 4 && <CourseContent completeFormStep={completeFormStep} backFormStep={backFormStep}/>}
+          {formstep === 5 && <CourseLanding completeFormStep={completeFormStep}/>}
+          {formstep === 6 && <CoursePrice completeFormStep={completeFormStep}/>} */}
+ 
+          {/* {formstep1 === 0 && <CourseChoice completeFormStep1={completeFormStep1} />}
+          {formstep1 === 1 && <Coursepreview completeFormStep1={completeFormStep1} backFormStep1={backFormStep1}/>}
+          {formstep1 === 2 && <CourseIntended completeFormStep1={completeFormStep1}/>} */}
           </div>
         </div>
       </div>

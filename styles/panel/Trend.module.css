@@ -1,0 +1,13 @@
+.trcontainer{
+    padding: 20px;
+}
+.trimg{
+    margin-top: 60px
+}
+.trTitle{
+    font-weight: 600;
+    margin: 80px 0 20px;
+}
+.trDes{
+    line-height: 30px;
+}

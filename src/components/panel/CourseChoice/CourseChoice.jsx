@@ -5,7 +5,7 @@ import { SSRProvider } from "react-bootstrap";
 import co from "../../../../styles/panel/course.module.css";
 import Coursepreview from "../../../../src/components/panel/Coursepreview/Coursepreview";
 
-const Courses = ({completeFormStep}) => {
+const Courses = ({completeFormStep,completeFormStep1}) => {
   const cors = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const Courses = ({completeFormStep}) => {
                         type setting industry.
                       </h6>
                     </div>
-                    <div onClick={completeFormStep} className={`col-sm-5 mb-3 ${co.onlinecourseit}`}>
+                    <div onClick={completeFormStep1} className={`col-sm-5 mb-3 ${co.onlinecourseit}`}>
                       {onlinecorse}
                       <h5 className={``}>Online Course</h5>
                       <h6 className={``}>

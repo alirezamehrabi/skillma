@@ -383,6 +383,116 @@
 .tablebody td{
   padding: 20px 10px;
 }
+.redDes {
+  background-color: #F8D5D5;
+  color: #DE2F2F;
+  padding: 25px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+.redDes a{
+  text-decoration: underline !important;
+  display: block;
+  margin-top: 10px;
+}
+
+.landingBg span,
+.landingBg label{
+  width: 100% !important;
+  height: 100% !important;
+}
+.input{
+  position: relative;
+  left: 54%;
+  z-index: 5;
+  width: 30px;
+  height: 30px;
+  top: 60px;
+  opacity: 0;
+  transition: 0.5s;
+}
+.input:checked{
+  opacity: 1;
+}
+.courseLanding{
+  background-color: #fff;
+  border-radius: 15px;
+  border: 1px solid red;
+}
+.landingTitle{
+  font-weight: bold;
+  margin: 40px 0 60px
+}
+.landingCourseTitle{
+  font-weight: 600;
+  margin: 10px 0 30px;
+}
+.landingDes{
+  margin-bottom: 20px;
+  color: #7A7D7C;
+}
+.landingDes a{
+  text-decoration: underline !important;
+}
+.form{
+  position: relative;
+}
+.datepick > div{
+  border: 1px solid #2d3ddf !important;
+  padding: 5px;
+  border-radius: 10px;
+}
+.datepick input{
+  color:#777;
+}
+.datepick svg{
+  width:26px;
+  height:26px;
+  fill:#777
+}
+.datepick path{
+  fill:#777
+}
+.stepModal{
+  display: block;
+margin: auto;
+text-align: center;
+}
+.stepModal svg{
+  margin-bottom: 30px;
+}
+.stepModal h6{
+  line-height: 30px;
+}
+.shortType{
+  border: 1px solid #acb2ec;
+  border-radius: 15px;
+  padding: 20px 0;
+  text-align: center;
+}
+.shortType > div{
+  padding: 0;
+}
+.TypeName{
+  margin-top: 20px;
+}
+.input1{
+  display: none;
+}
+.input1:checked ~ label{
+  color:blue
+}
+.input1:checked ~ label path{
+  fill:blue
+}
+.shortTypeHolder{
+  display: flex;
+  align-items: stretch;
+}
+.shortType{
+  margin: 10px;
+  flex-grow: 1;
+}
 @media only screen and (max-width: 1400px) {
   .preview {
     padding: 50px;
