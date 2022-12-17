@@ -5,7 +5,10 @@ import { useState } from "react";
 import { SSRProvider } from "react-bootstrap";
 import Header from "../../../src/components/panel/Header/Header.jsx";
 import Menu from "../../../src/components/panel/Menu/Menu.jsx";
+import Chart from "../../../src/components/panel/Chart1/Chart1.tsx";
+import Chart2 from "../../../src/components/panel/Chart2/Chart2.tsx";
 import dash from "../../../styles/panel/Dashboard.module.css";
+import re from "../../../styles/panel/Report.module.css";
 import styles from "../../../styles/Home.module.css";
 import co from "../../../styles/panel/Course.module.css";
 import men from "../../../styles/panel/Menu.module.css";
@@ -31,6 +34,14 @@ const Trend = () => {
           </div>
           <div className={`col-lg-10 ${dash.maincontainer}`}>
             <Header />
+            <div className={`row`}>
+                <div className={`col-12`}>
+                <Chart/>
+                </div>
+                <div className={`col-12 ${re.chart2}`}>
+                <Chart2/>
+                </div>
+            </div>
             
           </div>
         </div>
