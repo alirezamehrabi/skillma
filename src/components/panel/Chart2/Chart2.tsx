@@ -8,7 +8,7 @@ export const data = {
   labels: ['Course 1', 'Course 2', 'Course 3', 'Course 4'],
   datasets: [
     {
-      label: '# of Votes',
+      label: '# of Price',
       data: [12, 19, 3, 5],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',

@@ -1,0 +1,69 @@
+.container{
+    padding: 20px;
+}
+.container > div > span{
+    cursor: pointer;
+    width: 120px !important;
+    height: 120px !important;
+}
+.pdetail{
+    overflow: hidden;
+}
+.pdetail h5{
+    font-weight: 600;
+    position: relative;
+    top: -100px;
+    left: 150px;
+}
+.pdetail h6{
+    position: relative;
+    top: -100px;
+    left: 150px;
+    color: #7A7D7C;
+}
+.not{
+    padding: 25px 20px;
+    background-color: #D6EBFF;
+    color: #2D3DDF;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+.not > div > div {
+    line-height: 45px;
+}
+.eye{
+    background: none;
+    border:none;
+    position:relative;
+    top: -66px;
+    left: 95%;
+}
+.eye svg{
+    width: 25px;
+    height:25px;
+}
+.eye:hover{
+    background: none;
+    border:none;
+}
+.paydetail{
+    background-color: #FAFAFA;
+    padding: 45px 30px;
+}
+.main{
+    background-color: #fff;
+    border-radius: 15px;
+}
+.rinput{
+    margin: 30px 0;
+    transform: scale(1.5);
+}
+.rsvg svg{
+    margin: 0 20px;
+}
+.containerSuggest{
+    padding: 45px 30px;
+}
+.recImg{
+    
+}

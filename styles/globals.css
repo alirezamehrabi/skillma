@@ -270,6 +270,10 @@ canvas {
 .slick-next {
   display: none !important;
 }
+.changeTab1 .nav-link.active {
+  color: #fff !important;
+background: blue !important;
+}
 @media only screen and (max-width: 1400px) {
 }
 

@@ -6,6 +6,7 @@ import { SSRProvider } from "react-bootstrap";
 import Header from "../../../src/components/panel/Header/Header.jsx";
 import Menu from "../../../src/components/panel/Menu/Menu.jsx";
 import Chart from "../../../src/components/panel/Chart1/Chart1.tsx";
+import Cal from "../../../src/components/panel/Calender/Calender";
 import Chart2 from "../../../src/components/panel/Chart2/Chart2.tsx";
 import dash from "../../../styles/panel/Dashboard.module.css";
 import re from "../../../styles/panel/Report.module.css";
@@ -37,26 +38,7 @@ const Trend = () => {
           <div className={`col-lg-10 ${dash.maincontainer}`}>
             <Header />
             <div className={`row`}>
-                <div className={`col-12`}>
-                <Chart/>
-                </div>
-                <div className={`row position-relative `}>
-                  <div className={`col-md-7 order-2 order-md-1 ${re.chart2}`}><Chart2/>
-                  <div className={`${re.chartborder}`}>
-                  <h6 className={``}>total income</h6>
-                  <h5 className={`fw-bold`}>50 $</h5>
-                </div>
-                </div>
-                  <div className={`col-md-5 order-1 order-md-2`}>
-                  <div className={`${re.datepicker}`}>
-                                            <DatePicker onChange={onChange1} value={value1} maxDetail={"year"} format={"MMMM yyyy"}/>
-                                            <h5 className={`fw-bold`}>Total Income</h5>
-                                        </div>
-                  </div>
-                
-                
-                
-                </div>
+                {/* <Cal/> */}
             </div>
             
           </div>

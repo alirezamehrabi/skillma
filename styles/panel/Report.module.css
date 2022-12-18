@@ -1,5 +1,73 @@
-.chart2{
-    max-width: 600px;
-    max-height: 600px;
-    margin: 50px auto;
+.chart2 {
+  max-width: 600px;
+  max-height: 600px;
+  margin: 50px auto;
+}
+.chartborder {
+  border: 1px solid #ccc;
+  display: flex;
+  padding: 90px 80px;
+  border-radius: 50%;
+  box-shadow: 0px 15px 101px 30px rgba(0, 32, 64, 0.24);
+  position: relative;
+  top: -405px;
+  /* left: 170px; */
+  text-align: center;
+  margin: auto;
+  width: 250px;
+}
+.datepicker {
+  position: relative;
+  top: 50px;
+}
+.datepicker h5 {
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 1400px) {
+}
+
+@media only screen and (max-width: 1200px) {
+  .chartborder {
+    padding: 90px 70px;
+    width: 205px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .chartborder {
+    padding: 90px 70px;
+    width: 185px;
+    top: -395px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .chartborder {
+    padding: 90px 70px;
+    width: 230px;
+    top: -405px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .chartborder {
+    padding: 90px 70px;
+    width: 40%;
+    top: -394px;
+  }
+}
+@media only screen and (max-width: 474px) {
+  .chartborder {
+    padding: 90px 20px;
+    width: 40%;
+    top: -375px;
+  }
+}
+@media only screen and (max-width: 390px) {
+  .chartborder {
+    padding: 83px 0px;
+    width: 40%;
+    top: -350px;
+  }
 }
