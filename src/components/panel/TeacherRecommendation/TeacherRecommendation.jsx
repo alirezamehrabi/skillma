@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState,createRef } from "react";
 import { SSRProvider,Button } from "react-bootstrap";
-import st from "../../../../styles/panel/Stu.module.css";
+import st from "../../../../styles/panel/Teacher.module.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import UploadBox from "../UploadBox/UploadBox"
@@ -129,13 +129,73 @@ const StuProfile = () => {
           )}
         </Formik>
           </div>
-          <div className={`my-4 d-flex`}>
-            <h6 className={`fw-bold mb-3`}>your Recommendation</h6>
-            <div className={` my-4 ${st.recImg}`}>
+            <h6 className={`fw-bold mb-3 col-12`}>your Recommendation</h6><br/>
+            <div className={`row`}>
+            <div className={`col-lg-6`}>
+            <div className={`col-sm-11`}>
+          <div className={`my-4 row ${st.itholder}`}>
+            <div className={`col-4 my-1 ${st.recImg}`}>
                 <Image src={require(`../../../assets/panel/profile/1.png`)} alt=""/>
             </div>
-            <div className={`${st.recDetail}`}></div>
+            <div className={`col-8 ${st.recDetail}`}>
+              <h6 className={`fw-bold`}>Dani Beaumont</h6>
+              <h6 className={``}>Course: UI/UX desing</h6>
+              <h6 className={``}>sep,20,2022</h6>
+              <h6 className={``}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text in laying out print, graphic or web designs. 
+              <Link href="#">See More</Link></h6>
+            </div>
           </div>
+          </div>
+          </div>
+          <div className={`col-lg-6`}>
+            <div className={`col-sm-11`}>
+          <div className={`my-4 row ${st.itholder}`}>
+            <div className={`col-4 my-1 ${st.recImg}`}>
+                <Image src={require(`../../../assets/panel/profile/2.png`)} alt=""/>
+            </div>
+            <div className={`col-8 ${st.recDetail}`}>
+              <h6 className={`fw-bold`}>Dani Beaumont</h6>
+              <h6 className={``}>Course: UI/UX desing</h6>
+              <h6 className={``}>sep,20,2022</h6>
+              <h6 className={``}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text in laying out print, graphic or web designs. 
+              <Link href="#">See More</Link></h6>
+            </div>
+          </div>
+          </div>
+          </div>
+          <div className={`col-lg-6`}>
+            <div className={`col-sm-11`}>
+          <div className={`my-4 row ${st.itholder}`}>
+            <div className={`col-4 my-1 ${st.recImg}`}>
+                <Image src={require(`../../../assets/panel/profile/1.png`)} alt=""/>
+            </div>
+            <div className={`col-8 ${st.recDetail}`}>
+              <h6 className={`fw-bold`}>Dani Beaumont</h6>
+              <h6 className={``}>Course: UI/UX desing</h6>
+              <h6 className={``}>sep,20,2022</h6>
+              <h6 className={``}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text in laying out print, graphic or web designs. 
+              <Link href="#">See More</Link></h6>
+            </div>
+          </div>
+          </div>
+          </div>
+          <div className={`col-lg-6`}>
+            <div className={`col-sm-11`}>
+          <div className={`my-4 row ${st.itholder}`}>
+            <div className={`col-4 my-1 ${st.recImg}`}>
+                <Image src={require(`../../../assets/panel/profile/2.png`)} alt=""/>
+            </div>
+            <div className={`col-8 ${st.recDetail}`}>
+              <h6 className={`fw-bold`}>Dani Beaumont</h6>
+              <h6 className={``}>Course: UI/UX desing</h6>
+              <h6 className={``}>sep,20,2022</h6>
+              <h6 className={``}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text in laying out print, graphic or web designs. 
+              <Link href="#">See More</Link></h6>
+            </div>
+          </div>
+          </div>
+          </div>
+       </div>
        </div>
       </SSRProvider>
     );

@@ -64,6 +64,45 @@
 .containerSuggest{
     padding: 45px 30px;
 }
-.recImg{
-    
+.itholder{
+    /* flex-grow: 1; */
+    background-color: #F1F6F2;
+    margin: 15px;
+    border-radius: 15px;
+}
+.itholder:hover{
+    background-color: #F5F5F5;
+}
+.recImg span{
+    width: 100% !important;
+    height: 100% !important;
+}
+.recDetail{
+    padding: 20px;
+}
+.recDetail h6{
+    line-height: 30px;
+}
+@media  only screen and (max-width: 1400px) {
+}
+
+@media  only screen and (max-width: 1200px) {
+}  
+
+@media  only screen and (max-width: 992px) {
+    .eye {
+        left: 94%;
+      }
+}
+
+@media  only screen and (max-width: 768px) {
+    .eye {
+        left: 92%;
+      }
+}
+
+@media  only screen and (max-width: 576px) {
+    .eye {
+        left: 86%;
+      }
 }

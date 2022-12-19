@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState,createRef } from "react";
 import { SSRProvider,Button } from "react-bootstrap";
-import st from "../../../../styles/panel/Stu.module.css";
+import st from "../../../../styles/panel/Teacher.module.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import UploadBox from "../UploadBox/UploadBox"
