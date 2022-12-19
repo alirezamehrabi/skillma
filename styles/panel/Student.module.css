@@ -1,0 +1,45 @@
+.live,.live2{
+    background-color: #FAFAFA;
+    border-radius: 15px;
+    padding: 15px;
+}
+.live span{
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 100%;
+    animation: mymove 2s;
+  animation-iteration-count: infinite;
+}
+.live > span {
+    border: 3px solid rgb(43, 209, 231) !important;
+}
+@keyframes mymove {
+    0% {transform: scale(1);}
+  50% {transform: scale(1.2);}
+  100% {transform: scale(1);}
+  }
+  .liveTitle{
+    font-size: 15px;
+    line-height: 30px;
+  }
+  .liveWork{
+    font-size: 15px;
+    color: #7A7D7C;
+    margin-bottom: 15px;
+  }
+  .liveBtn{
+    background-color: #FF9401;
+    color: #fff;
+    border-radius: 12px;
+    padding: 8px 20px;
+    border: none;
+    transition: 0.5s;
+  }
+  .liveBtn:hover{
+    background-color: #F28C00;
+  }
+  .liveJoin{
+    font-size: 15px;
+    color: #7A7D7C;
+    margin: 15px 0;
+  }
