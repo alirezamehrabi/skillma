@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react"
 import { SSRProvider } from "react-bootstrap";
 import Header from "../../../src/components/panel/Header/Header.jsx"
-import Menu from "../../../src/components/panel/Menu/Menu.jsx"
+import Menu from "../../../src/components/panel/MenuStu/Menu.jsx"
 import dash from "../../../styles/panel/Dashboard.module.css"
 import styles from "../../../styles/Home.module.css"
 import co from "../../../styles/panel/Courses.module.css"

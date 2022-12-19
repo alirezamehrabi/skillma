@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState,createRef } from "react";
-import { SSRProvider,Button } from "react-bootstrap";
+import { useState } from "react";
+import { SSRProvider } from "react-bootstrap";
 import st from "../../../../styles/panel/Teacher.module.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import UploadBox from "../UploadBox/UploadBox"
 import co from "../../../../styles/panel/course.module.css";
 
 const ContactSchema = Yup.object().shape({
@@ -15,19 +14,11 @@ const ContactSchema = Yup.object().shape({
   });
 
 const StuProfile = () => {
-    const [passwordShown, setPasswordShown] = useState(false);
-  const togglePassword = () => {
-    setPasswordShown(!passwordShown);
-  };
+
   
   const [f1, setF1] = useState("");
   const [f2, setF2] = useState("");
-  const [f3, setF3] = useState("");
-  const [f4, setF4] = useState("");
   const [f5, setF5] = useState("");
-  const [f6, setF6] = useState("");
-  const [f7, setF7] = useState("");
-  const [f8, setF8] = useState("");
 
   const handleNameChange = (event) => {
     setF1(event.target.value);
@@ -35,23 +26,8 @@ const StuProfile = () => {
   const handleNameChange2 = (event) => {
     setF2(event.target.value);
   };
-  const handleNameChange3 = (event) => {
-    setF3(event.target.value);
-  };
-  const handleNameChange4 = (event) => {
-    setF4(event.target.value);
-  };
   const handleNameChange5 = (event) => {
     setF5(event.target.value);
-  };
-  const handleNameChange6 = (event) => {
-    setF6(event.target.value);
-  };
-  const handleNameChange7 = (event) => {
-    setF7(event.target.value);
-  };
-  const handleNameChange8 = (event) => {
-    setF8(event.target.value);
   };
 
     return (
