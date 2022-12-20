@@ -161,6 +161,58 @@
   flex-grow: 1;
   display: flex;
 }
+.Num {
+  background-color: blue;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 20px;
+  position: relative;
+  top: 24px;
+  left: 5%;
+  display: block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.border {
+  margin: 24px 95px;
+  display: inline-block;
+}
+.numDisable{
+  background-color: #D4D5D5;
+}
+.stitle{
+  color: #7A7D7C;
+}
+.sessionHolder{
+  padding-bottom: 20px;
+}
+.sessionHolder svg{
+  display: flex;
+  position: relative;
+  top: 22px;
+  right: 33px;
+}
+.sessionOption {
+  display: block;
+  float: left;
+}
+.sactive{
+  color: #f28c00;
+}
+.vidName{
+  font-weight: 600;
+  padding: 30px 0 0 30px;
+}
+.session{
+  max-height: 500px;
+  overflow-y: scroll;
+}
+.sessionOption2{
+  display: block;
+  float: right;
+  margin-left: 160px;
+}
 @media only screen and (max-width: 1400px) {
 }
 
@@ -181,5 +233,11 @@
   .blueBtn,
   .orangeBtn {
     padding: 1px 18px;
+  }
+  .sessionOption2{
+    margin-left: 50px;
+  }
+  .border{
+    margin: 24px 60px;
   }
 }
