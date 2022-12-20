@@ -264,6 +264,33 @@
   border-radius:10px;
   padding: 3px 8px;
 }
+.editor{
+  border-radius: 15px;
+  padding: 25px;
+  background-color: #fff;
+}
+.editor div{
+  border:1px solid #ccc;
+  border-radius: 15px;
+  padding: 25px;
+}
+.taskHead{
+  border-radius: 15px;
+  padding: 25px;
+  background-color: #fff;
+  margin-bottom: 25px;
+}
+.taskHeadDes{
+  color: #7A7D7C;
+}
+.taskBtn{
+  margin-top: 20px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  background-color: #FF9D14;
+  padding: 10px 60px;
+}
 @media only screen and (max-width: 1400px) {
   .sessionOption2{
     margin-left: 40px;
