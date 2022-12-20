@@ -4,7 +4,10 @@ import Link from "next/link";
 import styles from "../../../styles/Home.module.css";
 import detail from "../../../styles/DetailCourse.module.css";
 import st from "../../../styles/panel/Student.module.css";
-import Menu from "./../../../src/components/Menu/Menu";
+import Menu from "./../../../src/components/panel/MenuStu/Menu";
+import dash from "../../../styles/panel/Dashboard.module.css"
+import men from "../../../styles/panel/Menu.module.css"
+import Header from "../../../src/components/panel/Header/Header.jsx"
 import { SSRProvider } from "react-bootstrap";
 const detailcourse = () => {
   const play = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -20,17 +23,21 @@ const tik = <svg id="Group_21909" data-name="Group 21909" xmlns="http://www.w3.o
 <path id="Path_9884" data-name="Path 9884" d="M20.588,5.833a1.281,1.281,0,0,0-1.812-.007l-.007.007L9.227,15.388,5.218,11.366A1.309,1.309,0,1,0,3.4,13.249l4.918,4.918a1.28,1.28,0,0,0,1.811.007l.007-.007L20.588,7.716a1.281,1.281,0,0,0,.073-1.81C20.637,5.881,20.613,5.856,20.588,5.833Z" fill="#ff9401"/>
 </svg>
 
-  return (
-    <SSRProvider>
-      <div className={styles.container}>
-        <Head>
-          <title>Detail Course Page</title>
+return (
+  <SSRProvider>
+      <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
+      </Head>
+      <div className={`${dash.container}`}>
+          <div className={`row d-flex justify-content-between`}>
+              <div className={`col-2 ${men.menucontainer}`}>
+                  <Link href="/panel/dashboard"><div className={`${men.logo}`}></div></Link>
 
-        <main>
-          <Menu />
-          <section className={`row mx-auto container ${detail.secwidth}`}>
+                  <Menu /></div>
+              <div className={`col-lg-10 ${dash.maincontainer}`}>
+                  <Header />
+                  <div className={`col-12`}>
+                  <section className={`row mx-auto container ${detail.secwidth}`}>
             <div className={`col-xl-6 mx-4 ${detail.videoHolder}`}>
               <div className={` ${styles.introHolder}`}>
                 <video
@@ -80,10 +87,12 @@ const tik = <svg id="Group_21909" data-name="Group 21909" xmlns="http://www.w3.o
               </div>
             </div>
           </section>
-        </main>
+                  </div>
+              </div>
+          </div>
       </div>
-    </SSRProvider>
-  );
+  </SSRProvider>
+)
 };
 
 export default detailcourse;

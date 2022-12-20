@@ -20,18 +20,18 @@ const Menu = () => {
 const task = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect className="cls-1" width="24" height="24" /><path d="M21,7.47a.9.9,0,0,0-.26-.64L16.92,3a.92.92,0,0,0-1.28,0L13.1,5.56h0L3.26,15.39A.9.9,0,0,0,3,16v3.82a.9.9,0,0,0,.9.9H7.72a.91.91,0,0,0,.68-.26l9.78-9.84h0l2.56-2.5a1.21,1.21,0,0,0,.2-.3V7.51ZM7.35,19H4.8V16.4l8.94-8.93L16.28,10ZM17.55,8.74,15,6.2l1.27-1.27,2.54,2.54Z" /></g></svg>
     const cart = <svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
     <defs>
-      <clipPath id="clip-path">
+      <clipPath id="clipPath">
         <rect id="Rectangle_2205" data-name="Rectangle 2205" width="24" height="24" fill="#7a7d7c"/>
       </clipPath>
     </defs>
     <g id="Group_16665" data-name="Group 16665" transform="translate(-1181 -33)">
       <g id="Group_16663" data-name="Group 16663" transform="translate(1181 33)">
-        <g id="Group_16662" data-name="Group 16662" clip-path="url(#clip-path)">
+        <g id="Group_16662" data-name="Group 16662" clipPath="url(#clipPath)">
           <g id="Group_16661" data-name="Group 16661">
             <g id="Group_16664" data-name="Group 16664">
               <g id="Group_16659" data-name="Group 16659" opacity="0">
                 <g id="Group_16658" data-name="Group 16658">
-                  <g id="Group_16657" data-name="Group 16657" clip-path="url(#clip-path)">
+                  <g id="Group_16657" data-name="Group 16657" clipPath="url(#clipPath)">
                     <rect id="Rectangle_2202" data-name="Rectangle 2202" width="24" height="24" fill="#7a7d7c"/>
                   </g>
                 </g>

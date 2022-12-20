@@ -211,12 +211,69 @@
 .sessionOption2{
   display: block;
   float: right;
-  margin-left: 160px;
+  margin-left: 100px;
+}
+.maincontainer{
+  margin-top: 30px;
+}
+.taskholder{
+  padding: 40px 25px;
+  background-color: #fff;
+  margin-top: 20px;
+}
+.taskit{
+  padding: 20px 15px;
+}
+.taskit > div{
+  border-radius: 15px;
+  background-color: #FAFAFA;
+  padding: 12px;
+  color: #1A1C36;
+}
+.small{
+  flex-grow: 1;
+}
+.big{
+  flex-grow: 2;
+}
+.dot{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #3A8944;
+  margin-right: 10px;
+  display: inline-block;
+}
+.dot1{
+  background-color: #FF9401;
+}
+.stateColor{
+  color: #3A8944;
+}
+.stateDone{
+  background-color: #FF9401;
+  color: #fff;
+  border: 1px solid #FF9401;
+  border-radius: 10px;
+  padding: 3px 8px;
+}
+.stateNotDone{
+  background-color: #fff;
+  color: #FF9401;
+  border: 1px solid #FF9401;
+  border-radius:10px;
+  padding: 3px 8px;
 }
 @media only screen and (max-width: 1400px) {
+  .sessionOption2{
+    margin-left: 40px;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
+  .sessionOption2{
+    margin-left: 160px;
+  }
 }
 
 @media only screen and (max-width: 992px) {
@@ -238,6 +295,6 @@
     margin-left: 50px;
   }
   .border{
-    margin: 24px 60px;
+    margin: 24px 55px;
   }
 }
