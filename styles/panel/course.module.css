@@ -493,6 +493,10 @@ text-align: center;
   margin: 10px;
   flex-grow: 1;
 }
+.lbl2{
+  position: relative;
+  right: 40px;
+}
 @media only screen and (max-width: 1400px) {
   .preview {
     padding: 50px;

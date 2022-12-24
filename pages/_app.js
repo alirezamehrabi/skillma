@@ -1,13 +1,14 @@
-import '../styles/globals.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import '../styles/DatePicker.css'
-import '../styles/Calendar.css'
+import "../styles/globals.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "../styles/DatePicker.css";
+import "../styles/Calendar.css";
 import { useEffect, useState } from "react";
+
 function MyApp({ Component, pageProps }) {
-  useEffect(()=>{
+  useEffect(() => {
     import("bootstrap/dist/js/bootstrap");
-},[])
-  return <Component {...pageProps} />
+  }, []);
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;

@@ -173,9 +173,21 @@
 .tabs2 li {
   width: 25%;
 }
+.tabs3 li {
+  width: 20%;
+}
 @media only screen and (max-width: 768px) {
   .tabs2 li {
     height: 100px;
     overflow: hidden;
+  }
+  .tabs3 li {
+    height: 70px;
+    overflow: hidden;
+    font-size: 11px;
+    line-height: 15px;
+  }
+  .tabs3 li button{
+    padding: 0;
   }
 }

@@ -294,6 +294,92 @@
 .curs{
   cursor:pointer
 }
+.transContainer{
+  background-color: #fff;
+  padding: 40px 15px;
+  border-radius: 15px;
+}
+.Orderid{
+  margin: 30px 0 40px;
+}
+.OrderDet{
+  display: inline;
+}
+.orderList{
+  padding: 30px 15px;
+  border-radius: 15px;
+  margin: 80px auto 10px;
+  background-color: #FAFAFA;
+}
+.orderSmall{
+  flex-grow: 1;
+}
+.orderBig{
+  flex-grow: 5;
+}
+.orderHolder{
+  color: #1A1C36;
+}
+.orderNum{
+  color: #7A7D7C;
+}
+.orderPic span{
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 100% !important;
+}
+.orderPerName{
+  display: inline;
+  position: relative;
+  top: -15px;
+  left: 5px;
+}
+.listItems{
+  margin: 14px 0 ;
+}
+.cerContainer{
+  padding: 20px;
+}
+.cer span{
+  width: 250px !important;
+  height: 200px !important;
+  border-radius: 15px;
+}
+.cer h6{
+ margin:20px 0 40px;
+ color: #707070;
+}
+.recommend h6{
+ color: #707070;
+}
+.recommend button{
+  color: #fff;
+  border-radius: 15px;
+  border:none;
+  background-color: #FF9D14;
+  padding: 12px 60px;
+  margin: 35px auto;
+ }
+ .recDes{
+  color: #1A1C36;
+  line-height: 25px;
+  text-align: justify;
+ }
+ .recPer{margin: 20px 0}
+ .recPer span{
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 50%;
+ }
+ .recPer h6{
+  color: #1A1C36;
+  display: inline;
+  position: relative;
+  top: -15px;
+  left: 5px;
+ }
+ .caltitle{}
+ .calbtn{}
 @media only screen and (max-width: 1400px) {
   .sessionOption2{
     margin-left: 40px;
@@ -327,4 +413,13 @@
   .border{
     margin: 24px 55px;
   }
+  .orderHolder,
+  .orderHolder h6{
+    font-size: 11px;
+  }
+  .orderPic{
+    position: relative;
+    top: -10px;
+  }
+  
 }

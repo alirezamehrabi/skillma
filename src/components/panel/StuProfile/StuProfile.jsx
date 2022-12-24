@@ -22,11 +22,7 @@ const StuProfile = () => {
   const [f1, setF1] = useState("");
   const [f2, setF2] = useState("");
   const [f3, setF3] = useState("");
-  const [f4, setF4] = useState("");
   const [f5, setF5] = useState("");
-  const [f6, setF6] = useState("");
-  const [f7, setF7] = useState("");
-  const [f8, setF8] = useState("");
 
   const handleNameChange = (event) => {
     setF1(event.target.value);
@@ -37,20 +33,8 @@ const StuProfile = () => {
   const handleNameChange3 = (event) => {
     setF3(event.target.value);
   };
-  const handleNameChange4 = (event) => {
-    setF4(event.target.value);
-  };
   const handleNameChange5 = (event) => {
     setF5(event.target.value);
-  };
-  const handleNameChange6 = (event) => {
-    setF6(event.target.value);
-  };
-  const handleNameChange7 = (event) => {
-    setF7(event.target.value);
-  };
-  const handleNameChange8 = (event) => {
-    setF8(event.target.value);
   };
 
   return (
@@ -144,18 +128,11 @@ const StuProfile = () => {
                   Skill
                 </label>
                 <Field
-                  as="select"
+                  type="text"
                   name="subject"
                   placeholder="percent discount"
                   className={`col-12 d-block mx-auto ${co.txtfeild} ${co.selectFeild}`}
-                >
-                  <option value="" disabled defaultValue hidden>
-                    Select Type
-                  </option>
-                  <option value="red">10%</option>
-                  <option value="green">20%</option>
-                  <option value="blue">50%</option>
-                </Field>
+                />
                 <label htmlFor="email" className={`${co.label} ${co.lbl1}`}>
                   bio
                 </label>
@@ -170,42 +147,25 @@ const StuProfile = () => {
                 {errors.email && touched.email ? (
                   <div className={co.err}>{errors.email}</div>
                 ) : null}
-                <label className={`${co.label} ${co.lbl1}`}>Facebook</label>
+                <label
+                  htmlFor="email"
+                  className={`${co.label} ${co.lbl1}`}
+                >
+                  Open For
+                </label>
                 <Field
-                  name="email"
-                  type="email"
-                  placeholder="Copy Link"
-                  className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f6}
-                  onChange={handleNameChange6}
-                />
-                {errors.email && touched.email ? (
-                  <div className={co.err}>{errors.email}</div>
-                ) : null}
-                <label className={`${co.label} ${co.lbl1}`}>Twitter</label>
-                <Field
-                  name="email"
-                  type="email"
-                  placeholder="Copy Link"
-                  className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f7}
-                  onChange={handleNameChange7}
-                />
-                {errors.email && touched.email ? (
-                  <div className={co.err}>{errors.email}</div>
-                ) : null}
-                <label className={`${co.label} ${co.lbl1}`}>Instagram</label>
-                <Field
-                  name="email"
-                  type="email"
-                  placeholder="Copy Link"
-                  className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f8}
-                  onChange={handleNameChange8}
-                />
-                {errors.email && touched.email ? (
-                  <div className={co.err}>{errors.email}</div>
-                ) : null}
+                  as="select"
+                  name="subject"
+                  placeholder="percent discount"
+                  className={`col-12 d-block mx-auto ${co.txtfeild} ${co.selectFeild}`}
+                >
+                  <option value="" disabled defaultValue hidden>
+                    non
+                  </option>
+                  <option value="red">test1</option>
+                  <option value="green">test2</option>
+                  <option value="blue">test3</option>
+                </Field>
                 <div className={`col-12 d-flex justify-content-end mt-4`}>
                   <button type="button" className={`${co.conBTN} ${co.nxt}`}>
                     Save
