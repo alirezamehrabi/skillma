@@ -4,12 +4,10 @@ import { loginUser } from "../../pages/api/login-user";
 const DataContext = createContext();
 
 export function DataProvider({ children }) {
+
+  const[user,setUser] = useState(null)
   
   let router = useRouter();
-
-
-
-
 
 
   const onLoginUser = async()=>{
