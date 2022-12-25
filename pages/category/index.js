@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export async function getStaticProps() {
-  const res = await fetch(`http://localhost:9000/category`);
+  const res = await fetch(`https://skillma-api.shinypi.net/Category/GetMainCategories`);
   const posts = await res.json();
 
   return {
@@ -63,8 +63,8 @@ const Category = (props) => {
       theme: "colored",
     });
   };
-  const cate = props.posts;
-  // console.log(cate[0].id);
+  const cate = props.posts.data;
+  console.log(cate.data);
 
   return (
     <div className="container text-center mx-auto">
@@ -80,19 +80,20 @@ const Category = (props) => {
                   <input
                     className={`form-check-input ${cat.input}`}
                     type="checkbox"
-                    value={item.name}
+                    value={item.categoryName}
                     id={item.id}
                     onChange={handleChk}
                   />
                   <label className="form-check-label" htmlFor={item.id}>
                     <figure className={`${cat.catImg}`}>
                       <Image
-                        src={require(`../../src/assets/category/${item.img}`)}
+                        // src={require(`../../src/assets/category/${item.pictureName}`)}
+                        src={require(`../../src/assets/category/1.png`)}
                         alt="logo"
                         width=""
                         height=""
                       />
-                      <h5 className={`${cat.catName}`}>{item.name}</h5>
+                      <h5 className={`${cat.catName}`}>{item.categoryName}</h5>
                     </figure>
                   </label>
                 </div>

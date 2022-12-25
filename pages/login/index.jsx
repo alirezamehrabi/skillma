@@ -1,10 +1,15 @@
 import Head from "next/head";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "../../styles/Home.module.css";
 import reg from "../../styles/Registeration.module.css";
 import { SSRProvider,Button,FloatingLabel, Form  } from "react-bootstrap";
+import { loginUser } from "../api/login-user";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
+
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
@@ -21,6 +26,18 @@ const Login = () => {
     </g>
   </g>
 </svg>
+
+  // const onLoginUser = async()=>{
+  //   const userObj ={
+  //     email : "saeed@gmail.com",
+  //     password: "saeed"
+  //   }
+  //   const user = await loginUser(userObj)
+  //   console.log(user)
+  // }
+
+  const { onLoginUser } = useContext(DataContext);
+
 
   return (
     <SSRProvider>
@@ -62,7 +79,7 @@ const Login = () => {
                       </svg></Button>
       </FloatingLabel>
       <Link href={`/forgetpass`}>Forget Password?</Link>
-      <Button variant="warning" className={`${reg.logBTN}`}>Login</Button>
+      <Button variant="warning" className={`${reg.logBTN}`} onClick={onLoginUser}>Login</Button>
       </div>
             </div>
           </div>
