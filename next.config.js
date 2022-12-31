@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const withVideos = require('next-videos')
 const nextConfig = {
+  env: {
+    webURL: 'https://skillma-api.shinypi.net',
+  },
   reactStrictMode: true,
   swcMinify: true,
 }

@@ -6,9 +6,12 @@ import MobileNavigation from "./MobileNavigation";
 import FavorivteCategory from "../FavorivteCategory/FavorivteCategory";
 import { TiArrowUnsorted } from "react-icons/ti";
 import { useState, useEffect } from "react";
-import {Nav} from 'react-bootstrap';
+import { useContext } from "react";
+import DataContext from "../../../src/Context/DataContext";
 
 const Menu = () => {
+  // const { user,onLogoutUser } = useContext(DataContext);
+// console.log(user)
   const [title, setTitle] = useState("Price");
   const [title2, setTitle2] = useState("Level");
   const [show, setShow] = useState(false);
@@ -69,14 +72,15 @@ const funcHandler = (e) => {
             <div
               className={`col-lg-2 col-md-3 col-sm-3 order-4 order-lg-4 col-5 ${styles.btn}`}
             >
-              <Link href="#">
+              
+              {/* {user ? <h6>user</h6> :<Link href="/login">
                 <button
                   type="button"
                   className={`btn btn-warning ${styles.logBut}`}
                 >
                   Login / Sign Up
                 </button>
-              </Link>
+              </Link>} */}
             </div>
           </div>
         </div>

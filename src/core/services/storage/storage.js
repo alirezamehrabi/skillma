@@ -5,8 +5,19 @@ const setItem = (key, value) => {
 
 // get an item from localStorage with its key
 const getItem = (key) => {
+  
+
+
+if (typeof window !== 'undefined') {
+  console.log('You are on the browser')
+  // 👉️ can use localStorage here
+
   if (localStorage.getItem(key)) return localStorage.getItem(key);
   return false;
+} else {
+  console.log('You are on the server')
+  // 👉️ can't use localStorage
+}
 };
 
 // remove specific item with its key from localStorage
