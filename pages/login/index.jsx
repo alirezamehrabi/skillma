@@ -6,7 +6,6 @@ import { useState } from "react";
 import styles from "../../styles/Home.module.css";
 import reg from "../../styles/Registeration.module.css";
 import { SSRProvider, Button, FloatingLabel, Form } from "react-bootstrap";
-import { loginUser } from "../api/login-user";
 import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
 
@@ -70,14 +69,6 @@ const Login = () => {
     </svg>
   );
 
-  // const onLoginUser = async()=>{
-  //   const userObj ={
-  //     email : "saeed@gmail.com",
-  //     password: "saeed"
-  //   }
-  //   const user = await loginUser(userObj)
-  //   console.log(user)
-  // }
 
   const { onLoginUser,onLogoutUser } = useContext(DataContext);
 
@@ -144,13 +135,6 @@ const Login = () => {
                   onClick={onLoginUser}
                 >
                   Login
-                </Button>
-                <Button
-                  variant="warning"
-                  className={`${reg.logBTN}`}
-                  onClick={onLogoutUser}
-                >
-                  Loginout
                 </Button>
               </div>
             </div>

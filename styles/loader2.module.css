@@ -1,0 +1,26 @@
+.loader {
+  display: block;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  height: 1000vh;
+  z-index: 100;
+  width: 100%;
+  background: #1f6dc7;
+  opacity: 0.85;
+}
+
+.loader img {
+  display: inline-block;
+  margin: auto;
+  width: 400px;
+  opacity: 1;
+}
+.loader > span {
+  /* left: -40%;
+  top: 70px; */
+  display: flex !important;
+  width: 400px !important;
+  justify-content: center !important;
+  margin: auto !important;
+}

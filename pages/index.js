@@ -11,9 +11,13 @@ import Master from "../src/components/Master/Master"
 import FreeCourses from './../src/components/FreeCourses/FreeCourses';
 import Subscribe from './../src/components/Subscribe/Subscribe';
 import { SSRProvider  } from "react-bootstrap";
+import Loader from "./../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "./../src/Context/DataContext";
 
 export default function Home() {
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
     <div className={styles.container}>
       <Head>
@@ -332,5 +336,5 @@ dummy text of the printing and typesetting industry</h6>
       
     </div>
     </SSRProvider>
-  );
+  ):(<Loader />);
 }

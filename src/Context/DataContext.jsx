@@ -5,31 +5,37 @@ import {clearStorage, getItem} from "../../src/core/services/storage/storage"
 const DataContext = createContext();
 
 export function DataProvider({ children }) {
+  const [loading, setLoading] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
   const loggedIn = getItem("token")
   const[user,setUser] = useState(loggedIn ? true : false)
-  
-  let router = useRouter();
 
 
-  const onLoginUser = async()=>{
-    const userObj ={
-      email : "saeed@gmail.com",
-      password: "saeed"
-    }
-    const user = await loginUser(userObj)
-    setUser(true)
+  useEffect(() => {
+    setHydrated(true);
+}, []);
+if (!hydrated) {
+    // Returns null on first render, so the client and server match
+    return null;
+}
+const onLoginUser = async()=>{
+  const userObj ={
+    email : "",
+    password: ""
   }
-
+  const user = await loginUser(userObj)
+  setUser(true)
+}
+  
   const onLogoutUser = () => {
     setUser(false);
     clearStorage()
-
   };
+
   return (
-    <DataContext.Provider value={{ onLoginUser,onLogoutUser }}>
+    <DataContext.Provider value={{ onLoginUser,onLogoutUser,user,loading }}>
       {children}
     </DataContext.Provider>
   );
 }
-
 export default DataContext;
