@@ -3,13 +3,47 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import co from "../../styles/panel/course.module.css";
 import styles from "../../styles/Home.module.css";
 import reg from "../../styles/Registeration.module.css";
-import { SSRProvider, Button, FloatingLabel, Form } from "react-bootstrap";
+import { SSRProvider, Button, FloatingLabel } from "react-bootstrap";
 import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+
+const ContactSchema = Yup.object().shape({
+  email: Yup.string().min(2, "Too Short!").required("Required"),
+  password: Yup.string().min(2, "Too Short!").required("Required"),
+});
 
 const Login = () => {
+  const [f1, setF1] = useState("");
+  const [f2, setF2] = useState("");
+  const [f3, setF3] = useState("");
+  const [f4, setF4] = useState("");
+  const [f5, setF5] = useState("");
+  const [f6, setF6] = useState("");
+
+  const handleNameChange = (event) => {
+    setF1(event.target.value);
+  };
+  const handleNameChange2 = (event) => {
+    setF2(event.target.value);
+  };
+  const handleNameChange3 = (event) => {
+    setF3(event.target.value);
+  };
+  const handleNameChange4 = (event) => {
+    setF4(event.target.value);
+  };
+  const handleNameChange5 = (event) => {
+    setF5(event.target.value);
+  };
+  const handleNameChange6 = (event) => {
+    setF6(event.target.value);
+  };
+
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -100,7 +134,72 @@ const Login = () => {
               <div className={`${reg.line}`} />
               <h6 className={`${reg.or}`}>OR</h6>
               <div className={`col-9 mx-auto my-5`}>
-                <FloatingLabel
+                
+
+          <Formik
+          initialValues={{
+            password: "",
+
+            email: "",
+          }}
+          validationSchema={ContactSchema}
+          onSubmit={(values) => {
+            // same shape as initial values
+
+            console.log(values);
+          }}
+        >
+          {({ errors, touched }) => (
+            <Form className={co.form}>
+              <Field
+                name="email"
+                id="email"
+                type="email"
+                placeholder="e.g. Learn  ui/ux design"
+                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
+                value={f1}
+                onChange={handleNameChange}
+              />
+              
+              {errors.email && touched.email ? (
+                <div className={co.err}>{errors.email}</div>
+              ) : null}
+              <Field
+                name="password"
+                id="password"
+                type={passwordShown ? "text" : "password"}
+                placeholder="password"
+                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
+                value={f2}
+                onChange={handleNameChange2}
+              />
+              <Button className={`${reg.eye}`} onClick={togglePassword}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="blue"
+                      className="bi bi-eye"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                    </svg>
+                  </Button>
+              {errors.password && touched.password ? (
+                <div className={co.err}>{errors.password}</div>
+              ) : null}
+              
+            </Form>
+          )}
+        </Formik>
+
+
+
+
+
+
+                {/* <FloatingLabel
                   controlId="floatingInput"
                   label="Email address"
                   className="mb-3"
@@ -127,7 +226,7 @@ const Login = () => {
                       <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                     </svg>
                   </Button>
-                </FloatingLabel>
+                </FloatingLabel> */}
                 <Link href={`/forgetpass`}>Forget Password?</Link>
                 <Button
                   variant="warning"
