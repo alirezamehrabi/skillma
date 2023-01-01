@@ -18,18 +18,15 @@ const ContactSchema = Yup.object().shape({
   subject: Yup.string()
 
     .min(2, "Too Short!")
-
     .required("Required"),
 
   email: Yup.string()
 
     .email("Invalid email")
-
     .required("Required"),
   message: Yup.string()
 
     .min(4, "Too Short!")
-
     .required("Required"),
 });
 

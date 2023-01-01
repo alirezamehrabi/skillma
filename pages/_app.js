@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { DataProvider } from "../src/Context/DataContext";
 import Loader from "../src/components/Loader/Loader2";
 import Router from "next/router";
+import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
