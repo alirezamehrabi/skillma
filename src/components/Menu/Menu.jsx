@@ -13,7 +13,7 @@ const Menu = () => {
   const { user,onLogoutUser,loading, isSucces } = useContext(DataContext);
   const down = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect className="cls-1" width="24" height="24"/><path d="M20.49,7.16a1.7,1.7,0,0,0-2.4,0L12,13.21,5.91,7.16A1.71,1.71,0,0,0,3.5,9.58h0l7.23,7.24a1.72,1.72,0,0,0,2.42,0h0l7.32-7.24a1.71,1.71,0,0,0,0-2.42Z"/></g></svg>
 
-console.log(isSucces)
+// console.log(isSucces)
   const [title, setTitle] = useState("Price");
   const [title2, setTitle2] = useState("Level");
   const [show, setShow] = useState(false);

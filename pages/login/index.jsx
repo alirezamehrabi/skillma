@@ -11,10 +11,10 @@ import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import { loginUser } from "../../pages/api/login-user";
 import { useRouter } from "next/router";
-import {getItem} from "../../src/core/services/storage/storage"
+import { getItem } from "../../src/core/services/storage/storage";
 
 const ContactSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -23,11 +23,11 @@ const ContactSchema = Yup.object().shape({
 
 const Login = () => {
   const router = useRouter();
-  
-  let token = getItem("token")
-  if(token){
-    router.push({pathname:'/'})
-    return
+
+  let token = getItem("token");
+  if (token) {
+    router.push({ pathname: "/" });
+    return;
   }
 
   // const [f1, setF1] = useState("");
@@ -55,7 +55,7 @@ const Login = () => {
   // const handleNameChange6 = (event) => {
   //   setF6(event.target.value);
   // };
-const [isSubmitting , setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -116,7 +116,6 @@ const [isSubmitting , setIsSubmitting] = useState(false)
     </svg>
   );
 
-
   const { setUser } = useContext(DataContext);
 
   return (
@@ -147,89 +146,90 @@ const [isSubmitting , setIsSubmitting] = useState(false)
               <div className={`${reg.line}`} />
               <h6 className={`${reg.or}`}>OR</h6>
               <div className={`col-9 mx-auto my-5`}>
-                
+                <Formik
+                  initialValues={{
+                    email: "",
+                    password: "",
+                  }}
+                  validationSchema={ContactSchema}
+                  onSubmit={async (values) => {
+                    setIsSubmitting(true);
 
-          <Formik
-          initialValues={{
-            email: "",
-            password: "",
-          }}
-          validationSchema={ContactSchema}
-          onSubmit={async(values) => {
-            setIsSubmitting(true)
+                    const userObj = {
+                      email: values.email,
+                      password: values.password,
+                    };
+                    const user = await loginUser(userObj);
+                    setUser(user);
+                    // console.log(user)
+                    if (
+                      user !== "undefined" &&
+                      user !== "false" &&
+                      user !== null
+                    ) {
+                      router.push({ pathname: "/" });
+                    }
+                    setIsSubmitting(false);
 
-            const userObj ={
-              email : values.email,
-              password: values.password,
-            }
-            const user = await loginUser(userObj)
-            setUser(user)
-            // console.log(user)
-            if(user !== "undefined" && user !== "false" && user !== null){
-              router.push({pathname:'/'})
-            }
-            setIsSubmitting(false)
-
-            // console.log(values);
-          }}
-        >
-          {({ errors, touched }) => (
-            <Form className={co.form} >
-              <Field
-                name="email"
-                id="email"
-                type="email"
-                placeholder="Email address"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                // value={f1}
-                // onChange={handleNameChange}
-              />
-              
-              {errors.email && touched.email ? (
-                <div className={co.err}>{errors.email}</div>
-              ) : null}
-              <Field
-                name="password"
-                id="password"
-                type={passwordShown ? "text" : "password"}
-                placeholder="password"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                // value={f2}
-                // onChange={handleNameChange2}
-              />
-              <Button className={`${reg.eye}`} onClick={togglePassword}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="blue"
-                      className="bi bi-eye"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                    </svg>
-                  </Button>
-              {errors.password && touched.password ? (
-                <div className={co.err}>{errors.password}</div>
-              ) : null}
-              <Link href={`/forgetpass`}>Forget Password?</Link>
-                <Button
-                  variant="warning"
-                  type="submit"
-                  className={`${reg.logBTN}`}
+                    // console.log(values);
+                  }}
                 >
-                  {isSubmitting ? <div className={co.loadspn}/> : <>Login</>}
-                </Button>
-                <ToastContainer
-/>
+                  {({ errors, touched }) => (
+                    <Form className={co.form}>
+                      <Field
+                        name="email"
+                        id="email"
+                        type="email"
+                        placeholder="Email address"
+                        className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
+                        // value={f1}
+                        // onChange={handleNameChange}
+                      />
 
-            </Form>
-          )}
-        </Formik>
-
-
-                
+                      {errors.email && touched.email ? (
+                        <div className={co.err}>{errors.email}</div>
+                      ) : null}
+                      <Field
+                        name="password"
+                        id="password"
+                        type={passwordShown ? "text" : "password"}
+                        placeholder="password"
+                        className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
+                        // value={f2}
+                        // onChange={handleNameChange2}
+                      />
+                      <Button className={`${reg.eye}`} onClick={togglePassword}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="blue"
+                          className="bi bi-eye"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                        </svg>
+                      </Button>
+                      {errors.password && touched.password ? (
+                        <div className={co.err}>{errors.password}</div>
+                      ) : null}
+                      <Link href={`/forgetpass`}>Forget Password?</Link>
+                      <Button
+                        variant="warning"
+                        type="submit"
+                        className={`${reg.logBTN}`}
+                      >
+                        {isSubmitting ? (
+                          <div className={co.loadspn} />
+                        ) : (
+                          <>Login</>
+                        )}
+                      </Button>
+                      <ToastContainer />
+                    </Form>
+                  )}
+                </Formik>
               </div>
             </div>
           </div>
