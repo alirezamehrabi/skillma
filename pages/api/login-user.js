@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 const loginUser =async(obj)=>{
     try{
         const result = await axios.post(`${process.env.webURL}/Authentication/LoginUser`,obj)
-        console.log(result.data)
+        // console.log(result.data)
         const isSucces = result.data.isSucces
         setItem("isSucces", isSucces)
 
@@ -37,6 +37,7 @@ const loginUser =async(obj)=>{
                 progress: undefined,
                 theme: "colored",
                 });
+                return null
         }
 
         

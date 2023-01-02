@@ -12,7 +12,9 @@ import DataContext from "../../src/Context/DataContext";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
-
+import { loginUser } from "../../pages/api/login-user";
+import { useRouter } from "next/router";
+import Issub from "../../src/components/Loader/Loader"
 const ContactSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string().min(4, "Too Short!").required("Required"),
@@ -44,11 +46,13 @@ const Login = () => {
   // const handleNameChange6 = (event) => {
   //   setF6(event.target.value);
   // };
-
+const [isSubmitting , setIsSubmitting] = useState(false)
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
+  const router = useRouter();
+
   const google = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -105,10 +109,11 @@ const Login = () => {
   );
 
 
-  const { onLoginUser,onLogoutUser,handleNameChange,handleNameChange2, f1, f2 } = useContext(DataContext);
+  const { onLoginUser,onLogoutUser,handleNameChange,handleNameChange2, f1, f2, setF1, setF2, setUser } = useContext(DataContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // console.log(event.props.values)
   }
 
 
@@ -148,22 +153,34 @@ const Login = () => {
             password: "",
           }}
           validationSchema={ContactSchema}
-          onSubmit={(values) => {
-            // same shape as initial values
+          onSubmit={async(values) => {
+            setIsSubmitting(true)
+
+            const userObj ={
+              email : values.email,
+              password: values.password,
+            }
+            const user = await loginUser(userObj)
+            setUser(user)
+            console.log(user)
+            if(user !== "undefined" && user !== "false" && user !== null){
+              router.push({pathname:'/'})
+            }
+            setIsSubmitting(false)
 
             console.log(values);
           }}
         >
           {({ errors, touched }) => (
-            <Form className={co.form} onSubmit={handleSubmit}>
+            <Form className={co.form} >
               <Field
                 name="email"
                 id="email"
                 type="email"
                 placeholder="Email address"
                 className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                value={f1}
-                onChange={handleNameChange}
+                // value={f1}
+                // onChange={handleNameChange}
               />
               
               {errors.email && touched.email ? (
@@ -175,8 +192,8 @@ const Login = () => {
                 type={passwordShown ? "text" : "password"}
                 placeholder="password"
                 className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                value={f2}
-                onChange={handleNameChange2}
+                // value={f2}
+                // onChange={handleNameChange2}
               />
               <Button className={`${reg.eye}`} onClick={togglePassword}>
                     <svg
@@ -199,12 +216,12 @@ const Login = () => {
                   variant="warning"
                   type="submit"
                   className={`${reg.logBTN}`}
-                  onClick={onLoginUser}
                 >
-                  Login
+                  {isSubmitting ? <div className={co.loadspn}/> : <>Login</>}
                 </Button>
                 <ToastContainer
 />
+
             </Form>
           )}
         </Formik>
