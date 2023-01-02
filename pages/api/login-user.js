@@ -1,13 +1,19 @@
 import axios from "axios"
 import {setItem} from "../../src/core/services/storage/storage"
-import { ToastContainer, toast } from 'react-toastify';
-import { useRouter } from "next/router";
+import { toast } from 'react-toastify';
 
 const loginUser =async(obj)=>{
 
     try{
         const result = await axios.post(`${process.env.webURL}/Authentication/LoginUser`,obj)
-        // console.log(result.data)
+
+        const refreshToken = result.data.data.refreshToken
+        const refreshTokenExpireDate = result.data.data.refreshTokenExpireDate
+        const expireDate = result.data.data.expireDate
+        setItem("refreshToken", refreshToken)
+        setItem("refreshTokenExpireDate", refreshTokenExpireDate)
+        setItem("expireDate", expireDate)
+
         const isSucces = result.data.isSucces
         setItem("isSucces", isSucces)
 
@@ -26,7 +32,6 @@ const loginUser =async(obj)=>{
                 theme: "colored",
                 })
             )
-        
         }
         else if(result.data.isSucces === false){
             toast.error('wrong username or password', {

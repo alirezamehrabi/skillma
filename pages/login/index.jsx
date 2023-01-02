@@ -14,15 +14,22 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import { loginUser } from "../../pages/api/login-user";
 import { useRouter } from "next/router";
-import Issub from "../../src/components/Loader/Loader"
+import {getItem} from "../../src/core/services/storage/storage"
+
 const ContactSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string().min(4, "Too Short!").required("Required"),
 });
 
 const Login = () => {
-
+  const router = useRouter();
   
+  let token = getItem("token")
+  if(token){
+    router.push({pathname:'/'})
+    return
+  }
+
   // const [f1, setF1] = useState("");
   // const [f2, setF2] = useState("");
   // const [f3, setF3] = useState("");
@@ -53,7 +60,6 @@ const [isSubmitting , setIsSubmitting] = useState(false)
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
-  const router = useRouter();
 
   const google = (
     <svg
@@ -113,12 +119,6 @@ const [isSubmitting , setIsSubmitting] = useState(false)
 
   const { setUser } = useContext(DataContext);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // console.log(event.props.values)
-  }
-
-
   return (
     <SSRProvider>
       <div className={styles.container}>
@@ -164,13 +164,13 @@ const [isSubmitting , setIsSubmitting] = useState(false)
             }
             const user = await loginUser(userObj)
             setUser(user)
-            console.log(user)
+            // console.log(user)
             if(user !== "undefined" && user !== "false" && user !== null){
               router.push({pathname:'/'})
             }
             setIsSubmitting(false)
 
-            console.log(values);
+            // console.log(values);
           }}
         >
           {({ errors, touched }) => (
