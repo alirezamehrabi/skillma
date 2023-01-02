@@ -1,8 +1,10 @@
 import axios from "axios"
 import {setItem} from "../../src/core/services/storage/storage"
 import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from "next/router";
 
 const loginUser =async(obj)=>{
+
     try{
         const result = await axios.post(`${process.env.webURL}/Authentication/LoginUser`,obj)
         // console.log(result.data)

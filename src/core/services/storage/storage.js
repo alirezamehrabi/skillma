@@ -5,9 +5,6 @@ const setItem = (key, value) => {
 
 // get an item from localStorage with its key
 const getItem = (key) => {
-  
-
-
 if (typeof window !== 'undefined') {
   console.log('You are on the browser')
   // 👉️ can use localStorage here
