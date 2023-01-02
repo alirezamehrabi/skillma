@@ -21,6 +21,8 @@ const ContactSchema = Yup.object().shape({
 });
 
 const Login = () => {
+
+  
   // const [f1, setF1] = useState("");
   // const [f2, setF2] = useState("");
   // const [f3, setF3] = useState("");
@@ -109,7 +111,7 @@ const [isSubmitting , setIsSubmitting] = useState(false)
   );
 
 
-  const { onLoginUser,onLogoutUser,handleNameChange,handleNameChange2, f1, f2, setF1, setF2, setUser } = useContext(DataContext);
+  const { setUser } = useContext(DataContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
