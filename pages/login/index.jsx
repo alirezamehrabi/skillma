@@ -12,7 +12,7 @@ import DataContext from "../../src/Context/DataContext";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import { loginUser } from "../../pages/api/login-user";
+import { loginUser } from "../api/auth/login-user";
 import { useRouter } from "next/router";
 import { getItem } from "../../src/core/services/storage/storage";
 

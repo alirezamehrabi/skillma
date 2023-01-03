@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import { loginUser } from "../../pages/api/login-user";
+import { loginUser } from "../../pages/api/auth/login-user";
 import {
   clearStorage,
   getItem,

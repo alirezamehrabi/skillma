@@ -5,17 +5,13 @@ import { useState } from "react";
 import styles from "../../styles/Home.module.css";
 import reg from "../../styles/Registeration.module.css";
 import co from "../../styles/panel/course.module.css";
-import {getItem} from "../../src/core/services/storage/storage"
-import { Forgetpass } from "../../pages/api/forget-pass.js";
+import { getItem } from "../../src/core/services/storage/storage";
+import { Forgetpass } from "../api/auth/forget-pass.js";
 
-import {
-  SSRProvider,
-  Button,
-  Modal,
-} from "react-bootstrap";
+import { SSRProvider, Button, Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-
+import { useEffect } from "react";
 
 const ContactSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -23,7 +19,7 @@ const ContactSchema = Yup.object().shape({
 
 const ForgetPass = () => {
   const [show, setShow] = useState(false);
-  const [isSubmitting , setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -54,8 +50,8 @@ const ForgetPass = () => {
       />
     </svg>
   );
-const [massege,setMassege] = useState()
-// console.log(massege)
+  const [massege, setMassege] = useState();
+  console.log(massege);
   return (
     <SSRProvider>
       <div className={styles.container}>
@@ -74,96 +70,87 @@ const [massege,setMassege] = useState()
                 Please Enter the Valid Email Address
               </h6>
               <div className={`col-9 mx-auto my-5`}>
-
-          <Formik
-          initialValues={{
-            email: "",
-          }}
-          validationSchema={ContactSchema}
-          onSubmit={async(values) => {
-            setIsSubmitting(true)
-
-            const userObj ={
-              email : values.email,
-            }
-            // console.log(values)
-            const useremail = await Forgetpass(userObj).then((r) => {setMassege(useremail)})
-            
-            // console.log(massege)
-            // setUser(useremail)
-            setIsSubmitting(false)
-
-
-            
-
-
-
-
-
-          }}
-        >
-          {({ errors, touched }) => (
-            <Form className={co.form} >
-              <Field
-                name="email"
-                id="email"
-                type="email"
-                placeholder="Email address"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-              />
-              
-              {errors.email && touched.email ? (
-                <div className={co.err}>{errors.email}</div>
-              ) : null}
-              <Button
-              type="submit"
-                  variant="warning"
-                  className={`${reg.logBTN}`}
-                  onClick={handleShow}
+                <Formik
+                  initialValues={{
+                    email: "",
+                  }}
+                  validationSchema={ContactSchema}
+                  onSubmit={(values) => {
+                    setIsSubmitting(true);
+                    const userObj = {
+                      email: values.email,
+                    };
+                    // console.log(values)
+                    const useremail = Forgetpass(userObj).then((r) => {
+                      setMassege(r);
+                      setIsSubmitting(false);
+                      console.log(massege);
+                    });
+                  }}
                 >
-                  {isSubmitting ? <div className={co.loadspn}/> : <>Submit</>}
-                </Button>
-                
-            </Form>
-            
-          )}
-          
-        </Formik>
-        {massege === 200 ? <Modal
-              show={show}
-              className={`text-center mx-auto`}
-              onHide={handleClose}
-            >
-              <Modal.Header closeButton></Modal.Header>
-              <Modal.Body>
-                {message}
-                <br />
-                <h5 className={`${reg.forgetbold}`}>
-                  please check your email
-                </h5>
-                <h6 className={`${reg.forgetnormal}`}>
-                  Lorem ipsum, or lipsum as it is sometimes known, is dummy
-                  text used in laying out print, graphic or web designs.
-                </h6>
-              </Modal.Body>
-            </Modal> : massege !== undefined && massege !== 200 &&
-            <Modal
-            show={show}
-            className={`text-center mx-auto`}
-            onHide={handleClose}
-          >
-            <Modal.Header closeButton></Modal.Header>
-            <Modal.Body>
-              <br />
-              <h5 className={`${reg.forgetbold}`}>
-                please check your email
-              </h5>
-              <h6 className={`${reg.forgetnormal}`}>
-                some thing went wrong, please try again
-              </h6>
-            </Modal.Body>
-          </Modal>}
-                
+                  {({ errors, touched }) => (
+                    <Form className={co.form}>
+                      <Field
+                        name="email"
+                        id="email"
+                        type="email"
+                        placeholder="Email address"
+                        className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
+                      />
+
+                      {errors.email && touched.email ? (
+                        <div className={co.err}>{errors.email}</div>
+                      ) : null}
+                      <Button
+                        type="submit"
+                        variant="warning"
+                        className={`${reg.logBTN}`}
+                        onClick={handleShow}
+                      >
+                        {isSubmitting ? (
+                          <div className={co.loadspn} />
+                        ) : (
+                          <>Submit</>
+                        )}
+                      </Button>
+                    </Form>
+                  )}
+                </Formik>
+                {massege !== undefined && (
+                  <Modal
+                    show={show}
+                    className={`text-center mx-auto`}
+                    onHide={handleClose}
+                  >
+                    <Modal.Header closeButton></Modal.Header>
+                    <Modal.Body>
+                      {massege === true ? (
+                        <>
+                          {message}
+                          <br />
+                          <h5 className={`${reg.forgetbold}`}>
+                            please check your email
+                          </h5>
+                          <h6 className={`${reg.forgetnormal}`}>
+                            Lorem ipsum, or lipsum as it is sometimes known, is
+                            dummy text used in laying out print, graphic or web
+                            designs.
+                          </h6>{" "}
+                        </>
+                      ) : (
+                        <>
+                          <br />
+                          <h5 className={`${reg.forgetbold}`}>
+                            maybe wrong email
+                          </h5>
+                          <h6 className={`${reg.forgetnormal}`}>
+                            some thing went wrong, please try again
+                          </h6>
+                        </>
+                      )}
+                    </Modal.Body>
+                  </Modal>
+                )}
               </div>
             </div>
           </div>

@@ -1,12 +1,13 @@
 import axios from "axios"
-import {setItem} from "../../src/core/services/storage/storage"
+import {setItem} from "../../../src/core/services/storage/storage"
 import { toast } from 'react-toastify';
 
 const Forgetpass =async(obj)=>{
 
     try{
         const result = await axios.post(`${process.env.webURL}/Authentication/SendEmailForRepass?email=${obj.email}`,obj)
-        const status = result.status
+        console.log(result.data.isSucces)
+        const status = result.data.isSucces
         return status
 // console.log(status)
         // const isSucces = result.data.isSucces

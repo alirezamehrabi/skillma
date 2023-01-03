@@ -1,5 +1,5 @@
 import axios from "axios"
-import {setItem} from "../../src/core/services/storage/storage"
+import {setItem} from "../../../src/core/services/storage/storage"
 import { toast } from 'react-toastify';
 
 const loginUser =async(obj)=>{
@@ -7,12 +7,7 @@ const loginUser =async(obj)=>{
     try{
         const result = await axios.post(`${process.env.webURL}/Authentication/LoginUser`,obj)
 
-        const refreshToken = result.data.data.refreshToken
-        const refreshTokenExpireDate = result.data.data.refreshTokenExpireDate
-        const expireDate = result.data.data.expireDate
-        setItem("refreshToken", refreshToken)
-        setItem("refreshTokenExpireDate", refreshTokenExpireDate)
-        setItem("expireDate", expireDate)
+        
 
         const isSucces = result.data.isSucces
         setItem("isSucces", isSucces)
@@ -20,6 +15,12 @@ const loginUser =async(obj)=>{
         if(result.data.isSucces === true){
             const token = result.data.data.token
         setItem("token", token)
+        const refreshToken = result.data.data.refreshToken
+        const refreshTokenExpireDate = result.data.data.refreshTokenExpireDate
+        const expireDate = result.data.data.expireDate
+        setItem("refreshToken", refreshToken)
+        setItem("refreshTokenExpireDate", refreshTokenExpireDate)
+        setItem("expireDate", expireDate)
         return (result.data,
             toast.success('You Loggined Successfully!', {
                 position: "top-center",
@@ -34,6 +35,7 @@ const loginUser =async(obj)=>{
             )
         }
         else if(result.data.isSucces === false){
+
             toast.error('wrong username or password', {
                 position: "top-center",
                 autoClose: 5000,
