@@ -10,6 +10,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {useRouter} from 'next/router';
 import { useEffect } from "react";
+import { Resetpass } from "../api/auth/reset-pass.js";
+
 const ContactSchema = Yup.object().shape({
   password: Yup.string().min(4, "Too Short!").required("Required"),
   repassword: Yup.string().min(4, "Too Short!").required("Required"),
@@ -73,12 +75,9 @@ const [passwordShown, setPasswordShown] = useState(false);
                       password: values.password,
                       token: urlquery,
                     };
-                    const user = await loginUser(userObj);
+                    const user = await Resetpass(userObj);
                     setUser(user);
-                    // console.log(user)
                     setIsSubmitting(false);
-
-                    // console.log(values);
                   }}
                 >
                   {({ errors, touched }) => (
@@ -89,8 +88,6 @@ const [passwordShown, setPasswordShown] = useState(false);
                         type={passwordShown ? "text" : "password"}
                         placeholder="New password"
                         className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                        // value={f1}
-                        // onChange={handleNameChange}
                       />
                       <Button className={`${reg.eye}`} onClick={togglePassword}>
                         <svg
@@ -115,8 +112,6 @@ const [passwordShown, setPasswordShown] = useState(false);
                         type={passwordShownr ? "text" : "password"}
                         placeholder="Retype New Password"
                         className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                        // value={f2}
-                        // onChange={handleNameChange2}
                       />
                       <Button className={`${reg.eye}`} onClick={togglePasswordr}>
                         <svg
