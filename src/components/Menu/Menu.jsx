@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import DataContext from "../../../src/Context/DataContext";
 
-const Menu = () => {
+const Menu = ({menu}) => {
   const { user,onLogoutUser,loading, isSucces } = useContext(DataContext);
   const down = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect className="cls-1" width="24" height="24"/><path d="M20.49,7.16a1.7,1.7,0,0,0-2.4,0L12,13.21,5.91,7.16A1.71,1.71,0,0,0,3.5,9.58h0l7.23,7.24a1.72,1.72,0,0,0,2.42,0h0l7.32-7.24a1.71,1.71,0,0,0,0-2.42Z"/></g></svg>
 
@@ -137,99 +137,16 @@ const funcHandler = (e) => {
                 All Categories
               </button>
               <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Development
-                  </a>
-                </li>
-                <li>
+                {menu.map((i)=>{
+                  return(
+                  <li key={i.id}>
+                    <a className="dropdown-item" href="#">
+                      {i.categoryName}
+                    </a>
                   <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Business
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Finance & Accounting
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    IT & Software
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Personal Development
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Design
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Marketing
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Lifestyle
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Photography & video
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Health & Fitness
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Music
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Teaching & Academics
-                  </a>
-                </li>
+                  </li>)
+                })}
+                
               </ul>
             </div>
           </div>

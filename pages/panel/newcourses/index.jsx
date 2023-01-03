@@ -82,12 +82,6 @@ const Courses = () => {
             <Header />
           {formstep === 0 && formstep1===0  && <CourseChoice completeFormStep={completeFormStep} completeFormStep1={completeFormStep1}/>}
           {data()}
-          {/* {formstep === 1 && <Coursepreview completeFormStep={completeFormStep} back={backFormStep} />}
-          {formstep === 2 && <CourseIntended completeFormStep={completeFormStep}/>}
-          {formstep === 3 && <CourseSection completeFormStep={completeFormStep} />}
-          {formstep === 4 && <CourseContent completeFormStep={completeFormStep} backFormStep={backFormStep}/>}
-          {formstep === 5 && <CourseLanding completeFormStep={completeFormStep}/>}
-          {formstep === 6 && <CoursePrice completeFormStep={completeFormStep}/>} */}
           </div>
         </div>
       </div>

@@ -14,8 +14,22 @@ import { SSRProvider  } from "react-bootstrap";
 import Loader from "./../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "./../src/Context/DataContext";
+import axios from "axios";
 
-export default function Home() {
+export async function getStaticProps() {
+  const res = await fetch(
+    `${process.env.webURL}/Category/GetAllCategories`
+  );
+  const data = await res.json();
+  return {
+    props: {
+      ...{ data },
+    },
+  };
+}
+
+export default function Home(props) {
+  const allCat = props.data.data
   const { loading } = useContext(DataContext);
   return !loading ? (
     <SSRProvider>
@@ -26,7 +40,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <Menu />
+        <Menu menu={props.data.data} />
         <section className={`row mx-auto text-center ${styles.header}`}>
           <div className={`col-lg-6`}>
             <h5>are you ready to learn</h5>
