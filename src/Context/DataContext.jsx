@@ -21,6 +21,36 @@ export function DataProvider({ children }) {
   var date = new Date(expireDate);
   var date1 = new Date(refreshTokenExpireDate);
   const now = new Date();
+  const _iSMounted = useRef(true);
+  const [loading, setLoading] = useState(true);
+  const [hydrated, setHydrated] = useState(false);
+  const isSucces = getItem("isSucces");
+  const [user, setUser] = useState(loggedIn ? true : false);
+  const[menuCat, setMenuCat] = useState();
+  useEffect(() => {
+    if (_iSMounted.current) {
+      (async () => {
+		
+		const result = (
+			await Promise.all([
+			  fetch(`https://skillma-api.shinypi.net/Category/GetAllCategories`),
+			  ])
+		  ).map((r) => r.json());
+
+      // and waiting a bit more - fetch API is cumbersome
+      const [GetAllCategories] = await Promise.all(result);
+
+      // when the data is ready, save it to state
+		  setMenuCat(GetAllCategories);
+		
+		setLoading(false);
+		
+      })();
+    }
+    return () => {
+      _iSMounted.current = false;
+    };
+  }, []);
 
 
 
@@ -49,10 +79,6 @@ useEffect(() => {
 fetchData();
 },[])
 
-  const [loading, setLoading] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
-  const isSucces = getItem("isSucces");
-  const [user, setUser] = useState(loggedIn ? true : false);
 
   useEffect(() => {
     setHydrated(true);
@@ -73,6 +99,7 @@ fetchData();
         loading,
         isSucces,
         setUser,
+        menuCat,
       }}
     >
       {children}

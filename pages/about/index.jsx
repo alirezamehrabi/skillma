@@ -1,10 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import styles from "../../styles/Home.module.css";
-import detail from "../../styles/DetailCourse.module.css";
 import about from "../../styles/About.module.css";
-import online from "../../styles/Onlinecourse.module.css";
 import Menu from "./../../src/components/Menu/Menu";
 import Footer from "./../../src/components/Footer/Footer";
 import TeamSlider from "./../../src/components/TeamSlider/TeamSlider";
@@ -12,7 +11,12 @@ import { SSRProvider } from "react-bootstrap";
 import CountUp from "react-countup";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
+import Loader from "../../src/components/Loader/Loader";
+import { ContactUs } from "../api/contact-us";
+import co from "../../styles/panel/course.module.css";
+import { ToastContainer } from "react-toastify";
 
 const ContactSchema = Yup.object().shape({
   subject: Yup.string()
@@ -43,6 +47,9 @@ const ContactSchema = Yup.object().shape({
 // }
 
 const detailcourse = () => {
+  const { loading } = useContext(DataContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const meeting = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <defs>
@@ -65,7 +72,7 @@ const detailcourse = () => {
  
  
  
- return (
+ return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -236,10 +243,18 @@ const detailcourse = () => {
                         message: "",
                       }}
                       validationSchema={ContactSchema}
-                      onSubmit={(values) => {
-                        // same shape as initial values
-
-                        console.log(values);
+                      onSubmit={async (values) => {
+                        setIsSubmitting(true);
+    
+                        const userObj = {
+                          email: values.email,
+                          subject: values.subject,
+                          message: values.message,
+                        };
+                        const user = await ContactUs(userObj);
+                        // setUser(user);
+                        
+                        setIsSubmitting(false);
                       }}
                     >
                       {({ errors, touched }) => (
@@ -276,8 +291,13 @@ const detailcourse = () => {
                           ) : null}
 
                           <button type="submit" className={about.conBTN}>
-                            Submit
+                          {isSubmitting ? (
+                          <div className={co.loadspn} />
+                        ) : (
+                          <>Submit</>
+                        )}
                           </button>
+                          <ToastContainer />
                         </Form>
                       )}
                     </Formik>
@@ -306,7 +326,7 @@ const detailcourse = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default detailcourse;

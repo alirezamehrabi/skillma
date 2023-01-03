@@ -14,7 +14,6 @@ import { SSRProvider  } from "react-bootstrap";
 import Loader from "./../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "./../src/Context/DataContext";
-import axios from "axios";
 
 export async function getStaticProps() {
   const res = await fetch(
@@ -40,7 +39,7 @@ export default function Home(props) {
       </Head>
 
       <main>
-        <Menu menu={props.data.data} />
+        <Menu />
         <section className={`row mx-auto text-center ${styles.header}`}>
           <div className={`col-lg-6`}>
             <h5>are you ready to learn</h5>
