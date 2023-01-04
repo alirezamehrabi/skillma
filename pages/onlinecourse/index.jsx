@@ -19,10 +19,14 @@ import {
 import { GiLevelEndFlag } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
 import { MdOutlinePriceChange } from "react-icons/md";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 
 const detailcourse = () => {
   const meeting = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{fill:blue;opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="keylines"><rect className="cls-1" width="25" height="25"/><path d="M7.45,10.18H9.27a.91.91,0,0,0,0-1.82H7.45a.91.91,0,1,0,0,1.82ZM20.19,4.72H12.91V3.81a.91.91,0,0,0-1.82,0v.91H3.81a.91.91,0,0,0-.91.91v9.1a2.73,2.73,0,0,0,2.73,2.73H9.81L7.72,19.54a.91.91,0,0,0,0,1.29h0a.9.9,0,0,0,1.28,0H9l2.08-2.09v1.44a.91.91,0,0,0,1.82,0V18.74L15,20.83a.91.91,0,0,0,1.29,0h0a.91.91,0,0,0,0-1.29h0l-2.09-2.08h4.18a2.73,2.73,0,0,0,2.73-2.73V5.63A.91.91,0,0,0,20.19,4.72Zm-.91,10a.91.91,0,0,1-.91.91H5.63a.91.91,0,0,1-.91-.91V6.54H19.28ZM7.45,13.82h5.46a.91.91,0,0,0,0-1.82H7.45a.91.91,0,1,0,0,1.82Z"/></g></g></svg>
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -240,7 +244,7 @@ const detailcourse = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default detailcourse;

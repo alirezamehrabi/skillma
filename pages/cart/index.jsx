@@ -9,6 +9,9 @@ import online from "../../styles/Onlinecourse.module.css";
 import Menu from "./../../src/components/Menu/Menu";
 import Footer from "./../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 
 const Cart = () => {
   const del = (
@@ -27,7 +30,8 @@ const Cart = () => {
     </svg>
   );
 
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -211,7 +215,7 @@ const Cart = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default Cart;

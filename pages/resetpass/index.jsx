@@ -11,6 +11,9 @@ import * as Yup from "yup";
 import {useRouter} from 'next/router';
 import { useEffect } from "react";
 import { Resetpass } from "../api/auth/reset-pass.js";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 
 const ContactSchema = Yup.object().shape({
   password: Yup.string().min(4, "Too Short!").required("Required"),
@@ -43,7 +46,8 @@ const [passwordShown, setPasswordShown] = useState(false);
     urlquery
   },[])
   
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -163,7 +167,7 @@ const [passwordShown, setPasswordShown] = useState(false);
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default ForgetPass;

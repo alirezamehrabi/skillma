@@ -2,10 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
-import cart from "../../styles/Cart.module.css";
-import detail from "../../styles/DetailCourse.module.css";
-import about from "../../styles/About.module.css";
-import pdf from "../../styles/Pdfproduct.module.css";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 import help from "../../styles/help.module.css";
 import Menu from "./../../src/components/Menu/Menu";
 import Footer from "./../../src/components/Footer/Footer";
@@ -78,7 +77,8 @@ const Help = () => {
       </g>
     </svg>
   );
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -212,7 +212,7 @@ const Help = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default Help;

@@ -15,6 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { loginUser } from "../api/auth/login-user";
 import { useRouter } from "next/router";
 import { getItem } from "../../src/core/services/storage/storage";
+import Loader from "../../src/components/Loader/Loader";
 
 const ContactSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -116,9 +117,9 @@ const Login = () => {
     </svg>
   );
 
-  const { setUser } = useContext(DataContext);
+  const { setUser,loading } = useContext(DataContext);
 
-  return (
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -236,7 +237,7 @@ const Login = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default Login;

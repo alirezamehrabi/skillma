@@ -6,6 +6,9 @@ import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 
 export async function getStaticProps() {
   const res = await fetch(`https://skillma-api.shinypi.net/Category/GetMainCategories`);
@@ -66,7 +69,8 @@ const Category = (props) => {
   const cate = props.posts.data;
   console.log(cate.data);
 
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <div className="container text-center mx-auto">
       <div className="col-12">
         <h3 className={`${cat.title}`}>Select at least 4 category</h3>
@@ -131,7 +135,7 @@ const Category = (props) => {
         )}
       </div>
     </div>
-  );
+  ):(<Loader />)
 };
 
 export default Category;

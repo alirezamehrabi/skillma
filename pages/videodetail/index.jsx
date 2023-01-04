@@ -3,26 +3,20 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import detail from "../../styles/DetailCourse.module.css";
-import main from "../../styles/MainCourse.module.css";
 import Menu from "./../../src/components/Menu/Menu";
 import TopCoursesSlider from "./../../src/components/TopCoursesSlider/TopCoursesSlider";
 import Comment from "./../../src/components/Comment/Comment";
 import Footer from "./../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
 import { RiShareForwardLine } from "react-icons/ri";
-import { FaUserGraduate } from "react-icons/fa";
-import {
-  AiOutlineClockCircle,
-  AiOutlineShoppingCart,
-  AiOutlineGift,
-} from "react-icons/ai";
-import { GiLevelEndFlag } from "react-icons/gi";
-import { TbCertificate } from "react-icons/tb";
-import { MdOutlinePriceChange } from "react-icons/md";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
+
 const detailcourse = () => {
     const clock = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{fill:#0092e4;opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="keylines"><rect className="cls-1" width="24" height="24"/><path d="M14.79,12.57,12.9,11.48v-4a.9.9,0,0,0-1.8,0V12a.9.9,0,0,0,.45.78l2.34,1.35a.9.9,0,0,0,.9-1.56ZM12,3a9,9,0,1,0,9,9A9,9,0,0,0,12,3Zm0,16.2A7.2,7.2,0,1,1,19.2,12,7.2,7.2,0,0,1,12,19.2Z"/></g></g></svg>
-  let price = 50;
-  return (
+    const { loading } = useContext(DataContext);
+    return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -352,7 +346,7 @@ const detailcourse = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default detailcourse;

@@ -9,9 +9,13 @@ import PopularInstructor from "./../../src/components/PopularInstructorSlider/Po
 import PopularTopics from "./../../src/components/PopularTopics/PopularTopics"
 import Footer from "./../../src/components/Footer/Footer";
 import { Tab, Tabs,SSRProvider  } from "react-bootstrap";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 
 const Maincourse = () => {
-  return ( <SSRProvider> 
+  const { loading } = useContext(DataContext);
+  return !loading ? ( <SSRProvider> 
     <div className={styles.container}>
       <Head>
         <title>Main Course</title>
@@ -131,7 +135,7 @@ const Maincourse = () => {
       </main>
       <Footer />
     </div> </SSRProvider> 
-  );
+  ):(<Loader />)
 };
 
 export default Maincourse;

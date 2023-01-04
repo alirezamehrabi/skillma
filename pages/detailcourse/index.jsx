@@ -16,12 +16,16 @@ import {
   AiOutlineShoppingCart,
   AiOutlineGift,
 } from "react-icons/ai";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 import { GiLevelEndFlag } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
 import { MdOutlinePriceChange } from "react-icons/md";
 const detailcourse = () => {
   let price = 50;
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -447,7 +451,7 @@ const detailcourse = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default detailcourse;

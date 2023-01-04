@@ -5,6 +5,10 @@ import { useState } from "react";
 import styles from "../../styles/Home.module.css";
 import reg from "../../styles/Registeration.module.css";
 import { SSRProvider, Button, FloatingLabel, Form } from "react-bootstrap";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
+
 const Register = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
@@ -15,7 +19,8 @@ const Register = () => {
     setPasswordShownr(!passwordShownr);
   };
 
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -121,7 +126,7 @@ const Register = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default Register;

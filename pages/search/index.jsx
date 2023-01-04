@@ -12,8 +12,13 @@ import SoundList from "../../src/components/SoundList/SoundList"
 import TopCoursesSlider from "./../../src/components/TopCoursesSlider/TopCoursesSlider";
 import Footer from "./../../src/components/Footer/Footer";
 import { Tab, Tabs,SSRProvider  } from "react-bootstrap";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
+
 const Search = () => {
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -121,7 +126,7 @@ const Search = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default Search;

@@ -6,9 +6,13 @@ import help from "../../styles/help.module.css";
 import Menu from "./../../src/components/Menu/Menu";
 import Footer from "./../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 
 const Help = () => {
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -47,7 +51,7 @@ Ciceros De Finibus Bonorum et Malorum for use in a type specimen book.</div>
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default Help;

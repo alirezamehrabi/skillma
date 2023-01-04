@@ -10,6 +10,9 @@ import online from "../../styles/Onlinecourse.module.css";
 import Menu from "./../../src/components/Menu/Menu";
 import Footer from "./../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 
 const Pdfproduct = () => {
   const size = (
@@ -61,7 +64,8 @@ const Pdfproduct = () => {
     </svg>
   );
 
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -154,7 +158,7 @@ const Pdfproduct = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default Pdfproduct;

@@ -7,7 +7,9 @@ import reg from "../../styles/Registeration.module.css";
 import co from "../../styles/panel/course.module.css";
 import { getItem } from "../../src/core/services/storage/storage";
 import { Forgetpass } from "../api/auth/forget-pass.js";
-
+import Loader from "../../src/components/Loader/Loader";
+import { useContext } from "react";
+import DataContext from "../../src/Context/DataContext";
 import { SSRProvider, Button, Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -52,7 +54,8 @@ const ForgetPass = () => {
   );
   const [massege, setMassege] = useState();
   console.log(massege);
-  return (
+  const { loading } = useContext(DataContext);
+  return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -157,7 +160,7 @@ const ForgetPass = () => {
         </main>
       </div>
     </SSRProvider>
-  );
+  ):(<Loader />)
 };
 
 export default ForgetPass;
