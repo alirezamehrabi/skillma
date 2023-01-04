@@ -14,7 +14,9 @@ import { SSRProvider  } from "react-bootstrap";
 import Loader from "./../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "./../src/Context/DataContext";
-
+import {FreeCourse} from "./api/course/free-course"
+import {useEffect,useState} from "react"
+import axios from "axios";
 export async function getStaticProps() {
   const res = await fetch(
     `${process.env.webURL}/Category/GetAllCategories`
@@ -28,6 +30,7 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
+  // console.log(FreeCourse())
   const allCat = props.data.data
   const { loading } = useContext(DataContext);
   return !loading ? (

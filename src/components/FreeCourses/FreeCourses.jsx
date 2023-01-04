@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,9 +10,24 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { Rating } from "react-simple-star-rating";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
+import {FreeCourse} from "../../../pages/api/course/free-course"
 const FreeCourses = () => {
-  
+  // useEffect(()=>{
+  //   const coursedata = FreeCourse()
+  //   console.log(coursedata)
+  // })
+  // const [datac, setDatac] = useState()
+  // useEffect(()=>{
+  //   const fetchData = async () => {
+  //     const result = await fetch(
+  //       `${process.env.webURL}/Course/GetFreeCourses`
+  //     );
+  //     const json = await result.json();
+  //     setDatac(json)
+  //     console.log(datac)
+  //   }
+  //   fetchData().catch(console.error);
+  // })
   return (
     <div className={`row mx-auto g-2 `}>
         <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
