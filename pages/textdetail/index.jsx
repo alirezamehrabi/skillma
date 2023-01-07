@@ -335,7 +335,7 @@ const detailcourse = () => {
           <section className={`row container mx-auto mb-5 `}>
             <div className={`col-sm-12 ${detail.related}`}>Related Courses</div>
             <div className={`col-12`}>
-              <TopCoursesSlider />
+              {/* <TopCoursesSlider /> */}
             </div>
           </section>
           <Footer />
