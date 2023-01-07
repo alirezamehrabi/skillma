@@ -27,6 +27,8 @@ export function DataProvider({ children }) {
   const isSucces = getItem("isSucces");
   const [user, setUser] = useState(loggedIn ? true : false);
   const[menuCat, setMenuCat] = useState();
+  const[freeCourse, setFreeCourse] = useState();
+  const[topCourse, setTopCourse] = useState();
   useEffect(() => {
     if (_iSMounted.current) {
       (async () => {
@@ -34,17 +36,20 @@ export function DataProvider({ children }) {
 		const result = (
 			await Promise.all([
 			  fetch(`https://skillma-api.shinypi.net/Category/GetAllCategories`),
+			  fetch(`https://skillma-api.shinypi.net/Course/GetFreeCourses`),
+			  fetch(`https://skillma-api.shinypi.net/Course/GetTopCourses`),
 			  ])
 		  ).map((r) => r.json());
 
       // and waiting a bit more - fetch API is cumbersome
-      const [GetAllCategories] = await Promise.all(result);
+      const [GetAllCategories,GetFreeCourses,GetTopCourses] = await Promise.all(result);
 
       // when the data is ready, save it to state
 		  setMenuCat(GetAllCategories);
+      setFreeCourse(GetFreeCourses)
+      setTopCourse(GetTopCourses)
 		
 		setLoading(false);
-		
       })();
     }
     return () => {
@@ -100,6 +105,8 @@ fetchData();
         isSucces,
         setUser,
         menuCat,
+        freeCourse,
+        topCourse,
       }}
     >
       {children}

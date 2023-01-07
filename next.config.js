@@ -6,6 +6,9 @@ const nextConfig = {
   },
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ["skillma-api.shinypi.net"],
+  },
 }
 
 module.exports = withVideos(nextConfig)

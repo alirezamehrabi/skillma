@@ -19,7 +19,7 @@ import {useEffect,useState} from "react"
 import axios from "axios";
 export async function getStaticProps() {
   const res = await fetch(
-    `${process.env.webURL}/Category/GetAllCategories`
+    `${process.env.webURL}/Course/GetTopCourses`
   );
   const data = await res.json();
   return {
@@ -30,8 +30,10 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
+  // console.log(props.data.data)
+  const topcourse = props.data
   // console.log(FreeCourse())
-  const allCat = props.data.data
+  // const allCat = props.data.data
   const { loading } = useContext(DataContext);
   return !loading ? (
     <SSRProvider>
@@ -304,7 +306,7 @@ dummy text of the printing and typesetting industry</h6>
                 </>
               </Link>
             </div>
-            <div className={`col-12`}><TopCoursesSlider /></div>
+            <div className={`col-12`}><TopCoursesSlider {...topcourse}/></div>
         </section>
         <section className={`row container mx-auto mb-5`}>
           <div className={`col-sm-8 ${styles.titleFree}`}>Free Courses</div>

@@ -2,350 +2,75 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "../../../styles/Home.module.css";
-import { RiShareForwardLine } from "react-icons/ri";
-import { Rating } from "react-simple-star-rating";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import {FreeCourse} from "../../../pages/api/course/free-course"
+import { useContext } from "react";
+import DataContext from "../../Context/DataContext";
+import Loader from "../Loader/Loader";
+
 const FreeCourses = () => {
-  // useEffect(()=>{
-  //   const coursedata = FreeCourse()
-  //   console.log(coursedata)
-  // })
-  // const [datac, setDatac] = useState()
-  // useEffect(()=>{
-  //   const fetchData = async () => {
-  //     const result = await fetch(
-  //       `${process.env.webURL}/Course/GetFreeCourses`
-  //     );
-  //     const json = await result.json();
-  //     setDatac(json)
-  //     console.log(datac)
-  //   }
-  //   fetchData().catch(console.error);
-  // })
-  return (
+  const { freeCourse, loading } = useContext(DataContext);
+  return !loading ? (
     <div className={`row mx-auto g-2 `}>
-        <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
+      {freeCourse.data.map((i) => {
+        return (
+          <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`} key={i.id}>
+           
             <div className={`row mx-auto `}>
-        <div className={`col-4 `}>
-        <figure className={`col-12 ${styles.FreeImg}`}>
-                <Image
-                  src={require(`../../../src/assets/home/FreeImg.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
+              <div className={`col-4 `}>
+                <Link href={`/detailcourse/${i.id}`}>
+                <figure className={`col-12 ${styles.FreeImg}`}>
+                  <Image
+                    src={i.coursePic}
+                    alt="logo"
+                    width="150"
+                    height="150"
+                  />
                 </figure>
+                  </Link>
                 <figure className={`col-12 ${styles.FreePlay}`}>
-                <Image
-                  src={require(`../../../src/assets/home/play.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-              </figure>
-        </div>
-        <div className={`col-8 `}>
-        <figure className={`${styles.teacherBadgeFree}`}>
-                <Image
-                  src={require(`../../../src/assets/home/teacherMini.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}>Dani Beaumont</h6>
-                <h5 className={`text-truncate ${styles.nowrap}`}>Get Started with Adobe XD</h5>
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}>Duration: 12 h</h6>
-              </figure>
-        </div>
-            </div>
-        </div>
-        <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
-            <div className={`row mx-auto `}>
-        <div className={`col-4 `}>
-        <figure className={`col-12 ${styles.FreeImg}`}>
-                <Image
-                  src={require(`../../../src/assets/home/FreeImg.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
+                <Link href={`/detailcourse/${i.id}`}>
+                  <Image
+                    src={require(`../../../src/assets/home/play.png`)}
+                    alt="logo"
+                    width=""
+                    height=""
+                  />
+                  </Link>
                 </figure>
-                <figure className={`col-12 ${styles.FreePlay}`}>
-                <Image
-                  src={require(`../../../src/assets/home/play.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-              </figure>
-        </div>
-        <div className={`col-8 `}>
-        <figure className={`${styles.teacherBadgeFree}`}>
-                <Image
-                  src={require(`../../../src/assets/home/teacherMini.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}>Dani Beaumont</h6>
-                <h5 className={`text-truncate ${styles.nowrap}`}>Get Started with Adobe XD</h5>
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}>Duration: 12 h</h6>
-              </figure>
-        </div>
-            </div>
-        </div>
-        <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
-            <div className={`row mx-auto `}>
-        <div className={`col-4 `}>
-        <figure className={`col-12 ${styles.FreeImg}`}>
-                <Image
-                  src={require(`../../../src/assets/home/FreeImg.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
+              </div>
+              <div className={`col-8 `}>
+                <figure className={`${styles.teacherBadgeFree}`}>
+                  <Image
+                    src={i.teacherPicName}
+                    alt="logo"
+                    width="40"
+                    height="40"
+                  />
+                  <h6
+                    className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}
+                  >
+                    {i.teacherName}
+                  </h6>
+                  <h5 className={`text-truncate ${styles.nowrap}`}>
+                    {i.title}
+                  </h5>
+                  <h6
+                    className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}
+                  >
+                    Duration: {i.duration} h
+                  </h6>
                 </figure>
-                <figure className={`col-12 ${styles.FreePlay}`}>
-                <Image
-                  src={require(`../../../src/assets/home/play.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-              </figure>
-        </div>
-        <div className={`col-8 `}>
-        <figure className={`${styles.teacherBadgeFree}`}>
-                <Image
-                  src={require(`../../../src/assets/home/teacherMini.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}>Dani Beaumont</h6>
-                <h5 className={`text-truncate ${styles.nowrap}`}>Get Started with Adobe XD</h5>
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}>Duration: 12 h</h6>
-              </figure>
-        </div>
+              </div>
             </div>
-        </div>
-        <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
-            <div className={`row mx-auto `}>
-        <div className={`col-4 `}>
-        <figure className={`col-12 ${styles.FreeImg}`}>
-                <Image
-                  src={require(`../../../src/assets/home/FreeImg.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                </figure>
-                <figure className={`col-12 ${styles.FreePlay}`}>
-                <Image
-                  src={require(`../../../src/assets/home/play.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-              </figure>
-        </div>
-        <div className={`col-8 `}>
-        <figure className={`${styles.teacherBadgeFree}`}>
-                <Image
-                  src={require(`../../../src/assets/home/teacherMini.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}>Dani Beaumont</h6>
-                <h5 className={`text-truncate ${styles.nowrap}`}>Get Started with Adobe XD</h5>
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}>Duration: 12 h</h6>
-              </figure>
-        </div>
-            </div>
-        </div>
-        <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
-            <div className={`row mx-auto `}>
-        <div className={`col-4 `}>
-        <figure className={`col-12 ${styles.FreeImg}`}>
-                <Image
-                  src={require(`../../../src/assets/home/FreeImg.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                </figure>
-                <figure className={`col-12 ${styles.FreePlay}`}>
-                <Image
-                  src={require(`../../../src/assets/home/play.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-              </figure>
-        </div>
-        <div className={`col-8 `}>
-        <figure className={`${styles.teacherBadgeFree}`}>
-                <Image
-                  src={require(`../../../src/assets/home/teacherMini.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}>Dani Beaumont</h6>
-                <h5 className={`text-truncate ${styles.nowrap}`}>Get Started with Adobe XD</h5>
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}>Duration: 12 h</h6>
-              </figure>
-        </div>
-            </div>
-        </div>
-        <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
-            <div className={`row mx-auto `}>
-        <div className={`col-4 `}>
-        <figure className={`col-12 ${styles.FreeImg}`}>
-                <Image
-                  src={require(`../../../src/assets/home/FreeImg.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                </figure>
-                <figure className={`col-12 ${styles.FreePlay}`}>
-                <Image
-                  src={require(`../../../src/assets/home/play.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-              </figure>
-        </div>
-        <div className={`col-8 `}>
-        <figure className={`${styles.teacherBadgeFree}`}>
-                <Image
-                  src={require(`../../../src/assets/home/teacherMini.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}>Dani Beaumont</h6>
-                <h5 className={`text-truncate ${styles.nowrap}`}>Get Started with Adobe XD</h5>
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}>Duration: 12 h</h6>
-              </figure>
-        </div>
-            </div>
-        </div>
-        <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
-            <div className={`row mx-auto `}>
-        <div className={`col-4 `}>
-        <figure className={`col-12 ${styles.FreeImg}`}>
-                <Image
-                  src={require(`../../../src/assets/home/FreeImg.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                </figure>
-                <figure className={`col-12 ${styles.FreePlay}`}>
-                <Image
-                  src={require(`../../../src/assets/home/play.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-              </figure>
-        </div>
-        <div className={`col-8 `}>
-        <figure className={`${styles.teacherBadgeFree}`}>
-                <Image
-                  src={require(`../../../src/assets/home/teacherMini.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}>Dani Beaumont</h6>
-                <h5 className={`text-truncate ${styles.nowrap}`}>Get Started with Adobe XD</h5>
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}>Duration: 12 h</h6>
-              </figure>
-        </div>
-            </div>
-        </div>
-        <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
-            <div className={`row mx-auto `}>
-        <div className={`col-4 `}>
-        <figure className={`col-12 ${styles.FreeImg}`}>
-                <Image
-                  src={require(`../../../src/assets/home/FreeImg.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                </figure>
-                <figure className={`col-12 ${styles.FreePlay}`}>
-                <Image
-                  src={require(`../../../src/assets/home/play.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-              </figure>
-        </div>
-        <div className={`col-8 `}>
-        <figure className={`${styles.teacherBadgeFree}`}>
-                <Image
-                  src={require(`../../../src/assets/home/teacherMini.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}>Dani Beaumont</h6>
-                <h5 className={`text-truncate ${styles.nowrap}`}>Get Started with Adobe XD</h5>
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}>Duration: 12 h</h6>
-              </figure>
-        </div>
-            </div>
-        </div>
-        <div className={`col-lg-4 col-sm-6 ${styles.freeWrap}`}>
-            <div className={`row mx-auto `}>
-        <div className={`col-4 `}>
-        <figure className={`col-12 ${styles.FreeImg}`}>
-                <Image
-                  src={require(`../../../src/assets/home/FreeImg.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                </figure>
-                <figure className={`col-12 ${styles.FreePlay}`}>
-                <Image
-                  src={require(`../../../src/assets/home/play.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-              </figure>
-        </div>
-        <div className={`col-8 `}>
-        <figure className={`${styles.teacherBadgeFree}`}>
-                <Image
-                  src={require(`../../../src/assets/home/teacherMini.png`)}
-                  alt="logo"
-                  width=""
-                  height=""
-                />
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeName}`}>Dani Beaumont</h6>
-                <h5 className={`text-truncate ${styles.nowrap}`}>Get Started with Adobe XD</h5>
-                <h6 className={`text-truncate ${styles.nowrap} ${styles.FreeDuration}`}>Duration: 12 h</h6>
-              </figure>
-        </div>
-            </div>
-        </div>
+            
+          </div>
+        );
+      })}
     </div>
+  ) : (
+    <Loader />
   );
 };
 

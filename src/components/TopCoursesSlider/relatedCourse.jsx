@@ -52,12 +52,12 @@ const ShortSlider = (props) => {
       },
     ],
   };
-  console.log(props)
-  const data = props
+  console.log(props.coursedet.data.relatedCourses)
+  const data = props.coursedet.data.relatedCourses
   return !loading ? (
     <div>
       <Slider {...settings}>
-        {props.data.map((i,index)=>{
+        {data.map((i,index)=>{
           return(<div className={`col-12 ${styles.courseSlidePic}`} key={index}>
           <Link href="#">
             <>

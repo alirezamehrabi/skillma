@@ -435,6 +435,7 @@
 .FreeImg span{
   width: 107px !important;
   height:auto !important;
+  border-radius: 5%;
 }
 
 .FreePlay span{
@@ -478,6 +479,9 @@
 .freeWrap{
   max-height: 150px;
   overflow: hidden;
+}
+.FreePlay span{
+  cursor: pointer;
 }
 .discount {
   margin: 40px auto;
