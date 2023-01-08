@@ -246,7 +246,9 @@ const detailcourse = (props) => {
                 </div>
               </div>
               <div className={`col-12 ${detail.require}`}>
-                <div className={`col-11 mx-auto my-3`}>
+              {cd.productShowInDetailsDTOs.map((i)=>{
+                return(
+                  <div className={`col-11 mx-auto my-3`} key={i.id}>
                   <div className={`row mx-auto`}>
                     <div className={`col-4 mx-auto`}>
                       <figure className={`${detail.requirePic}`}>
@@ -262,98 +264,26 @@ const detailcourse = (props) => {
                       <h6 className={`${detail.requretxt}`}>
                         Wacom DTK1660K0A Cintiq 16 Drawing Tablet with Screen.
                       </h6>
-                      <Link href="#">
-                        <button
-                          type="button"
-                          className={`btn btn-outline-warning ${detail.btnRequire}`}
-                        >
-                          Visit for Buy
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className={`col-11 mx-auto my-3`}>
-                  <div className={`row mx-auto`}>
-                    <div className={`col-4 mx-auto`}>
-                      <figure className={`${detail.requirePic}`}>
-                        <Image
-                          src={require(`../../src/assets/maincourse/require1.png`)}
-                          alt="logo"
-                          width=""
-                          height=""
-                        />
-                      </figure>
-                    </div>
-                    <div className={`col-8 mx-auto`}>
-                      <h6 className={`${detail.requretxt}`}>
-                        Wacom DTK1660K0A Cintiq 16 Drawing Tablet with Screen.
-                      </h6>
-                      <Link href="#">
-                        <button
-                          type="button"
-                          className={`btn btn-outline-warning ${detail.btnRequire}`}
-                        >
-                          Visit for Buy
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className={`col-11 mx-auto my-3`}>
-                  <div className={`row mx-auto`}>
-                    <div className={`col-4 mx-auto`}>
-                      <figure className={`${detail.requirePic}`}>
-                        <Image
-                          src={require(`../../src/assets/maincourse/require2.png`)}
-                          alt="logo"
-                          width=""
-                          height=""
-                        />
-                      </figure>
-                    </div>
-                    <div className={`col-8 mx-auto`}>
-                      <h6 className={`${detail.requretxt}`}>
-                        Wacom DTK1660K0A Cintiq 16 Drawing Tablet with Screen.
-                      </h6>
-                      <Link href="#">
+                      {i.link === null ? <Link href="#">
                         <button
                           type="button"
                           className={`btn btn-warning ${detail.btnRequire} ${styles.logBut} ${styles.knowBut}`}
                         >
                           Visit for Buy
                         </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className={`col-11 mx-auto my-3`}>
-                  <div className={`row mx-auto`}>
-                    <div className={`col-4 mx-auto`}>
-                      <figure className={`${detail.requirePic}`}>
-                        <Image
-                          src={require(`../../src/assets/maincourse/require1.png`)}
-                          alt="logo"
-                          width=""
-                          height=""
-                        />
-                      </figure>
-                    </div>
-                    <div className={`col-8 mx-auto`}>
-                      <h6 className={`${detail.requretxt}`}>
-                        Wacom DTK1660K0A Cintiq 16 Drawing Tablet with Screen.
-                      </h6>
-                      <Link href="#">
+                      </Link>:<Link href="#">
                         <button
                           type="button"
                           className={`btn btn-outline-warning ${detail.btnRequire}`}
                         >
                           Visit for Buy
                         </button>
-                      </Link>
+                      </Link>}
                     </div>
                   </div>
                 </div>
+                )
+              })}
               </div>
             </div>
           </section>
