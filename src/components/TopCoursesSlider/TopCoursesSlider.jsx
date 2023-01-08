@@ -10,7 +10,7 @@ import { useContext } from "react";
 import DataContext from "../../Context/DataContext";
 import Loader from "../Loader/Loader";
 
-const ShortSlider = (props) => {
+const ShortSlider = ({data}) => {
   const {  loading } = useContext(DataContext);
   // console.log(topCourse)
   const [show, setShow] = useState(false);
@@ -52,18 +52,21 @@ const ShortSlider = (props) => {
       },
     ],
   };
-  console.log(props)
-  const data = props
+  console.log(data)
+
+
+
+  // const data = props
   return !loading ? (
     <div>
       <Slider {...settings}>
-        {props.data.map((i,index)=>{
+        {data.map((i,index)=>{
           return(<div className={`col-12 ${styles.courseSlidePic}`} key={index}>
           <Link href="#">
             <>
               <figure className={`col-10 ${styles.coursePicHolder}`}>
                 <Image
-                  src={i.TCPic}
+                  src={i.teachePic}
                   alt="logo"
                   width="100"
                   height="100"

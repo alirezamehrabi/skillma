@@ -1,0 +1,8 @@
+.varifyContainer{
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px #777;
+    margin: 150px auto;
+    padding: 50px;
+    text-align: center;
+    background-color: #fffadf;
+}

@@ -30,32 +30,6 @@ const Login = () => {
     router.push({ pathname: "/" });
     return;
   }
-
-  // const [f1, setF1] = useState("");
-  // const [f2, setF2] = useState("");
-  // const [f3, setF3] = useState("");
-  // const [f4, setF4] = useState("");
-  // const [f5, setF5] = useState("");
-  // const [f6, setF6] = useState("");
-
-  // const handleNameChange = (event) => {
-  //   setF1(event.target.value);
-  // };
-  // const handleNameChange2 = (event) => {
-  //   setF2(event.target.value);
-  // };
-  // const handleNameChange3 = (event) => {
-  //   setF3(event.target.value);
-  // };
-  // const handleNameChange4 = (event) => {
-  //   setF4(event.target.value);
-  // };
-  // const handleNameChange5 = (event) => {
-  //   setF5(event.target.value);
-  // };
-  // const handleNameChange6 = (event) => {
-  //   setF6(event.target.value);
-  // };
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {

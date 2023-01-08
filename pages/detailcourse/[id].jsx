@@ -5,7 +5,7 @@ import styles from "../../styles/Home.module.css";
 import detail from "../../styles/DetailCourse.module.css";
 import main from "../../styles/MainCourse.module.css";
 import Menu from "../../src/components/Menu/Menu";
-import TopCoursesSlider from "../../src/components/TopCoursesSlider/relatedCourse";
+import TopCoursesSlider from "../../src/components/TopCoursesSlider/TopCoursesSlider";
 import Comment from "../../src/components/Comment/Comment";
 import Footer from "../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
@@ -51,8 +51,8 @@ export async function getStaticProps(context) {
  }
 }
 
-// const page = related
 const detailcourse = (props) => {
+
   const cd = props.coursedet.data
   const { loading } = useContext(DataContext);
   return !loading ? (
@@ -84,7 +84,7 @@ const detailcourse = (props) => {
                       height="20"
                     />
                     <h5 className={``}>{cd.teacherName}</h5>
-                    <h6 className={``}>12.501 followers</h6>
+                    <h6 className={``}>{cd.teacherFallowers} followers</h6>
                   </figure>
                 </div>
                 <div className={`col-6 mx-auto`}>
@@ -129,7 +129,7 @@ const detailcourse = (props) => {
               {cd.seasons.map((i)=>{
                 return(
                   <div className={`col-11 ${detail.sessionHolder}`}>
-                <span className={`${detail.Num}`}>1</span>
+                <span className={`${detail.Num}`}>{cd.seasonNumber}</span>
                 <h6 className={`text-truncate ${detail.sessionTitle}`}>
                   {i.title}
                 </h6>
@@ -183,13 +183,20 @@ const detailcourse = (props) => {
               </div>
               <div className={`col-12 ${detail.content}`}>
                 <h5 className={detail.contentTitle}>requirement</h5>
-                {cd.requirements}
-                {/* <div className={detail.circle} />
+                {cd.requirements.map((i)=>{
+                    return(
+                      <Link href={i.link}>
+                        <>
+                      <div className={detail.circle} />
                 <h6
                   className={`${detail.contentDescription} ${detail.contentDescription3}`}
                 >
-                  Lorem Ipsum is simply dummy
-                </h6> */}
+                  {i.text}
+                </h6>
+                </>
+                      </Link>
+                    )
+                })}
               </div>
             </div>
             <div className={`col-xl-5 ${detail.content}`}>
@@ -354,7 +361,7 @@ const detailcourse = (props) => {
           <section className={`row container mx-auto mb-5 `}>
             <div className={`col-sm-12 ${detail.related}`}>Related Courses</div>
             <div className={`col-12`}>
-              <TopCoursesSlider {...props} />
+              <TopCoursesSlider data={props.coursedet.data.relatedCourses} />
             </div>
           </section>
           <Footer />

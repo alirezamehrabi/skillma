@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["skillma-api.shinypi.net"],
+    domains: ["ftp.shinypi.net"],
   },
 }
 

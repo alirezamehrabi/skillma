@@ -306,7 +306,7 @@ dummy text of the printing and typesetting industry</h6>
                 </>
               </Link>
             </div>
-            <div className={`col-12`}><TopCoursesSlider {...topcourse}/></div>
+            <div className={`col-12`}><TopCoursesSlider data={topcourse.data}/></div>
         </section>
         <section className={`row container mx-auto mb-5`}>
           <div className={`col-sm-8 ${styles.titleFree}`}>Free Courses</div>
