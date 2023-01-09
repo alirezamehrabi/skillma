@@ -9,8 +9,28 @@ import help from "../../styles/help.module.css";
 import Menu from "./../../src/components/Menu/Menu";
 import Footer from "./../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
+import { useState } from "react";
+export async function getStaticProps() {
+  const res = await fetch(
+    `${process.env.webURL}/Category/GetHelpcategories`
+  );
+  const data = await res.json();
+  const res1 = await fetch(
+    `${process.env.webURL}/Help/GetFAQ`
+  );
+  const data1 = await res1.json();
+  return {
+    props: {
+      ...{ data,data1 },
+    },
+  };
+}
 
-const Help = () => {
+const Help = (props) => {
+  const[inputData,setInputData] = useState("")
+  // console.log(inputData)
+  const helpCat = props.data.data
+  const frequently = props.data1.data
   const varify = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <defs>
@@ -91,6 +111,7 @@ const Help = () => {
             <div className={`col-7`}>
               <h5 className={`${help.vitrinDes}`}>Hello, how can we help?</h5>
               <div className="col-9 mx-auto">
+                <form>
                 <div className={`input-group ${help.inputsearch}`}>
                   <input
                     type="text"
@@ -98,11 +119,14 @@ const Help = () => {
                     placeholder="Ask a Question"
                     aria-label="Ask a Question"
                     aria-describedby="basic-addon2"
+                    value={inputData}
+                    onChange={(e)=>setInputData(e.target.value)}
                   />
                   <div className="input-group-append">
+                    <Link href={`/helpsearch?Key=${inputData}`}>
                     <button
                       className={`btn btn-outline-secondary bg-warning ${help.searchbutton}`}
-                      type="button"
+                      type="submit"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -118,8 +142,10 @@ const Help = () => {
                         </g>
                       </svg>
                     </button>
+                    </Link>
                   </div>
                 </div>
+                </form>
               </div>
             </div>
             <div className={`col-5 ${help.vitrinIMG}`}>
@@ -132,81 +158,39 @@ const Help = () => {
             </div>
           </section>
           <section className={`row container mx-auto mb-5`}>
+            
             <h5 className={`${help.questionTitle}`}>
               Frequently Asked Questions
             </h5>
-            <span className={`${help.bullet}`}></span>
+            {frequently.map((i)=>{
+              return(<>
+              <span className={`${help.bullet}`}></span>
+              
             <span className={`${help.item}`}>
-              Creating and Editing Your Profile
+             <Link href={`/helpdetail/${i.id}`}>{i.title}</Link>
             </span>
             <br />
-            <span className={`${help.bullet}`}></span>
-            <span className={`${help.item}`}>Lorem Ipsum is simply dummy</span>
-            <br />
-            <br />
-            <span className={`${help.bullet}`}></span>
-            <span className={`${help.item}`}>
-              Lorem Ipsum is simply dummy text of the printing
-            </span>
-            <br />
-            <br />
+              </>)
+            })}
           </section>
           <section className={`row container mx-auto mb-5`}>
             <h5 className={`${help.topictitle}`}>
               Select a Topic to Search for Help
             </h5>
-            <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>
+            {helpCat.map((i)=>{
+              return(
+                <div className={`col-xl-4 col-md-6 col-sm-12 g-4`} key={i.id}>
               <div className={`col-12 ${help.topicItem}`}>
-                <div className={`col-12 ${help.topicimg}`}>{varify}</div>
-                <h5 className={`col-12`}>Getting Started</h5>
-                <h6 className={`col-12`}>
-                  Learn how Skillma works and how to start learning.
-                </h6>
+                <div className={`col-12 ${help.topicimg}`}>
+                  <Image src={i.catPic} alt="" width="120" height="120"/>
+                  </div>
+                  
+                <h5 className={`col-12 text-truncate`}><Link href={`/helpcat/${i.id}`}>{i.title}</Link></h5>
+                <h6 className={`col-12 text-truncate`}>{i.subtitle}</h6>
               </div>
             </div>
-            <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>
-              <div className={`col-12 ${help.topicItem}`}>
-                <div className={`col-12 ${help.topicimg}`}>{accout}</div>
-                <h5 className={`col-12`}>Account & Profile</h5>
-                <h6 className={`col-12`}>Manage your account settings.</h6>
-              </div>
-            </div>
-            <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>
-              <div className={`col-12 ${help.topicItem}`}>
-                <div className={`col-12 ${help.topicimg}`}>{course}</div>
-                <h5 className={`col-12`}>course taking</h5>
-                <h6 className={`col-12`}>
-                  Everything about taking a course on Skilma.
-                </h6>
-              </div>
-            </div>
-            <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>
-              <div className={`col-12 ${help.topicItem}`}>
-                <div className={`col-12 ${help.topicimg}`}>{pay}</div>
-                <h5 className={`col-12`}>Instructor Payments</h5>
-                <h6 className={`col-12`}>
-                  Understand the revenue share and how to receive payments.
-                </h6>
-              </div>
-            </div>
-            <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>
-              <div className={`col-12 ${help.topicItem}`}>
-                <div className={`col-12 ${help.topicimg}`}>{video}</div>
-                <h5 className={`col-12`}>Quality Standards</h5>
-                <h6 className={`col-12`}>
-                  Learn what it takes to create a high quality course.
-                </h6>
-              </div>
-            </div>
-            <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>
-              <div className={`col-12 ${help.topicItem}`}>
-                <div className={`col-12 ${help.topicimg}`}>{maintain}</div>
-                <h5 className={`col-12`}>Course Management</h5>
-                <h6 className={`col-12`}>
-                  Maintain your course and engage with students.
-                </h6>
-              </div>
-            </div>
+              )
+            })}
           </section>
           <Footer />
         </main>

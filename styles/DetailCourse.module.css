@@ -17,7 +17,9 @@
 .personHolder {
   padding-left: 30px;
 }
-
+.requirePic span{
+  border-radius: 10px;
+}
 .session {
   background-color: #fafafa;
   border-radius: 15px;

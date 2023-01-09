@@ -253,25 +253,25 @@ const detailcourse = (props) => {
                     <div className={`col-4 mx-auto`}>
                       <figure className={`${detail.requirePic}`}>
                         <Image
-                          src={require(`../../src/assets/maincourse/require1.png`)}
+                          src={i.picture}
                           alt="logo"
-                          width=""
-                          height=""
+                          width="100"
+                          height="100"
                         />
                       </figure>
                     </div>
                     <div className={`col-8 mx-auto`}>
                       <h6 className={`${detail.requretxt}`}>
-                        Wacom DTK1660K0A Cintiq 16 Drawing Tablet with Screen.
+                        {i.description}
                       </h6>
-                      {i.link === null ? <Link href="#">
+                      {i.link === null ? <Link href={`asdasdsdfsdffgdghfghjnghjghjdggsdffgsd`}>
                         <button
                           type="button"
                           className={`btn btn-warning ${detail.btnRequire} ${styles.logBut} ${styles.knowBut}`}
                         >
                           Visit for Buy
                         </button>
-                      </Link>:<Link href="#">
+                      </Link>:<Link href={`asdasdsdfsdffgdghfghjnghjghjdggsdffgsd`}>
                         <button
                           type="button"
                           className={`btn btn-outline-warning ${detail.btnRequire}`}
