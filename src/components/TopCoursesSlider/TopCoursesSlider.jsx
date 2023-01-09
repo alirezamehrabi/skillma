@@ -52,7 +52,7 @@ const ShortSlider = ({data}) => {
       },
     ],
   };
-  console.log(data)
+  // console.log(data)
 
 
 

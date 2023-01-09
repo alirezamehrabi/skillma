@@ -13,7 +13,48 @@ import Loader from "../../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
 
-const Maincourse = () => {
+export async function getStaticProps() {
+  const res = await fetch(
+    `${process.env.webURL}/Course/GetVerfiedCourses`
+  );
+  const data = await res.json();
+  const freeCourseresPopular = await fetch(
+    `${process.env.webURL}/Course/GetFilterCoursesNotFree?page=1&PageSize=9&Request=0`
+  );
+  const freeCoursePopular = await freeCourseresPopular.json();
+  const freeCourseresNew = await fetch(
+    `${process.env.webURL}/Course/GetFilterCoursesNotFree?page=1&PageSize=9&Request=1`
+  );
+  const freeCourseNew = await freeCourseresNew.json();
+  const freeCourseresTrend = await fetch(
+    `${process.env.webURL}/Course/GetFilterCoursesNotFree?page=1&PageSize=9&Request=2`
+  );
+  const freeCourseTrend = await freeCourseresTrend.json();
+  const freeCourseresRate = await fetch(
+    `${process.env.webURL}/Course/GetFilterCoursesNotFree?page=1&PageSize=9&Request=3`
+  );
+  const freeCourseRate = await freeCourseresRate.json();
+  const PupularResInstructors = await fetch(
+    `${process.env.webURL}/Teacher/GetPupularInstructors`
+  );
+  const PupularInstructors = await PupularResInstructors.json();
+  const onlineCourseRes = await fetch(
+    `${process.env.webURL}/OnlineCourse/GetFilteredOnlineCourses?page=1&pageSize=16&Types=1`
+  );
+  const onlineCourse = await onlineCourseRes.json();
+  const PopularTopicsRes = await fetch(
+    `${process.env.webURL}/Teacher/GetPopularTopics`
+  );
+  const PopularTopics = await PopularTopicsRes.json();
+  return {
+    props: {
+      ...{ data,freeCourseNew,freeCoursePopular,freeCourseTrend,freeCourseRate,PupularInstructors,onlineCourse,PopularTopics },
+    },
+  };
+}
+
+const Maincourse = (props) => {
+  // console.log(props.PopularTopics.data)
   const { loading } = useContext(DataContext);
   return !loading ? ( <SSRProvider> 
     <div className={styles.container}>
@@ -38,27 +79,27 @@ const Maincourse = () => {
           >
             <Tab eventKey="pop" title="Most Popular">
               <div className={`col-12`}>
-                <TopCoursesSlider />
+                <TopCoursesSlider data={props.freeCoursePopular.data.pageData}/>
               </div>
             </Tab>
             <Tab eventKey="new" title="Newest">
               <div className={`col-12`}>
-                <TopCoursesSlider />
+                <TopCoursesSlider data={props.freeCourseNew.data.pageData}/>
               </div>
             </Tab>
             <Tab eventKey="trend" title="Trending">
               <div className={`col-12`}>
-                <TopCoursesSlider />
+                <TopCoursesSlider data={props.freeCourseTrend.data.pageData}/>
               </div>
             </Tab>
             <Tab eventKey="rate" title="Highest Rate">
               <div className={`col-12`}>
-                <TopCoursesSlider />
+                <TopCoursesSlider data={props.freeCourseRate.data.pageData}/>
               </div>
             </Tab>
           </Tabs>
         </section>
-        <section className={`row container mx-auto mb-5 `}>
+         <section className={`row container mx-auto mb-5 `}>
         <div className={`col-sm-8 ${main.titleVerified}`}>Verified Courses</div>
         <div className={`col-sm-4 mx-auto ${styles.but} ${styles.but2}`}>
               <Link href="#">
@@ -88,16 +129,16 @@ const Maincourse = () => {
               </Link>
             </div>
             <div className={`col-12`}>
-                <TopCoursesSlider />
+                <TopCoursesSlider data={props.data.data}/>
               </div>
         </section>
         <section className={`row container mx-auto mb-5 `}>
           <div className={`col-sm-12 ${main.titleInstructors}`}>Popular Instructors</div>
-          <div className={`col-12`}><PopularInstructor /></div>
+          <div className={`col-12`}><PopularInstructor data={props.PupularInstructors.data}/></div>
         </section>
         <section className={`row container mx-auto mb-5 `}>
           <div className={`col-sm-12 ${main.titleTopic}`}>Popular Topics</div>
-          <div className={`col-12`}><PopularTopics /></div>
+          <div className={`col-12`}><PopularTopics data={props.PopularTopics.data}/></div>
         </section>
         <section className={`row container mx-auto mb-5 ${styles.topCourses}`}>
         <div className={`col-sm-8 ${styles.titleCourse}`}>Online Courses</div>
@@ -128,8 +169,8 @@ const Maincourse = () => {
                 </>
               </Link>
             </div>
-            <div className={`col-12`}><TopCoursesSlider /></div>
-        </section>
+            <div className={`col-12`}><TopCoursesSlider data={props.onlineCourse.data.pageData}/></div>
+        </section> 
         
 
       </main>
