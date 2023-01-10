@@ -30,10 +30,7 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
-  // console.log(props.data.data)
   const topcourse = props.data
-  // console.log(FreeCourse())
-  // const allCat = props.data.data
   const { loading } = useContext(DataContext);
   return !loading ? (
     <SSRProvider>

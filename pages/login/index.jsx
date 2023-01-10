@@ -157,8 +157,6 @@ const Login = () => {
                         type="email"
                         placeholder="Email address"
                         className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                        // value={f1}
-                        // onChange={handleNameChange}
                       />
 
                       {errors.email && touched.email ? (
@@ -170,8 +168,6 @@ const Login = () => {
                         type={passwordShown ? "text" : "password"}
                         placeholder="password"
                         className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                        // value={f2}
-                        // onChange={handleNameChange2}
                       />
                       <Button className={`${reg.eye}`} onClick={togglePassword}>
                         <svg

@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import detail from "../../styles/DetailCourse.module.css";
-import main from "../../styles/MainCourse.module.css";
 import Menu from "../../src/components/Menu/Menu";
 import TopCoursesSlider from "../../src/components/TopCoursesSlider/TopCoursesSlider";
 import Comment from "../../src/components/Comment/Comment";
@@ -54,6 +53,7 @@ export async function getStaticProps(context) {
 const detailcourse = (props) => {
 
   const cd = props.coursedet.data
+  console.log(cd)
   const { loading } = useContext(DataContext);
   return !loading ? (
     <SSRProvider>

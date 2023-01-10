@@ -1,19 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import com from "../../../styles/Comment.module.css";
-import {Dropdown,Form,Button}  from 'react-bootstrap';
+import { Button, Dropdown } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import { SSRProvider } from "react-bootstrap";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { TbArrowForwardUp } from "react-icons/tb";
-const Comment = () => {
-  const [rating, setRating] = useState(0);
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";
+import co from "../../../styles/panel/course.module.css";
+import { comment } from "../../../pages/api/comment";
+const ContactSchema = Yup.object().shape({
+  textarea: Yup.string().min(4, "Too Short!").required("Required"),
+});
 
+const Comment = () => {
+  const [rating, setRating] = useState();
   const handleRating = (number) => {
-    setRating(number);
+    if (number !== undefined) {
+      setRating(number);
+    }
   };
+
+  useEffect(() => {
+    handleRating();
+  }, [rating]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+ const courseId =router.query.id
+  
   return (
     <SSRProvider>
       <section className={`container mx-auto`}>
@@ -101,36 +120,36 @@ const Comment = () => {
                   Malorum for use in a specimen book. It usually begins with.
                 </span>
                 <div className={`col-9 ${com.answer}`}>
-                <div className={`row ${com.com}`}>
-              <div className={`col-sm-6`}>
-                <figure className={`${com.commentPic}`}>
-                  <Image
-                    src={require(`../../../src/assets/maincourse/per1.png`)}
-                    alt=""
-                    width=""
-                    height=""
-                  />
-                </figure>
-                <span className={`${com.comName}`}>Lorem Ipsum</span>
-              </div>
-              <div className={`col-sm-3`}>
-                <Rating
-                  onClick={handleRating}
-                  allowFraction={true}
-                  initialValue={4.5}
-                  className={com.rating}
-                />
-              </div>
-              <div className={`col-sm-3 ${com.date}`}>21 june 2022</div>
-              <span className={`${com.commentTXT}`}>
-                  Lorem ipsum, or lipsum as it is sometimes known, is text used
-                  in laying out print, graphic or web designs. passage is
-                  attributed to an unknown typesetter in the 15th century who is
-                  thought to have scrambled parts Ciceros De Finibus Bonorum et
-                  Malorum for use in a specimen book. It usually begins with.
-                </span>
-              </div>
-
+                  <div className={`row ${com.com}`}>
+                    <div className={`col-sm-6`}>
+                      <figure className={`${com.commentPic}`}>
+                        <Image
+                          src={require(`../../../src/assets/maincourse/per1.png`)}
+                          alt=""
+                          width=""
+                          height=""
+                        />
+                      </figure>
+                      <span className={`${com.comName}`}>Lorem Ipsum</span>
+                    </div>
+                    <div className={`col-sm-3`}>
+                      <Rating
+                        onClick={handleRating}
+                        allowFraction={true}
+                        initialValue={4.5}
+                        className={com.rating}
+                      />
+                    </div>
+                    <div className={`col-sm-3 ${com.date}`}>21 june 2022</div>
+                    <span className={`${com.commentTXT}`}>
+                      Lorem ipsum, or lipsum as it is sometimes known, is text
+                      used in laying out print, graphic or web designs. passage
+                      is attributed to an unknown typesetter in the 15th century
+                      who is thought to have scrambled parts Ciceros De Finibus
+                      Bonorum et Malorum for use in a specimen book. It usually
+                      begins with.
+                    </span>
+                  </div>
                 </div>
                 <div className={`row ${com.commentItem}`}>
                   <div className={`col-4 ${com.like}`}>
@@ -193,32 +212,69 @@ const Comment = () => {
           </div>
           <div className={`col-xl-4 ${com.commentPost}`}>
             <h6 className={`${com.comTitle}`}>Add Comments</h6>
-            <Dropdown>
-      <Dropdown.Toggle  id="dropdown-basic" className={`${com.drop}`}>
-        Course Spended
-      </Dropdown.Toggle>
 
-      <Dropdown.Menu className={`${com.dropdown}`}>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-    <Form.Group className="my-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Control as="textarea" className={`${com.txtArea}`} placeholder="Message" rows={6} />
-      </Form.Group>
-      <div className={`row`}>
-        <div className={`col-7`}>Rate:</div>
-        <div className={`col-5`}>
-        <Rating
-                  onClick={handleRating}
-                  allowFraction={true}
-                  initialValue={4.5}
-                  className={com.ratingg}
-                />
-        </div>
-        <Button variant="warning" className={`${com.addBTN}`}>Add Comment</Button>
-      </div>
+            <Formik
+              initialValues={{
+                drop: "",
+                textarea: "",
+              }}
+              validationSchema={ContactSchema}
+              onSubmit={async (values) => {
+                setIsSubmitting(true);
+
+                const userObj = {
+                  rate: rating,
+                  commentMessage: values.textarea,
+                  spend: values.spend,
+                  courseId : courseId,
+                };
+                const user = await comment(userObj);
+                setUser(user);
+                
+                setIsSubmitting(false);
+              }}
+            >
+              {({ errors, touched }) => (
+                <Form className={co.form}>
+                  <Field as="select" name="spend" placeholder="Course Spended" className={`text-center p-1 ${com.dropdown} ${com.massege}`}>
+                    <option value="" disabled defaultValue hidden selected>
+                      Course Spended
+                    </option>
+                    <option value="0">0%</option>
+                    <option value="25">25%</option>
+                    <option value="50">20%</option>
+                    <option value="75">75%</option>
+                    <option value="100">100%</option>
+                  </Field>
+                  <Field name="textarea" as="textarea" className={`${com.txtArea} ${com.massege}`} placeholder="Message" rows={6}>
+                  </Field>
+                  <div className="my-4" />
+                  <div className={`row`}>
+                    <div className={`col-7`}>Rate:</div>
+                    <div className={`col-5`}>
+                      <Rating
+                        onClick={handleRating}
+                        allowFraction={true}
+                        initialValue={4.5}
+                        className={com.ratingg}
+                      />
+                    </div>
+                    <Button
+                      variant="warning"
+                      type="submit"
+                      className={`${com.addBTN}`}
+                    >
+                      {isSubmitting ? (
+                        <div className={co.loadspn} />
+                      ) : (
+                        <>Add Comment</>
+                      )}
+                    </Button>
+                    <ToastContainer />
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </section>
