@@ -16,15 +16,15 @@ import {
   AiOutlineGift,
 } from "react-icons/ai";
 import Loader from "../../src/components/Loader/Loader";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
 import { GiLevelEndFlag } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
 import { MdOutlinePriceChange } from "react-icons/md";
-import Moment from 'react-moment';
-
+import Moment from "react-moment";
+import axios from "axios";
 export async function getStaticPaths() {
-  return { paths:[], fallback: 'blocking' };
+  return { paths: [], fallback: "blocking" };
 }
 
 export async function getStaticProps(context) {
@@ -32,29 +32,46 @@ export async function getStaticProps(context) {
   const request = await fetch(
     `${process.env.webURL}/Course/GetCourseDetail?id=${paths}`
   );
- 
- try{
-  const coursedet = await request.json();
-  return {
-    props: {
-      ...{ coursedet },
-    },
-  };
- }
- catch(e){
-  return {
+  const request1 = await fetch(
+    `${process.env.webURL}/Comment/GetCourseComment?CourseId=${paths}&page=1&pagesize=5`
+  );
+
+  try {
+    const coursedet = await request.json();
+    const comment = await request1.json();
+    return {
+      props: {
+        ...{ coursedet, comment },
+      },
+    };
+  } catch (e) {
+    return {
       redirect: {
         destination: "/404",
       },
-    }
- }
+    };
+  }
 }
 
 const detailcourse = (props) => {
-
-  const cd = props.coursedet.data
-  console.log(cd)
+  const cd = props.coursedet.data;
+  // console.log(props.coursedet.data);
   const { loading } = useContext(DataContext);
+
+  const datafunc = async (p)=>{
+    try {
+      const result = await fetch(
+        `${process.env.webURL}/Comment/GetCourseComment?CourseId=${cd.id}&page=${p}&pagesize=5`
+        );
+        const json = await result.json();
+        console.log(json)
+      return json.data.pageData
+    } catch (error) {
+       console.log(error);
+    }
+  }
+
+
   return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
@@ -62,17 +79,12 @@ const detailcourse = (props) => {
           <title>Detail Course Page</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
-
         <main>
           <Menu />
           <section className={`row mx-auto container ${detail.secwidth}`}>
             <div className={`col-xl-6 mx-4 ${detail.videoHolder}`}>
               <div className={` ${styles.introHolder}`}>
-                <video
-                  src={cd.videoPath}
-                  autoPlay
-                  controls
-                />
+                <video src={cd.videoPath} autoPlay controls />
               </div>
               <div className={`row ${styles.conHolder}`}>
                 <div className={`col-6 ${detail.personHolder}`}>
@@ -90,7 +102,8 @@ const detailcourse = (props) => {
                 <div className={`col-6 mx-auto`}>
                   <div className={`row ${detail.bot}`}>
                     <div className={`col-4`}>
-                      <RiShareForwardLine style={{ color: "blue" }} />{cd.shareCount}
+                      <RiShareForwardLine style={{ color: "blue" }} />
+                      {cd.shareCount}
                     </div>
                     <div className={`col-4`}>
                       <svg
@@ -126,39 +139,45 @@ const detailcourse = (props) => {
             </div>
             <div className={`col-xl-5 ${detail.session}`}>
               <h5 className={`${detail.sessionName}`}>Session</h5>
-              {cd.seasons.map((i)=>{
-                return(
-                  <div className={`col-11 ${detail.sessionHolder}`}>
-                <span className={`${detail.Num}`}>{cd.seasonNumber}</span>
-                <h6 className={`text-truncate ${detail.sessionTitle}`}>
-                  {i.title}
-                </h6>
-              {cd.price === 0? null : <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="blue"
-                  className="bi bi-lock"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" />
-                </svg>}
-                
-                <div className={`${detail.border}`}>
-                  {i.parts.map((j)=>{
-                    return(
-                      <>
-                      <span className={`text-truncate ${detail.sessionOption}`}>
-                    {j.title}
-                  </span>
-                  <span className={`${detail.sessionOption2}`}>{j.videoTime}</span>
-                  <br />
-                  </>
-                    )
-                  })}
-                </div>
-              </div>
-                )
+              {cd.seasons.map((i) => {
+                return (
+                  <div className={`col-11 ${detail.sessionHolder}`} key={i.id}>
+                    <span className={`${detail.Num}`}>{i.seasonNumber}</span>
+                    <h6 className={`text-truncate ${detail.sessionTitle}`}>
+                      {i.title}
+                    </h6>
+                    {cd.price === 0 ? null : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="blue"
+                        className="bi bi-lock"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" />
+                      </svg>
+                    )}
+
+                    <div className={`${detail.border}`}>
+                      {i.parts.map((j, index) => {
+                        return (
+                          <React.Fragment key={index}>
+                            <span
+                              className={`text-truncate ${detail.sessionOption}`}
+                            >
+                              {j.title}
+                            </span>
+                            <span className={`${detail.sessionOption2}`}>
+                              {j.videoTime}
+                            </span>
+                            <br />
+                          </React.Fragment>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
               })}
             </div>
           </section>
@@ -167,35 +186,36 @@ const detailcourse = (props) => {
               <div className={`col-12 ${detail.content}`}>
                 <h5 className={detail.contentTitle}>
                   {cd.title}
-                  <span className={`${detail.year}`}> <Moment fromNow>{cd.createdAt}</Moment></span>
+                  <span className={`${detail.year}`}>
+                    {" "}
+                    <Moment fromNow>{cd.createdAt}</Moment>
+                  </span>
                 </h5>
                 <h6 className={detail.contentDescription}>
-                  <div
-                      dangerouslySetInnerHTML={{ __html: cd.description }}
-                    />
+                  <div dangerouslySetInnerHTML={{ __html: cd.description }} />
                 </h6>
               </div>
               <div className={`col-12 ${detail.content}`}>
                 <h5 className={detail.contentTitle}>What you ll learn:</h5>
-                <div
-                      dangerouslySetInnerHTML={{ __html: cd.whatYouLearn }}
-                    />
+                <div dangerouslySetInnerHTML={{ __html: cd.whatYouLearn }} />
               </div>
               <div className={`col-12 ${detail.content}`}>
                 <h5 className={detail.contentTitle}>requirement</h5>
-                {cd.requirements.map((i)=>{
-                    return(
-                      <Link href={i.link}>
-                        <>
-                      <div className={detail.circle} />
-                <h6
-                  className={`${detail.contentDescription} ${detail.contentDescription3}`}
-                >
-                  {i.text}
-                </h6>
-                </>
-                      </Link>
-                    )
+                {cd.requirements.map((i,index) => {
+                  return (
+                    <React.Fragment key={index}>
+                    <Link href={i.link}>
+                      <>
+                        <div className={detail.circle} />
+                        <h6
+                          className={`${detail.contentDescription} ${detail.contentDescription3}`}
+                        >
+                          {i.text}
+                        </h6>
+                      </>
+                    </Link>
+                    </React.Fragment>
+                  );
                 })}
               </div>
             </div>
@@ -206,88 +226,123 @@ const detailcourse = (props) => {
                     <MdOutlinePriceChange />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Price:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.price === 0 ? "Free" : `${cd.price}$`}</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.price === 0 ? "Free" : `${cd.price}$`}
+                      </span>
                     </h6>
                     <GiLevelEndFlag />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Level:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.level === 0 ? "Begginer" : cd.level === 1 ? "Intermediate" : cd.level === 2 && "Expert" }</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.level === 0
+                          ? "Begginer"
+                          : cd.level === 1
+                          ? "Intermediate"
+                          : cd.level === 2 && "Expert"}
+                      </span>
                     </h6>
                     <TbCertificate />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Certificate:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.certificate === true ? "Yes" : "No"}</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.certificate === true ? "Yes" : "No"}
+                      </span>
                     </h6>
                   </div>
                   <div className={`col-xl-6 ${detail.cartItem}`}>
                     <AiOutlineClockCircle />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Duration:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.duration}</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.duration}
+                      </span>
                     </h6>
                     <FaUserGraduate />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Student:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.studentCount}</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.studentCount}
+                      </span>
                     </h6>
                   </div>
                   <div className={`col-11 mx-auto ${detail.cartBut}`}>
                     <Link href="#">
-                      
-                        <button
-                          type="button"
-                          className={`btn btn-warning ${styles.logBut} ${detail.cartButton}`}
-                        >
-                          {cd.price === 0 ? "Free Join to Course" : <><AiOutlineShoppingCart />Add To Cart</>}
-                          
-                        </button>
+                      <button
+                        type="button"
+                        className={`btn btn-warning ${styles.logBut} ${detail.cartButton}`}
+                      >
+                        {cd.price === 0 ? (
+                          "Free Join to Course"
+                        ) : (
+                          <>
+                            <AiOutlineShoppingCart />
+                            Add To Cart
+                          </>
+                        )}
+                      </button>
                     </Link>
                   </div>
                 </div>
               </div>
               <div className={`col-12 ${detail.require}`}>
-              {cd.productShowInDetailsDTOs.map((i)=>{
-                return(
-                  <div className={`col-11 mx-auto my-3`} key={i.id}>
-                  <div className={`row mx-auto`}>
-                    <div className={`col-4 mx-auto`}>
-                      <figure className={`${detail.requirePic}`}>
-                        <Image
-                          src={i.picture}
-                          alt="logo"
-                          width="100"
-                          height="100"
-                        />
-                      </figure>
+                {cd.productShowInDetailsDTOs.map((i) => {
+                  return (
+                    <div className={`col-11 mx-auto my-3`} key={i.id}>
+                      <div className={`row mx-auto`}>
+                        <div className={`col-4 mx-auto`}>
+                          <figure className={`${detail.requirePic}`}>
+                            <Image
+                              src={i.picture}
+                              alt="logo"
+                              width="100"
+                              height="100"
+                            />
+                          </figure>
+                        </div>
+                        <div className={`col-8 mx-auto`}>
+                          <h6 className={`${detail.requretxt}`}>
+                            {i.description}
+                          </h6>
+                          {i.link === null ? (
+                            <Link
+                              href={`asdasdsdfsdffgdghfghjnghjghjdggsdffgsd`}
+                            >
+                              <button
+                                type="button"
+                                className={`btn btn-warning ${detail.btnRequire} ${styles.logBut} ${styles.knowBut}`}
+                              >
+                                Visit for Buy
+                              </button>
+                            </Link>
+                          ) : (
+                            <Link
+                              href={`asdasdsdfsdffgdghfghjnghjghjdggsdffgsd`}
+                            >
+                              <button
+                                type="button"
+                                className={`btn btn-outline-warning ${detail.btnRequire}`}
+                              >
+                                Visit for Buy
+                              </button>
+                            </Link>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    <div className={`col-8 mx-auto`}>
-                      <h6 className={`${detail.requretxt}`}>
-                        {i.description}
-                      </h6>
-                      {i.link === null ? <Link href={`asdasdsdfsdffgdghfghjnghjghjdggsdffgsd`}>
-                        <button
-                          type="button"
-                          className={`btn btn-warning ${detail.btnRequire} ${styles.logBut} ${styles.knowBut}`}
-                        >
-                          Visit for Buy
-                        </button>
-                      </Link>:<Link href={`asdasdsdfsdffgdghfghjnghjghjdggsdffgsd`}>
-                        <button
-                          type="button"
-                          className={`btn btn-outline-warning ${detail.btnRequire}`}
-                        >
-                          Visit for Buy
-                        </button>
-                      </Link>}
-                    </div>
-                  </div>
-                </div>
-                )
-              })}
+                  );
+                })}
               </div>
             </div>
           </section>
-          <Comment />
+          <Comment
+            teacherId={cd.teacherId}
+            commentData={props.comment.data.pageData}
+            totalCount={props.comment.data.totalCount}
+            totalPage={props.comment.data.totalPage}
+            page={props.comment.data.page}
+            pageTitle={props.coursedet.data.title}
+            datafunc={datafunc}
+          />
           <section className={`row container mx-auto mb-5 `}>
             <div className={`col-sm-12 ${detail.related}`}>Related Courses</div>
             <div className={`col-12`}>
@@ -298,7 +353,9 @@ const detailcourse = (props) => {
         </main>
       </div>
     </SSRProvider>
-  ):(<Loader />)
+  ) : (
+    <Loader />
+  );
 };
 
 export default detailcourse;

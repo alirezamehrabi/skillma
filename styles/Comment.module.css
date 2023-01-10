@@ -46,10 +46,49 @@
   top: -60px;
   left: 70px;
 }
-.percent {
+.percent75 {
   color: orange;
   border: 2px solid orange;
   border-right: 2px solid #ccc;
+  border-radius: 50%;
+  padding: 10px 0;
+  text-align: center;
+  max-width: 44px;
+  font-size: 14px;
+}
+.percent0 {
+  color: orange;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  padding: 10px 0;
+  text-align: center;
+  max-width: 44px;
+  font-size: 14px;
+}
+.percent100 {
+  color: orange;
+  border: 2px solid orange;
+  border-radius: 50%;
+  padding: 10px 0;
+  text-align: center;
+  max-width: 44px;
+  font-size: 14px;
+}
+.percent25 {
+  color: orange;
+  border: 2px solid #ccc;
+  border-left: 2px solid orange;
+  border-radius: 50%;
+  padding: 10px 0;
+  text-align: center;
+  max-width: 44px;
+  font-size: 14px;
+}
+.percent50 {
+  color: orange;
+  border: 2px solid #ccc;
+  border-left: 2px solid orange;
+  border-top: 2px solid orange;
   border-radius: 50%;
   padding: 10px 0;
   text-align: center;
@@ -98,10 +137,16 @@
 .dislike:hover {
   color: red;
 }
-.com:nth-child(even) .com:nth-child(even) {
-  border-left: 5px dotted #ccc;
+  .commentShow> .com  {
   border-bottom: 3px dashed #ccc;
   padding: 0 0 0 30px;
+}
+.commentShow> .com:last-child  {
+  border-bottom: none
+}
+.comleft  {
+  /* border-left: 5px dotted #ccc; */
+  border-left: 3px dashed #ccc;
 }
 .answer {
   background-color: #fafafa;
@@ -171,7 +216,7 @@
 }
 
 @media only screen and (max-width: 576px) {
-  .percent {
+  .percent0,.percent50,.percent100,.percent25,.percent75 {
     width: 40px;
   }
   .date {
