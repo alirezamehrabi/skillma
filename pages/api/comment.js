@@ -11,10 +11,7 @@ const comment = async (obj) => {
       { headers: { Authorization: 'bearer '+  token} }
     );
     
-    // console.log(result);
     const status = result.status;
-    // setItem("status", status);
-    // console.log(result.data.isSucces)
     if(status === 200){
         
                 toast.success('Your Comment Sent Successfully!', {
@@ -49,4 +46,18 @@ const comment = async (obj) => {
     return error;
   }
 };
-export { comment };
+const AddDissLike = async (id) => {
+  try {
+    const token = getItem("token")
+    const result = await axios.put(
+      `${process.env.webURL}/Comment/AddDissLike?id=${id}`,
+      { headers: { Authorization: 'bearer '+  token} }
+    );
+    
+    const status = result.status;
+    
+  } catch (error) {
+    return error;
+  }
+};
+export { comment,AddDissLike };

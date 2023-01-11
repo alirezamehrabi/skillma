@@ -3,17 +3,17 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import com from "../../../styles/Comment.module.css";
-import { Button, Dropdown } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import { SSRProvider } from "react-bootstrap";
-import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+import { AiOutlineLike, AiOutlineDislike,AiOutlineCloseCircle } from "react-icons/ai";
 import { TbArrowForwardUp } from "react-icons/tb";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/router";
 import co from "../../../styles/panel/course.module.css";
-import { comment } from "../../../pages/api/comment";
+import { comment,AddDissLike } from "../../../pages/api/comment";
 import Moment from "react-moment";
 import axios from "axios";
 const ContactSchema = Yup.object().shape({
@@ -41,13 +41,22 @@ const funcReply = (id,userName)=>{
   setReplyState(id)
   setReplyState2(userName)
 }
+const funcReplyNull = ()=>{
+  setReplyState(null)
+  setReplyState2(null)
+}
 const [mydata,setMydata] = useState(commentData)
 
-console.log(commentData)
 
+// console.log(replyState)
 
-
-
+const [replynum, setReplynum] = useState(3)
+const moreReplyFunc=()=>{
+  setReplynum(replynum+3)
+}
+console.log(replynum)
+const [replylength , setReplylength] = useState()
+console.log(replylength)
   return (
     <SSRProvider>
       <section className={`container mx-auto`}>
@@ -88,9 +97,9 @@ console.log(commentData)
     <span className={`${com.commentTXT}`}>
       {i.commentMessage}
     </span>
-    {i.replies.map((j,index)=>{
+    {i.replies.slice(0, replynum).map((j,index)=>{
     return(
-    <div className={`col-9 ${com.answer}`} key={index}>
+    <div className={`col-9 ${com.answer}`} key={index} onLoad={()=>setReplylength(i.replies.length)}>
     <div className={`row ${com.com}`}>
       <div className={`col-sm-6`}>
         <figure className={`${com.commentPic}`}>
@@ -118,31 +127,28 @@ console.log(commentData)
     </div>
     )
   })}
+  {replynum < i.replies.length ? <button className={com.moreBtn} onClick={moreReplyFunc}>Show more</button>: null}
     <div className={`row ${com.commentItem}`}>
       <div className={`col-4 ${com.like}`}>
         <AiOutlineLike /> Like({i.likeCount})
       </div>
-      <div className={`col-4 ${com.dislike}`}>
+      <div className={`col-4 ${com.dislike}`} onClick={()=>AddDissLike(i.commentId)}>
         <AiOutlineDislike /> DisLike({i.dissLikeCount})
       </div>
       <div className={`col-4 ${com.reply}`} >
-       <a href="#commentPart" onClick={()=>funcReply(i.commentId,i.commentMessage)}><TbArrowForwardUp /> Reply</a> 
+       <a href="#commentPart" onClick={()=>funcReply(i.commentId,i.userDetail.fullName)}><TbArrowForwardUp /> Reply</a> 
       </div>
     </div>
   </div>
-  
 </div>
   )
 })}
 
-
-
-
-
-
           </div>
           <div className={`col-xl-4 ${com.commentPost}`} id="commentPart">
             <h6 className={`${com.comTitle}`}>Add Comments</h6>
+            {replyState2 && <><h6 className={`${com.comTitle}`}>Reply to : {replyState2}</h6>
+            <div className={`${com.closeBTN}`} onClick={funcReplyNull}><AiOutlineCloseCircle/></div></>}
 
             <Formik
               initialValues={{
@@ -166,7 +172,6 @@ console.log(commentData)
                 // console.log(await datafunc(1))
                 {resReply.isSucces && setMydata(await datafunc(1)) }
               }}
-              
             >
               {({ errors, touched }) => (
                 <Form className={co.form}>
