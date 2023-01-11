@@ -64,7 +64,7 @@ const detailcourse = (props) => {
         `${process.env.webURL}/Comment/GetCourseComment?CourseId=${cd.id}&page=${p}&pagesize=5`
         );
         const json = await result.json();
-        console.log(json)
+        // console.log(json)
       return json.data.pageData
     } catch (error) {
        console.log(error);
