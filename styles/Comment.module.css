@@ -8,6 +8,20 @@
   background: url(../src/assets/maincourse/comment.png) no-repeat;
   background-position: 1% 40%;
 }
+.isTeacher {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #2d3ddf;
+  text-align: center;
+  border: 2px solid #fff;
+  justify-content: center;
+  position: relative;
+  top: -60px;
+  left: 45px;
+}
 .commentShow {
   padding: 20px 30px;
 }
@@ -15,14 +29,14 @@
   font-weight: 600;
   font-size: 18px;
 }
-.closeBTN{
+.closeBTN {
   display: block;
   float: right;
   position: relative;
   top: -50px;
   cursor: pointer;
 }
-.moreBtn{
+.moreBtn {
   display: block;
   margin: 30px auto;
   border: none;
@@ -31,7 +45,7 @@
   padding: 5px 20px;
   border-radius: 10px;
 }
-.closeBTN svg{
+.closeBTN svg {
   width: 24px;
   height: 24px;
 }
@@ -157,14 +171,14 @@
 .dislike:hover {
   color: red;
 }
-  .commentShow> .com  {
+.commentShow > .com {
   border-bottom: 3px dashed #ccc;
   padding: 0 0 0 30px;
 }
-.commentShow> .com:last-child  {
-  border-bottom: none
+.commentShow > .com:last-child {
+  border-bottom: none;
 }
-.comleft  {
+.comleft {
   border-left: 3px dashed #ccc;
 }
 .answer {
@@ -235,7 +249,11 @@
 }
 
 @media only screen and (max-width: 576px) {
-  .percent0,.percent50,.percent100,.percent25,.percent75 {
+  .percent0,
+  .percent50,
+  .percent100,
+  .percent25,
+  .percent75 {
     width: 40px;
   }
   .date {

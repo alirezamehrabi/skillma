@@ -22,14 +22,19 @@ export async function getStaticProps() {
     `${process.env.webURL}/Course/GetTopCourses`
   );
   const data = await res.json();
+  const res1 = await fetch(
+    `${process.env.webURL}/ShortContent/GetFilteredShortVideo?page=1&pagesize=13&Type=1`
+  );
+  const shortvideodata = await res1.json();
   return {
     props: {
-      ...{ data },
+      ...{ data,shortvideodata },
     },
   };
 }
 
 export default function Home(props) {
+  console.log(props.shortvideodata.data.pageData)
   const topcourse = props.data
   const { loading } = useContext(DataContext);
   return !loading ? (
@@ -283,7 +288,7 @@ dummy text of the printing and typesetting industry</h6>
                 </>
               </Link>
             </div>
-            <div className={`col-12`}><ShortVideoSlider /></div>
+            <div className={`col-12`}><ShortVideoSlider data={props.shortvideodata.data.pageData}/></div>
         </section>
         <section className={`row container mx-auto mb-5 ${styles.topCourses}`}>
         <div className={`col-sm-8 ${styles.titleCourse}`}>Top Courses</div>

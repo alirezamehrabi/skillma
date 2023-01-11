@@ -59,7 +59,6 @@ const Comment = ({
     setReplyState2(null);
   };
   const [mydata, setMydata] = useState(commentData);
-
   const [replynum, setReplynum] = useState(3);
   const moreReplyFunc = () => {
     setReplynum(replynum + 3);
@@ -92,6 +91,7 @@ const Comment = ({
               width="60"
               height="60"
             />
+            <span className={`${com.isTeacher}`}>T</span>
           </figure>
           <span className={`${com.comName}`}>{i.userDetail.fullName}</span>
         </div>
