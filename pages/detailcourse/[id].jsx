@@ -55,7 +55,8 @@ export async function getStaticProps(context) {
 
 const detailcourse = (props) => {
   const cd = props.coursedet.data;
-  // console.log(props.coursedet.data);
+
+  console.log(props.coursedet.data);
   const { loading } = useContext(DataContext);
 
   const datafunc = async (p)=>{
@@ -71,7 +72,7 @@ const detailcourse = (props) => {
     }
   }
 
-
+let pageName = 1
   return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
@@ -342,6 +343,8 @@ const detailcourse = (props) => {
             page={props.comment.data.page}
             pageTitle={props.coursedet.data.title}
             datafunc={datafunc}
+            courseId={props.coursedet.data.id}
+            pageName={pageName}
           />
           <section className={`row container mx-auto mb-5 `}>
             <div className={`col-sm-12 ${detail.related}`}>Related Courses</div>

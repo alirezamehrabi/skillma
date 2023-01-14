@@ -60,4 +60,46 @@ const AddDissLike = async (id) => {
     return error;
   }
 };
-export { comment,AddDissLike };
+const DecreaseDissLike = async (id) => {
+  try {
+    const token = getItem("token")
+    const result = await axios.put(
+      `${process.env.webURL}/Comment/DecreaseDissLike?id=${id}`,
+      { headers: { Authorization: 'bearer '+  token} }
+    );
+    
+    const status = result.status;
+    
+  } catch (error) {
+    return error;
+  }
+};
+const AddLike = async (id) => {
+  try {
+    const token = getItem("token")
+    const result = await axios.put(
+      `${process.env.webURL}/Comment/AddLike?id=${id}`,
+      { headers: { Authorization: 'bearer '+  token} }
+    );
+    
+    const status = result.status;
+    
+  } catch (error) {
+    return error;
+  }
+};
+const DecreaseLike = async (id) => {
+  try {
+    const token = getItem("token")
+    const result = await axios.put(
+      `${process.env.webURL}/Comment/DecreaseLike?id=${id}`,
+      { headers: { Authorization: 'bearer '+  token} }
+    );
+    
+    const status = result.status;
+    
+  } catch (error) {
+    return error;
+  }
+};
+export { comment,AddDissLike,DecreaseDissLike,AddLike,DecreaseLike };

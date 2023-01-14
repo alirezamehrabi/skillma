@@ -17,7 +17,7 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/router";
 import co from "../../../styles/panel/course.module.css";
-import { comment, AddDissLike } from "../../../pages/api/comment";
+import { comment,AddDissLike,DecreaseDissLike,AddLike,DecreaseLike } from "../../../pages/api/comment";
 import Moment from "react-moment";
 import axios from "axios";
 import pag from "../../../styles/paginate.module.css";
@@ -34,6 +34,10 @@ const Comment = ({
   totalCount,
   pageTitle,
   datafunc,
+shortContentId,
+onlineCourseId,
+courseId,
+pageName
 }) => {
   const [rating, setRating] = useState();
   const handleRating = (number) => {
@@ -41,13 +45,14 @@ const Comment = ({
       setRating(number);
     }
   };
-
+  console.log(pageName)
+// console.log(commentData)
   useEffect(() => {
     handleRating();
   }, [rating]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const courseId = router.query.id;
+  // const courseId = router.query.id;
   const [replyState, setReplyState] = useState(0);
   const [replyState2, setReplyState2] = useState();
   const funcReply = (id, userName) => {
@@ -69,9 +74,16 @@ const Comment = ({
   const changePage = async ({ selected }) => {
     setPageNum(selected);
 
-    setMydata(await datafunc(selected));
+    setMydata(await datafunc(selected+1));
   };
+const [tcomment , setTcomment] = useState(totalCount)
+// const commentFunc = () => {
+//   setTcomment(totalCount)
 
+// }
+// useEffect(() =>{
+//   commentFunc()
+// },[tcomment])
   const pageCount = totalPage;
   const datadisplay = mydata.map((i) => {
     return (
@@ -91,7 +103,7 @@ const Comment = ({
               width="60"
               height="60"
             />
-            <span className={`${com.isTeacher}`}>T</span>
+            {i.isTeacher === true ? <span className={`${com.isTeacher}`}>T</span>: null}
           </figure>
           <span className={`${com.comName}`}>{i.userDetail.fullName}</span>
         </div>
@@ -143,6 +155,7 @@ const Comment = ({
                       />
                     </figure>
                     <span className={`${com.comName}`}>{j.userName}</span>
+            {i.isTeacher === true ? <span className={`${com.isTeacher} ${com.isTeacher2}`}>T</span>: null}
                   </div>
                   <div className={`col-sm-3`}>
                     <Rating
@@ -195,7 +208,7 @@ const Comment = ({
         <div className={`row ${com.com}`}>
           <div className={`col-xl-8 ${com.commentShow}`}>
             <div className={`col-md-12 mb-5 ${com.commentNum}`}>
-              Total {totalCount} Comments
+              Total {tcomment} Comments
             </div>
 
             {datadisplay}
@@ -238,8 +251,13 @@ const Comment = ({
                   rate: rating,
                   commentMessage: values.textarea,
                   spend: values.spend,
-                  courseId: courseId,
                   teacherId: teacherId,
+                  // courseId: courseId,
+                  courseId:pageName === 1 ? courseId:null,
+                  onlineCourseId:pageName === 2 ? courseId:null,
+                  // shortContentId:pageName === 3 ? courseId:null,
+                  // teacherId:pageName === 4 ? courseId:null,
+                // (courseId=== null && teacherId === null && shortContentId === null) && (onlineCourseId=== courseId),
                 };
                 {
                   replyState !== 0 && (userObj.commentId = replyState);
@@ -247,8 +265,9 @@ const Comment = ({
                 const resReply = await comment(userObj);
                 setIsSubmitting(false);
                 // console.log(await datafunc(1))
+                let tc = tcomment+1
                 {
-                  resReply.isSucces && setMydata(await datafunc(1));
+                  resReply.isSucces && setMydata(await datafunc(1)), setTcomment(tc) ;
                 }
               }}
             >
