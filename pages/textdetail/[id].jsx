@@ -3,16 +3,43 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import detail from "../../styles/DetailCourse.module.css";
-import Menu from "./../../src/components/Menu/Menu";
-import TopCoursesSlider from "./../../src/components/TopCoursesSlider/TopCoursesSlider";
-import Comment from "./../../src/components/Comment/Comment";
-import Footer from "./../../src/components/Footer/Footer";
+import Menu from "../../src/components/Menu/Menu";
+import TopCoursesSlider from "../../src/components/TopCoursesSlider/TopCoursesSlider";
+import Comment from "../../src/components/Comment/Comment";
+import Footer from "../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
 import { RiShareForwardLine } from "react-icons/ri";
 import Loader from "../../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
-
+export async function getStaticPaths() {
+  return { paths:[], fallback: 'blocking' };
+}
+export async function getStaticProps(context) {
+  const paths = context.params.id;
+  const request = await fetch(
+    `${process.env.webURL}/ShortContent/GetSoundDetail?id=${paths}`
+  );
+  const request1 = await fetch(
+    `${process.env.webURL}/Comment/GetTextComment?CourseId=${paths}&page=1&pagesize=5`
+  );
+ try{
+  const coursedet = await request.json();
+  const comment = await request1.json();
+  return {
+    props: {
+      ...{ coursedet,comment },
+    },
+  };
+ }
+ catch(e){
+  return {
+      redirect: {
+        destination: "/404",
+      },
+    }
+ }
+}
 const detailcourse = () => {
     const clock = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{fill:#0092e4;opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="keylines"><rect className="cls-1" width="24" height="24"/><path d="M14.79,12.57,12.9,11.48v-4a.9.9,0,0,0-1.8,0V12a.9.9,0,0,0,.45.78l2.34,1.35a.9.9,0,0,0,.9-1.56ZM12,3a9,9,0,1,0,9,9A9,9,0,0,0,12,3Zm0,16.2A7.2,7.2,0,1,1,19.2,12,7.2,7.2,0,0,1,12,19.2Z"/></g></g></svg>
     const { loading } = useContext(DataContext);
@@ -27,24 +54,12 @@ const detailcourse = () => {
         <main>
           <Menu />
           <section className={`row mx-auto container`}>
-            <div className={`col-xl-6 mx-4 ${detail.videoHolder} ${detail.videoHolder2}`}>
+            <div className={`col-xl-6 mx-4 ${detail.videoHolder} ${detail.videoHolder2} ${detail.videoHolder3}`}>
               <div className={` ${styles.introHolder}`}>
-              <div className={` ${styles.spic}`}>
-              <Image
-                      src={require(`../../src/assets/detail/sound.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    />
-                    </div>
-                <audio
-        controls
-        src="/cold.mp3">
-            Your browser does not support the
-            <code>audio</code> element.
-    </audio>
-              </div>
-              <div className={`row mt-5 ${styles.conHolder}`}>
+              <Image src={require(`../../src/assets/detail/text.png`)} alt="" width="500" height="500"/>
+              <h5 className={`${detail.toptext}`}>title</h5>
+              
+              <div className={`row ${styles.conHolder} ${styles.conHoldertxt}`}>
                 <div className={`col-6 ${detail.personHolder}`}>
                   <figure className={`${styles.teacherBadgeModal}`}>
                     <Image
@@ -92,9 +107,11 @@ const detailcourse = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div></div>
+              
             </div>
-            <div className={`col-xl-5 ${detail.session} ${detail.soundsession}`}>
+            
+            <div className={`col-xl-5 ${detail.session}`}>
               <h5 className={`${detail.sessionName}`}>Related</h5>
               <div className={`col-11 mx-auto ${detail.sounditem}`}>
                 <div className={`row`}>
@@ -231,8 +248,8 @@ const detailcourse = () => {
             </div>
           </section>
           <section className={`row mx-auto container ${detail.content}`}>
-            <div className={`col-xl-6 mx-4 ${detail.soundcontent}`}>
-              <div className={`col-12 ${detail.content}`}>
+            <div className={`col-xl-10 mx-4 ${detail.contenttext}`}>
+              <div className={`col-xl-6 ${detail.content}`}>
                 <h5 className={detail.contentTitle}>
                   Lorem Ipsum is simply dummy text
                   <span className={`${detail.year}`}>2 years ago</span>
@@ -318,7 +335,7 @@ const detailcourse = () => {
                   Lorem Ipsum is simply dummy text of the printing
                 </h6>
               </div>
-              <div className={`col-12 ${detail.content}`}>
+              <div className={`col-12 mb-5 ${detail.content}`}>
                 <h5 className={detail.contentTitle}>requirement</h5>
                 <div className={detail.circle} />
                 <h6
@@ -346,7 +363,7 @@ const detailcourse = () => {
           <section className={`row container mx-auto mb-5 `}>
             <div className={`col-sm-12 ${detail.related}`}>Related Courses</div>
             <div className={`col-12`}>
-              <TopCoursesSlider />
+              {/* <TopCoursesSlider /> */}
             </div>
           </section>
           <Footer />

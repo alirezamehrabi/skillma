@@ -16,7 +16,7 @@ import { GiLevelEndFlag } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
 import { MdOutlinePriceChange } from "react-icons/md";
 import Loader from "../../src/components/Loader/Loader";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
 export async function getStaticPaths() {
   return { paths:[], fallback: 'blocking' };
@@ -50,7 +50,7 @@ export async function getStaticProps(context) {
 }
 const onlinecourse = (props) => {
   const cd = props.coursedet.data;
-  console.log(props.coursedet.data)
+  // console.log(cd)
   const datafunc = async (p)=>{
     try {
       const result = await fetch(
@@ -80,17 +80,17 @@ const onlinecourse = (props) => {
             <div className={`col-12 ${online.cdetail}`}>
             <figure className={`${online.teacherBadge}`}  >
                 <Image
-                  src={require(`../../src/assets/home/teacherMini.png`)}
+                  src={cd.teacherPic}
                   alt="logo"
-                  width=""
-                  height=""
+                  width="40"
+                  height="40"
                 />
                 
-                <h5 className={`${online.name}`}>Dani Beaumont</h5>
-                <h6 className={`${online.rol}`}>User Expeience Design, User Interface</h6>
+                <h5 className={`${online.name}`}>{cd.teacherName}</h5>
+                <h6 className={`${online.rol}`}>{cd.teacherField}</h6>
                 </figure>
-                <h5 className={`${online.work}`}>User Experience (UX): The Ultimate Guide to Usability and UX</h5>
-                <h6 className={`${online.des}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed.</h6>
+                <h5 className={`${online.work}`}>{cd.title}</h5>
+                <h6 className={`${online.des}`}>{cd.description}</h6>
                 
                 
                 
@@ -101,34 +101,34 @@ const onlinecourse = (props) => {
                     <MdOutlinePriceChange />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Price:{" "}
-                      <span className={`col-12 ${detail.bold}`}>56$</span>
+                      <span className={`col-12 ${detail.bold}`}>{cd.price}$</span>
                     </h6>
                     <GiLevelEndFlag />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Level:{" "}
-                      <span className={`col-12 ${detail.bold}`}>Begginer</span>
+                      <span className={`col-12 ${detail.bold}`}>{cd.level === 1 ? "Begginer" :cd.level === 2 ? "Intermediate" : cd.level === 3 && "Expert" }</span>
                     </h6>
                     <TbCertificate />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Certificate:{" "}
-                      <span className={`col-12 ${detail.bold}`}>Lorem</span>
+                      <span className={`col-12 ${detail.bold}`}>{cd.hasCertificate === true ? "Yes" : "No"}</span>
                     </h6>
                   </div>
                   <div className={`col-xl-6 ${detail.cartItem}`}>
                     <AiOutlineClockCircle />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Duration:{" "}
-                      <span className={`col-12 ${detail.bold}`}>128 h</span>
+                      <span className={`col-12 ${detail.bold}`}>{cd.duration} h</span>
                     </h6>
                     {meeting} 
                     <h6 className={`col-12 ${detail.normal}`}>
                       Meeting:{" "}
-                      <span className={`col-12 ${detail.bold}`}>18</span>
+                      <span className={`col-12 ${detail.bold}`}>{cd.meeting}</span>
                     </h6>
                     <FaUserGraduate />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Student:{" "}
-                      <span className={`col-12 ${detail.bold}`}>12450</span>
+                      <span className={`col-12 ${detail.bold}`}>{cd.students}</span>
                     </h6>
                   </div>
                   <div className={`col-12 mx-auto ${detail.cartBut}`}>
@@ -194,77 +194,26 @@ const onlinecourse = (props) => {
                   >
                     <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                   </svg>
-                  Lorem Ipsum is simply dummy text of the printing
+                  {cd.whatYouLearn}
                 </h6>
 
-                <h6
-                  className={`${detail.contentDescription} ${detail.contentDescription2}`}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    fill="blue"
-                    className="bi bi-check2"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                  </svg>
-                  Lorem Ipsum is simply dummy
-                </h6>
-
-                <h6
-                  className={`${detail.contentDescription} ${detail.contentDescription2}`}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    fill="blue"
-                    className="bi bi-check2"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                  </svg>
-                  Lorem Ipsum is simply dummy
-                </h6>
-
-                <h6
-                  className={`${detail.contentDescription} ${detail.contentDescription2}`}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    fill="blue"
-                    className="bi bi-check2"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                  </svg>
-                  Lorem Ipsum is simply dummy text of the printing
-                </h6>
               </div>
               <div className={`col-12 ${detail.content}`}>
                 <h5 className={detail.contentTitle}>requirement</h5>
-                <div className={detail.circle} />
+                {cd.requirements.map((i)=>{
+                  return(
+                    <React.Fragment key={i.id}>
+                      <div className={detail.circle} />
+                      <Link href={i.link}>
                 <h6
                   className={`${detail.contentDescription} ${detail.contentDescription3}`}
                 >
-                  Lorem Ipsum is simply dummy text of the printing
+                  {i.text}
                 </h6>
-                <div className={detail.circle} />
-                <h6
-                  className={`${detail.contentDescription} ${detail.contentDescription3}`}
-                >
-                  Lorem Ipsum is simply dummy
-                </h6>
-                <div className={detail.circle} />
-                <h6
-                  className={`${detail.contentDescription} ${detail.contentDescription3}`}
-                >
-                  Lorem Ipsum is simply dummy
-                </h6>
+                </Link>
+                    </React.Fragment>
+                  )
+                })}
               </div>
             </div>
           </section>
@@ -281,14 +230,20 @@ const onlinecourse = (props) => {
           />
           <section className={`row container mx-auto mb-5 `}>
             <div className={`col-sm-12 ${online.related}`}>Certificate</div>
-            <div className={`row`}>
+            {cd.certificates.map((i)=>{
+              return(
+              <div className={`p-3 text-justify`} key={i.id}>{i.title} </div>
+
+              )
+            })}
+            {/* <div className={`row`}>
               <div className={`col-sm-6 p-3 text-justify`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Ciceros book. It usually begins with.<br/> The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts </div>
               <div className={`col-sm-6`}>
                 <figure className={`d-flex justify-content-center`}>
                 <Image src={require(`./../../src/assets/onlinecourse/cer.png`)} alt="" width="300" height="300"/>
                 </figure>
               </div>
-            </div>
+            </div> */}
           </section>
           <Footer />
         </main>

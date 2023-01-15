@@ -45,8 +45,12 @@ pageName
       setRating(number);
     }
   };
-  console.log(pageName)
-// console.log(commentData)
+  // console.log(teacherId)
+  const [likenum,setLikenum] = useState();
+// console.log(likenum)
+// useEffect(() => {
+//   likenum;
+// }, [likenum]);
   useEffect(() => {
     handleRating();
   }, [rating]);
@@ -77,13 +81,7 @@ pageName
     setMydata(await datafunc(selected+1));
   };
 const [tcomment , setTcomment] = useState(totalCount)
-// const commentFunc = () => {
-//   setTcomment(totalCount)
 
-// }
-// useEffect(() =>{
-//   commentFunc()
-// },[tcomment])
   const pageCount = totalPage;
   const datadisplay = mydata.map((i) => {
     return (
@@ -179,12 +177,12 @@ const [tcomment , setTcomment] = useState(totalCount)
             </button>
           ) : null}
           <div className={`row ${com.commentItem}`}>
-            <div className={`col-4 ${com.like}`}>
+            <div className={`col-4 ${com.like}`} onClick={() => AddLike(i.commentId)}>
               <AiOutlineLike /> Like({i.likeCount})
             </div>
             <div
               className={`col-4 ${com.dislike}`}
-              onClick={() => AddDissLike(i.commentId)}
+              onClick={() => {AddDissLike(i.commentId),setLikenum(i.likeCount)}} 
             >
               <AiOutlineDislike /> DisLike({i.dissLikeCount})
             </div>
@@ -212,7 +210,7 @@ const [tcomment , setTcomment] = useState(totalCount)
             </div>
 
             {datadisplay}
-            {pageCount > 0 ? (
+            {tcomment > 0 ? (
               <ReactPaginate
                 perviousLabel={"Pervious"}
                 nextLabel={"Next"}
@@ -252,19 +250,16 @@ const [tcomment , setTcomment] = useState(totalCount)
                   commentMessage: values.textarea,
                   spend: values.spend,
                   teacherId: teacherId,
-                  // courseId: courseId,
                   courseId:pageName === 1 ? courseId:null,
                   onlineCourseId:pageName === 2 ? courseId:null,
-                  // shortContentId:pageName === 3 ? courseId:null,
+                  shortContentId:pageName === 3 ? shortContentId:null,
                   // teacherId:pageName === 4 ? courseId:null,
-                // (courseId=== null && teacherId === null && shortContentId === null) && (onlineCourseId=== courseId),
                 };
                 {
                   replyState !== 0 && (userObj.commentId = replyState);
                 }
                 const resReply = await comment(userObj);
                 setIsSubmitting(false);
-                // console.log(await datafunc(1))
                 let tc = tcomment+1
                 {
                   resReply.isSucces && setMydata(await datafunc(1)), setTcomment(tc) ;
@@ -285,7 +280,7 @@ const [tcomment , setTcomment] = useState(totalCount)
                     </option>
                     <option value="0">0%</option>
                     <option value="25">25%</option>
-                    <option value="50">20%</option>
+                    <option value="50">50%</option>
                     <option value="75">75%</option>
                     <option value="100">100%</option>
                   </Field>

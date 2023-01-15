@@ -3,18 +3,61 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import detail from "../../styles/DetailCourse.module.css";
-import Menu from "./../../src/components/Menu/Menu";
-import TopCoursesSlider from "./../../src/components/TopCoursesSlider/TopCoursesSlider";
-import Comment from "./../../src/components/Comment/Comment";
-import Footer from "./../../src/components/Footer/Footer";
+import Menu from "../../src/components/Menu/Menu";
+import TopCoursesSlider from "../../src/components/TopCoursesSlider/TopCoursesSlider";
+import Comment from "../../src/components/Comment/Comment";
+import Footer from "../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
 import { RiShareForwardLine } from "react-icons/ri";
 import Loader from "../../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
-const detailcourse = () => {
+import Moment from "react-moment";
+
+export async function getStaticPaths() {
+  return { paths:[], fallback: 'blocking' };
+}
+export async function getStaticProps(context) {
+  const paths = context.params.id;
+  const request = await fetch(
+    `${process.env.webURL}/ShortContent/GetShortVideoDetail?id=${paths}`
+  );
+  const request1 = await fetch(
+    `${process.env.webURL}/Comment/GetAudioComment?CourseId=${paths}&page=1&pagesize=5`
+  );
+ try{
+  const coursedet = await request.json();
+  const comment = await request1.json();
+  return {
+    props: {
+      ...{ coursedet,comment },
+    },
+  };
+ }
+ catch(e){
+  return {
+      redirect: {
+        destination: "/404",
+      },
+    }
+ }
+}
+const videoDetail = (props) => {
+  const cd = props.coursedet.data;
+  const datafunc = async (p)=>{
+    try {
+      const result = await fetch(
+        `${process.env.webURL}/Comment/GetAudioComment?CourseId=${cd.id}&page=${p}&pagesize=5`
+        );
+        const json = await result.json();
+      return json.data.pageData
+    } catch (error) {
+       console.log(error);
+    }
+  }
     const clock = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{fill:#0092e4;opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="keylines"><rect className="cls-1" width="24" height="24"/><path d="M14.79,12.57,12.9,11.48v-4a.9.9,0,0,0-1.8,0V12a.9.9,0,0,0,.45.78l2.34,1.35a.9.9,0,0,0,.9-1.56ZM12,3a9,9,0,1,0,9,9A9,9,0,0,0,12,3Zm0,16.2A7.2,7.2,0,1,1,19.2,12,7.2,7.2,0,0,1,12,19.2Z"/></g></g></svg>
     const { loading } = useContext(DataContext);
+    let pageName = 3
     return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
@@ -26,12 +69,15 @@ const detailcourse = () => {
         <main>
           <Menu />
           <section className={`row mx-auto container`}>
-            <div className={`col-xl-6 mx-4 ${detail.videoHolder} ${detail.videoHolder2} ${detail.videoHolder3}`}>
+            <div className={`col-lg-6 mx-4 ${detail.videoHolder} ${detail.videoHolder2}`}>
               <div className={` ${styles.introHolder}`}>
-              <Image src={require(`../../src/assets/detail/text.png`)} alt="" width="500" height="500"/>
-              <h5 className={`${detail.toptext}`}>title</h5>
-              
-              <div className={`row ${styles.conHolder} ${styles.conHoldertxt}`}>
+              <video
+                  src={require("../../src/video/intro.mp4")}
+                  autoPlay
+                  controls
+                />
+              </div>
+              <div className={`row mt-5 ${styles.conHolder}`}>
                 <div className={`col-6 ${detail.personHolder}`}>
                   <figure className={`${styles.teacherBadgeModal}`}>
                     <Image
@@ -79,149 +125,10 @@ const detailcourse = () => {
                     </div>
                   </div>
                 </div>
-              </div></div>
-              
-            </div>
-            
-            <div className={`col-xl-5 ${detail.session}`}>
-              <h5 className={`${detail.sessionName}`}>Related</h5>
-              <div className={`col-11 mx-auto ${detail.sounditem}`}>
-                <div className={`row`}>
-                    <div className={`col-4 ${detail.leftit}`}>
-                    <Image
-                      src={require(`../../src/assets/detail/1.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    />
-                    </div>
-                    <div className={`col-8 ${detail.rightit}`}>
-                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
-                        <div className={`${detail.speecher}`}>
-                    <Image
-                      src={require(`../../src/assets/home/teacherMini.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
-                    </div>
-                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
-                    </div>
-                    </div>
               </div>
-              
-              </div>
-
-              <div className={`col-11 mx-auto ${detail.sounditem}`}>
-                <div className={`row`}>
-                    <div className={`col-4 ${detail.leftit}`}>
-                    <Image
-                      src={require(`../../src/assets/detail/2.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    />
-                    </div>
-                    <div className={`col-8 ${detail.rightit}`}>
-                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
-                        <div className={`${detail.speecher}`}>
-                    <Image
-                      src={require(`../../src/assets/home/teacherMini.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
-                    </div>
-                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
-                    </div>
-                    </div>
-              </div>
-              
-              </div>
-              <div className={`col-11 mx-auto ${detail.sounditem}`}>
-                <div className={`row`}>
-                    <div className={`col-4 ${detail.leftit}`}>
-                    <Image
-                      src={require(`../../src/assets/detail/3.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    />
-                    </div>
-                    <div className={`col-8 ${detail.rightit}`}>
-                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
-                        <div className={`${detail.speecher}`}>
-                    <Image
-                      src={require(`../../src/assets/home/teacherMini.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
-                    </div>
-                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
-                    </div>
-                    </div>
-              </div>
-              
-              </div>
-              <div className={`col-11 mx-auto ${detail.sounditem}`}>
-                <div className={`row`}>
-                    <div className={`col-4 ${detail.leftit}`}>
-                    <Image
-                      src={require(`../../src/assets/detail/4.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    />
-                    </div>
-                    <div className={`col-8 ${detail.rightit}`}>
-                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
-                        <div className={`${detail.speecher}`}>
-                    <Image
-                      src={require(`../../src/assets/home/teacherMini.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
-                    </div>
-                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
-                    </div>
-                    </div>
-              </div>
-              
-              </div>
-              <div className={`col-11 mx-auto ${detail.sounditem}`}>
-                <div className={`row`}>
-                    <div className={`col-4 ${detail.leftit}`}>
-                    <Image
-                      src={require(`../../src/assets/detail/5.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    />
-                    </div>
-                    <div className={`col-8 ${detail.rightit}`}>
-                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
-                        <div className={`${detail.speecher}`}>
-                    <Image
-                      src={require(`../../src/assets/home/teacherMini.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
-                    </div>
-                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
-                    </div>
-                    </div>
-              </div>
-              
-              </div>
-
-            </div>
-          </section>
-          <section className={`row mx-auto container ${detail.content}`}>
-            <div className={`col-xl-10 mx-4 ${detail.contenttext}`}>
-              <div className={`col-xl-6 ${detail.content}`}>
+              <section className={`row mx-auto container ${detail.content}`}>
+            <div className={`col-xl-10 mx-4 `}>
+              <div className={`col-12 ${detail.content}`}>
                 <h5 className={detail.contentTitle}>
                   Lorem Ipsum is simply dummy text
                   <span className={`${detail.year}`}>2 years ago</span>
@@ -331,7 +238,156 @@ const detailcourse = () => {
             </div>
             
           </section>
-          <Comment />
+            </div>
+            
+            <div className={`col-lg-5 ${detail.session}`}>
+              <h5 className={`${detail.sessionName}`}>Related</h5>
+              <div className={`col-11 mx-auto ${detail.sounditem}`}>
+                <div className={`row`}>
+                    <div className={`col-4 ${detail.leftit}`}>
+                    <Image
+                      src={require(`../../src/assets/detail/video.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    />
+                    </div>
+                    <div className={`col-8 ${detail.rightit}`}>
+                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
+                        <div className={`${detail.speecher}`}>
+                    <Image
+                      src={require(`../../src/assets/home/teacherMini.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
+                    </div>
+                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
+                    </div>
+                    </div>
+              </div>
+              
+              </div>
+
+              <div className={`col-11 mx-auto ${detail.sounditem}`}>
+                <div className={`row`}>
+                    <div className={`col-4 ${detail.leftit}`}>
+                    <Image
+                      src={require(`../../src/assets/detail/video.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    />
+                    </div>
+                    <div className={`col-8 ${detail.rightit}`}>
+                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
+                        <div className={`${detail.speecher}`}>
+                    <Image
+                      src={require(`../../src/assets/home/teacherMini.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
+                    </div>
+                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
+                    </div>
+                    </div>
+              </div>
+              
+              </div>
+              <div className={`col-11 mx-auto ${detail.sounditem}`}>
+                <div className={`row`}>
+                    <div className={`col-4 ${detail.leftit}`}>
+                    <Image
+                      src={require(`../../src/assets/detail/video.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    />
+                    </div>
+                    <div className={`col-8 ${detail.rightit}`}>
+                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
+                        <div className={`${detail.speecher}`}>
+                    <Image
+                      src={require(`../../src/assets/home/teacherMini.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
+                    </div>
+                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
+                    </div>
+                    </div>
+              </div>
+              
+              </div>
+              <div className={`col-11 mx-auto ${detail.sounditem}`}>
+                <div className={`row`}>
+                    <div className={`col-4 ${detail.leftit}`}>
+                    <Image
+                      src={require(`../../src/assets/detail/video.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    />
+                    </div>
+                    <div className={`col-8 ${detail.rightit}`}>
+                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
+                        <div className={`${detail.speecher}`}>
+                    <Image
+                      src={require(`../../src/assets/home/teacherMini.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
+                    </div>
+                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
+                    </div>
+                    </div>
+              </div>
+              
+              </div>
+              <div className={`col-11 mx-auto ${detail.sounditem}`}>
+                <div className={`row`}>
+                    <div className={`col-4 ${detail.leftit}`}>
+                    <Image
+                      src={require(`../../src/assets/detail/video.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    />
+                    </div>
+                    <div className={`col-8 ${detail.rightit}`}>
+                        <h5 className={detail.soundname}>Ui Design Introduction</h5>
+                        <div className={`${detail.speecher}`}>
+                    <Image
+                      src={require(`../../src/assets/home/teacherMini.png`)}
+                      alt="logo"
+                      width=""
+                      height=""
+                    /><span className={`${detail.speechername}`}>Samira Naseri</span>
+                    </div>
+                    <div className={`${detail.speechertime}`}>{clock}<span className={``}>3:44</span>
+                    </div>
+                    </div>
+              </div>
+              
+              </div>
+
+            </div>
+          </section>
+          
+          <Comment
+            teacherId={cd.teacherId}
+            commentData={props.comment.data.pageData}
+            totalCount={props.comment.data.totalCount}
+            totalPage={props.comment.data.totalPage}
+            page={props.comment.data.page}
+            pageTitle={props.coursedet.data.title}
+            datafunc={datafunc}
+            shortContentId={cd.id}
+            pageName={pageName}
+          />
           <section className={`row container mx-auto mb-5 `}>
             <div className={`col-sm-12 ${detail.related}`}>Related Courses</div>
             <div className={`col-12`}>
@@ -345,4 +401,4 @@ const detailcourse = () => {
   ):(<Loader />)
 };
 
-export default detailcourse;
+export default videoDetail;

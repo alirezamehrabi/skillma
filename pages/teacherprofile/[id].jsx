@@ -6,13 +6,13 @@ import detail from "../../styles/DetailCourse.module.css";
 import teach from "../../styles/Teach.module.css";
 import main from "../../styles/MainCourse.module.css";
 import search from "../../styles/Search.module.css";
-import Menu from "./../../src/components/Menu/Menu";
-import ShortVideoSlider from "./../../src/components/ShortVideoSlider/ShortVideoSlider";
-import TxtSearch from "./../../src/components/TxtSearch/TxtSearch";
+import Menu from "../../src/components/Menu/Menu";
+import ShortVideoSlider from "../../src/components/ShortVideoSlider/ShortVideoSlider";
+import TxtSearch from "../../src/components/TxtSearch/TxtSearch";
 import SoundList from "../../src/components/SoundList/SoundList";
-import TopCoursesSlider from "./../../src/components/TopCoursesSlider/TopCoursesSlider";
-import Footer from "./../../src/components/Footer/Footer";
-import Comment from "./../../src/components/Comment/Comment";
+import TopCoursesSlider from "../../src/components/TopCoursesSlider/TopCoursesSlider";
+import Footer from "../../src/components/Footer/Footer";
+import Comment from "../../src/components/Comment/Comment";
 import { Button, SSRProvider } from "react-bootstrap";
 import {AiOutlineFacebook,AiOutlineInstagram,AiOutlineClockCircle,AiFillStar} from "react-icons/ai"
 import {FiTwitter} from "react-icons/fi"
@@ -22,11 +22,55 @@ import Loader from "../../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
 
+export async function getStaticPaths() {
+  return { paths:[], fallback: 'blocking' };
+}
+export async function getStaticProps(context) {
+  const paths = context.params.id;
+  const request = await fetch(
+    `${process.env.webURL}/TeacherDetail/GetTeacherDetailById?id=${paths}`
+  );
+  const request1 = await fetch(
+    `${process.env.webURL}/Comment/GetTeacherComment?page=1&pagesize=5`
+  );
+ try{
+  const coursedet = await request.json();
+  const comment = await request1.json();
+  return {
+    props: {
+      ...{ coursedet,comment },
+    },
+  };
+ }
+ catch(e){
+  return {
+      redirect: {
+        destination: "/404",
+      },
+    }
+ }
+}
 const TeacherProfile = () => {
+  const cd = props.coursedet.data;
+  console.log(props.coursedet.data)
+  const datafunc = async (p)=>{
+    try {
+      const result = await fetch(
+        `${process.env.webURL}/Comment/GetOnlineCourseComment?page=${p}&pagesize=5`
+        );
+        const json = await result.json();
+        // console.log(json)
+      return json.data.pageData
+    } catch (error) {
+       console.log(error);
+    }
+  }
     const course = <svg id="Group_20373" data-name="Group 20373" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <rect id="Rectangle_3457" data-name="Rectangle 3457" width="24" height="24" fill="blue" opacity="0"/>
     <path id="Path_9761" data-name="Path 9761" d="M20.383,2.929A11.991,11.991,0,0,0,18.4,2.755,11.84,11.84,0,0,0,12,4.629,11.835,11.835,0,0,0,5.6,2.8a11.991,11.991,0,0,0-1.984.174.915.915,0,0,0-.759.914v10.97a.914.914,0,0,0,.9.927.869.869,0,0,0,.169-.013,9.965,9.965,0,0,1,7.542,1.746l.109.064h.1a.835.835,0,0,0,.64,0h.1l.109-.064a9.968,9.968,0,0,1,7.542-1.847.913.913,0,0,0,1.056-.745.956.956,0,0,0,.014-.169V3.788A.915.915,0,0,0,20.383,2.929Zm-9.3,12.149A11.764,11.764,0,0,0,5.6,13.725H4.687V4.584a7.742,7.742,0,0,1,.914,0,9.932,9.932,0,0,1,5.485,1.645Zm8.227-1.316H18.4a11.764,11.764,0,0,0-5.485,1.353V6.229A9.932,9.932,0,0,1,18.4,4.584a7.742,7.742,0,0,1,.914,0Zm1.07,3.794a11.991,11.991,0,0,0-1.984-.174A11.832,11.832,0,0,0,12,19.256a11.832,11.832,0,0,0-6.4-1.874,11.991,11.991,0,0,0-1.984.174A.913.913,0,0,0,2.858,18.6v.005a.915.915,0,0,0,1.07.722,9.965,9.965,0,0,1,7.542,1.746.913.913,0,0,0,1.06,0,9.965,9.965,0,0,1,7.542-1.746.9.9,0,1,0,.316-1.773Z" fill="#2d3ddf"/>
   </svg>
+
+ let pageName = 4
   
   const { loading } = useContext(DataContext);
   return !loading ? (
@@ -98,7 +142,17 @@ Ciceros De Finibus Bonorum et Malorum for use in a type specimen book. It usuall
         <div className={`col-sm-8 ${styles.titleCourse}`}>My Courses</div>
             <div className={`col-12`}><TopCoursesSlider /></div>
         </section>
-        <Comment />
+        <Comment
+            teacherId={cd.teacherId}
+            commentData={props.comment.data.pageData}
+            totalCount={props.comment.data.totalCount}
+            totalPage={props.comment.data.totalPage}
+            page={props.comment.data.page}
+            pageTitle={props.coursedet.data.title}
+            datafunc={datafunc}
+            courseId={props.coursedet.data.id}
+            pageName={pageName}
+          />
         <section className={`row container mx-auto mb-5 ${teach.student}`}>
         <div className={`col-sm-8 ${teach.titleStudents}`}>Students</div>
         <div className={`col-sm-8 ${teach.desStudents}`}>Lorem ipsum, or lipsum as it is sometimes known.</div>

@@ -50,7 +50,7 @@ const AddDissLike = async (id) => {
   try {
     const token = getItem("token")
     const result = await axios.put(
-      `${process.env.webURL}/Comment/AddDissLike?id=${id}`,
+      `${process.env.webURL}/Comment/AddDissLike?id=${id}`,{},
       { headers: { Authorization: 'bearer '+  token} }
     );
     
@@ -64,7 +64,7 @@ const DecreaseDissLike = async (id) => {
   try {
     const token = getItem("token")
     const result = await axios.put(
-      `${process.env.webURL}/Comment/DecreaseDissLike?id=${id}`,
+      `${process.env.webURL}/Comment/DecreaseDissLike?id=${id}`,{},
       { headers: { Authorization: 'bearer '+  token} }
     );
     
@@ -78,7 +78,7 @@ const AddLike = async (id) => {
   try {
     const token = getItem("token")
     const result = await axios.put(
-      `${process.env.webURL}/Comment/AddLike?id=${id}`,
+      `${process.env.webURL}/Comment/AddLike?id=${id}`,{},
       { headers: { Authorization: 'bearer '+  token} }
     );
     
@@ -92,7 +92,7 @@ const DecreaseLike = async (id) => {
   try {
     const token = getItem("token")
     const result = await axios.put(
-      `${process.env.webURL}/Comment/DecreaseLike?id=${id}`,
+      `${process.env.webURL}/Comment/DecreaseLike?id=${id}`,{},
       { headers: { Authorization: 'bearer '+  token} }
     );
     
