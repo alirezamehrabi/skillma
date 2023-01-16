@@ -12,7 +12,7 @@ import { Rating } from "react-simple-star-rating";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
-const ShortSlider = () => {
+const ShortSlider = ({data}) => {
     const settings = {
         className: "center",
         centerMode: true,
@@ -21,121 +21,31 @@ const ShortSlider = () => {
         slidesToShow: 1,
         speed: 500
       };
+      // console.log(data)
   return (
         
     <Slider {...settings}>
-      <div>
-      <Image src={require(`../../../src/assets/about/a.png`)} className={`${about.imgSlide}`} alt="" width="" height=""/>
-      <h5 className={`text-center fw-bold`}>Dani Beaumont</h5>
-      <h6 className={`text-center`}>General Manager</h6>
+      {data.map((i)=>{
+        return(
+<div key={i.id}>
+      <Image src={i.pictureName} className={`${about.imgSlide}`} alt="" width="80" height="80"/>
+      <h5 className={`text-center fw-bold`}>{i.fullName}</h5>
+      <h6 className={`text-center`}>{i.position}</h6>
       <div className={`col-12 `}>
-              <Link href="#">
-                <><FaTwitter /></>
+              <Link href={i.twiter}>
+                <FaTwitter />
               </Link>
-              <Link href="#">
-                <><FaFacebook /></>
+              <Link href={i.faceBook}>
+                <FaFacebook />
               </Link>
-              <Link href="#">
-                <><FaInstagram /></>
-              </Link>
-            </div>
-      </div>
-      <div>
-      <Image src={require(`../../../src/assets/about/b.png`)} className={`${about.imgSlide}`} alt="" width="" height=""/>
-      <h5 className={`text-center fw-bold`}>Dani Beaumont</h5>
-      <h6 className={`text-center`}>General Manager</h6>
-      <div className={`col-12`}>
-              <Link href="#">
-                <><FaTwitter /></>
-              </Link>
-              <Link href="#">
-                <><FaFacebook /></>
-              </Link>
-              <Link href="#">
-                <><FaInstagram /></>
+              <Link href={i.instagram}>
+                <FaInstagram />
               </Link>
             </div>
       </div>
-      <div>
-      <Image src={require(`../../../src/assets/about/c.png`)} className={`${about.imgSlide}`} alt="" width="" height=""/>
-      <h5 className={`text-center fw-bold`}>Dani Beaumont</h5>
-      <h6 className={`text-center`}>General Manager</h6>
-      <div className={`col-12`}>
-              <Link href="#">
-                <><FaTwitter /></>
-              </Link>
-              <Link href="#">
-                <><FaFacebook /></>
-              </Link>
-              <Link href="#">
-                <><FaInstagram /></>
-              </Link>
-            </div>
-      </div>
-      <div>
-      <Image src={require(`../../../src/assets/about/d.png`)} className={`${about.imgSlide}`} alt="" width="" height=""/>
-      <h5 className={`text-center fw-bold`}>Dani Beaumont</h5>
-      <h6 className={`text-center`}>General Manager</h6>
-      <div className={`col-12`}>
-              <Link href="#">
-                <><FaTwitter /></>
-              </Link>
-              <Link href="#">
-                <><FaFacebook /></>
-              </Link>
-              <Link href="#">
-                <><FaInstagram /></>
-              </Link>
-            </div>
-      </div>
-      <div>
-      <Image src={require(`../../../src/assets/about/e.png`)} className={`${about.imgSlide}`} alt="" width="" height=""/>
-      <h5 className={`text-center fw-bold`}>Dani Beaumont</h5>
-      <h6 className={`text-center`}>General Manager</h6>
-      <div className={`col-12`}>
-              <Link href="#">
-                <><FaTwitter /></>
-              </Link>
-              <Link href="#">
-                <><FaFacebook /></>
-              </Link>
-              <Link href="#">
-                <><FaInstagram /></>
-              </Link>
-            </div>
-      </div>
-      <div>
-      <Image src={require(`../../../src/assets/about/f.png`)} className={`${about.imgSlide}`} alt="" width="" height=""/>
-      <h5 className={`text-center fw-bold`}>Dani Beaumont</h5>
-      <h6 className={`text-center`}>General Manager</h6>
-      <div className={`col-12`}>
-              <Link href="#">
-                <><FaTwitter /></>
-              </Link>
-              <Link href="#">
-                <><FaFacebook /></>
-              </Link>
-              <Link href="#">
-                <><FaInstagram /></>
-              </Link>
-            </div>
-      </div>
-      <div>
-      <Image src={require(`../../../src/assets/about/g.png`)} className={`${about.imgSlide}`} alt="" width="" height=""/>
-      <h5 className={`text-center fw-bold`}>Dani Beaumont</h5>
-      <h6 className={`text-center`}>General Manager</h6>
-      <div className={`col-12`}>
-              <Link href="#">
-                <><FaTwitter /></>
-              </Link>
-              <Link href="#">
-                <><FaFacebook /></>
-              </Link>
-              <Link href="#">
-                <><FaInstagram /></>
-              </Link>
-            </div>
-      </div>
+        )
+      })}
+      
     </Slider>
   );
 };

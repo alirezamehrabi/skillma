@@ -54,7 +54,7 @@ export async function getStaticProps() {
 }
 
 const Maincourse = (props) => {
-  // console.log(props.PopularTopics.data)
+  console.log(props.PupularInstructors.data)
   const { loading } = useContext(DataContext);
   return !loading ? ( <SSRProvider> 
     <div className={styles.container}>

@@ -4,14 +4,40 @@ import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import teach from "../../styles/Teach.module.css";
 import stu from "../../styles/Student.module.css";
-import Menu from "./../../src/components/Menu/Menu";
-import Footer from "./../../src/components/Footer/Footer";
+import Menu from "../../src/components/Menu/Menu";
+import Footer from "../../src/components/Footer/Footer";
 import { Button, SSRProvider } from "react-bootstrap";
 import Loader from "../../src/components/Loader/Loader";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
-
-const TeacherProfile = () => {
+import Moment from "react-moment";
+export async function getStaticPaths() {
+  return { paths:[], fallback: 'blocking' };
+}
+export async function getStaticProps(context) {
+  const paths = context.params.id;
+  const request = await fetch(
+    `${process.env.webURL}/User/GetUserDetailById?id=${paths}`
+  );
+ try{
+  const studet = await request.json();
+  return {
+    props: {
+      ...{ studet },
+    },
+  };
+ }
+ catch(e){
+  return {
+      redirect: {
+        destination: "/404",
+      },
+    }
+ }
+}
+const StudentProfile = (props) => {
+const dt = props.studet.data
+console.log(dt)
     const course = <svg id="Group_20373" data-name="Group 20373" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <rect id="Rectangle_3457" data-name="Rectangle 3457" width="24" height="24" fill="blue" opacity="0"/>
     <path id="Path_9761" data-name="Path 9761" d="M20.383,2.929A11.991,11.991,0,0,0,18.4,2.755,11.84,11.84,0,0,0,12,4.629,11.835,11.835,0,0,0,5.6,2.8a11.991,11.991,0,0,0-1.984.174.915.915,0,0,0-.759.914v10.97a.914.914,0,0,0,.9.927.869.869,0,0,0,.169-.013,9.965,9.965,0,0,1,7.542,1.746l.109.064h.1a.835.835,0,0,0,.64,0h.1l.109-.064a9.968,9.968,0,0,1,7.542-1.847.913.913,0,0,0,1.056-.745.956.956,0,0,0,.014-.169V3.788A.915.915,0,0,0,20.383,2.929Zm-9.3,12.149A11.764,11.764,0,0,0,5.6,13.725H4.687V4.584a7.742,7.742,0,0,1,.914,0,9.932,9.932,0,0,1,5.485,1.645Zm8.227-1.316H18.4a11.764,11.764,0,0,0-5.485,1.353V6.229A9.932,9.932,0,0,1,18.4,4.584a7.742,7.742,0,0,1,.914,0Zm1.07,3.794a11.991,11.991,0,0,0-1.984-.174A11.832,11.832,0,0,0,12,19.256a11.832,11.832,0,0,0-6.4-1.874,11.991,11.991,0,0,0-1.984.174A.913.913,0,0,0,2.858,18.6v.005a.915.915,0,0,0,1.07.722,9.965,9.965,0,0,1,7.542,1.746.913.913,0,0,0,1.06,0,9.965,9.965,0,0,1,7.542-1.746.9.9,0,1,0,.316-1.773Z" fill="#2d3ddf"/>
@@ -36,10 +62,10 @@ const TeacherProfile = () => {
                 <div className={`row`}>
             <div className={`col-7 ${teach.teachHolder}`}>
                 <figure className={`${teach.teacherPic}`}>
-                    <Image src={require(`../../src/assets/student/student.png`)} alt="student pic" height="" width="" />
+                    <Image src={dt.picName} alt="student pic" height="100" width="100" />
                 </figure>
-                <h6 className={`${teach.name}`}>Dani Beaumont <span className={`${teach.follow}`}>(12,456 followers)</span></h6>
-                <h6 className={`${teach.role}`}>User Expeience Design, User Interface</h6>
+                <h6 className={`${teach.name}`}>{dt.fullName} <span className={`${teach.follow}`}>({dt.connectionCount} Followers)</span></h6>
+                <h6 className={`${teach.role}`}>{dt.feild}</h6>
                 <Button variant="warning" className={`${teach.connectbtn} ${teach.btnp}`}>
                   Connect
                 </Button>
@@ -50,93 +76,64 @@ const TeacherProfile = () => {
             <div className={`col-4 ${teach.about}`}>About me</div>
                 </div>
             </div>
-            <div className={`col-12 ${teach.teachDes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. 
-The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of 
-Ciceros De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with.</div>
+            <div className={`col-12 ${teach.teachDes}`}>{dt.aboutMe}</div>
             <div className={`col-xl-8  col-lg-10 col-md-11 col-sm-12 ${stu.con}`}>
             
             <h6 className={`${stu.contitle}`}>Connection:</h6>
-            <div className={`${stu.conpicholder}`}>
-              <Image src={require(`../../src/assets/student/1.png`)} alt="1" height="" width="" />
+            {dt.connectionPics.map((i,index)=>{
+              return(
+                <div className={`${stu.conpicholder}`} key={index}>
+              <Image src={i.picName} alt="1" height="100" width="100" />
             </div>
+              )
+            })}
             <div className={`${stu.conpicholder}`}>
-              <Image src={require(`../../src/assets/student/2.png`)} alt="1" height="" width="" />
-            </div>
-            <div className={`${stu.conpicholder}`}>
-              <Image src={require(`../../src/assets/student/3.png`)} alt="1" height="" width="" />
-            </div>
-            <div className={`${stu.conpicholder}`}>
-              <Image src={require(`../../src/assets/student/4.png`)} alt="1" height="" width="" />
-            </div>
-            <div className={`${stu.conpicholder}`}>
-              <Image src={require(`../../src/assets/student/5.png`)} alt="1" height="" width="" />
-            </div>
-            <div className={`${stu.conpicholder}`}>
-              <Image src={require(`../../src/assets/student/6.png`)} alt="1" height="" width="" /><span className={`${stu.connum}`}>+124</span>
+              <Image src={require(`../../src/assets/student/6.png`)} alt="1" height="" width="" /><span className={`${stu.connum}`}>+{dt.connectionCount}</span>
             </div>
             </div>
           </section>
           <section className={`row container mx-auto mb-5 ${stu.skill}`}>
             <div className={`${stu.skilltitle}`}>Skills</div>
             <div className={`row ${stu.skillholder}`}>
-              <div className={`col-md-4 mx-auto`}>{bookmark} <span className={``}>Web designer</span></div>
-              <div className={`col-md-4 mx-auto`}>{bookmark} <span className={``}>User Interface Design</span></div>
-              <div className={`col-md-4 mx-auto`}>{bookmark} <span className={``}>Graphic Design</span></div>
+              {dt.skills.split(",").map((i)=>{
+                return(
+                  <div className={`col-md-4 mx-auto`}>{bookmark} <span className={``}>{i}</span></div>
+                )
+              })}
             </div>
           </section>
           <section className={`row container mx-auto mb-5 ${stu.certificate}`}>
           <div className={`${stu.certitle}`}>Certifications</div>
             <div className={`row ${stu.cerholder}`}>
-              <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>{cer}<h5 className={`${stu.cername}`}>Certifications Title</h5><h6 className={`${stu.cerdes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy</h6>
+              {dt.certificates.map((i)=>{
+                return(
+                    <div className={`col-xl-4 col-md-6 col-sm-12 g-4`} key={i.id}>{cer}<h5 className={`${stu.cername}`}>{i.title}</h5><h6 className={`text-truncate ${stu.cerdes}`}>{i.description}</h6>
               <button type="button" className={`${stu.cerbtn}`}>View</button></div>
-              <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>{cer}<h5 className={`${stu.cername}`}>Certifications Title</h5><h6 className={`${stu.cerdes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy</h6>
-              <button type="button" className={`${stu.cerbtn}`}>View</button></div>
-              <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>{cer}<h5 className={`${stu.cername}`}>Certifications Title</h5><h6 className={`${stu.cerdes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy</h6>
-              <button type="button" className={`${stu.cerbtn}`}>View</button></div>
-              <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>{cer}<h5 className={`${stu.cername}`}>Certifications Title</h5><h6 className={`${stu.cerdes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy</h6>
-              <button type="button" className={`${stu.cerbtn}`}>View</button></div>
-              <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>{cer}<h5 className={`${stu.cername}`}>Certifications Title</h5><h6 className={`${stu.cerdes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy</h6>
-              <button type="button" className={`${stu.cerbtn}`}>View</button></div>
-              <div className={`col-xl-4 col-md-6 col-sm-12 g-4`}>{cer}<h5 className={`${stu.cername}`}>Certifications Title</h5><h6 className={`${stu.cerdes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy</h6>
-              <button type="button" className={`${stu.cerbtn}`}>View</button></div>
+                )
+              })}
             </div>
           </section>
           <section className={`row container mx-auto mb-5 ${stu.certificate}`}>
           <div className={`${stu.segtitle}`}>Recomendation</div>
-            <div className={`col-12 mb-4 ${stu.segitem}`}>
+          {dt.recomendations.map((i,index)=>{
+            return(
+              <div className={`col-12 mb-4 ${stu.segitem}`} key={index}>
               <div className={`row`}>
                 <div className={`col-sm-4 ${stu.leftseg}`}>
                 <div className={`${stu.segimg}`}>
               <Image src={require(`../../src/assets/student/r1.png`)} alt="1" height="" width="" />
             </div>
-            <h5 className={`${stu.segname}`}>Dani Beaumont</h5>
-            <h6 className={`${stu.segrole}`}>User Expeience Design, User Interface</h6>
-            <h6 className={`${stu.segdate}`}>7 September 2022</h6>
+            <h5 className={`${stu.segname}`}>{i.name}</h5>
+            <h6 className={`${stu.segrole}`}>{i.feild}</h6>
+            <h6 className={`${stu.segdate}`}><Moment format="D MMM YYYY" withTitle>{i.createdAt}</Moment></h6>
                 </div>
-                <div className={`col-sm-8 ${stu.rightseg}`}><span className={`${stu.recdes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, 
-graphic or web designs. The passage is attributed to an unknown typesetter in the 15th 
-century who is thought to have scrambled parts of Ciceros De Finibus Bonorum et 
-Malorum for use in a type specimen book. It usually begins with:century who is thought to 
-have scrambled parts of Ciceros …</span><Link href="#">See More</Link></div>
+                <div className={`col-sm-8 ${stu.rightseg}`}><span className={`${stu.recdes}`}>{i.description}</span>
+                {/* <Link href="#">See More</Link> */}
+                </div>
               </div>
             </div>
-            <div className={`col-12 mb-4 ${stu.segitem}`}>
-              <div className={`row`}>
-                <div className={`col-sm-4 ${stu.leftseg}`}>
-                <div className={`${stu.segimg}`}>
-              <Image src={require(`../../src/assets/student/r2.png`)} alt="1" height="" width="" />
-            </div>
-            <h5 className={`${stu.segname}`}>Dani Beaumont</h5>
-            <h6 className={`${stu.segrole}`}>User Expeience Design, User Interface</h6>
-            <h6 className={`${stu.segdate}`}>7 September 2022</h6>
-                </div>
-                <div className={`col-sm-8 ${stu.rightseg}`}><span className={`${stu.recdes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, 
-graphic or web designs. The passage is attributed to an unknown typesetter in the 15th 
-century who is thought to have scrambled parts of Ciceros De Finibus Bonorum et 
-Malorum for use in a type specimen book. It usually begins with:century who is thought to 
-have scrambled parts of Ciceros …</span><Link href="#">See More</Link></div>
-              </div>
-            </div>
+            )
+          })}
           </section>
           <Footer />
         </main>
@@ -145,4 +142,4 @@ have scrambled parts of Ciceros …</span><Link href="#">See More</Link></div>
   ):(<Loader />)
 };
 
-export default TeacherProfile;
+export default StudentProfile;

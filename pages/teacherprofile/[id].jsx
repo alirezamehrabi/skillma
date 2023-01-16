@@ -31,7 +31,7 @@ export async function getStaticProps(context) {
     `${process.env.webURL}/TeacherDetail/GetTeacherDetailById?id=${paths}`
   );
   const request1 = await fetch(
-    `${process.env.webURL}/Comment/GetTeacherComment?page=1&pagesize=5`
+    `${process.env.webURL}/Comment/GetTeacherComment?CourseId=${paths}&page=1&pagesize=5`
   );
  try{
   const coursedet = await request.json();
@@ -50,13 +50,14 @@ export async function getStaticProps(context) {
     }
  }
 }
-const TeacherProfile = () => {
+const TeacherProfile = (props) => {
   const cd = props.coursedet.data;
-  console.log(props.coursedet.data)
+  console.log(cd.teacherId)
+  const td = props.coursedet.data
   const datafunc = async (p)=>{
     try {
       const result = await fetch(
-        `${process.env.webURL}/Comment/GetOnlineCourseComment?page=${p}&pagesize=5`
+        `${process.env.webURL}/Comment/GetTeacherComment?CourseId=${cd.teacherId}&page=${p}&pagesize=5`
         );
         const json = await result.json();
         // console.log(json)
@@ -88,43 +89,41 @@ const TeacherProfile = () => {
                 <div className={`row`}>
             <div className={`col-7 ${teach.teachHolder}`}>
                 <figure className={`${teach.teacherPic}`}>
-                    <Image src={require(`../../src/assets/teacher/teacherimg.png`)} alt="teacher pic" height="" width="" />
+                    <Image src={td.pic} alt="teacher pic" height="100" width="100" />
                 </figure>
-                <h6 className={`${teach.name}`}>Dani Beaumont <span className={`${teach.follow}`}>(12,456 followers)</span></h6>
-                <h6 className={`${teach.role}`}>User Expeience Design, User Interface</h6>
+                <h6 className={`${teach.name}`}>{td.name} <span className={`${teach.follow}`}>({td.connections} followers)</span></h6>
+                <h6 className={`${teach.role}`}>{td.feild}</h6>
                 <Button variant="warning" className={`${teach.connectbtn}`}>
                   Connect
                 </Button>
             </div>
             <div className={`col-4 ${teach.about}`}>About me</div>
             <div className={`col-1 ${teach.social}`}>
-                <Link href="#">
+                <Link href={`${td.facebook}`}>
                 <AiOutlineFacebook/>
                 </Link>
-                <Link href="#">
+                <Link href={`${td.twitter}`}>
                 <FiTwitter/>
                 </Link>
-                <Link href="#">
+                <Link href={`${td.insta}`}>
                 <AiOutlineInstagram/>
                 </Link>
-                <Link href="#">
+                <Link href={td.shareLink}>
                 <TiArrowForwardOutline/>
                 </Link>
             </div>
                 </div>
             </div>
-            <div className={`col-12 ${teach.teachDes}`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. 
-The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of 
-Ciceros De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with.</div>
+            <div className={`col-12 ${teach.teachDes}`}>{td.aboutTeacher}</div>
             <div className={`col-xl-8  col-lg-10 col-md-11 col-sm-12`}>
             <div className={`row`}>
             <div className={`col-md-6 ${teach.teacherStatistic}`}>
-            <h6 className={`col-12 ${teach.bold}`}><AiFillStar/> 4/5 <span className={`col-12 ${teach.normal}`}>5.0</span></h6>
-            <h6 className={`col-12 ${teach.bold}`}><FaUserGraduate/> 12,456 <span className={`col-12 ${teach.normal}`}>students</span></h6>
+            <h6 className={`col-12 ${teach.bold}`}><AiFillStar/> {parseFloat(td.rate).toFixed(2)} <span className={`col-12 ${teach.normal}`}>5.0</span></h6>
+            <h6 className={`col-12 ${teach.bold}`}><FaUserGraduate/> {td.students} <span className={`col-12 ${teach.normal}`}>students</span></h6>
             </div>
             <div className={`col-md-6 ${teach.teacherStatistic}`}>
-            <h6 className={`col-12 ${teach.bold}`}>{course} 128 <span className={`col-12 ${teach.normal}`}>hours</span></h6>
-            <h6 className={`col-12 ${teach.bold}`}><TiArrowForwardOutline/>31 <span className={`col-12 ${teach.normal}`}>Courses</span></h6>
+            <h6 className={`col-12 ${teach.bold}`}>{course} {td.teachHour} <span className={`col-12 ${teach.normal}`}>hours</span></h6>
+            <h6 className={`col-12 ${teach.bold}`}><TiArrowForwardOutline/>{td.courseCount} <span className={`col-12 ${teach.normal}`}>Courses</span></h6>
             </div>
             </div>
             </div>
@@ -135,12 +134,12 @@ Ciceros De Finibus Bonorum et Malorum for use in a type specimen book. It usuall
               className={`col-sm-4 mx-auto ${styles.but} ${styles.but2}`}
             ></div>
             <div className={`col-12`}>
-              <ShortVideoSlider />
+              <ShortVideoSlider data={td.shortVideos}/>
             </div>
           </section>
           <section className={`row container mx-auto mb-5 ${styles.topCourses}`}>
         <div className={`col-sm-8 ${styles.titleCourse}`}>My Courses</div>
-            <div className={`col-12`}><TopCoursesSlider /></div>
+            <div className={`col-12`}><TopCoursesSlider data={td.courses}/></div>
         </section>
         <Comment
             teacherId={cd.teacherId}
@@ -155,26 +154,12 @@ Ciceros De Finibus Bonorum et Malorum for use in a type specimen book. It usuall
           />
         <section className={`row container mx-auto mb-5 ${teach.student}`}>
         <div className={`col-sm-8 ${teach.titleStudents}`}>Students</div>
-        <div className={`col-sm-8 ${teach.desStudents}`}>Lorem ipsum, or lipsum as it is sometimes known.</div>
         <div className={`col-sm-11 mx-auto ${teach.listStudents}`}>
-            <Image src={require(`../../src/assets/teacher/1.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/2.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/3.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/4.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/5.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/6.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/7.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/8.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/9.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/1.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/2.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/3.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/4.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/5.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/6.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/7.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/8.png`)} alt="student" height="" width=""/>
-            <Image src={require(`../../src/assets/teacher/9.png`)} alt="student" height="" width=""/>
+          {td.studentDetails.map((i,index)=>{
+            return(
+              <Image src={i.picName} alt={i.name} height="80" width="80" key={index}/>
+            )
+          })}
         </div>
         </section>
           <Footer />

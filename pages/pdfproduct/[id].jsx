@@ -7,14 +7,38 @@ import detail from "../../styles/DetailCourse.module.css";
 import about from "../../styles/About.module.css";
 import pdf from "../../styles/Pdfproduct.module.css";
 import online from "../../styles/Onlinecourse.module.css";
-import Menu from "./../../src/components/Menu/Menu";
-import Footer from "./../../src/components/Footer/Footer";
+import Menu from "../../src/components/Menu/Menu";
+import Footer from "../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
 import Loader from "../../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
-
-const Pdfproduct = () => {
+export async function getStaticPaths() {
+  return { paths:[], fallback: 'blocking' };
+}
+export async function getStaticProps(context) {
+  const paths = context.params.id;
+  const request = await fetch(
+    `${process.env.webURL}/Product/GetProductDetailById?id=${paths}`
+  );
+ try{
+  const data = await request.json();
+  return {
+    props: {
+      ...{ data },
+    },
+  };
+ }
+ catch(e){
+  return {
+      redirect: {
+        destination: "/404",
+      },
+    }
+ }
+}
+const Pdfproduct = (props) => {
+  const pdfData = props.data.data
   const size = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <defs>
@@ -77,7 +101,7 @@ const Pdfproduct = () => {
           <section className={`row container mx-auto ${pdf.vitrin}`}>
             <div className={`col-sm-2 ${pdf.imgHolder}`}>
               <Image
-                src={require(`./../../src/assets/cart/img.png`)}
+                src={pdfData.oldPicture}
                 alt=""
                 width="400"
                 height="400"
@@ -85,28 +109,26 @@ const Pdfproduct = () => {
             </div>
             <div className={`col-sm-10 ${pdf.rightvitrin}`}>
               <h5 className={``}>
-                User Experience (UX): The Ultimate Guide to Usability and UX
+                {pdfData.title}
               </h5>
               <h6 className={``}>
-                Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-                used in laying out print, graphic or web designs. The passage is
-                attributed.
+              {pdfData.summery}
               </h6>
               <div className={`row ${pdf.infoholder}`}>
                 <div className={`col-6 ${pdf.info}`}>
                   {price} <span className={`${pdf.norm}`}> price: </span>{" "}
-                  <span className={`${pdf.bold}`}> 18$</span>
+                  <span className={`${pdf.bold}`}> {pdfData.price}$</span>
                   <br />
                   <br />
-                  {download} <span className={`${pdf.bold}`}>1.234 </span>{" "}
+                  {download} <span className={`${pdf.bold}`}>{pdfData.downloadtime} </span>{" "}
                   <span className={`${pdf.norm}`}> Downloads</span>
                   <br />
                   <br />
-                  {format} <span className={`${pdf.bold}`}>PDF </span>{" "}
+                  {format} <span className={`${pdf.bold}`}>{pdfData.format} </span>{" "}
                   <span className={`${pdf.norm}`}> Format</span>
                   <br />
                   <br />
-                  {size} <span className={`${pdf.bold}`}>8G </span>{" "}
+                  {size} <span className={`${pdf.bold}`}>{pdfData.fileSize} </span>{" "}
                   <span className={`${pdf.norm}`}> Size</span>
                   <br />
                   <br />
@@ -122,37 +144,14 @@ const Pdfproduct = () => {
           <section className={`row container mx-auto mb-5`}>
             <div className={`col-12 ${pdf.desTitle}`}>Description</div>
             <div className={`col-12 ${pdf.des}`}>
-              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-              used in laying out print, graphic or web designs. The passage is
-              attributed to an unknown typesetter in the 15th century who is
-              thought to have scrambled parts of Ciceros De Finibus Bonorum et
-              Malorum for use in a type specimen book. It usually begins with:
-              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-              used in laying out print, graphic or web designs. The passage is
-              attributed to an unknown typesetter in the 15th century who is
-              thought to have scrambled parts of Ciceros De Finibus Bonorum et
-              Malorum for use in a type specimen book. It usually begins with:
-              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-              used in laying out print, graphic or web designs. The passage is
-              attributed to an unknown typesetter in the 15th century who is
-              thought to have scrambled parts of Ciceros De Finibus Bonorum et
-              Malorum for use in a type specimen book. It usually begins with.
+              {pdfData.description}
             </div>
           </section>
           <section className={`row container mx-auto mb-5`}>
             <div className={`col-12 ${pdf.learnTitle}`}>
               What you&apos;ll learn:
             </div>
-            <div className={`col-6 ${pdf.des}`}>Dynamic Text</div>
-            <div className={`col-6 ${pdf.imgHolder}`}>
-              <Image
-                src={require(`./../../src/assets/cart/img.png`)}
-                alt=""
-                width="500"
-                height="300"
-              />
-            </div>
-            <div className={`col-12 ${pdf.des}`}>Dynamic Description</div>
+            <div className={`col-6 ${pdf.des}`}><div dangerouslySetInnerHTML={{ __html: pdfData.whatYouLearn }} /></div>
           </section>
           <Footer />
         </main>

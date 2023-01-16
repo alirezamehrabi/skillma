@@ -253,7 +253,7 @@ const [tcomment , setTcomment] = useState(totalCount)
                   courseId:pageName === 1 ? courseId:null,
                   onlineCourseId:pageName === 2 ? courseId:null,
                   shortContentId:pageName === 3 ? shortContentId:null,
-                  // teacherId:pageName === 4 ? courseId:null,
+                  // teacherId:pageName === 4 ? teacherId:null,
                 };
                 {
                   replyState !== 0 && (userObj.commentId = replyState);

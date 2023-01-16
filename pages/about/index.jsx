@@ -34,19 +34,25 @@ const ContactSchema = Yup.object().shape({
     .required("Required"),
 });
 
-// export async function getStaticProps() {
-//   const res = await fetch(
-//     `${process.env.webURL}/AboutUs/InsertAboutUs`
-//   );
-//   const data = await res.json();
-//   return {
-//     props: {
-//       ...{ data },
-//     },
-//   };
-// }
+export async function getStaticProps() {
+  const res = await fetch(
+    `${process.env.webURL}/AboutUs/GetAboutUs`
+  );
+  const data = await res.json();
+  const res1 = await fetch(
+    `${process.env.webURL}/Team/GetTeams`
+  );
+  const data2 = await res1.json();
+  return {
+    props: {
+      ...{ data,data2 },
+    },
+  };
+}
 
-const detailcourse = () => {
+const detailcourse = (props) => {
+  console.log(props.data.data)
+  const data = props.data.data
   const { loading } = useContext(DataContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -84,15 +90,7 @@ const detailcourse = () => {
           <section className={`row container mx-auto`}>
             <div className={`${about.title}`}>About us</div>
             <div className={`${about.des}`}>
-              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-              used in laying out print, graphic or web designs. The passage is
-              attributed to an unknown typesetter in the 15th century who is
-              thought to have scrambled parts of Ciceros book. It usually
-              begins with:
-              <br />
-              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-              used in laying out print, graphic or web scrambled parts of
-              Ciceros book. It usually begins with.
+              {data.summery}
             </div>
 
             <div className={`col-md-6 mx-auto text-center`}>
@@ -112,8 +110,8 @@ const detailcourse = () => {
                       }}
                     >
                       {" "}
-                      <CountUp end={4} duration={4} />
-                      <span className="shopassistant-plus">m+</span>{" "}
+                      <CountUp end={data.studentLearningCount} duration={4} />
+                      {" "}
                     </div>
                   </h2>
                   <h6>Student Learning</h6>
@@ -133,8 +131,7 @@ const detailcourse = () => {
                       }}
                     >
                       {" "}
-                      <CountUp end={4} duration={4} />
-                      <span className="shopassistant-plus">k+</span>{" "}
+                      <CountUp end={data.courseCount} duration={4} />{" "}
                     </div>
                   </h2>
                   <h6>Active Courses</h6>
@@ -154,7 +151,7 @@ const detailcourse = () => {
                       }}
                     >
                       {" "}
-                      <CountUp end={100} duration={4} />
+                      <CountUp end={data.freeCourseCount} duration={4} />
                     </div>
                   </h2>
                   <h6>Free Courses</h6>
@@ -164,38 +161,38 @@ const detailcourse = () => {
             <div className={`row g-4`}>
               <div className={`col-4 g-4 ${about.img}`}>
                 <Image
-                  src={require(`./../../src/assets/about/1.png`)}
-                  alt=""
-                  width=""
-                  height=""
+                  src={data.pic1}
+                  alt="pic1"
+                  width="200"
+                  height="200"
                 />
               </div>
               <div className={`col-4 g-4`}>
                 <div className={`row g-4`}>
                   <div className={`col-12 g-4 ${about.img}`}>
                     <Image
-                      src={require(`./../../src/assets/about/2.png`)}
-                      alt=""
-                      width=""
-                      height=""
+                      src={data.pic2}
+                      alt="pic2"
+                      width="100"
+                      height="100"
                     />
                   </div>
                   <div className={`col-12 g-4 ${about.img}`}>
                     <Image
-                      src={require(`./../../src/assets/about/3.png`)}
-                      alt=""
-                      width=""
-                      height=""
+                      src={data.pic3}
+                      alt="pic3"
+                      width="100"
+                      height="100"
                     />
                   </div>
                 </div>
               </div>
               <div className={`col-4 g-4 ${about.img}`}>
                 <Image
-                  src={require(`./../../src/assets/about/4.png`)}
-                  alt=""
-                  width=""
-                  height=""
+                  src={data.pic4}
+                  alt="pic4"
+                  width="200"
+                  height="200"
                 />
               </div>
             </div>
@@ -203,7 +200,7 @@ const detailcourse = () => {
           <section className={`row container mx-auto ${about.team}`}>
             <div className={`col-12 text-center ${about.teamTitle}`}>Team</div>
             <div className={`col-12 text-center`}>
-              <TeamSlider />
+              <TeamSlider data={props.data2.data}/>
             </div>
           </section>
           <section className={`row container-fluid mx-auto ${about.join}`}>
@@ -211,11 +208,7 @@ const detailcourse = () => {
               Join us
             </div>
             <div className={`col-12 text-center ${about.joinDes}`}>
-              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-              used in laying out print, graphic or web designs. The passage is
-              attributed to an unknown typesetter in the 15th century who is
-              thought to have scrambled parts of Ciceros book. It usually begins
-              with:
+              {data.joinText}
             </div>
             <div className={`col-12 text-center`}>
               <button
@@ -305,15 +298,15 @@ const detailcourse = () => {
                 </div>
                 <div className={`col-md-6 g-5`}>
                   <div className={`col-12 p-5 ${about.rightContact}`}>
-                    {phone} 123456 <br/>
-                    {txt} abcd@gmail.com
+                    {phone} {data.phone} <br/>
+                    {txt} {data.email}
                     <div className={`col-xl-6 ${about.Social}`}>
                     <div className={`col-12 mx-auto text-center ${about.Socialtxt}`}>Social Media</div>
                     <div className={`col-12 `}>
-                          <Link href="#">{twitter}</Link>
-                          <Link href="#">{insta}</Link>
-                          <Link href="#">{facebook}</Link>
-                          <Link href="#">{youtube}</Link>
+                          <Link href={data.twiter}>{twitter}</Link>
+                          <Link href={data.instagram}>{insta}</Link>
+                          <Link href={data.faceBook}>{facebook}</Link>
+                          <Link href={data.youTube}>{youtube}</Link>
                     </div>
                   
                   </div>

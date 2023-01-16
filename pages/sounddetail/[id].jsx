@@ -44,7 +44,7 @@ export async function getStaticProps(context) {
 
 const SoundDetail = (props) => {
   const cd = props.coursedet.data;
-  console.log(props.comment.data.pageData)
+  // console.log(props.comment.data.pageData)
   // console.log(cd.pageData.teacherId)
   const datafunc = async (p)=>{
     try {
@@ -97,13 +97,13 @@ const SoundDetail = (props) => {
                       height="30"
                     />
                     <h5 className={``}>{cd.teacherName}</h5>
-                    <h6 className={``}>12.501 followers</h6>
+                    <h6 className={``}>{cd.fallowerCount} Followers</h6>
                   </figure>
                 </div>
                 <div className={`col-6 mx-auto`}>
                   <div className={`row ${detail.bot}`}>
                     <div className={`col-4`}>
-                      <RiShareForwardLine style={{ color: "blue" }} />{cd.shareCount}
+                      <RiShareForwardLine style={{ color: "blue" }}/>{cd.shareCount}
                     </div>
                     <div className={`col-4`}>
                       <svg
@@ -131,7 +131,7 @@ const SoundDetail = (props) => {
                       >
                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                       </svg>
-                      {cd.rate}/5
+                      {parseFloat(cd.rate).toFixed(2)}/5
                     </div>
                   </div>
                 </div>
@@ -145,10 +145,10 @@ const SoundDetail = (props) => {
                 <div className={`row`}>
                     <div className={`col-4 ${detail.leftit}`}>
                     <Image
-                      src={require(`../../src/assets/detail/1.png`)}
+                      src={i.teacherPicName}
                       alt="logo"
-                      width=""
-                      height=""
+                      width="100"
+                      height="100"
                     />
                     </div>
                     <div className={`col-8 ${detail.rightit}`}>

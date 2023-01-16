@@ -10,20 +10,12 @@ import { SSRProvider } from "react-bootstrap";
 const ShortSlider = ({data}) => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   const [rating, setRating] = useState(0);
 
   // Catch Rating value
   const handleRating = (number) => {
     setRating(number);
   };
-  // Optinal callback functions
-  const onPointerEnter = () => console.log("Enter");
-  const onPointerLeave = () => console.log("Leave");
-  // const onPointerMove = ({value: number, index: number}) => console.log(value, index)
-
   var settings = {
     dots: true,
     infinite: false,

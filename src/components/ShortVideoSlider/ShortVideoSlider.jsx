@@ -64,9 +64,9 @@ const ShortSlider = ({data}) => {
   return (
     <div>
       <Slider {...settings}>
-        {data.map((i)=>{
+        {data.map((i,index)=>{
           return(
-            <div className={`col-11 ${styles.shortSlidePic}`}>
+            <div className={`col-11 ${styles.shortSlidePic}`} key={index}>
           <Link href="#" >
             <>
               <figure className={``} >

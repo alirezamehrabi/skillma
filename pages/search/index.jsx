@@ -53,7 +53,7 @@ const Search = () => {
                 </>
               </Link>
             </div>
-            <div className={`col-12`}><ShortVideoSlider /></div>
+            {/* <div className={`col-12`}><ShortVideoSlider /></div> */}
         </section>
           <section className={`row container mx-auto mb-5 `}>
           <div className={`col-sm-12 ${styles.titleFree}`}>Free Courses</div>
@@ -64,22 +64,22 @@ const Search = () => {
           >
             <Tab eventKey="pop" title="Most Popular">
               <div className={`col-12`}>
-                <TopCoursesSlider />
+                {/* <TopCoursesSlider /> */}
               </div>
             </Tab>
             <Tab eventKey="new" title="Newest">
               <div className={`col-12`}>
-                <TopCoursesSlider />
+                {/* <TopCoursesSlider /> */}
               </div>
             </Tab>
             <Tab eventKey="trend" title="Trending">
               <div className={`col-12`}>
-                <TopCoursesSlider />
+                {/* <TopCoursesSlider /> */}
               </div>
             </Tab>
             <Tab eventKey="rate" title="Highest Rate">
               <div className={`col-12`}>
-                <TopCoursesSlider />
+                {/* <TopCoursesSlider /> */}
               </div>
             </Tab>
           </Tabs>
@@ -102,7 +102,7 @@ const Search = () => {
               </Link>
             </div>
             <div className={`col-12`}>
-                <TopCoursesSlider />
+                {/* <TopCoursesSlider /> */}
               </div>
         </section>
               </div>

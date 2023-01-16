@@ -23,6 +23,7 @@ margin: 15px 0 15px 30px;
     width:40px !important;
     height:40px !important;
     border-radius: 100%;
+    background: #fff !important;
 }
 .conpicholder:nth-child(3){left: -10px}
 .conpicholder:nth-child(4){left: -20px}
