@@ -8,7 +8,8 @@ import { DataProvider } from "../src/Context/DataContext";
 import Loader from "../src/components/Loader/Loader2";
 import Router from "next/router";
 import 'react-toastify/dist/ReactToastify.css';
-
+import store from "./api/redux/store";
+import { Provider } from "react-redux";
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
     
@@ -26,7 +27,7 @@ function MyApp({ Component, pageProps }) {
   <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-  <DataProvider>{loading && <Loader />}<Component {...pageProps} /></DataProvider></>);
+  <Provider store={store}><DataProvider>{loading && <Loader />}<Component {...pageProps} /></DataProvider></Provider></>);
 }
 
 export default MyApp;

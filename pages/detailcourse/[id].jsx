@@ -16,13 +16,16 @@ import {
   AiOutlineGift,
 } from "react-icons/ai";
 import Loader from "../../src/components/Loader/Loader";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import DataContext from "../../src/Context/DataContext";
 import { GiLevelEndFlag } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
 import { MdOutlinePriceChange } from "react-icons/md";
 import Moment from "react-moment";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getLike } from "../api/redux/likereducer";
+
 export async function getStaticPaths() {
   return { paths: [], fallback: "blocking" };
 }
@@ -54,6 +57,14 @@ export async function getStaticProps(context) {
 }
 
 const detailcourse = (props) => {
+  const disPatch = useDispatch()
+const {likeCount}= useSelector(({like})=>like);
+console.log(likeCount)
+useEffect(() => {
+  disPatch(getLike())
+}, [])
+
+
   const cd = props.coursedet.data;
 
   console.log(props.coursedet.data);

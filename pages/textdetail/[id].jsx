@@ -4,7 +4,6 @@ import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import detail from "../../styles/DetailCourse.module.css";
 import Menu from "../../src/components/Menu/Menu";
-import TopCoursesSlider from "../../src/components/TopCoursesSlider/TopCoursesSlider";
 import Comment from "../../src/components/Comment/Comment";
 import Footer from "../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
@@ -72,20 +71,20 @@ const TxtDetail = (props) => {
           <section className={`row mx-auto container`}>
             <div className={`col-xl-6 mx-4 ${detail.videoHolder} ${detail.videoHolder2} ${detail.videoHolder3}`}>
               <div className={` ${styles.introHolder}`}>
-              <Image src={require(`../../src/assets/detail/text.png`)} alt="" width="500" height="500"/>
-              <h5 className={`${detail.toptext}`}>title</h5>
+              <Image src={cd.picName} alt="" width="500" height="500"/>
+              <h5 className={`${detail.toptext}`}>{cd.title}</h5>
               
               <div className={`row ${styles.conHolder} ${styles.conHoldertxt}`}>
                 <div className={`col-6 ${detail.personHolder}`}>
                   <figure className={`${styles.teacherBadgeModal}`}>
                     <Image
-                      src={require(`../../src/assets/home/teacherMini.png`)}
+                      src={cd.teacherPic}
                       alt="logo"
-                      width=""
-                      height=""
+                      width="50"
+                      height="50"
                     />
                     <h5 className={``}>{cd.teacherName}</h5>
-                    <h6 className={``}>12.501 followers</h6>
+                    <h6 className={``}>{cd.connectionsCount} followers</h6>
                   </figure>
                 </div>
                 <div className={`col-6 mx-auto`}>
