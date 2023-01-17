@@ -55,8 +55,6 @@ pageName
     handleRating();
   }, [rating]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const router = useRouter();
-  // const courseId = router.query.id;
   const [replyState, setReplyState] = useState(0);
   const [replyState2, setReplyState2] = useState();
   const funcReply = (id, userName) => {
