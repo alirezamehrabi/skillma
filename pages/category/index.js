@@ -9,9 +9,10 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
+import { category } from "../api/category";
 
 export async function getStaticProps() {
-  const res = await fetch(`https://skillma-api.shinypi.net/Category/GetMainCategories`);
+  const res = await fetch(`${process.env.webURL}/Category/GetMainCategories`);
   const posts = await res.json();
 
   return {
@@ -26,31 +27,24 @@ const Category = (props) => {
     setTotalSelectedCheckboxes(
       document.querySelectorAll("input[type=checkbox]:checked").length
       );
-      
+      console.log(e.target)
       setV((prevState) => [...prevState]);
-
       if(e.target.checked){
-        
-        
-        setV((prevState) => [...prevState,e.target.value]);
+        setV((prevState) => [...prevState,e.target.id]);
       }else{
-        // v= v.filter((item) => item !== e.target.value)
-        // setV(v.filter((item) => item !== e.target.value))
         setV((prevState) => [
-          prevState.filter((item) => item !== e.target.value) 
+          prevState.filter((item) => item !== e.target.id) 
         ]);
       }
   console.log(v)
     }
 
 
- const a =()=>{
+ const sendCat =()=>{
   const check = document.querySelectorAll("input[type=checkbox]:checked")
   const c = [check].map((item)=> {return item.value})
+  category(v)
  }
-    
-    
-    // console.log(val)
   useEffect(() => {
     console.log(totalSelectedCheckboxes);
   }, [totalSelectedCheckboxes]);
@@ -67,7 +61,6 @@ const Category = (props) => {
     });
   };
   const cate = props.posts.data;
-  console.log(cate.data);
 
   const { loading } = useContext(DataContext);
   return !loading ? (
@@ -92,10 +85,10 @@ const Category = (props) => {
                     <figure className={`${cat.catImg}`}>
                       <Image
                         // src={require(`../../src/assets/category/${item.pictureName}`)}
-                        src={require(`../../src/assets/category/1.png`)}
+                        src={item.pictureName}
                         alt="logo"
-                        width=""
-                        height=""
+                        width="220"
+                        height="220"
                       />
                       <h5 className={`${cat.catName}`}>{item.categoryName}</h5>
                     </figure>
@@ -128,7 +121,7 @@ const Category = (props) => {
           </>
         ) : (
           <Link href={`#`}>
-            <Button variant="warning" className={`${cat.btn}`} onClick={a}>
+            <Button variant="warning" className={`${cat.btn}`} onClick={sendCat}>
               Save & Continue
             </Button>
           </Link>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import com from "../../../styles/Comment.module.css";
@@ -15,7 +14,6 @@ import { TbArrowForwardUp } from "react-icons/tb";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import { useRouter } from "next/router";
 import co from "../../../styles/panel/course.module.css";
 import { comment,AddDissLike,DecreaseDissLike,AddLike,DecreaseLike } from "../../../pages/api/comment";
 import Moment from "react-moment";
@@ -34,10 +32,10 @@ const Comment = ({
   totalCount,
   pageTitle,
   datafunc,
-shortContentId,
-onlineCourseId,
-courseId,
-pageName
+  shortContentId,
+  onlineCourseId,
+  courseId,
+  pageName
 }) => {
   const [rating, setRating] = useState();
   const handleRating = (number) => {
@@ -45,12 +43,7 @@ pageName
       setRating(number);
     }
   };
-  // console.log(teacherId)
   const [likenum,setLikenum] = useState();
-// console.log(likenum)
-// useEffect(() => {
-//   likenum;
-// }, [likenum]);
   useEffect(() => {
     handleRating();
   }, [rating]);
@@ -131,7 +124,6 @@ const [tcomment , setTcomment] = useState(totalCount)
             {i.spend}
           </div>
           <span className={`${com.course}`}>Course: {pageTitle}</span>
-
           <span className={`${com.commentTXT}`}>{i.commentMessage}</span>
           {i.replies.slice(0, replynum).map((j, index) => {
             return (
@@ -180,7 +172,7 @@ const [tcomment , setTcomment] = useState(totalCount)
             </div>
             <div
               className={`col-4 ${com.dislike}`}
-              onClick={() => {AddDissLike(i.commentId),setLikenum(i.likeCount)}} 
+              onClick={() => {AddDissLike(i.commentId)}} 
             >
               <AiOutlineDislike /> DisLike({i.dissLikeCount})
             </div>

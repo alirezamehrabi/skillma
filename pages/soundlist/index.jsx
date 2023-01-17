@@ -19,8 +19,6 @@ import DataContext from "../../src/Context/DataContext";
 const Search = () => {
   const { loading } = useContext(DataContext);
 
-  const [dt0, setDt0] = useState([])
-
   const fetchData0 = async (p)=>{
     try {
       const result = await fetch(
@@ -36,8 +34,6 @@ const Search = () => {
   useEffect(() => {
     fetchData0(1);
   },[])
-
-  const [dt1, setDt1] = useState([])
 
   const fetchData1 = async (p)=>{
     try {
@@ -71,7 +67,6 @@ const Search = () => {
   useEffect(() => {
     fetchData2(1);
   },[])
-  const [dt3, setDt3] = useState([])
 
   const fetchData3 = async (p)=>{
     try {
@@ -88,9 +83,6 @@ const Search = () => {
   useEffect(() => {
     fetchData3(1);
   },[])
-
-
-
 
 
 

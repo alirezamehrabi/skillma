@@ -15,7 +15,7 @@ import { useContext } from "react";
 import DataContext from "../../Context/DataContext";
 import Loader from "../Loader/Loader";
 
-const Sound = ({fetchData0,fetchData1,fetchData2,fetchData3,totalCount,totalPage}) => {
+const Sound = ({fetchData0,fetchData1,fetchData2,fetchData3}) => {
   const { loading } = useContext(DataContext);
 
   const [mydata1, setMydata1] = useState();
