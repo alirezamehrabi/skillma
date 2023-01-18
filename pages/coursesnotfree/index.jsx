@@ -2,21 +2,22 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
+import search from "../../styles/Search.module.css";
 import Menu from "./../../src/components/Menu/Menu";
-import FreeCourse from "../../src/components/FreeCourse/FreeCourse"
+import CoursesNotFree from "../../src/components/CoursesNotFree/CoursesNotFree"
 import Footer from "./../../src/components/Footer/Footer";
-import { Tab, Tabs,SSRProvider  } from "react-bootstrap";
+import { SSRProvider  } from "react-bootstrap";
 import Loader from "../../src/components/Loader/Loader";
 import { useContext, useEffect, useState } from "react";
 import DataContext from "../../src/Context/DataContext";
 
-const VC = () => {
+const CNF = () => {
   const { loading } = useContext(DataContext);
 
   const fetchData0 = async (p)=>{
     try {
       const result = await fetch(
-        `${process.env.webURL}/Course/GetFilterCourses?page=${p}&pageSize=6&Types=0`
+        `${process.env.webURL}/Course/GetFilterCoursesNotFree?page=${p}&pageSize=6&Types=0`
         );
         const json = await result.json();
         // console.log(json.data.pageData)
@@ -32,7 +33,7 @@ const VC = () => {
   const fetchData1 = async (p)=>{
     try {
       const result = await fetch(
-        `${process.env.webURL}/Course/GetFilterCourses?page=${p}&pageSize=6&Types=1`
+        `${process.env.webURL}/Course/GetFilterCoursesNotFree?page=${p}&pageSize=6&Types=1`
         );
         const json = await result.json();
         // console.log(json.data.pageData)
@@ -44,12 +45,11 @@ const VC = () => {
   useEffect(() => {
     fetchData1(1);
   },[])
-  const [dt2, setDt2] = useState([])
 
   const fetchData2 = async (p)=>{
     try {
       const result = await fetch(
-        `${process.env.webURL}/Course/GetFilterCourses?page=${p}&pageSize=6&Types=2`
+        `${process.env.webURL}/Course/GetFilterCoursesNotFree?page=${p}&pageSize=6&Types=2`
         );
         const json = await result.json();
         // console.log(json.data.pageData)
@@ -65,10 +65,9 @@ const VC = () => {
   const fetchData3 = async (p)=>{
     try {
       const result = await fetch(
-        `${process.env.webURL}/Course/GetFilterCourses?page=${p}&pageSize=6&Types=3`
+        `${process.env.webURL}/Course/GetFilterCoursesNotFree?page=${p}&pageSize=6&Types=3`
         );
         const json = await result.json();
-        // console.log(json.data.pageData)
       return json.data
     } catch (error) {
        console.log(error);
@@ -85,7 +84,7 @@ const VC = () => {
     <SSRProvider>
       <div className={styles.container}>
         <Head>
-          <title>Verified Course List</title>
+          <title>Course Not Free List</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
 
@@ -93,8 +92,8 @@ const VC = () => {
           <Menu />
           <section className={`row container mx-auto mb-5 `}>
           <div className={`col-12`}>
-              <div className={`col-sm-8 fw-bolder my-4`}>Verified Course</div>
-                <FreeCourse fetchData0={fetchData0} fetchData1={fetchData1} fetchData2={fetchData2} fetchData3={fetchData3}/>
+              <div className={`col-sm-8 fw-bolder my-4`}>Course Not Free</div>
+                <CoursesNotFree fetchData0={fetchData0} fetchData1={fetchData1} fetchData2={fetchData2} fetchData3={fetchData3}/>
               </div>
         </section>
           
@@ -105,4 +104,4 @@ const VC = () => {
   ):(<Loader />)
 };
 
-export default VC;
+export default CNF;

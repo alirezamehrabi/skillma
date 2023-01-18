@@ -441,6 +441,7 @@
 .coursePicHolder span {
   width: 100% !important;
   height: 270px !important;
+  border-radius: 15px;
 }
 .FreeImg span{
   width: 107px !important;
