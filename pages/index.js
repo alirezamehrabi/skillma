@@ -34,7 +34,7 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
-  console.log(props.shortvideodata.data.pageData)
+  // console.log(props.shortvideodata.data.pageData)
   const topcourse = props.data
   const { loading } = useContext(DataContext);
   return !loading ? (

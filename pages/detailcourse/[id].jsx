@@ -57,17 +57,18 @@ export async function getStaticProps(context) {
 }
 
 const detailcourse = (props) => {
+  // console.log(props.coursedet.data)
   const disPatch = useDispatch()
-const {likeCount}= useSelector(({like})=>like);
-console.log(likeCount)
-useEffect(() => {
-  disPatch(getLike())
-}, [])
+// const {data}= useSelector(({like})=>like);
+// console.log(data)
+// useEffect(() => {
+//   disPatch(getLike(15))
+// }, [disPatch])
 
 
   const cd = props.coursedet.data;
 
-  console.log(props.coursedet.data);
+  // console.log(props.coursedet.data);
   const { loading } = useContext(DataContext);
 
   const datafunc = async (p)=>{

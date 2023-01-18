@@ -20,6 +20,9 @@ import Moment from "react-moment";
 import axios from "axios";
 import pag from "../../../styles/paginate.module.css";
 import ReactPaginate from "react-paginate";
+import { useDispatch, useSelector } from "react-redux";
+import { getLike, getLikeFallBack } from "../../../pages/api/redux/likereducer";
+import { useRouter } from "next/router";
 const ContactSchema = Yup.object().shape({
   textarea: Yup.string().min(4, "Too Short!").required("Required"),
 });
@@ -37,6 +40,29 @@ const Comment = ({
   courseId,
   pageName
 }) => {
+  let router = useRouter()
+  let rout = router.query.id
+  const disPatch = useDispatch()
+// const {data}= useSelector(({like})=>like);
+// console.log(data)
+// useEffect(() => {
+  // disPatch(getLike(15))
+//   .then((res)=>{
+//     disPatch(AnalyzeByIdApi(item.id));
+// });
+// }, [disPatch])
+const dp = (a)=>{
+  disPatch(getLike(a)).
+  then((res)=>{
+    disPatch(getLikeFallBack(rout))
+  }
+    )
+}
+// useEffect(() => {
+//   disPatch(getLike(15))
+// dp()
+// }, [disPatch])
+
   const [rating, setRating] = useState();
   const handleRating = (number) => {
     if (number !== undefined) {
@@ -172,9 +198,9 @@ const [tcomment , setTcomment] = useState(totalCount)
             </div>
             <div
               className={`col-4 ${com.dislike}`}
-              onClick={() => {AddDissLike(i.commentId)}} 
+              onClick={()=>{dp(i.commentId), setLikenum(i.dissLikeCount)}} 
             >
-              <AiOutlineDislike /> DisLike({i.dissLikeCount})
+              <AiOutlineDislike /> DisLike({likenum})
             </div>
             <div className={`col-4 ${com.reply}`}>
               <a
