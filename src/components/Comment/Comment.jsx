@@ -51,6 +51,11 @@ const Comment = ({
 //     disPatch(AnalyzeByIdApi(item.id));
 // });
 // }, [disPatch])
+
+
+const [likenum,setLikenum] = useState();
+
+
 const dp = (a)=>{
   disPatch(getLike(a)).
   then((res)=>{
@@ -69,7 +74,6 @@ const dp = (a)=>{
       setRating(number);
     }
   };
-  const [likenum,setLikenum] = useState();
   useEffect(() => {
     handleRating();
   }, [rating]);
@@ -200,7 +204,7 @@ const [tcomment , setTcomment] = useState(totalCount)
               className={`col-4 ${com.dislike}`}
               onClick={()=>{dp(i.commentId), setLikenum(i.dissLikeCount)}} 
             >
-              <AiOutlineDislike /> DisLike({likenum})
+              <AiOutlineDislike /> DisLike({i.dissLikeCount})
             </div>
             <div className={`col-4 ${com.reply}`}>
               <a
