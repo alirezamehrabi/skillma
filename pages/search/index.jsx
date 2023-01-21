@@ -13,10 +13,49 @@ import TopCoursesSlider from "./../../src/components/TopCoursesSlider/TopCourses
 import Footer from "./../../src/components/Footer/Footer";
 import { Tab, Tabs,SSRProvider  } from "react-bootstrap";
 import Loader from "../../src/components/Loader/Loader";
-import { useContext } from "react";
+import { useContext,useState,useEffect } from "react";
 import DataContext from "../../src/Context/DataContext";
+import axios from './../../src/core/services/interceptor/interceptor';
+import { useRouter } from 'next/router';
+import { Moment } from 'react-moment';
+import { RiShareForwardLine } from 'react-icons/ri';
 
 const Search = () => {
+const router = useRouter()
+const [data,setData] = useState()
+const [dataTXT,setDataTXT] = useState()
+  const fetchData = async (p)=>{
+    try {
+      const result = await fetch(
+        `${process.env.webURL}/ShortContent/GetFilteredShortVideo?SearchKey=${router.query.search}`
+        );
+        const json = await result.json();
+        setData(json.data.pageData)
+    } catch (error) {
+       console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchData();
+  },[])
+
+  const fetchData0 = async (p)=>{
+    try {
+      const result = await fetch(
+        `${process.env.webURL}/ShortContent/GetFilteredTexes?SearchKey=${router.query.search}`
+        );
+        const json = await result.json();
+        setDataTXT(json.data.pageData)
+    } catch (error) {
+       console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchData0();
+  },[])
+
+
+
   const { loading } = useContext(DataContext);
   return !loading ? (
     <SSRProvider>
@@ -39,21 +78,8 @@ const Search = () => {
               <section className={`row container mx-auto mb-5`}>
           <div className={`col-md-8 ${styles.titleShort}`}>Short Videos</div>
           <div className={`col-md-4 mx-auto ${styles.but} ${styles.but2}`}>
-              <Link href="#">
-                <>
-                  <button
-                    type="button"
-                    className={`btn btn-warning px-4 py-0 ${styles.logBut} ${styles.knowBut}`}
-                  >
-                    ALL SHORT VIDEOS
-                  </button>
-                  <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={styles.rarrow}><defs><style>{`.cls-1{opacity:0}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect class="cls-1" width="24" height="24"/><path d="M20.88,11.43a1.77,1.77,0,0,0-.32-.5L13.07,3.44a1.51,1.51,0,1,0-2.13,2.13l4.94,4.93H4.51a1.5,1.5,0,1,0,0,3H15.88l-4.94,4.93a1.5,1.5,0,0,0,0,2.12h0a1.51,1.51,0,0,0,2.12,0h0l7.49-7.5a1.6,1.6,0,0,0,.32-.49A1.5,1.5,0,0,0,20.88,11.43Z"/></g></svg>
-                  </div>
-                </>
-              </Link>
             </div>
-            {/* <div className={`col-12`}><ShortVideoSlider /></div> */}
+            <div className={`col-12`}><ShortVideoSlider data={data}/></div>
         </section>
           <section className={`row container mx-auto mb-5 `}>
           <div className={`col-sm-12 ${styles.titleFree}`}>Free Courses</div>
@@ -96,7 +122,7 @@ const Search = () => {
                     See All
                   </button>
                   <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={styles.rarrow}><defs><style>{`.cls-1{opacity:0}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect class="cls-1" width="24" height="24"/><path d="M20.88,11.43a1.77,1.77,0,0,0-.32-.5L13.07,3.44a1.51,1.51,0,1,0-2.13,2.13l4.94,4.93H4.51a1.5,1.5,0,1,0,0,3H15.88l-4.94,4.93a1.5,1.5,0,0,0,0,2.12h0a1.51,1.51,0,0,0,2.12,0h0l7.49-7.5a1.6,1.6,0,0,0,.32-.49A1.5,1.5,0,0,0,20.88,11.43Z"/></g></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={styles.rarrow}><defs><style>{`.cls-1{opacity:0}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect className="cls-1" width="24" height="24"/><path d="M20.88,11.43a1.77,1.77,0,0,0-.32-.5L13.07,3.44a1.51,1.51,0,1,0-2.13,2.13l4.94,4.93H4.51a1.5,1.5,0,1,0,0,3H15.88l-4.94,4.93a1.5,1.5,0,0,0,0,2.12h0a1.51,1.51,0,0,0,2.12,0h0l7.49-7.5a1.6,1.6,0,0,0,.32-.49A1.5,1.5,0,0,0,20.88,11.43Z"/></g></svg>
                   </div>
                 </>
               </Link>
@@ -110,13 +136,13 @@ const Search = () => {
             <Tab eventKey="new" title="Text">
               <div className={`col-12`}>
               <div className={`col-sm-8 ${search.titleDefination}`}>Defination</div>
-                <TxtSearch />
+                <TxtSearch/>
               </div>
             </Tab>
             <Tab eventKey="trend" title="Sound">
               <div className={`col-12`}>
               <div className={`col-sm-8 ${search.titleSound}`}>Sounds</div>
-                <SoundList />
+                {/* <SoundList /> */}
               </div>
             </Tab>
           </Tabs>

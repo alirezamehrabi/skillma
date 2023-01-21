@@ -4,12 +4,14 @@ import styles from "../../../styles/Home.module.css";
 import Navigation from "./Navigation";
 import MobileNavigation from "./MobileNavigation";
 import FavorivteCategory from "../FavorivteCategory/FavorivteCategory";
-import { TiArrowUnsorted } from "react-icons/ti";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import DataContext from "../../../src/Context/DataContext";
+import Loader from './../Loader/Loader';
+import { getItem } from "../../core/services/storage/storage";
 
 const Menu = () => {
+  const token = getItem("token")
   const { menuCat, onLogoutUser, loading, isSucces } = useContext(DataContext);
   const menu = menuCat.data
   const down = (
@@ -24,39 +26,20 @@ const Menu = () => {
     </svg>
   );
 
-  const [title, setTitle] = useState("Price");
-  const [title2, setTitle2] = useState("Level");
-  const [show, setShow] = useState(false);
-
-  const changeState = () => {
-    setShow(!show);
-  };
-
-  const dropdown = (event) => {
-    setTitle(event.target.textContent);
-    event.preventDefault();
-    event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
-  };
-  const dropdown2 = (event) => {
-    setTitle2(event.target.textContent);
-    event.preventDefault();
-    event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
-  };
   const [state, setState] = useState(false);
+  const [searchTXT, setSearchTXT] = useState();
+  const searchHandler = (e) => {
+    setSearchTXT(e.target.value)
+  }
+  const formsubmit = (e) => {
+    e.preventDefault()
 
+  }
   useEffect(() => {
     window.addEventListener("click", () => setState(false));
 
     return () => window.removeEventListener("click", () => setState(false));
   });
-  const funcHandler = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    e.nativeEvent.stopImmediatePropagation();
-    setState(!state);
-  };
   return !loading ? (
     <>
       <section className={`container-fluid ${styles.menuHolder}`}>
@@ -174,87 +157,40 @@ const Menu = () => {
             </div>
           </div>
           <div className={`col-5 ${styles.favCat}`}>
-            <FavorivteCategory />
+            {token ? <FavorivteCategory /> : null}
           </div>
           <div className={`col-5`}>
-            <div className="input-group mb-3">
+            <form className="input-group mb-3" onSubmit={formsubmit}>
               <input
                 type="text"
                 className={`form-control ${styles.sinput}`}
                 placeholder="Search by Topic,Course,Teacher"
                 aria-label="Search by Topic,Course,Teacher"
                 aria-describedby="basic-addon2"
+                value={searchTXT}
+                onChange={searchHandler}
               />
               <div className={`input-group-append ${styles.search}`}>
-                <TiArrowUnsorted onClick={changeState} />
-                <button
-                  className={`btn btn-outline-secondary ${styles.searchsvg}`}
-                  type="button"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    fill="#FF9D14"
-                    className="bi bi-search"
-                    viewBox="0 0 16 16"
+                <Link href={`/search?search=${searchTXT}`}>
+                  <button
+                    className={`btn btn-outline-secondary ${styles.searchsvg}`}
+                    type="submit"
                   >
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                  </svg>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="25"
+                      fill="#FF9D14"
+                      className="bi bi-search"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                  </button></Link>
               </div>
-            </div>
+            </form>
           </div>
 
-          {show && (
-            <div className={`col-12 ${styles.searchBox}`}>
-              <div className={`row `}>
-                <div className={`col-6 g-3 my-3`}>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search by Topic,Course,Teacher"
-                    aria-label="Search by Topic,Course,Teacher"
-                    aria-describedby="basic-addon2"
-                  />
-                </div>
-                <div className={`col-2 g-3 my-3`}>
-                  <div className={styles.box2}>
-                    <ul className={styles.boxList2} onClick={dropdown}>
-                      <Link passHref href="#" className={styles.listHeader2}>
-                        <span onClick={funcHandler}>{title}</span>
-                      </Link>
-
-                      <li className={styles.listItem21}>Free</li>
-                      <li className={styles.listItem21}>Price</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className={`col-2 g-3 my-3`}>
-                  <div className={styles.box2}>
-                    <ul className={styles.boxList2} onClick={dropdown2}>
-                      <Link passHref href="#" className={styles.listHeader2}>
-                        <span onClick={funcHandler}>{title2}</span>
-                      </Link>
-
-                      <li className={styles.listItem21}>All Levels</li>
-                      <li className={styles.listItem21}>Beginner</li>
-                      <li className={styles.listItem21}>Intermediate</li>
-                      <li className={styles.listItem21}>Expert</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className={`col-2 g-3 my-3`}>
-                  <button
-                    type="button"
-                    className={`btn btn-warning ${styles.logBut}`}
-                  >
-                    Search
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </section>
     </>

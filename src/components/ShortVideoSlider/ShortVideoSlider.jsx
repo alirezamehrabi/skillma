@@ -10,6 +10,7 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { Rating } from "react-simple-star-rating";
 import Moment from "react-moment";
 import {Modal} from 'react-bootstrap';
+import Loader from "../Loader/Loader";
 const ShortSlider = ({data}) => {
     const [show, setShow] = useState(false);
 
@@ -64,7 +65,7 @@ const ShortSlider = ({data}) => {
   return (
     <div>
       <Slider {...settings}>
-        {data.map((i,index)=>{
+        {data !==undefined ? data.map((i,index)=>{
           return(
             <div className={`col-11 ${styles.shortSlidePic}`} key={index}>
           <Link href="#" >
@@ -211,7 +212,7 @@ const ShortSlider = ({data}) => {
           </Link>
         </div>
           )
-        })}
+        }):<Loader/>}
         
       </Slider>
     </div>

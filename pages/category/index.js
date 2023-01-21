@@ -10,6 +10,7 @@ import Loader from "../../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "../../src/Context/DataContext";
 import { category } from "../api/category";
+import { useRouter } from 'next/router';
 
 export async function getStaticProps() {
   const res = await fetch(`${process.env.webURL}/Category/GetMainCategories`);
@@ -39,11 +40,12 @@ const Category = (props) => {
   console.log(v)
     }
 
+    const router = useRouter();
 
  const sendCat =()=>{
   const check = document.querySelectorAll("input[type=checkbox]:checked")
   const c = [check].map((item)=> {return item.value})
-  category(v)
+  category(v).then(()=>router.push({ pathname: "/" }))
  }
   useEffect(() => {
     console.log(totalSelectedCheckboxes);
