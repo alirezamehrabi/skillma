@@ -47,12 +47,13 @@ const Menu = () => {
           <div className="row mx-auto">
             <div className="col-lg-2 col-md-7 col-sm-7 order-2 order-lg-1 col-4">
               <figure className={styles.logo}>
+                <Link href={`/`}>
                 <Image
                   src={require(`../../assets/home/logo.png`)}
                   alt="logo"
                   width="145"
                   height="42"
-                />
+                /></Link>
               </figure>
             </div>
             <div className="col-lg-7 col-md-1 col-sm-1 order-1 order-lg-2 col-2 d-flex justify-content-center">

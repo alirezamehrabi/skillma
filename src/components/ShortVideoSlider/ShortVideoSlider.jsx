@@ -62,6 +62,12 @@ const ShortSlider = ({data}) => {
       },
     ],
   };
+  if(data === undefined){
+    return <Loader/>
+  }
+else if(data.length === 0){
+  return <h3 className={styles.nodata}>There is no data to show</h3>
+}
   return (
     <div>
       <Slider {...settings}>

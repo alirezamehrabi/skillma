@@ -14,9 +14,6 @@ import { SSRProvider  } from "react-bootstrap";
 import Loader from "./../src/components/Loader/Loader";
 import { useContext } from "react";
 import DataContext from "./../src/Context/DataContext";
-import {FreeCourse} from "./api/course/free-course"
-import {useEffect,useState} from "react"
-import axios from "axios";
 export async function getStaticProps() {
   const res = await fetch(
     `${process.env.webURL}/Course/GetTopCourses`
@@ -26,9 +23,17 @@ export async function getStaticProps() {
     `${process.env.webURL}/ShortContent/GetFilteredShortVideo?page=1&pagesize=13&Type=1`
   );
   const shortvideodata = await res1.json();
+  const res2 = await fetch(
+    `${process.env.webURL}/AboutUs/GetDynamicTexts`
+  );
+  const dynamic = await res2.json();
+  const res3 = await fetch(
+    `${process.env.webURL}/AboutUs/GetAboutUs`
+  );
+  const whyskill = await res3.json();
   return {
     props: {
-      ...{ data,shortvideodata },
+      ...{ data,shortvideodata,dynamic,whyskill },
     },
   };
 }
@@ -36,6 +41,8 @@ export async function getStaticProps() {
 export default function Home(props) {
   // console.log(props.shortvideodata.data.pageData)
   const topcourse = props.data
+  const dynamic = props.dynamic
+  const whyskill = props.whyskill.data
   const { loading } = useContext(DataContext);
   return !loading ? (
     <SSRProvider>
@@ -50,10 +57,9 @@ export default function Home(props) {
         <section className={`row mx-auto text-center ${styles.header}`}>
           <div className={`col-lg-6`}>
             <h5>are you ready to learn</h5>
-            <h2>Start learning new thing Daily</h2>
+            <h2>{dynamic.headerTitle}</h2>
             <h5>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry s standard
+            {dynamic.headerDescription}
             </h5>
             <div className="col-9 mx-auto">
               <div className={`input-group ${styles.inputsearch}`}>
@@ -91,10 +97,7 @@ export default function Home(props) {
           <div className={`col-lg-6 ${styles.leftWhy}`}>
             <h2>Know about Skillma</h2>
             <h6>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry s standard. Lorem
-              Ipsum is simply dummy text of the printing and typesetting
-              industry
+              {whyskill.summery}
             </h6>
             <div className={`col-12 mx-auto text-left`}>
               <div className={`row`}>
@@ -113,8 +116,7 @@ export default function Home(props) {
                       }}
                     >
                       {" "}
-                      <CountUp end={4} duration={4} />
-                      <span className="shopassistant-plus">m+</span>{" "}
+                      <CountUp end={whyskill.studentLearningCount} duration={4} />
                     </div>
                   </h2>
                   <h6>Student Learning</h6>
@@ -134,8 +136,7 @@ export default function Home(props) {
                       }}
                     >
                       {" "}
-                      <CountUp end={4} duration={4} />
-                      <span className="shopassistant-plus">k+</span>{" "}
+                      <CountUp end={whyskill.courseCount} duration={4} />
                     </div>
                   </h2>
                   <h6>Active Courses</h6>
@@ -155,7 +156,7 @@ export default function Home(props) {
                       }}
                     >
                       {" "}
-                      <CountUp end={100} duration={4} />
+                      <CountUp end={whyskill.freeCourseCount} duration={4} />
                     </div>
                   </h2>
                   <h6>Free Courses</h6>
@@ -163,8 +164,8 @@ export default function Home(props) {
               </div>
             </div>
             <div className={`col-12 my-5 mx-auto ${styles.but}`}>
-              <Link href="#">
-                <>
+              <Link href={`/about`}>
+                <a>
                   <button
                     type="button"
                     className={`btn btn-warning px-4 py-2 ${styles.logBut} ${styles.knowBut}`}
@@ -174,7 +175,7 @@ export default function Home(props) {
                   <div>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={styles.rarrow}><defs><style>{`.cls-1{opacity:0}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect className="cls-1" width="24" height="24"/><path d="M20.88,11.43a1.77,1.77,0,0,0-.32-.5L13.07,3.44a1.51,1.51,0,1,0-2.13,2.13l4.94,4.93H4.51a1.5,1.5,0,1,0,0,3H15.88l-4.94,4.93a1.5,1.5,0,0,0,0,2.12h0a1.51,1.51,0,0,0,2.12,0h0l7.49-7.5a1.6,1.6,0,0,0,.32-.49A1.5,1.5,0,0,0,20.88,11.43Z"/></g></svg>
                   </div>
-                </>
+                </a>
               </Link>
             </div>
           </div>
@@ -249,14 +250,11 @@ export default function Home(props) {
         </div>
         <div className={`col-lg-6 ${styles.rightVarify}`}>
           <h2>choose favorite course from verified courses</h2>
-          <h6>Lorem Ipsum is simply dummy text of the printing
-and typesetting industry. Lorem  Ipsum has been
-the industry s standard. Lorem Ipsum is simply
-dummy text of the printing and typesetting industry</h6>
+          <h6>{dynamic.veryfiedDescription}</h6>
         
         <div className={`col-12 mt-5 mx-auto ${styles.but}`}>
-              <Link href="#">
-                <>
+              <Link href="/verifiedcourse">
+                <a>
                   <button
                     type="button"
                     className={`btn btn-warning ${styles.logBut} ${styles.knowBut}`}
@@ -266,7 +264,7 @@ dummy text of the printing and typesetting industry</h6>
                   <div>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={styles.rarrow}><defs><style>{`.cls-1{opacity:0}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect className="cls-1" width="24" height="24"/><path d="M20.88,11.43a1.77,1.77,0,0,0-.32-.5L13.07,3.44a1.51,1.51,0,1,0-2.13,2.13l4.94,4.93H4.51a1.5,1.5,0,1,0,0,3H15.88l-4.94,4.93a1.5,1.5,0,0,0,0,2.12h0a1.51,1.51,0,0,0,2.12,0h0l7.49-7.5a1.6,1.6,0,0,0,.32-.49A1.5,1.5,0,0,0,20.88,11.43Z"/></g></svg>
                   </div>
-                </>
+                </a>
               </Link>
             </div>
             </div>
@@ -274,8 +272,8 @@ dummy text of the printing and typesetting industry</h6>
         <section className={`row container mx-auto mb-5`}>
           <div className={`col-sm-8 ${styles.titleShort}`}>Short Videos</div>
           <div className={`col-sm-4 mx-auto ${styles.but} ${styles.but2}`}>
-              <Link href="#">
-                <>
+              <Link href="/shortvideo">
+                <a>
                   <button
                     type="button"
                     className={`btn btn-warning px-4 py-0 ${styles.logBut} ${styles.knowBut}`}
@@ -285,7 +283,7 @@ dummy text of the printing and typesetting industry</h6>
                   <div>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={styles.rarrow}><defs><style>{`.cls-1{opacity:0}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect className="cls-1" width="24" height="24"/><path d="M20.88,11.43a1.77,1.77,0,0,0-.32-.5L13.07,3.44a1.51,1.51,0,1,0-2.13,2.13l4.94,4.93H4.51a1.5,1.5,0,1,0,0,3H15.88l-4.94,4.93a1.5,1.5,0,0,0,0,2.12h0a1.51,1.51,0,0,0,2.12,0h0l7.49-7.5a1.6,1.6,0,0,0,.32-.49A1.5,1.5,0,0,0,20.88,11.43Z"/></g></svg>
                   </div>
-                </>
+                </a>
               </Link>
             </div>
             <div className={`col-12`}><ShortVideoSlider data={props.shortvideodata.data.pageData}/></div>
@@ -333,8 +331,8 @@ dummy text of the printing and typesetting industry</h6>
         <section className={`row container mx-auto mb-5 ${styles.topCourses}`}>
         <div className={`col-sm-12 ${styles.discount}`}>Discount</div>
         <div className={`col-md-6 ${styles.discountDes}`}>
-        <h2 className={`${styles.discountTitle}`}>Get 35% Discount For New Member Course</h2>
-        <h6 className={`${styles.discounttxt}`}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem  Ipsum has been the industry s standard. Lorem Ipsum is simply dummy text of the printing and typesetting industry</h6>
+        <h2 className={`${styles.discountTitle}`}>{dynamic.disountTitle}</h2>
+        <h6 className={`${styles.discounttxt}`}>{dynamic.disountDescription}</h6>
         </div>
         <div className={`col-md-6 ${styles.discountImg}`}>
         <figure className={`${styles.varifyPic} ${styles.bigImgEffect}`}>
@@ -349,7 +347,7 @@ dummy text of the printing and typesetting industry</h6>
         </section>
        
         <Master/>
-        <Subscribe/>
+        <Subscribe count={whyskill.studentLearningCount}/>
       </main>
       <Footer />
 

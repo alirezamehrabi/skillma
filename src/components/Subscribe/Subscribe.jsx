@@ -3,7 +3,7 @@ import Image from "next/image";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import styles from "../../../styles/Home.module.css";
-const Subscribe = () => {
+const Subscribe = ({count}) => {
     const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -11,7 +11,7 @@ const Subscribe = () => {
     return ( 
         <section className={`row container mx-auto mb-5 ${styles.subscribe}`}>
         <div className={`col-sm-12 ${styles.subscribeTitle}`}>Subscribe For Get Update Every<br/>New Courses</div>
-        <div className={`col-sm-12 ${styles.subscribeDes}`}>150k Students daily learn with SKillMA. Subscribe for new courses.</div>
+        <div className={`col-sm-12 ${styles.subscribeDes}`}>{count} Students daily learn with SKillMA. Subscribe for new courses.</div>
         <div className={`col-xl-6 col-sm-11 mx-auto text-center `}>
         <div className={`input-group ${styles.inputWraper}`}>
   <input type="text" className="form-control" placeholder="Enter Your Email" aria-label="Enter Your Email" aria-describedby="button-addon2"/>

@@ -1,6 +1,15 @@
 .MobileNavigation {
   display: none;
 }
+.nodata{
+  background: #f1c40f;
+  display: block;
+  width: 100%;
+  border-radius:15px;
+  text-align: center;
+  padding: 30px 15px;
+  color:#fdf1f1;
+}
 .account svg{
   width: 20px;
   height:20px;
@@ -36,7 +45,7 @@
   background: #FF9D14;
   font-weight:600
 }
-.logBut:hover {
+.but:hover .logBut, .but:hover .rarrow{
   background-color: #ffcf00;
   color: #fff;
 }
@@ -118,7 +127,9 @@
 .header h2 {
   font-weight:600
 }
-
+.but a{
+  display: flex;
+}
 .title {
   margin: 60px auto;
   text-align: center;
@@ -136,6 +147,9 @@
 .leftWhy h6 {
   line-height: 30px;
   margin-bottom: 30px;
+}
+.leftWhy h6 {
+  word-wrap: break-word;
 }
 .pic1 {
   position: absolute;

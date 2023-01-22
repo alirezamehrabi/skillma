@@ -53,14 +53,19 @@ const ShortSlider = ({data}) => {
     ],
   };
   // console.log(data)
-
+  if(data === undefined){
+    return <Loader/>
+  }
+else if(data.length === 0){
+  return <h3 className={styles.nodata}>There is no data to show</h3>
+}
 
 
   // const data = props
   return !loading ? (
     <div>
       <Slider {...settings}>
-        {data.map((i,index)=>{
+        {data !== undefined ? data.map((i,index)=>{
           return(<div className={`col-12 ${styles.courseSlidePic}`} key={index}>
           <Link href="#">
             <>
@@ -185,7 +190,7 @@ const ShortSlider = ({data}) => {
             </>
           </Link>
         </div>)
-        })}
+        }): (<Loader />)}
       </Slider>
     </div>
   ):(<Loader />)
