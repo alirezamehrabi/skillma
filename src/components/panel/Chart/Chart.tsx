@@ -43,7 +43,6 @@ import {
       {
         fill: true,
         label: 'Online Course',
-        // data: labels.map(() => faker.datatype.number({ min: 0, max: 750 })),
         data: ['100', '70', '100', '200', '140', '150', '180'],
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',

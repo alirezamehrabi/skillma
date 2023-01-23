@@ -37,12 +37,18 @@ const Courses = () => {
     setFormstep1((formstep1) => formstep1 - 1);
     console.log(formstep1)
   };
+
+  const [coursepreviewData, setCoursepreview] = useState("");
+  const prev =(e)=>{
+    console.log(e)
+  }
+
   const sec = false;
   const data = ()=>{
     if(formstep>=1){
       return(
         <>
-        {formstep === 1 && <Coursepreview completeFormStep={completeFormStep} back={backFormStep} />}
+        {formstep === 1 && <Coursepreview completeFormStep={completeFormStep} back={backFormStep} prev={prev()} />}
           {formstep === 2 && <CourseIntended completeFormStep={completeFormStep}/>}
           {formstep === 3 && <CourseSection completeFormStep={completeFormStep} />}
           {formstep === 4 && <CourseContent completeFormStep={completeFormStep} backFormStep={backFormStep}/>}

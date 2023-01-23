@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { SSRProvider } from "react-bootstrap";
 import Header from "../../../src/components/panel/Header/Header.jsx"
 import Menu from "../../../src/components/panel/Menu/Menu.jsx"
@@ -13,9 +13,30 @@ import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import Table from 'react-bootstrap/Table';
 import ReactPaginate from "react-paginate";
 import {Button,Modal} from 'react-bootstrap';
+// export async function getStaticProps() {
+//   const request = await fetch(
+//     `${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=10&PriceType=0&status=0&CategoryId=1&key=z`
+//   );
 
+//   try {
+//     const dt = await request.json();
+//     return {
+//       props: {
+//         ...{ dt },
+//       },
+//     };
+//   } catch (e) {
+//     return {
+//       redirect: {
+//         destination: "/404",
+//       },
+//     };
+//   }
+// }
 const Courses = () => {
   const [value, onChange] = useState(new Date());
+  
+  
 
   const [title, setTitle] = useState("Price");
   const [title2, setTitle2] = useState("State");
@@ -88,9 +109,26 @@ const Courses = () => {
       </tr>
       );
     });
-
-
-
+    const [si, setSi] = useState()
+    const [datacourse, setDatacourse] = useState()
+    const fetchData = async ({p,pr,st,ci,si})=>{
+      // if(p !== undefined){return p} else if(p === undefined){return p === 1}
+      try {
+        const result = await fetch(
+          `${process.env.webURL}/Course/GetCoursesDashboard?${p !== undefined ? page=p%26 : ""}${pr !== undefined ? pagesize=pr%26 : ""}${st !== undefined ? status=st%26 : ""}${ci !== undefined ? CategoryId=ci%26 : ""}${si !== undefined ? key=si%26 : ""}`
+          );
+          const json = await result.json();
+          // console.log(json.data.pageData)
+          setDatacourse(json.data)
+        // return json.data
+      } catch (error) {
+         console.log(error);
+      }
+    }
+    useEffect(() => {
+      fetchData([1]);
+    },[])
+    console.log(datacourse)
   return (
     <SSRProvider>
       <Head>
@@ -105,9 +143,8 @@ const Courses = () => {
           <div className={`col-lg-10 ${dash.maincontainer}`}>
             <Header />
             <div className={`col-12 ${co.coursetitle}`}><span className={``}>Course</span>
-              <div className={``}><button type="button" className={`${co.coursebtn}`}>Create New</button></div></div>
+              <div className={``}><Link href={`/panel/newcourses`}><button type="button" className={`${co.coursebtn}`}>Create New</button></Link></div></div>
             <div className={`col-12`}>
-
 
               <div className={`col-12 ${styles.searchBox} ${co.searchBox}`}>
                 <div className={`row `}>
@@ -118,6 +155,8 @@ const Courses = () => {
                       placeholder="Search by Name"
                       aria-label="Search by Name"
                       aria-describedby="basic-addon2"
+                      onChange={(e)=>setSi(e.target.value)}
+                      value={si}
                     />
                   </div>
                   <div className={`col-6 col-xl-2 col-md-6 g-3 my-3`}>

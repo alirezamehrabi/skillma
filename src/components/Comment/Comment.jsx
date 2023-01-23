@@ -63,11 +63,6 @@ const dp = (a)=>{
   }
     )
 }
-// useEffect(() => {
-//   disPatch(getLike(15))
-// dp()
-// }, [disPatch])
-
   const [rating, setRating] = useState();
   const handleRating = (number) => {
     if (number !== undefined) {

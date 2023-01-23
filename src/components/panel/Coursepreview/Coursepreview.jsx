@@ -19,12 +19,19 @@ const ContactSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const Courses = ({completeFormStep,back}) => {
+const Courses = ({completeFormStep,back,prev}) => {
   const [firstName, setFirstName] = useState('');
 
   const handleNameChange = event => {
     setFirstName(event.target.value);
   };
+
+  const functionHandler = (data) => {
+
+    prev(data);
+    
+    }
+
   return (
     <SSRProvider>
       <div className={`row ${co.preview}`}>
@@ -96,7 +103,7 @@ const Courses = ({completeFormStep,back}) => {
               <button type="button" onClick={back} className={`${co.conBTN} ${co.prev}`}>
               Previuse
               </button>
-              <button onClick={completeFormStep} type="button" className={`${co.conBTN} ${co.nxt}`}>
+              <button onClick={() => { completeFormStep(); functionHandler()}} type="button" className={`${co.conBTN} ${co.nxt}`}>
                 Continue
               </button>
               </div>
