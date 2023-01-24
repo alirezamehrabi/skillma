@@ -16,6 +16,7 @@ export const getLike = createAsyncThunk('like/count', async(id)=>{
   }
 })
 export const getLikeFallBack = createAsyncThunk('like/likecount', async(id)=>{
+  console.log(id)
   try {
     const token = getItem("token")
     const result = await axios.get(
@@ -24,6 +25,7 @@ export const getLikeFallBack = createAsyncThunk('like/likecount', async(id)=>{
     )
     const data = result.data.data.pageData
     console.log(data)
+    return data
   } catch (error) {
     return error;
   }

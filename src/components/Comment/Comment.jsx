@@ -59,9 +59,13 @@ const [likenum,setLikenum] = useState();
 const dp = (a)=>{
   disPatch(getLike(a)).
   then((res)=>{
-    disPatch(getLikeFallBack(rout))
-  }
-    )
+    console.log(res)
+  })
+  disPatch(getLikeFallBack(rout)).then((res)=>{
+    console.log(res)
+
+}
+)
 }
   const [rating, setRating] = useState();
   const handleRating = (number) => {
@@ -197,7 +201,10 @@ const [tcomment , setTcomment] = useState(totalCount)
             </div>
             <div
               className={`col-4 ${com.dislike}`}
-              onClick={()=>{dp(i.commentId), setLikenum(i.dissLikeCount)}} 
+              onClick={()=>disPatch(getLikeFallBack(rout)).then((res)=>{
+                console.log(res)
+            
+            })} 
             >
               <AiOutlineDislike /> DisLike({i.dissLikeCount})
             </div>

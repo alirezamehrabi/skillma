@@ -26,8 +26,7 @@ const Courses = ({completeFormStep,back,prev}) => {
     setFirstName(event.target.value);
   };
 
-  const functionHandler = (data) => {
-
+  const functionHandler = (data) => {console.log(data)
     prev(data);
     
     }
@@ -38,29 +37,28 @@ const Courses = ({completeFormStep,back,prev}) => {
         <h5 className={`${co.prevTitle}`}>Create new course</h5>
         <Formik
           initialValues={{
-            subject: "",
+            firstNameg: "",
 
             email: "",
 
             message: "",
           }}
-          validationSchema={ContactSchema}
+          // validationSchema={ContactSchema}
           onSubmit={(values) => {
             // same shape as initial values
-
-            console.log(values);
+            functionHandler(values)
+            console.log(values,"val");
           }}
         >
-          {({ errors, touched }) => (
-            <Form className={co.form}>
+          {({ errors, touched,values,handleChange ,handleSubmit}) => (
+            <Form className={co.form} >
               <label htmlFor="email" className={`${co.label}`}>How about a working title?</label>
               <Field
                 name="email"
                 type="email"
                 placeholder="e.g. Learn  ui/ux design"
                 className={`col-12 mx-auto ${co.txtfeild}`}
-                value={firstName}
-                onChange={handleNameChange}
+         
                 maxLength="160"
               />
               <span className={`${co.txtlength}`}>{160- firstName.length}</span>
@@ -103,7 +101,7 @@ const Courses = ({completeFormStep,back,prev}) => {
               <button type="button" onClick={back} className={`${co.conBTN} ${co.prev}`}>
               Previuse
               </button>
-              <button onClick={() => { completeFormStep(); functionHandler()}} type="button" className={`${co.conBTN} ${co.nxt}`}>
+              <button  type="submit" className={`${co.conBTN} ${co.nxt}`}>
                 Continue
               </button>
               </div>

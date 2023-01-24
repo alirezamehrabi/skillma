@@ -36,6 +36,7 @@ import {
   };
   
   const labels = ['Course1', 'Course2', 'Course3', 'Course4', 'Course5', 'Course6', 'Course7'];
+  const data1= ['100', '70', '100', '200', '140', '150', '180']
   
   export const data = {
     labels,
@@ -43,7 +44,7 @@ import {
       {
         fill: true,
         label: 'Online Course',
-        data: ['100', '70', '100', '200', '140', '150', '180'],
+        data:data1,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
