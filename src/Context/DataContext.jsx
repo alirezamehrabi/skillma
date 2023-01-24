@@ -29,26 +29,28 @@ export function DataProvider({ children }) {
   const[menuCat, setMenuCat] = useState();
   const[freeCourse, setFreeCourse] = useState();
   const[topCourse, setTopCourse] = useState();
+  const[tDashboard, setTDashboard] = useState();
   useEffect(() => {
     if (_iSMounted.current) {
-      (async () => {
+      (async (p) => {
 		
 		const result = (
 			await Promise.all([
 			  fetch(`https://skillma-api.shinypi.net/Category/GetAllCategories`),
 			  fetch(`https://skillma-api.shinypi.net/Course/GetFreeCourses`),
 			  fetch(`https://skillma-api.shinypi.net/Course/GetTopCourses`),
+			  fetch(`https://skillma-api.shinypi.net/TeacherDashboard/GetDashboardData?id=${p}`),
 			  ])
 		  ).map((r) => r.json());
 
       // and waiting a bit more - fetch API is cumbersome
-      const [GetAllCategories,GetFreeCourses,GetTopCourses] = await Promise.all(result);
+      const [GetAllCategories,GetFreeCourses,GetTopCourses,TeacherDashboard] = await Promise.all(result);
 
       // when the data is ready, save it to state
 		  setMenuCat(GetAllCategories);
       setFreeCourse(GetFreeCourses)
       setTopCourse(GetTopCourses)
-		
+      setTDashboard(TeacherDashboard)
 		setLoading(false);
       })();
     }
@@ -107,6 +109,7 @@ fetchData();
         menuCat,
         freeCourse,
         topCourse,
+        tDashboard
       }}
     >
       {children}

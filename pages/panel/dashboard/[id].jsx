@@ -17,6 +17,7 @@ export async function getStaticPaths() {
   }
   
   export async function getStaticProps(context) {
+    console.log(context)
     const paths = context.params.id;
     const request = await fetch(
       `${process.env.webURL}/TeacherDashboard/GetDashboardData?id=${paths}`
@@ -100,7 +101,7 @@ const Dashboard = (props) => {
                                         <div className={`${dash.datepicker}`}>
                                             <DatePicker onChange={onChange1} value={value1} maxDetail={"year"} format={"MMMM yyyy"}/>
                                         </div>
-                                        <Chart /></div>
+                                        <Chart data={dt.studentChart}/></div>
                                 </div>
                                 <div className={`col-md-4 ${dash.rightitemholder}`}>
                                     <div className={`col-12 mb-5`}><Calendar onChange={onChange} value={value} /></div>

@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import DataContext from "../../../Context/DataContext";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -9,6 +11,7 @@ import {
     Filler,
     Legend,
   } from 'chart.js';
+
   import { Line } from 'react-chartjs-2';
   
   ChartJS.register(
@@ -34,7 +37,8 @@ import {
       },
     },
   };
-  
+  const { tDashboard } = useContext(DataContext);
+
   const labels = ['Course1', 'Course2', 'Course3', 'Course4', 'Course5', 'Course6', 'Course7'];
   const data1= ['100', '70', '100', '200', '140', '150', '180']
   
