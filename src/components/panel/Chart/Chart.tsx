@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import DataContext from "../../../Context/DataContext";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -37,25 +35,27 @@ import {
       },
     },
   };
-  const { tDashboard } = useContext(DataContext);
-
-  const labels = ['Course1', 'Course2', 'Course3', 'Course4', 'Course5', 'Course6', 'Course7'];
-  const data1= ['100', '70', '100', '200', '140', '150', '180']
   
-  export const data = {
-    labels,
-    datasets: [
-      {
-        fill: true,
-        label: 'Online Course',
-        data:data1,
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
-      },
-    ],
-  };
-  
-  export default function App() {
+  export default function App(props) {
+console.log(props.data)
+const labels = props.data.map((i)=>{
+  return [i.courseName]
+})
+  const data1= props.data.map((i)=>{
+    return [i.studentCount]
+  })
+    var data = {
+      labels,
+      datasets: [
+        {
+          fill: true,
+          label: 'Online Course',
+          data:data1,
+          borderColor: 'rgb(53, 162, 235)',
+          backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+      ],
+    };
     return <Line options={options} data={data} />;
   }
   

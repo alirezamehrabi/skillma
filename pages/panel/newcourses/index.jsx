@@ -17,8 +17,15 @@ import dash from "../../../styles/panel/Dashboard.module.css";
 import styles from "../../../styles/Home.module.css";
 import co from "../../../styles/panel/course.module.css";
 import men from "../../../styles/panel/Menu.module.css";
+export async function getStaticProps() {
+  const res = await fetch(`${process.env.webURL}/Category/GetMainCategories`);
+  const posts = await res.json();
 
-const Courses = () => {
+  return {
+    props: { posts },
+  };
+}
+const Courses = (props) => {
   const [formstep, setFormstep] = useState(0)
   const completeFormStep = () => {
     setFormstep((formstep) => formstep + 1);
@@ -48,7 +55,7 @@ const Courses = () => {
     if(formstep>=1){
       return(
         <>
-        {formstep === 1 && <Coursepreview completeFormStep={completeFormStep} back={backFormStep} prev={(item)=>console.log(item)} />}
+        {formstep === 1 && <Coursepreview data={props.posts.data} backFormStep={backFormStep} prev={(item)=>console.log(item)} sec={sec}/>}
           {formstep === 2 && <CourseIntended completeFormStep={completeFormStep}/>}
           {formstep === 3 && <CourseSection completeFormStep={completeFormStep} />}
           {formstep === 4 && <CourseContent completeFormStep={completeFormStep} backFormStep={backFormStep}/>}
