@@ -7,21 +7,24 @@ import { Formik, Form, Field,Table  } from "formik";
 import * as Yup from "yup";
 import UploadBox from "../UploadBox/UploadBox";
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
-import { createReactEditorJS } from 'react-editor-js'
-// import CheckList from '@editorjs/checklist'
-import Paragraph from '@editorjs/paragraph'
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic'
+
+const ReactQuill = dynamic(import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
 const ContactSchema = Yup.object().shape({
   title: Yup.string()
     .min(2, "Too Short!")
     .required("Required"),
-  category: Yup.string()
+  categoryId: Yup.string()
     .min(2, "Too Short!")
     .required("Required"),
   level: Yup.string()
     .min(4, "Too Short!")
     .required("Required"),
 });
-export const ReactEditorJS = createReactEditorJS()
 
 const Courses = ({prev,sec,data  }) => {
   const [firstName, setFirstName] = useState('');
@@ -30,7 +33,6 @@ const Courses = ({prev,sec,data  }) => {
     prev(data);
     
     }
-
     const [f1, setF1] = useState("");
     const [f2, setF2] = useState("");
     const [f3, setF3] = useState("");
@@ -48,7 +50,7 @@ const Courses = ({prev,sec,data  }) => {
     const [f16, setF16] = useState("");
     const [f17, setF17] = useState("");
     const [title, setTitle] = useState("");
-    const [cat, setCat] = useState("");
+    const [categoryId , setCategoryId ] = useState("");
     const [f12, setF12] = useState("");
     const [level, setLevel] = useState("");
     const [sec1, setSec1] = useState("");
@@ -135,8 +137,6 @@ const Courses = ({prev,sec,data  }) => {
     <rect id="Rectangle_6118" data-name="Rectangle 6118" width="54" height="54" transform="translate(0 0)" fill="#3a8944" opacity="0"/>
     <path id="Path_51926" data-name="Path 51926" d="M28.917,16.835,20.176,25.6l-3.362-3.362a2.037,2.037,0,1,0-2.873,2.873l4.788,4.809a2.041,2.041,0,0,0,2.873,0L31.79,19.728a2.038,2.038,0,0,0,.011-2.882l-.011-.011A2.037,2.037,0,0,0,28.917,16.835ZM23.375,3A20.375,20.375,0,1,0,43.75,23.375,20.374,20.374,0,0,0,23.375,3Zm0,36.675a16.3,16.3,0,1,1,16.3-16.3A16.3,16.3,0,0,1,23.375,39.675Z" transform="translate(3.792 3.792)" fill="#3a8944"/>
   </svg>
-
-
     const delet = (
       <svg
         id="Component_28_1"
@@ -350,6 +350,28 @@ const Courses = ({prev,sec,data  }) => {
         />
       </svg>
     );
+    const [value, setValue] = useState('');
+
+      const [formstep, setFormstep] = useState(0)
+      const completeFormStep = () => {
+        setFormstep((formstep) => formstep + 1);
+        console.log(formstep + "normal")
+      };
+      const backFormStep = () => {
+        setFormstep((formstep) => formstep - 1);
+        // console.log(formstep)
+      };
+      const [formstep1, setFormstep1] = useState(0)
+      const completeFormStep1 = () => {
+        setFormstep1((formstep1) => formstep1 + 1);
+        console.log(formstep1 + "online")
+      };
+      const backFormStep1 = () => {
+        setFormstep1((formstep1) => formstep1 - 1);
+        console.log(formstep1)
+      };
+
+
   return (
     <SSRProvider>
       <div className={`row ${co.preview}`}>
@@ -359,6 +381,9 @@ const Courses = ({prev,sec,data  }) => {
             title:"",
             checked: [],
             checked2: [],
+            categoryId:"",
+            title:"",
+            level:""
           }}
           // validationSchema={ContactSchema}
           onSubmit={(values) => {
@@ -390,7 +415,7 @@ const Courses = ({prev,sec,data  }) => {
 
 
 {/* form1 - coursePreview */}
-
+<div className={formstep === 0 ? `${co.active}` : `${co.noactive}`}>
 <h5 className={`${co.prevTitle}`}>Create new course</h5>
 
               <label htmlFor="title" className={`${co.label}`}>How about a working title?</label>
@@ -400,27 +425,26 @@ const Courses = ({prev,sec,data  }) => {
                 placeholder="e.g. Learn  ui/ux design"
                 className={`col-12 mx-auto ${co.txtfeild}`}
                 onKeyUp={handleNameChangetitle}
-
                 maxLength="160"
               />
               <span className={`${co.txtlength}`}>{160- title.length}</span>
               {errors.title && touched.title ? (
                 <div className={co.err}>{errors.title}</div>
               ) : null}
-              <label htmlFor="cat" className={`${co.label}`}>What category best fits the knowledge you'll share?</label>
+              <label htmlFor="categoryId" className={`${co.label}`}>What category best fits the knowledge you'll share?</label>
               <Field
                 as="select"
-                name="cat"
+                name="categoryId"
                 placeholder="Select category"
                 className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`} defaultValue={'DEFAULT'} 
               >
-              <option disabled hidden value="DEFAULT" >Select category</option>
+              <option disabled hidden value="DEFAULT" >{categoryId}</option>
               {data.map((i)=>{
                 return <option value={i.id} key={i.id}>{i.categoryName}</option>
               })}
                 </Field>
-              {errors.cat && touched.cat ? (
-                <div className={co.err}>{errors.cat}</div>
+              {errors.categoryId && touched.categoryId ? (
+                <div className={co.err}>{errors.categoryId}</div>
               ) : null}
               <label htmlFor="level" className={`${co.label}`}>select level</label>
               <Field
@@ -442,17 +466,14 @@ const Courses = ({prev,sec,data  }) => {
               This Course is Free
             </label>
               <div className={`col-12 d-flex justify-content-end mt-4`}>
-              <button type="button"  className={`${co.conBTN} ${co.prev}`}>
-              Previuse
-              </button>
-              <button  type="submit" className={`${co.conBTN} ${co.nxt}`}>
+              {(title === "" && level ==="" && categoryId === "") ? <>please fill</> : <button  type="submit" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
                 Continue
-              </button>
+              </button>}
+              </div>
               </div>
 
-
 {/* form2 CourseIntended */}
-
+<div className={formstep === 1 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row container mx-auto ${co.blueDes}`}>
         <div className={`col-1`}>{notice}</div>
         <div className={`col-11 ${co.noticedes}`}>
@@ -601,24 +622,28 @@ const Courses = ({prev,sec,data  }) => {
               <div className={`col-12 mx-auto text center ${co.addBtn}`}>
                 {plus}Add more
               </div>
-              <h5 className={`fw-bold`}>Description</h5>
-              <div className={`${co.ckHolder}`}>Editor Holder</div>
-              <ReactEditorJS defaultValue={blocks}/>
-              <div className={`col-12 d-flex justify-content-end mt-4`}>
-                <button type="button" className={`${co.conBTN} ${co.nxt}`}>
+              <h5 className={`fw-bold mb-4`}>Description</h5>
+              <ReactQuill theme="snow" value={value} onChange={setValue} />
+              <div className="my-2"/>
+              <div className={`col-12 d-flex justify-content-end mt-5`}>
+              <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
+                  Previous
+                </button>
+                <button type="button" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
                   Continue
                 </button>
+
               </div>
       </div>
 
-
+      </div>
 
 
 
 {/* form3 CourseSection */}
 
 
-
+<div className={formstep === 2 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row ${co.preview}`}>
         <div className={`row mx-auto justify-content-center`}>
           <div className={`col-2 ${co.passed}`}>
@@ -706,12 +731,15 @@ const Courses = ({prev,sec,data  }) => {
                 {plus}Add more
               </div>
               <div className={`col-12 d-flex justify-content-end mt-4`}>
-                <button type="button" className={`${co.conBTN} ${co.nxt}`}>
+              <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
+                  Previous
+                </button>
+                <button type="button" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
                   Continue
                 </button>
               </div>
       </div>
-
+      </div>
 
 
 
@@ -726,7 +754,7 @@ const Courses = ({prev,sec,data  }) => {
 
 
 
-
+<div className={formstep === 3 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row ${co.preview}`}>
         <div className={`row mx-auto justify-content-center`}>
           <div className={`col col-xxl-2 ${co.passed}`}>
@@ -830,7 +858,10 @@ const Courses = ({prev,sec,data  }) => {
           </div>
         </div>
         <div className={`d-flex justify-content-end ${co.corsebtn}`}>
-          <button type="button" className={`${co.conBTN} ${co.nxt}`}>
+        <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
+                  Previous
+                </button>
+          <button type="button" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
             Continue
           </button>
         </div>
@@ -915,7 +946,7 @@ const Courses = ({prev,sec,data  }) => {
           </div>
         </Modal.Header>
       </Modal>
-
+      </div>
 
 
 
@@ -923,7 +954,7 @@ const Courses = ({prev,sec,data  }) => {
 
 {/* form5 CourseLanding */}
 
-
+<div className={formstep === 4 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row container mx-auto ${co.redDes}`}>
         <div className={`col-1`}>{notice}</div>
         <div className={`col-11 ${co.noticedes}`}><span>
@@ -1167,19 +1198,21 @@ const Courses = ({prev,sec,data  }) => {
 
         
         <div className={`d-flex justify-content-end ${co.corsebtn}`}>
-        <button type="button" className={`${co.conBTN} ${co.nxt}`}>
+        <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
+                  Previous
+                </button>
+        <button type="button" className={`${co.conBTN} ${co.nxt}`} onClick={completeFormStep}>
                 Continue
               </button>
       </div>
       </div>
       </div>
-
+      </div>
 
 
 
 {/* form6 CoursePrice */}
-
-
+<div className={formstep === 5 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row ${co.preview}`}>
         <div className={`row mx-auto justify-content-center`}>
           <div className={`col col-xxl-2 ${co.passed}`}>
@@ -1288,6 +1321,9 @@ const Courses = ({prev,sec,data  }) => {
               </div>
               </div>
         <div className={`d-flex justify-content-end ${co.corsebtn}`}>
+        <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
+                  Previous
+                </button>
         <button type="submit" className={`${co.conBTN} ${co.nxt}`}>
                 Save
               </button>
@@ -1306,7 +1342,7 @@ const Courses = ({prev,sec,data  }) => {
       </div>
       </div>
 
-
+      </div>
             </Form>
           )}
         </Formik>

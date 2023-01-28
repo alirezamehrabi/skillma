@@ -17,7 +17,6 @@ export async function getStaticPaths() {
   }
   
   export async function getStaticProps(context) {
-    console.log(context)
     const paths = context.params.id;
     const request = await fetch(
       `${process.env.webURL}/TeacherDashboard/GetDashboardData?id=${paths}`
@@ -107,29 +106,14 @@ const Dashboard = (props) => {
                                     <div className={`col-12 mb-5`}><Calendar onChange={onChange} value={value} /></div>
                                     <div className={`col-12 mt-5 ${dash.timelinepart}`}>
                                         <h6 className={`col-12 mt-5 ${dash.tltitle}`}>TimeLine</h6>
-                                        <div className={`col-12 mb-4 ${dash.timelineitem}`}><h5 className={`${dash.timelinename}`}>Lorem Ipsum is simply dummy text<br />(Task Title)</h5>
-                                            <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                                            <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
+                                        {dt.timeLine.map((i)=>{
+                                            return(
+                                                <div className={`col-12 mb-4 ${dash.timelineitem}`}><h5 className={`${dash.timelinename}`}>{i.title}</h5>
+                                            <h6 className={`${dash.timelinetitle}`}>{i.courseName}</h6>
+                                            <h6 className={`${dash.timelineclock}`}>{i.time}</h6>
                                         </div>
-                                        <div className={`col-12 mb-4`}>
-                                        <h6 className={`${dash.timelineremain}`}>//In next 10 minute</h6>
-                                        </div>
-                                        <div className={`col-12 mb-4 ${dash.timelineitem}`}><h5 className={`${dash.timelinename}`}>Lorem Ipsum is simply dummy text<br />(Task Title)</h5>
-                                            <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                                            <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
-                                        </div>
-                                        <div className={`col-12 mb-4 ${dash.timelineitem}`}><h5 className={`${dash.timelinename}`}>Lorem Ipsum is simply dummy text<br />(Task Title)</h5>
-                                            <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                                            <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
-                                        </div>
-                                        <div className={`col-12 mb-4 ${dash.timelineitem}`}><h5 className={`${dash.timelinename}`}>Lorem Ipsum is simply dummy text<br />(Task Title)</h5>
-                                            <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                                            <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
-                                        </div>
-                                        <div className={`col-12 mb-4 ${dash.timelineitem}`}><h5 className={`${dash.timelinename}`}>Lorem Ipsum is simply dummy text<br />(Task Title)</h5>
-                                            <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                                            <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
-                                        </div>
+                                            )
+                                        })}
 
                                     </div>
                                 </div>

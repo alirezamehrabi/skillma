@@ -14,14 +14,17 @@ import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
 import { Button, Modal } from "react-bootstrap";
 import Loader from "../../../src/components/Loader/Loader.jsx";
+import { DeleteCourse } from "../../api/course/course";
 export async function getStaticProps() {
   const res = await fetch(`${process.env.webURL}/Category/GetMainCategories`);
-  const res1 = await fetch(`${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=5`);
+  const res1 = await fetch(
+    `${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=5`
+  );
   const posts = await res.json();
   const firstdt = await res1.json();
 
   return {
-    props: { posts,firstdt },
+    props: { posts, firstdt },
   };
 }
 const Courses = (props) => {
@@ -163,12 +166,10 @@ const Courses = (props) => {
     </svg>
   );
 
-
   const fetchData = async (p) => {
     try {
       const result = await fetch(
         `${process.env.webURL}/Course/GetCoursesDashboard?page=${p}&pagesize=5&CategoryId=${catId}&key=${si}`
-        // ${st !== undefined ? status=st%26 : ""}
       );
       const json = await result.json();
       // console.log(json.data.pageData)
@@ -182,17 +183,15 @@ const Courses = (props) => {
     fetchData(1);
   }, [state]);
 
-
   const sData = async (p) => {
     try {
       const result = await fetch(
-        `${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=5&CategoryId=${p.catId}&key=${p.si}`
-        // ${st !== undefined ? status=st%26 : ""}
+        `${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=5&CategoryId=${p.catId}&key=${p.si}&PriceType=${p.pr}&status=${p.st}`
       );
       const json = await result.json();
       // console.log(json.data.pageData)
       setDatacourse(json.data);
-      setDt(json.data)
+      setDt(json.data);
       return json.data;
     } catch (error) {
       console.log(error);
@@ -200,31 +199,72 @@ const Courses = (props) => {
   };
 
   const [catId, setCatId] = useState("");
-  // console.log(catId)
   const [si, setSi] = useState("");
   const [datacourse, setDatacourse] = useState(firstdt);
   const [dt, setDt] = useState(firstdt);
 
   const [pageNum, setPageNum] = useState(0);
   const itemPerPage = 5;
-  console.log(dt)
 
   const changePage = async ({ selected }) => {
     setPageNum(selected);
     setDt(await fetchData(selected + 1));
   };
-  const pageCount = datacourse !== undefined ? datacourse.totalPage : <Loader />
-  const dtlenght = datacourse !== undefined ? datacourse.pageData.length : <Loader />
-  const dttotallenght = datacourse !== undefined ? datacourse.totalCount : <Loader />
-  // console.log(pageCount);
-  const displayItems = dt.pageData !== undefined ? (
+  const pageCount =
+    datacourse !== undefined ? datacourse.totalPage : <Loader />;
+  const dtlenght =
+    datacourse !== undefined ? datacourse.pageData.length : <Loader />;
+  const dttotallenght =
+    datacourse !== undefined ? datacourse.totalCount : <Loader />;
+  const [pr, setPr] = useState(null);
+  const prData = () => {
+    dt.pageData !== undefined ? (
+      dt.pageData.map((i) => {
+        if (i.price === 0) {
+          setPr(0);
+        } else if (i.price > 0) {
+          setPr(1);
+        }
+      })
+    ) : (
+      <Loader />
+    );
+  };
+  useEffect(() => {
+    prData();
+  }, []);
+  const [st, setSt] = useState(null);
+  const stData = () => {
+    dt.pageData !== undefined ? (
+      dt.pageData.map((i) => {
+        if (i.status === 0) {
+          setSt(0);
+        } else if (i.status === 1) {
+          setSt(1);
+        } else if (i.status === 2) {
+          setSt(2);
+        }
+      })
+    ) : (
+      <Loader />
+    );
+  };
+  useEffect(() => {
+    prData();
+  }, []);
+  console.log(st);
+  useEffect(() => {
+    stData();
+  }, []);
+  const displayItems =
+    dt.pageData !== undefined ? (
       dt.pageData.map((i) => {
         return (
           <tr key={i.id}>
             <td>{i.id}</td>
             <td>{i.title}</td>
             <td>{i.categoryName}</td>
-            <td>{i.price}</td>
+            <td>{i.price === 0 ? "Free" : i.price}</td>
             <td>{i.studentCount}</td>
             <td>{parseFloat(i.rate).toFixed(2)}</td>
             {i.progress === "Compelete" ? (
@@ -234,44 +274,57 @@ const Courses = (props) => {
             )}
             {i.status === "Published" ? (
               <td className={`${co.greenc}`}>{i.status}</td>
+            ) : i.status === "Awaiting" ? (
+              <td className={`${co.orangec}`}>{i.status}</td>
             ) : (
               <td className={`${co.orangec}`}>{i.status}</td>
             )}
             {i.isVerified === true ? <td>{tik}</td> : <td>{line}</td>}
             <td>
-              <div className={`${co.del}`} onClick={() => handleShow(i.rate)}>
+              <div className={`${co.del}`} onClick={() => {
+                          handleShow(i.id);
+                          setModalData(i);
+                        }}>
                 {delet}
               </div>
-              <div className={`${co.edit}`}>{edit}</div>
+              <div className={`${co.edit}`}><Link href={`/panel/newcourses?id=${i.id}`}>{edit}</Link></div>
             </td>
+            {modalData !== null ? (
+          <Modal show={show} onHide={handleClose}>
+          <Modal.Body className={`${co.modalbody}`}>
+            {delet} <h5 className={``} >Delete course</h5>
+            <h6 className={``}>
+              Lorem ipsum, or lipsum as it is sometimes known
+            </h6>
+            <Button variant="outline-danger mt-3" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="danger mx-3 mt-3" onClick={()=>{DeleteCourse(modalData.id);handleClose()}}>
+              Save Changes
+            </Button>
+          </Modal.Body>
+        </Modal>
+        ) : null}
+            
           </tr>
+          
         );
+        
       })
     ) : (
       <Loader />
     );
-
+  // console.log(sData)
   const [state, setState] = useState(0);
   const submitHandler = (e) => {
     e.preventDefault();
     setState(state + 1);
-    sData({catId,si})
+    sData({ catId, si, pr, st });
   };
-  console.log(dt)
+  // console.log(dt)
 
-  // const [mydata, setMydata] = useState();
-  // useEffect(() => {
-  //   const data =async()=>{
-  //   setMydata(await datacourse)
-  // }
-  // data()
-  // }, [])
-
-  // const datadisplay = courseDT.map((i) => {
-  //   return (
-  //   );
-  // });
-
+  const [modalData, setModalData] = useState(null);
+  
   return (
     <SSRProvider>
       <Head>
@@ -348,8 +401,18 @@ const Courses = (props) => {
                             <span onClick={funcHandler}>{title}</span>
                           </Link>
 
-                          <li className={styles.listItem21}>Free</li>
-                          <li className={styles.listItem21}>Price</li>
+                          <li
+                            className={styles.listItem21}
+                            onClick={() => setPr(0)}
+                          >
+                            Free
+                          </li>
+                          <li
+                            className={styles.listItem21}
+                            onClick={() => setPr(1)}
+                          >
+                            Price
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -365,8 +428,24 @@ const Courses = (props) => {
                             <span onClick={funcHandler}>{title2}</span>
                           </Link>
 
-                          <li className={styles.listItem21}>Completed</li>
-                          <li className={styles.listItem21}>onGoing</li>
+                          <li
+                            className={styles.listItem21}
+                            onClick={() => setSt(0)}
+                          >
+                            Awaiting
+                          </li>
+                          <li
+                            className={styles.listItem21}
+                            onClick={() => setSt(1)}
+                          >
+                            Published
+                          </li>
+                          <li
+                            className={styles.listItem21}
+                            onClick={() => setSt(2)}
+                          >
+                            IsDeleted
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -411,9 +490,7 @@ const Courses = (props) => {
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {displayItems}
-                    </tbody>
+                    <tbody>{displayItems}</tbody>
                   </Table>
                   <ReactPaginate
                     perviousLabel={"Pervious"}
@@ -436,21 +513,6 @@ const Courses = (props) => {
           </div>
         </div>
       </div>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Body className={`${co.modalbody}`}>
-          {delet} <h5 className={``}>Delete course</h5>
-          <h6 className={``}>
-            Lorem ipsum, or lipsum as it is sometimes known
-          </h6>
-          <Button variant="outline-danger mt-3" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="danger mx-3 mt-3" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Body>
-      </Modal>
     </SSRProvider>
   );
 };
