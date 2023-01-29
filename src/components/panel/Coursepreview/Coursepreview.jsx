@@ -34,7 +34,8 @@ const Courses = ({prev,sec,data  }) => {
     
     }
     const [f1, setF1] = useState("");
-    const [f2, setF2] = useState("");
+    const [whatLearn, setWhatLearn] = useState("");
+    const [whatLearn6, setWhatLearn6] = useState("");
     const [f3, setF3] = useState("");
     const [f4, setF4] = useState("");
     const [f5, setF5] = useState("");
@@ -67,6 +68,15 @@ const Courses = ({prev,sec,data  }) => {
     const handleNameChangetitle = (event) => {
       setTitle(event.target.value);
     };
+    const handleNameChangewhatLearn = (event) => {
+      setWhatLearn(event.target.value);
+    };
+    const handleNameChangewhatLearn6 = (event) => {
+      setWhatLearn6(event.target.value);
+    };
+    const handleNameChangeCat = (event) => {
+      setCategoryId(event.target.value);
+    };
      const handleNameChangesec1 = (event) => {
       setSec1(event.target.value);
     };
@@ -84,6 +94,9 @@ const Courses = ({prev,sec,data  }) => {
     };
     const handleNameChangediscount = (event) => {
       setDiscount(event.target.value);
+    };
+    const handleNameChangepercent = (event) => {
+      setPercent(event.target.value);
     };
     const handleNameChange = (event) => {
       setF1(event.target.value);
@@ -353,8 +366,9 @@ const Courses = ({prev,sec,data  }) => {
     const [value, setValue] = useState('');
 
       const [formstep, setFormstep] = useState(0)
-      const completeFormStep = () => {
-        setFormstep((formstep) => formstep + 1);
+      const completeFormStep = (value) => {
+          setFormstep((formstep) => formstep + 1);
+        
         console.log(formstep + "normal")
       };
       const backFormStep = () => {
@@ -383,7 +397,13 @@ const Courses = ({prev,sec,data  }) => {
             checked2: [],
             categoryId:"",
             title:"",
-            level:""
+            level:"",
+            whatLearn:"",
+            whatLearn6:"",
+            value:"",
+            price:"",
+            percent:""
+          
           }}
           // validationSchema={ContactSchema}
           onSubmit={(values) => {
@@ -404,6 +424,8 @@ const Courses = ({prev,sec,data  }) => {
             // "whatYouLearn": "string",
             // "status": 0
             // functionHandler(values)
+
+            
             console.log(values,"val");
           }}
         >
@@ -436,9 +458,10 @@ const Courses = ({prev,sec,data  }) => {
                 as="select"
                 name="categoryId"
                 placeholder="Select category"
+                onKeyUp={handleNameChangeCat}
                 className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`} defaultValue={'DEFAULT'} 
               >
-              <option disabled hidden value="DEFAULT" >{categoryId}</option>
+              <option hidden value="DEFAULT" >Select Category</option>
               {data.map((i)=>{
                 return <option value={i.id} key={i.id}>{i.categoryName}</option>
               })}
@@ -453,7 +476,7 @@ const Courses = ({prev,sec,data  }) => {
                 placeholder="select level"
                 className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`} defaultValue={'DEFAULT'} 
               >
-              <option disabled hidden value="DEFAULT" >Select Level</option>
+              <option hidden value="DEFAULT" >Select Level</option>
               <option value="0">Beginer</option>
               <option value="1">Intermediate</option>
               <option value="2">Expert</option>
@@ -466,7 +489,7 @@ const Courses = ({prev,sec,data  }) => {
               This Course is Free
             </label>
               <div className={`col-12 d-flex justify-content-end mt-4`}>
-              {(title === "" && level ==="" && categoryId === "") ? <>please fill</> : <button  type="submit" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
+              {(values.level === "" || values.categoryId === "" || values.title === "") ? <>please fill</> : <button  type="submit" onClick={completeFormStep}  className={`${co.conBTN} ${co.nxt}`}>
                 Continue
               </button>}
               </div>
@@ -543,7 +566,7 @@ const Courses = ({prev,sec,data  }) => {
                 type="text"
                 placeholder="e.g. Learn  ui/ux design"
                 className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onKeyUp={handleNameChange}
+                onKeyUp={handleNameChangewhatLearn}
                 maxLength="160"
               />
               <span className={`${co.txtlength} ${co.txtlength2}`}>
@@ -613,7 +636,7 @@ const Courses = ({prev,sec,data  }) => {
                 type="text"
                 placeholder="e.g. Learn  ui/ux design"
                 className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onChange={handleNameChange5}
+                onKeyUp={handleNameChangewhatLearn6}
                 maxLength="160"
               />
               <span className={`${co.txtlength} ${co.txtlength2}`}>
@@ -629,9 +652,9 @@ const Courses = ({prev,sec,data  }) => {
               <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
                   Previous
                 </button>
-                <button type="button" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
-                  Continue
-                </button>
+                {(values.whatLearn === "" || values.whatLearn6 ==="") ? <>please fill</> : <button  type="submit" onClick={completeFormStep}  className={`${co.conBTN} ${co.nxt}`}>
+                Continue
+              </button>}
 
               </div>
       </div>
@@ -734,9 +757,9 @@ const Courses = ({prev,sec,data  }) => {
               <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
                   Previous
                 </button>
-                <button type="button" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
-                  Continue
-                </button>
+                {(values.sec1 === "") ? <>please fill</> : <button  type="submit" onClick={completeFormStep}  className={`${co.conBTN} ${co.nxt}`}>
+                Continue
+              </button>}
               </div>
       </div>
       </div>
@@ -814,7 +837,7 @@ const Courses = ({prev,sec,data  }) => {
           </div>
           <div className={`row ${co.contentcourse}`}>
             <div
-              className={`col-3 d-flex justify-content-center ${co.newItem}`}
+              className={`col-3 d-flex justify-content-center ${co.newItem}`} onClick={handleShow2}
             >
               <div className={`d-flex align-self-center`}>
                 {plus} Add New Lecture
@@ -1269,6 +1292,7 @@ const Courses = ({prev,sec,data  }) => {
                 type="text"
                 placeholder="Insert Course price"
                 className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
+                onKeyUp={handleNameChangeprice}
               />
               <span className={`${co.txtlength} ${co.txtlength2}`}>
                 $
@@ -1290,6 +1314,7 @@ const Courses = ({prev,sec,data  }) => {
                 type="text"
                 placeholder="discount code"
                 className={`col-12 col-md-11 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
+                onKeyUp={handleNameChangediscount}
               />
               {errors.discount && touched.discount ? (
                 <div className={co.err}>{errors.discount}</div>
@@ -1297,13 +1322,14 @@ const Courses = ({prev,sec,data  }) => {
               </div>
               <div className={`col-md-6 position-relative`}>
               <label htmlFor="percent" className={`col-12 ${co.label} d-block`}>percent discount</label>
+              
               <Field
                 as="select"
-                name="discountper"
+                name="percent"
                 placeholder="percent discount"
                 className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`} defaultValue={'DEFAULT'} 
               >
-              <option disabled hidden value="DEFAULT" >percent discount</option>
+              <option hidden value="DEFAULT" >percent discount</option>
               <option value="10%">10%</option>
               <option value="20%">20%</option>
               <option value="50%">50%</option>
@@ -1324,9 +1350,9 @@ const Courses = ({prev,sec,data  }) => {
         <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
                   Previous
                 </button>
-        <button type="submit" className={`${co.conBTN} ${co.nxt}`}>
+              {(values.price === "" || values.percent === "" || values.discount === "") ? <>please fill</> : <button  type="submit" onClick={handleShow}  className={`${co.conBTN} ${co.nxt}`}>
                 Save
-              </button>
+              </button>}
               <Modal show={show} onHide={handleClose}>
         <Modal.Body className={co.stepModal}><div>{tik}</div>
         <h6>Your  course  successfully  has been send</h6>

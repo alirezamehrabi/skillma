@@ -60,12 +60,12 @@ const dp = (a)=>{
   disPatch(getLike(a)).
   then((res)=>{
     console.log(res)
+    disPatch(getLikeFallBack(rout)).then((res)=>{
+      console.log(res)
+  }
+  )
   })
-  disPatch(getLikeFallBack(rout)).then((res)=>{
-    console.log(res)
-
-}
-)
+  
 }
   const [rating, setRating] = useState();
   const handleRating = (number) => {

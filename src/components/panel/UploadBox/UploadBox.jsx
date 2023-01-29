@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 import Image from "next/image";
 import co from "../../../../styles/panel/course.module.css"
+import axios from 'axios';
+import { getItem } from '../../../core/services/storage/storage';
 const thumbsContainer = {
   display: 'flex',
   flexDirection: 'row',
@@ -67,16 +69,86 @@ function Previews(props) {
     return () => files.forEach(file => URL.revokeObjectURL(file.preview));
   }, []);
 
+  const [dt,setDt] = useState()
+const datafile = async(e)=>{
+  
+  console.log(e.target.files[0],"event")
+  setDt(e.target.files[0])
+  let formData = new FormData();
+  console.log(dt)
+  formData.append('File', dt);
+  const config = {     
+    headers: { 'content-type': 'multipart/form-data' }
+}
+const token = getItem("token")
+
+    try{
+        const result = await axios.post(`https://skillma-api.shinypi.net/Course/UploadFile`,formData
+        ,{config,
+          headers: { Authorization: 'bearer '+  token}
+          }).then(response => {
+                    console.log(response.data.uploadMessage);
+                })
+    }
+    catch(error){
+            console.log(error)
+    }
+// const token = getItem("token")
+// axios.post("https://skillma-api.shinypi.net/Course/UploadFile", formData, {config,
+// headers: { Authorization: 'bearer '+  token}
+// })
+//     .then(response => {
+//         console.log(response);
+//     })
+//     .catch(error => {
+//         console.log(error);
+//     });
+}
+// const inpu = document.getElementById("inp").value
+const inputRef1 = useRef(null);
+function handleClick() {
+  console.log(inputRef.current.value);
+}
+
+const [file, setFile] = useState();
+  const inputRef = useRef(null);
+
+  const handleUploadClick = () => {
+    // 👇 We redirect the click event onto the hidden input element
+    inputRef.current?.click();
+  };
+
+  const handleFileChange = (e) => {
+    if (!e.target.files) {
+      return;
+    }
+
+    setFile(e.target.files[0]);
+
+    // 🚩 do the file upload here normally...
+  };
+
+
+
   return (
     <section className="container">
       <div {...getRootProps({className: 'dropzone'})}>
-        <input {...getInputProps()} />
+        {/* <input {...getInputProps()} onChange={(e)=>datafile(e)}  type="file" ref={inputRef} /> */}
+        <input
+        type="file"
+        ref={inputRef}
+        onChange={handleFileChange}
+        style={{ display: 'none' }}
+      />
+        
         <div className={`${co.uppic}`}>
         <Image src={require(`../../../assets/panel/course/upload2.gif`)} alt=""/>
         <p>Drag & drop <span>Videos</span></p>
         <h6>or <span>Browse videos</span> on your computer</h6>
-        <button className={`${co.upBTN}`}>Upload</button>
+        <button className={`${co.upBTN}`} onClick={handleUploadClick}>{file ? `${file.name}` : 'Click to select'}</button>
+        
       </div>
+      <button >Upload</button>
       </div>
       <aside style={thumbsContainer}>
         {thumbs}
