@@ -364,7 +364,7 @@ const Courses = ({prev,sec,data  }) => {
       </svg>
     );
     const [value, setValue] = useState('');
-
+console.log(value)
       const [formstep, setFormstep] = useState(0)
       const completeFormStep = (value) => {
           setFormstep((formstep) => formstep + 1);

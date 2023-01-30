@@ -17,24 +17,40 @@ import Loader from "../../../src/components/Loader/Loader.jsx";
 import { DeleteCourse } from "../../api/course/course";
 import { getItem } from "../../../src/core/services/storage/storage.js";
 import Moment from "react-moment";
-export async function getStaticProps() {
-  const res1 = await fetch(
-    `${process.env.webURL}/Task/GetAllTasks?page=1&pagesize=5`
-  );
-  // const posts = await res.json();
-  const firstdt = await res1.json();
+import { useRouter } from "next/router.js";
 
-  return {
-    props: { firstdt },
-  };
+export async function getStaticPaths() {
+  return { paths: [], fallback: "blocking" };
 }
+
+export async function getStaticProps(context) {
+  const paths = context.params.id;
+  const request1 = await fetch(
+    `${process.env.webURL}/Task/GetToDoTaskByTaskId?TaskId=${paths}&page=1&pagesize=5`
+  );
+
+  try {
+    const todo = await request1.json();
+    return {
+      props: {
+        ...{ todo },
+      },
+    };
+  } catch (e) {
+    return {
+      redirect: {
+        destination: "/404",
+      },
+    };
+  }
+}
+
 const Courses = (props) => {
   // const catDt = props.posts.data;
   // console.log(props.posts)
-  const firstdt = props.firstdt.data;
+  const firstdt = props.todo.data;
   const [value, onChange] = useState(new Date());
-const val = value.toISOString()
-  const [title, setTitle] = useState("Course");
+  const val = value.toISOString();
   const [title2, setTitle2] = useState("State");
   const [delid, setDelid] = useState();
 
@@ -46,12 +62,6 @@ const val = value.toISOString()
     setDelid(id);
   };
 
-  const dropdown = (event) => {
-    setTitle(event.target.textContent);
-    event.preventDefault();
-    event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
-  };
   const dropdown2 = (event) => {
     setTitle2(event.target.textContent);
     event.preventDefault();
@@ -82,58 +92,6 @@ const val = value.toISOString()
       />
     </svg>
   );
-  const tik = (
-    <svg
-      id="Layer_2"
-      data-name="Layer 2"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-    >
-      <g id="keylines">
-        <rect
-          id="Rectangle_6198"
-          data-name="Rectangle 6198"
-          width="24"
-          height="24"
-          fill="#0092e4"
-          opacity="0"
-        />
-        <path
-          id="Path_82779"
-          data-name="Path 82779"
-          d="M20.59,5.83a1.28,1.28,0,0,0-1.81,0h0L9.23,15.39l-4-4A1.31,1.31,0,1,0,3.4,13.25l4.92,4.92a1.28,1.28,0,0,0,1.81,0h0L20.59,7.72a1.28,1.28,0,0,0,.07-1.81Z"
-          fill="#7a7d7c"
-        />
-      </g>
-    </svg>
-  );
-  const delet = (
-    <svg
-      id="Component_28_1"
-      data-name="Component 28 – 1"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-    >
-      <rect
-        id="Rectangle_6197"
-        data-name="Rectangle 6197"
-        width="24"
-        height="24"
-        fill="red"
-        opacity="0"
-      />
-      <path
-        id="Path_82778"
-        data-name="Path 82778"
-        d="M19.2,6.6H15.6V5.7A2.7,2.7,0,0,0,12.9,3H11.1A2.7,2.7,0,0,0,8.4,5.7v.9H4.8a.9.9,0,1,0,0,1.8h.9v9.9A2.7,2.7,0,0,0,8.4,21h7.2a2.7,2.7,0,0,0,2.7-2.7V8.4h.9a.9.9,0,0,0,0-1.8Zm-9-.9a.9.9,0,0,1,.9-.9h1.8a.9.9,0,0,1,.9.9v.9H10.2Zm6.3,12.6a.9.9,0,0,1-.9.9H8.4a.9.9,0,0,1-.9-.9V8.4h9Z"
-        fill="#7a7d7c"
-      />
-    </svg>
-  );
   const edit = (
     <svg
       id="Group_20967"
@@ -160,13 +118,14 @@ const val = value.toISOString()
       />
     </svg>
   );
-  const [courseDt, setCourseDt] = useState()
+  const [courseDt, setCourseDt] = useState();
   // console.log(courseDt)
   const fetchcourse = async (p) => {
-    const token = getItem("token")
+    const token = getItem("token");
     try {
       const result = await fetch(
-        `${process.env.webURL}/Course/GetTeacherCoursesName`,{headers: { Authorization: 'Bearer '+  token}}
+        `${process.env.webURL}/Course/GetTeacherCoursesName`,
+        { headers: { Authorization: "Bearer " + token } }
       );
       const json = await result.json();
       // console.log(json.data.pageData)
@@ -182,7 +141,7 @@ const val = value.toISOString()
   const fetchData = async (p) => {
     try {
       const result = await fetch(
-        `${process.env.webURL}/Task/GetAllTasks?page=${p}&pagesize=5`
+        `${process.env.webURL}/Task/GetToDoTaskByTaskId?page=${p}&pagesize=5`
       );
       const json = await result.json();
       // console.log(json.data.pageData)
@@ -196,16 +155,15 @@ const val = value.toISOString()
     fetchData(1);
   }, [state]);
 
-  
-
-  const [catId, setCatId] = useState("");
+  const router = useRouter();
+  const ro = router.query.id;
   const [si, setSi] = useState("");
   const [datacourse, setDatacourse] = useState(firstdt);
   const [dt, setDt] = useState(firstdt);
   const sData = async (p) => {
     try {
       const result = await fetch(
-        `${process.env.webURL}/Task/GetAllTasks?page=1&pagesize=5&Type=${p.st}&Key=${p.si}&CourseId=${p.catId}&date=${p.val}`
+        `${process.env.webURL}/Task/GetToDoTaskByTaskId?page=1&pagesize=5&TaskId=${p.ro}&Type=${p.st}&Key=${p.si}`
       );
       const json = await result.json();
       // console.log(json.data.pageData)
@@ -217,20 +175,16 @@ const val = value.toISOString()
     }
   };
   const [pageNum, setPageNum] = useState(0);
-  const itemPerPage = 5;
 
   const changePage = async ({ selected }) => {
     setPageNum(selected);
     setDt(await fetchData(selected + 1));
   };
   // console.log(dt)
-  const pageCount =
-  dt !== undefined ? dt.totalPage : <Loader />;
-  const dtlenght =
-  dt !== undefined ? dt.pageData.length : <Loader />;
-  const dttotallenght =
-  dt !== undefined ? dt.totalCount : <Loader />;
-    
+  const pageCount = dt !== undefined ? dt.totalPage : <Loader />;
+  const dtlenght = dt !== undefined ? dt.pageData.length : <Loader />;
+  const dttotallenght = dt !== undefined ? dt.totalCount : <Loader />;
+
   const [st, setSt] = useState(null);
   const stData = () => {
     dt.pageData !== undefined ? (
@@ -250,61 +204,45 @@ const val = value.toISOString()
   useEffect(() => {
     stData();
   }, []);
+  console.log(dt)
   const displayItems =
     dt !== undefined ? (
-      dt.pageData.map((i,index) => {
+      dt.pageData.map((i, index) => {
         return (
           <tr key={i.id}>
-            <td>{index+1}</td>
-            <td><Link href={`/panel/task/${i.id}`}>{i.taskName}</Link></td>
-            <td>{i.courseName}</td>
-            {i.type === "Done" ?<td className={`${co.greenc}`}>{i.type}</td>: i.type === "Doing"? <td className={`${co.orangec}`}>{i.type}</td> : <td className={`${co.bluec}`}>{i.type}</td>}
-            <td><Moment format="YYYY/MM/DD">{i.date}</Moment></td>
+            <td>{index + 1}</td>
+            <td>{i.studentName}</td>
+            {i.status === "Compelete" ? (
+              <td className={`${co.greenc}`}>{i.status}</td>
+            ) : (
+              i.status === "In Progress" && (
+                <td className={`${co.orangec}`}>{i.status}</td>
+              )
+            )}
             <td>
-              <div className={`${co.del}`} onClick={() => {
-                          handleShow(i.id);
-                          setModalData(i);
-                        }}>
-                {delet}
-              </div>
-              <div className={`${co.edit}`}><Link href={`/panel/newcourses?id=${i.id}`}>{edit}</Link></div>
+              <Moment format="YYYY/MM/DD">{i.dateOfSubmit}</Moment>
             </td>
-            {modalData !== null ? (
-          <Modal show={show} onHide={handleClose}>
-          <Modal.Body className={`${co.modalbody}`}>
-            {delet} <h5 className={``} >Delete course</h5>
-            <h6 className={``}>
-              Lorem ipsum, or lipsum as it is sometimes known
-            </h6>
-            <Button variant="outline-danger mt-3" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="danger mx-3 mt-3" onClick={()=>{DeleteCourse(modalData.id);handleClose()}}>
-              Save Changes
-            </Button>
-          </Modal.Body>
-        </Modal>
-        ) : null}
-            
+            {i.score === null ? <td>{line}</td> : <td>{i.score}</td>}
+            <td>
+              <div className={`${co.edit}`}>{edit}</div>
+            </td>
           </tr>
-          
         );
-        
       })
     ) : (
       <Loader />
     );
-  // console.log(sData)
   const [state, setState] = useState(0);
+ if(st=== null){
+  setSt("")
+ }
+
   const submitHandler = (e) => {
     e.preventDefault();
     setState(state + 1);
-    sData({  si, st,catId,val });
+    sData({ si, st, ro, val })
   };
-  // console.log(dt)
 
-  const [modalData, setModalData] = useState(null);
-  
   return (
     <SSRProvider>
       <Head>
@@ -322,13 +260,14 @@ const val = value.toISOString()
           <div className={`col-lg-10 ${dash.maincontainer}`}>
             <Header />
             <div className={`col-12 ${co.coursetitle}`}>
-              <span className={``}>Course</span>
-              <div className={``}>
-                <Link href={`/panel/newcourses`}>
-                  <button type="button" className={`${co.coursebtn}`}>
-                    Create New
-                  </button>
-                </Link>
+              <div className={`row`}>
+                <div className={`col-3`}>
+              <span className={`fw-bolder p-3 mt-3`}>{(dt.pageData[0] !== undefined) ? dt.pageData[0].taskName : <>Can't Find This Task</>}</span>
+                </div>
+                <div className={`col-9`}>
+              <span className={`fw-bolder p-3 mt-3`}>{(dt.pageData[0] !== undefined) ? dt.pageData[0].description : null}</span>
+
+                </div>
               </div>
             </div>
             <div className={`col-12`}>
@@ -346,31 +285,6 @@ const val = value.toISOString()
                         onChange={(e) => setSi(e.target.value)}
                       />
                     </div>
-                    <div className={`col-6 col-xl-2 col-md-6 g-3 my-3`}>
-                      <div className={styles.box2}>
-                        <ul className={styles.boxList2} onClick={dropdown}>
-                          <Link
-                            passHref
-                            href="#"
-                            className={styles.listHeader2}
-                          >
-                            <span onClick={funcHandler}>{title}</span>
-                          </Link>
-
-                          {courseDt !== undefined ? courseDt.map((i) => {
-                            return (
-                              <li
-                                key={i.id}
-                                className={styles.listItem21}
-                                onClick={() => setCatId(i.id)}
-                              >
-                                {i.courseName}
-                              </li>
-                            );
-                          }): null}
-                        </ul>
-                      </div>
-                    </div>
 
                     <div className={`col-6 col-xl-2 col-md-6 g-3 my-3`}>
                       <div className={styles.box2}>
@@ -387,19 +301,13 @@ const val = value.toISOString()
                             className={styles.listItem21}
                             onClick={() => setSt(0)}
                           >
-                            To Do
+                            Inprogress
                           </li>
                           <li
                             className={styles.listItem21}
                             onClick={() => setSt(1)}
                           >
-                            Doing
-                          </li>
-                          <li
-                            className={styles.listItem21}
-                            onClick={() => setSt(2)}
-                          >
-                            Done
+                            compelete
                           </li>
                         </ul>
                       </div>
@@ -433,12 +341,12 @@ const val = value.toISOString()
                   <Table bordered hover responsive size="xl" className={`my-5`}>
                     <thead>
                       <tr className={co.tablehead}>
-                      <th></th>
-          <th>Task Name</th>
-          <th>Course Name</th>
-          <th>Status</th>
-          <th>Date</th>
-          <th>Action</th>
+                        <th></th>
+                        <th>Student Name</th>
+                        <th>Date of Submission</th>
+                        <th>Status</th>
+                        <th>Score</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>{displayItems}</tbody>

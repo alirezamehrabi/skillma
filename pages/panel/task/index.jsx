@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { SSRProvider } from "react-bootstrap";
 import Header from "../../../src/components/panel/Header/Header.jsx"
 import Menu from "../../../src/components/panel/Menu/Menu.jsx"
@@ -19,6 +19,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { getItem } from "../../../src/core/services/storage/storage.js";
+import Loader from "../../../src/components/Loader/Loader.jsx";
 
 
 const ContactSchema = Yup.object().shape({
@@ -44,7 +46,30 @@ const ContactSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const Courses = () => {
+const Courses = (props) => {
+
+  const [courseDt, setCourseDt] = useState()
+  const fetchcourse = async (p) => {
+     const token = getItem("token")
+     try {
+       const result = await fetch(
+         `${process.env.webURL}/Task/GetMainTasks`,{headers: { Authorization: 'Bearer '+  token}}
+       );
+       const json = await result.json();
+       console.log(json.data)
+       setCourseDt(json.data)
+       return json.data;
+     } catch (error) {
+       console.log(error);
+     }
+   };
+   useEffect(() => {
+     fetchcourse();
+   }, []);
+
+
+
+  console.log(props.data)
   const [value, onChange] = useState(new Date());
   const [value1, onChange1] = useState(new Date());
   const [value2, onChange2] = useState(new Date());
@@ -113,8 +138,8 @@ const Courses = () => {
             <Header />
             <div className={`col-12 ${co.coursetitle}`}><span className={``}>Task</span>
               <div className={``}><button type="button" className={`${co.coursebtn}`} onClick={handleShow}>Create New</button></div></div>
-
-            <div className={`col-12`}>
+            
+            {/* <div className={`col-12`}>
               <div className={`row ${co.coursesection}`}>
                 <div className={`col-12 ${co.datesection}`}><DatePicker onChange={onChange} value={value} format={"yyyy"} maxDetail={"decade"} />
                   <div className={`my-5`} />
@@ -160,8 +185,40 @@ const Courses = () => {
 
               </div>
 
-            </div>
+            </div> */}
+
             <div className={`row mt-5`}>
+            {courseDt !== undefined ? courseDt.map((i,index)=>{
+              return(
+<div className={`col-xl-4 ${co.taskitemholder}`} key={index}>
+                <Link href={`/panel/task/${i.id}`}>
+                <div className={`col-11`}>
+                  <div className={`col-12`}>
+                    <h5 className={`${co.tname}`}>{i.taskName}</h5>
+                    <h6 className={`${co.tdes}`}>{i.description}</h6>
+                    <div className={`${co.cname}`}>{i.courseName}</div><div className={`${co.cdate}`}>{i.startDate}</div>
+                    <div className={`${co.conholder}`}>
+                      {i.studentPics.map((j,index)=>{
+                        return(
+                        <div className={`${co.conpicholder}`}>
+                        <Image src={j.picName} alt="1" height="100" width="100" key={index}/>
+                      </div>
+                        )
+                      })}
+                      <div className={`${co.conpicholdernum}`}>
+                        <Image src={require(`../../../src/assets/student/6.png`)} alt="1" height="" width="" /><span className={`${co.connum}`}>{i.studentCount}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </Link>
+              </div>
+              )
+            }):<Loader/>}
+
+
+
+{/* 
               <div className={`col-xl-4 ${co.taskitemholder}`}><h6 className={`${co.tasktitle}`}>To Do</h6>
                 <div className={`col-11`}>
                   <div className={`col-12`}>
@@ -323,7 +380,10 @@ const Courses = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
+            </div>
+            <div className={co.seeMore}>
+              <Link href={`/panel/tasklist`}>See All</Link>
             </div>
           </div>
         </div>

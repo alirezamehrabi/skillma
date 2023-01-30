@@ -13,10 +13,8 @@ const comment = async (obj) => {
     
     const status = result.status;
     if(status === 200){
-        
             return (result.data
                 )
-                
         }
   } catch (error) {
     return error;
