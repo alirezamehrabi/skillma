@@ -297,10 +297,10 @@ const Courses = (props) => {
               Lorem ipsum, or lipsum as it is sometimes known
             </h6>
             <Button variant="outline-danger mt-3" onClick={handleClose}>
-              Close
+              Cancel
             </Button>
             <Button variant="danger mx-3 mt-3" onClick={()=>{DeleteCourse(modalData.id);handleClose()}}>
-              Save Changes
+              Delete
             </Button>
           </Modal.Body>
         </Modal>

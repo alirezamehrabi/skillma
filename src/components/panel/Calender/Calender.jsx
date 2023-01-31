@@ -1,6 +1,6 @@
 // Sample events calendar build, explained and detailed over at
 // https://justacoding.blog/react-calendar-component-example-with-events/
-
+// import "./calendar.css"
 import { useState, useEffect, Fragment } from "react"
 
 // Some config for convenience

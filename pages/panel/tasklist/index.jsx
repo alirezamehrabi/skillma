@@ -14,7 +14,7 @@ import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
 import { Button, Modal } from "react-bootstrap";
 import Loader from "../../../src/components/Loader/Loader.jsx";
-import { DeleteCourse } from "../../api/course/course";
+import { DeleteTask } from "../../api/course/course";
 import { getItem } from "../../../src/core/services/storage/storage.js";
 import Moment from "react-moment";
 export async function getStaticProps() {
@@ -277,10 +277,10 @@ const val = value.toISOString()
               Lorem ipsum, or lipsum as it is sometimes known
             </h6>
             <Button variant="outline-danger mt-3" onClick={handleClose}>
-              Close
+            Cancel
             </Button>
-            <Button variant="danger mx-3 mt-3" onClick={()=>{DeleteCourse(modalData.id);handleClose()}}>
-              Save Changes
+            <Button variant="danger mx-3 mt-3" onClick={()=>{DeleteTask(modalData.id);handleClose()}}>
+            Delete
             </Button>
           </Modal.Body>
         </Modal>
