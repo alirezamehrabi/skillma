@@ -6,6 +6,7 @@ import { SSRProvider } from "react-bootstrap";
 import Header from "../../../src/components/panel/Header/Header.jsx";
 import CourseChoice from "../../../src/components/panel/CourseChoice/CourseChoice";
 import Coursepreview from "../../../src/components/panel/Coursepreview/Coursepreview";
+import OnlineCoursepreview from "../../../src/components/panel/Coursepreview/OnlineCoursePreview";
 import CourseIntended from "../../../src/components/panel/CourseIntended/CourseIntended";
 import CourseSection from "../../../src/components/panel/CourseSection/CourseSection";
 import CourseContent from "../../../src/components/panel/CourseContent/CourseContent";
@@ -67,7 +68,7 @@ const Courses = (props) => {
     else if(formstep1>=1){
       return(
         <>
-          {formstep1 === 1 && <Coursepreview completeFormStep={completeFormStep1} back={backFormStep1}/>}
+          {formstep1 === 1 && <OnlineCoursepreview data={props.posts.data} completeFormStep={completeFormStep1} back={backFormStep1} sec={sec}/>}
           {formstep1 === 2 && <CourseIntended completeFormStep={completeFormStep1} sec={sec}/>}
 
           {formstep1 === 3 && <CourseOnlineContent completeFormStep={completeFormStep1} backFormStep={backFormStep1}/>}

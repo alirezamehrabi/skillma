@@ -16,7 +16,7 @@ import { Modal } from "react-bootstrap";
 const ShortSlider = ({data}) => {
   const {  loading } = useContext(DataContext);
   const [modalData, setModalData] = useState(null);
-console.log(data)
+// console.log(data)
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

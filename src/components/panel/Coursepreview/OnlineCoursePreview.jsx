@@ -364,7 +364,6 @@ const Courses = ({prev,sec,data  }) => {
       </svg>
     );
     const [value, setValue] = useState('');
-console.log(value)
       const [formstep, setFormstep] = useState(0)
       const completeFormStep = (value) => {
           setFormstep((formstep) => formstep + 1);
@@ -516,15 +515,7 @@ console.log(value)
             <div className={`${co.border}`} />
             <div className={`col-12 ${co.navName}`}>Intended learners</div>
           </div>
-          <div className={`col-2 ${co.disable}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Section</div>
-          </div>
+          
           <div className={`col-2 ${co.disable}`}>
             <div className={`col-12`}>
               <div className={`${co.firstDiv}`}>
@@ -663,123 +654,12 @@ console.log(value)
 
 
 
-{/* form3 CourseSection */}
+{/* form4 CourseContent */}
 
 
 <div className={formstep === 2 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row ${co.preview}`}>
         <div className={`row mx-auto justify-content-center`}>
-          <div className={`col-2 ${co.passed}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Intended learners</div>
-          </div>
-          <div className={`col-2`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Section</div>
-          </div>
-          <div className={`col-2 ${co.disable}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Content</div>
-          </div>
-          <div className={`col-2 ${co.disable}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Landing</div>
-          </div>
-          <div className={`col-2 ${co.disable}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`col-12 ${co.navName}`}>Price & discount</div>
-          </div>
-        </div>
-
-              <h5 className={`fw-bold`}>
-              How many section does your course consist of?
-              </h5>
-              <label htmlFor="email" className={`${co.label} ${co.lbl1}`}>
-              Here is where you add course content, like lectures, course sections, file and ...
-              </label>
-              <Field
-                name="sec1"
-                type="text"
-                placeholder="e.g. introduction"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onKeyUp={handleNameChangesec1}
-                maxLength="70"
-              />
-              <span className={`${co.txtlength} ${co.txtlength2}`}>
-                {70 - sec1.length}
-              </span>
-              {errors.sec1 && touched.sec1 ? (
-                <div className={co.err}>{errors.sec1}</div>
-              ) : null}
-              <Field
-                name="sec2"
-                type="text"
-                placeholder="e.g. seasion 1"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onKeyUp={handleNameChangesec2}
-                maxLength="70"
-              />
-              <span className={`${co.txtlength} ${co.txtlength2}`}>
-                {70 - sec2.length}
-              </span>
-              {errors.sec2 && touched.sec2 ? (
-                <div className={co.err}>{errors.sec2}</div>
-              ) : null}
-              
-              <div className={`col-12 mx-auto text center ${co.addBtn}`}>
-                {plus}Add more
-              </div>
-              <div className={`col-12 d-flex justify-content-end mt-4`}>
-              <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
-                  Previous
-                </button>
-                {(values.sec1 === "") ? <>please fill</> : <button  type="submit" onClick={completeFormStep}  className={`${co.conBTN} ${co.nxt}`}>
-                Continue
-              </button>}
-              </div>
-      </div>
-      </div>
-
-
-
-
-
-
-
-
-{/* form4 CourseContent */}
-
-
-
-
-
-<div className={formstep === 3 ? `${co.active}` : `${co.noactive}`}>
-<div className={`row ${co.preview}`}>
-        <div className={`row mx-auto justify-content-center`}>
           <div className={`col col-xxl-2 ${co.passed}`}>
             <div className={`col-12`}>
               <div className={`${co.firstDiv}`}>
@@ -788,15 +668,6 @@ console.log(value)
             </div>
             <div className={`${co.border}`} />
             <div className={`col-12 ${co.navName}`}>Intended learners</div>
-          </div>
-          <div className={`col col-xxl-2 ${co.passed}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Section</div>
           </div>
           <div className={`col col-xxl-2`}>
             <div className={`col-12`}>
@@ -977,7 +848,7 @@ console.log(value)
 
 {/* form5 CourseLanding */}
 
-<div className={formstep === 4 ? `${co.active}` : `${co.noactive}`}>
+<div className={formstep === 3 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row container mx-auto ${co.redDes}`}>
         <div className={`col-1`}>{notice}</div>
         <div className={`col-11 ${co.noticedes}`}><span>
@@ -998,15 +869,7 @@ console.log(value)
             <div className={`${co.border}`} />
             <div className={`col-12 ${co.navName}`}>Intended learners</div>
           </div>
-          <div className={`col-2 ${co.passed}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Section</div>
-          </div>
+          
           <div className={`col col-xxl-2 ${co.passed}`}>
             <div className={`col-12`}>
               <div className={`${co.firstDiv}`}>
@@ -1038,152 +901,6 @@ console.log(value)
         <h5 className={`${co.landingTitle}`}>Course landing page</h5>
         <h6 className={`${co.landingCourseTitle}`}>Course image</h6>
         <h6 className={`${co.landingDes}`}>Upload your course image here. It must meet our course image quality standards to be accepted.</h6>
-        
-        <h6 className={`${co.landingDes}`}>default cover</h6>
-        <div className={`row ${co.landingBg}`}>
-            <div className={`col-2`}>
-                <div className={`col-11`}>
-                <div className="form-check">
-                  <input
-                    className={`form-check-input ${co.input}`}
-                    type="checkbox"
-                    value="1"
-                    id="e1"
-                  />
-                  <label className="form-check-label" htmlFor="e1">
-                    <figure className={`${co.catImg}`}>
-                      <Image
-                        src={require(`../../../assets/panel/course/1p.png`)}
-                        alt="logo"
-                        width=""
-                        height=""
-                      />
-                    </figure>
-                  </label>
-            </div>
-                </div>
-            </div>
-            <div className={`col-2`}>
-                <div className={`col-11`}>
-                <div className="form-check">
-                  <input
-                    className={`form-check-input ${co.input}`}
-                    type="checkbox"
-                    value="1"
-                    id="e2"
-                  />
-                  <label className="form-check-label" htmlFor="e2">
-                    <figure className={`${co.catImg}`}>
-                      <Image
-                        src={require(`../../../assets/panel/course/2p.png`)}
-                        alt="logo"
-                        width=""
-                        height=""
-                      />
-                    </figure>
-                  </label>
-            </div>
-                </div>
-            </div>
-            <div className={`col-2`}>
-                <div className={`col-11`}>
-                <div className="form-check">
-                  <input
-                    className={`form-check-input ${co.input}`}
-                    type="checkbox"
-                    value="1"
-                    id="e3"
-                  />
-                  <label className="form-check-label" htmlFor="e3">
-                    <figure className={`${co.catImg}`}>
-                      <Image
-                        src={require(`../../../assets/panel/course/3p.png`)}
-                        alt="logo"
-                        width=""
-                        height=""
-                      />
-                    </figure>
-                  </label>
-            </div>
-                    
-                </div>
-            </div>
-            <div className={`col-2`}>
-                <div className={`col-11`}>
-                <div className="form-check">
-                  <input
-                    className={`form-check-input ${co.input}`}
-                    type="checkbox"
-                    value="1"
-                    id="e4"
-                  />
-                  <label className="form-check-label" htmlFor="e4">
-                    <figure className={`${co.catImg}`}>
-                      <Image
-                        src={require(`../../../assets/panel/course/4p.png`)}
-                        alt="logo"
-                        width=""
-                        height=""
-                      />
-                    </figure>
-                  </label>
-            </div>
-                    
-                </div>
-            </div>
-            <div className={`col-2`}>
-                <div className={`col-11`}>
-                <div className="form-check">
-                  <input
-                    className={`form-check-input ${co.input}`}
-                    type="checkbox"
-                    value="1"
-                    id="e5"
-                  />
-                  <label className="form-check-label" htmlFor="e5">
-                    <figure className={`${co.catImg}`}>
-                      <Image
-                        src={require(`../../../assets/panel/course/5p.png`)}
-                        alt="logo"
-                        width=""
-                        height=""
-                      />
-                    </figure>
-                  </label>
-            </div>
-                    
-                </div>
-            </div>
-            <div className={`col-2`}>
-                <div className={`col-11`}>
-                <div className="form-check">
-                  <input
-                    className={`form-check-input ${co.input}`}
-                    type="checkbox"
-                    value="1"
-                    id="e6"
-                  />
-                  <label className="form-check-label" htmlFor="e6">
-                    <figure className={`${co.catImg}`}>
-                      <Image
-                        src={require(`../../../assets/panel/course/6p.png`)}
-                        alt="logo"
-                        width=""
-                        height=""
-                      />
-                    </figure>
-                  </label>
-            </div>
-                    
-                </div>
-            </div>
-            
-        </div>
-        <h6 className={`${co.landingDes}`}>or</h6> 
-
-
-
-
         <div className={co.modal}>
           <div className={`row ${co.upholder}`}>
             <div className={`${co.uploadbox}`}>
@@ -1235,7 +952,7 @@ console.log(value)
 
 
 {/* form6 CoursePrice */}
-<div className={formstep === 5 ? `${co.active}` : `${co.noactive}`}>
+<div className={formstep === 4 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row ${co.preview}`}>
         <div className={`row mx-auto justify-content-center`}>
           <div className={`col col-xxl-2 ${co.passed}`}>
@@ -1246,15 +963,6 @@ console.log(value)
             </div>
             <div className={`${co.border}`} />
             <div className={`col-12 ${co.navName}`}>Intended learners</div>
-          </div>
-          <div className={`col-2 ${co.passed}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Section</div>
           </div>
           <div className={`col col-xxl-2 ${co.passed}`}>
             <div className={`col-12`}>

@@ -10,7 +10,6 @@ import Router from "next/router";
 import 'react-toastify/dist/ReactToastify.css';
 import store from "./api/redux/store";
 import { Provider } from "react-redux";
-import 'react-dropzone-uploader/dist/styles.css'
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);

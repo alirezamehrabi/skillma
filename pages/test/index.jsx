@@ -1,7 +1,8 @@
 import React from "react";
+import { render } from "react-dom";
 import { Formik } from "formik";
 import yup from "yup";
-import { getItem } from "../../../../src/core/services/storage/storage";
+import { getItem } from "../../src/core/services/storage/storage";
 
 class Thumb extends React.Component {
   state = {
@@ -56,10 +57,24 @@ const App =()=> {
         <Formik
           initialValues={{ file: null }}
           onSubmit={async (values) => {
+            alert(
+              JSON.stringify(
+                {
+                  fileName: values.file.name,
+                  type: values.file.type,
+                  size: `${values.file.size} bytes`,
+                },
+                null,
+                2
+              )
+            );
+            // console.log(values, "values")
             let formData = new FormData();
+            // console.log(values.file.name, "file")
 
             const token = getItem("token");
             formData.append("File", values.file);
+            // console.log(formData, "formData")
 
             fetch(
               "https://skillma-api.shinypi.net/Course/UploadFile",
@@ -72,10 +87,7 @@ const App =()=> {
                 },
               }
             ).then(async(r)=>{
-              const resD = await r.json();
-              const resDt = resD.uploadMessage
-              return resDt
-
+                console.log(await r.json())
             })
           }}
           render={({ values, handleSubmit, setFieldValue }) => {

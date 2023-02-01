@@ -23,6 +23,7 @@ import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import { getLike, getLikeFallBack } from "../../../pages/api/redux/likereducer";
 import { useRouter } from "next/router";
+import Loader from "../Loader/Loader";
 const ContactSchema = Yup.object().shape({
   textarea: Yup.string().min(4, "Too Short!").required("Required"),
 });
@@ -43,29 +44,53 @@ const Comment = ({
   let router = useRouter()
   let rout = router.query.id
   const disPatch = useDispatch()
+  // console.log(courseId)
 // const {data}= useSelector(({like})=>like);
 // console.log(data)
 // useEffect(() => {
-  // disPatch(getLike(15))
+//   disPatch(getLike(15))
 //   .then((res)=>{
 //     disPatch(AnalyzeByIdApi(item.id));
 // });
 // }, [disPatch])
 
-
 const [likenum,setLikenum] = useState();
 
+// const [ dt , setDt] = useState()
+// const [ dt1 , setDt1] = useState()
+// const mydt = ()=> disPatch(getLikeFallBack(courseId)).then((r)=> setDt1(r))
 
+// console.log(dt1)
+// const dp = (a)=>{
+//   disPatch(getLike(a)).
+//   then(async(res)=>{
+//     // console.log(res)
+//     await disPatch(await getLikeFallBack(courseId)).then((r)=> setDt1(r))})}
+//     useEffect(()=>{
+//       mydt()
+//     },[dp()])
+
+const [mydata, setMydata] = useState(commentData);
+const [ dt , setDt] = useState()
+const [ dt1 , setDt1] = useState()
+const mydt = ()=> disPatch(getLikeFallBack(courseId)).then((r)=> setDt1(r.payload))
+useEffect(()=>{
+  mydt()
+},[])
+console.log(dt1)
 const dp = (a)=>{
   disPatch(getLike(a)).
   then((res)=>{
-    console.log(res)
-    disPatch(getLikeFallBack(rout)).then((res)=>{
-      console.log(res)
-  }
-  )
-  })
-  
+    disPatch(getLikeFallBack(courseId)).then((r)=> console.log(r.payload))
+  })}
+  useEffect(()=>{
+    dp()
+  },[dt])
+if(dt1 !== undefined){
+  console.log(dt1.payload)
+}
+else if(dt1 === undefined){
+  <Loader/>
 }
   const [rating, setRating] = useState();
   const handleRating = (number) => {
@@ -87,7 +112,7 @@ const dp = (a)=>{
     setReplyState(null);
     setReplyState2(null);
   };
-  const [mydata, setMydata] = useState(commentData);
+
   const [replynum, setReplynum] = useState(3);
   const moreReplyFunc = () => {
     setReplynum(replynum + 3);
@@ -102,7 +127,7 @@ const dp = (a)=>{
   };
 const [tcomment , setTcomment] = useState(totalCount)
 
-  const pageCount = totalPage;
+const pageCount = totalPage;
   const datadisplay = mydata.map((i) => {
     return (
       <div
@@ -201,10 +226,7 @@ const [tcomment , setTcomment] = useState(totalCount)
             </div>
             <div
               className={`col-4 ${com.dislike}`}
-              onClick={()=>disPatch(getLikeFallBack(rout)).then((res)=>{
-                console.log(res)
-            
-            })} 
+              onClick={()=>{dp(i.commentId);setDt(i.commentId)}} 
             >
               <AiOutlineDislike /> DisLike({i.dissLikeCount})
             </div>

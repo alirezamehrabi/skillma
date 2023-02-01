@@ -52,7 +52,8 @@ export async function getStaticProps(context) {
 }
 const TeacherProfile = (props) => {
   const cd = props.coursedet.data;
-  console.log(cd.teacherId)
+  // console.log(cd.teacherId)
+  // console.log(props.coursedet)
   const td = props.coursedet.data
   const datafunc = async (p)=>{
     try {
@@ -149,7 +150,7 @@ const TeacherProfile = (props) => {
             page={props.comment.data.page}
             pageTitle={props.coursedet.data.title}
             datafunc={datafunc}
-            courseId={props.coursedet.data.id}
+            courseId={props.coursedet.data.teacherId}
             pageName={pageName}
           />
         <section className={`row container mx-auto mb-5 ${teach.student}`}>

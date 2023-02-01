@@ -16,15 +16,15 @@ export const getLike = createAsyncThunk('like/count', async(id)=>{
   }
 })
 export const getLikeFallBack = createAsyncThunk('like/likecount', async(id)=>{
-  console.log(id)
+  // console.log(id)
   try {
     const token = getItem("token")
     const result = await axios.get(
-      `${process.env.webURL}/Comment/GetCourseComment?CourseId=${id}`,
+      `${process.env.webURL}/Comment/GetTeacherComment?CourseId=${id}`,
       { headers: { Authorization: 'bearer '+  token} }
     )
     const data = result.data.data.pageData
-    console.log(data)
+    // console.log(data)
     return data
   } catch (error) {
     return error;
