@@ -1,0 +1,21 @@
+.holder{
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #fff;
+}
+.holder h6{
+    font-weight: 600;
+    margin-top: 20px
+}
+.holder div{
+    border: 1px dotted #ccc;
+    padding: 20px;
+    border-radius: 10px;
+
+}
+.holder svg{
+    margin-right: 10px;
+
+}

@@ -365,7 +365,7 @@ const Courses = ({prev,sec,data  }) => {
     );
     const [value, setValue] = useState('');
 console.log(value)
-      const [formstep, setFormstep] = useState(0)
+      const [formstep, setFormstep] = useState(3)
       const completeFormStep = (value) => {
           setFormstep((formstep) => formstep + 1);
         
@@ -375,17 +375,7 @@ console.log(value)
         setFormstep((formstep) => formstep - 1);
         // console.log(formstep)
       };
-      const [formstep1, setFormstep1] = useState(0)
-      const completeFormStep1 = () => {
-        setFormstep1((formstep1) => formstep1 + 1);
-        console.log(formstep1 + "online")
-      };
-      const backFormStep1 = () => {
-        setFormstep1((formstep1) => formstep1 - 1);
-        console.log(formstep1)
-      };
-
-
+  
   return (
     <SSRProvider>
       <div className={`row ${co.preview}`}>
@@ -431,9 +421,6 @@ console.log(value)
         >
           {({ errors, touched,values,handleChange ,field}) => (
             <Form className={co.form} >
-
-
-
 
 
 {/* form1 - coursePreview */}
@@ -939,7 +926,6 @@ console.log(value)
             <div className={`${co.uploadbox}`}>
               <UploadBox />
             </div>
-            <h6 className={`fw-bold mt-5`}>Your Files</h6>
             {/* <Table bordered hover responsive size="xl" className={`my-5`}>
               <thead>
                 <tr className={co.tablehead}>
@@ -961,7 +947,7 @@ console.log(value)
             <div className={`d-flex justify-content-end ${co.corsebtn}`}>
               <button
                 type="button"
-                className={`${co.conBTN} ${co.nxt}`}
+                className={`mt-4 ${co.conBTN} ${co.nxt}`}
               >
                 Continue
               </button>

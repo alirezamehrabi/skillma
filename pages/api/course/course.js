@@ -22,8 +22,8 @@ const DeleteCourse = async (id) => {
 const DeleteShort = async (id) => {
   try {
     const token = getItem("token")
-    const result = await axios.put(
-      `${process.env.webURL}/Course/DeleteCourseDashboard?id=${id}`,{},
+    const result = await axios.delete(
+      `${process.env.webURL}/ShortContent/DeleteShortContent?ContentId=${id}`,{},
       {}
     ).then((r)=>{
         return r.isSucces

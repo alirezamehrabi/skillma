@@ -31,7 +31,7 @@ const Courses = (props) => {
   const catDt = props.posts.data;
   const firstdt = props.firstdt.data;
   const [value, onChange] = useState(new Date());
-
+  const val = value.toISOString()
   const [title, setTitle] = useState("Price");
   const [title2, setTitle2] = useState("State");
   const [title3, setTitle3] = useState("Category");
@@ -186,7 +186,7 @@ const Courses = (props) => {
   const sData = async (p) => {
     try {
       const result = await fetch(
-        `${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=5&CategoryId=${p.catId}&key=${p.si}&PriceType=${p.pr}&status=${p.st}`
+        `${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=5&CategoryId=${p.catId}&key=${p.si}&PriceType=${p.pr}&status=${p.st}&date=${val}`
       );
       const json = await result.json();
       // console.log(json.data.pageData)
@@ -197,7 +197,6 @@ const Courses = (props) => {
       console.log(error);
     }
   };
-
   const [catId, setCatId] = useState("");
   const [si, setSi] = useState("");
   const [datacourse, setDatacourse] = useState(firstdt);
@@ -234,6 +233,9 @@ const Courses = (props) => {
     prData();
   }, []);
   const [st, setSt] = useState(null);
+  if(st === null){
+    setSt("")
+  }
   const stData = () => {
     dt.pageData !== undefined ? (
       dt.pageData.map((i) => {
@@ -257,7 +259,7 @@ const Courses = (props) => {
     stData();
   }, []);
   const displayItems =
-    dt.pageData !== undefined ? (
+    dt !== undefined ? (
       dt.pageData.map((i) => {
         return (
           <tr key={i.id}>
@@ -294,7 +296,7 @@ const Courses = (props) => {
           <Modal.Body className={`${co.modalbody}`}>
             {delet} <h5 className={``} >Delete course</h5>
             <h6 className={``}>
-              Lorem ipsum, or lipsum as it is sometimes known
+              Are You Sure?
             </h6>
             <Button variant="outline-danger mt-3" onClick={handleClose}>
               Cancel

@@ -364,7 +364,7 @@ const Courses = ({prev,sec,data  }) => {
       </svg>
     );
     const [value, setValue] = useState('');
-      const [formstep, setFormstep] = useState(0)
+      const [formstep, setFormstep] = useState(2)
       const completeFormStep = (value) => {
           setFormstep((formstep) => formstep + 1);
         
@@ -699,57 +699,9 @@ const Courses = ({prev,sec,data  }) => {
       </div>
       <div className={`row ${co.courseContent}`}>
         <div className={`col-12  mt-5`}>
-          <h6 className={`${co.navtitle}`}>Introduction</h6>
-          <div className={` mb-4 ${co.icon}`}>
-            <div onClick={handleShow}>{del}</div>{" "}
-            <div className="" >
-              {edit}
-            </div>
-          </div>
-          <div className={`row ${co.contentcourse}`}>
-            <div
-              className={`col-3 d-flex justify-content-center ${co.newItem}`} onClick={handleShow2}
-            >
-              <div className={`d-flex align-self-center`}>
-                {plus} Add New Lecture
-              </div>
-            </div>
-            <div
-              className={`col-3 offset-1 d-flex justify-content-center ${co.newItem} ${co.oldItem}`}
-            >
-              <div className="row">
-                <div className={`col-12 ${co.courseIMG}`}>
-                  <Image
-                    src={require(`../../../assets/panel/course/1.png`)}
-                    alt="course pic"
-                  />
-                </div>
-                <div className={`col-12`}>
-                  <h6>create wireframe</h6>
-                  <h6>sep 13 , 2022</h6>
-                  <h6>24:00</h6>
-                </div>
-                <div className={`col-12 d-flex justify-content-end ${co.icon}`}>
-                  <div>{del}</div> <div onClick={handleShow2}>{edit}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={`col-12 mt-5`}>
-          <h6 className={`${co.navtitle}`}>season 1</h6>
-          <div className={` mb-4 ${co.icon}`}>
-            {del} {edit}
-          </div>
-          <div className={`row ${co.contentcourse}`}>
-            <div
-              className={`col-3 d-flex justify-content-center ${co.newItem}`}
-            >
-              <div className={`d-flex align-self-center`}>
-                {plus} Add New Lecture
-              </div>
-            </div>
-          </div>
+        <h6 className={`fw-bold`}>course content</h6>
+          <h6 className="mb-4">Here is where you add course topics</h6>
+            <UploadBox />
         </div>
         <div className={`d-flex justify-content-end ${co.corsebtn}`}>
         <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
@@ -760,86 +712,6 @@ const Courses = ({prev,sec,data  }) => {
           </button>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Body className={`${co.modalbody}`}>
-          {delet} <h5 className={``}>Delete course</h5>
-          <h6 className={``}>
-            Lorem ipsum, or lipsum as it is sometimes known
-          </h6>
-          <Button variant="outline-danger mt-3" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="danger mx-3 mt-3" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Body>
-      </Modal>
-      <Modal show={show2} onHide={handleClose2} size="xl">
-        <Modal.Header closeButton className={co.modal}>
-          <div className={`row ${co.upholder}`}>
-            <h5 className={`col-12 ${co.uptitle}`}>Create new course</h5>
-            <h6 className={`col-12 ${co.upLblName}`}>Lecture name</h6>
-            <div className={`col-12`}>
-              <Formik
-                initialValues={{
-                  lecture: "",
-                }}
-                // validationSchema={ContactSchema}
-                onSubmit={(values) => {
-                  // same shape as initial values
-
-                  console.log(values);
-                }}
-              >
-                {({ errors, touched }) => (
-                  <Form className={co.form}>
-                    <Field
-                      name="lecture"
-                      type="text"
-                      placeholder="Enter a title"
-                      className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                    />
-                    {errors.lecture && touched.lecture ? (
-                      <div className={co.err}>{errors.lecture}</div>
-                    ) : null}
-                  </Form>
-                )}
-              </Formik>
-            </div>
-            <h6 className={`${co.upLblName}`}>Select content type:</h6>
-            <div className={`${co.uploadbox}`}>
-              <UploadBox />
-            </div>
-            <h6 className={`fw-bold mt-5`}>Your Files</h6>
-            {/* <Table bordered hover responsive size="xl" className={`my-5`}>
-              <thead>
-                <tr className={co.tablehead}>
-                  <th>File Name</th>
-                  <th>Data</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className={co.tablebody}>
-                  <td>{file} production ID_4884238.Pdf</td>
-                  <td>sep 13 , 2022</td>
-                  <td>
-                    {del} {see}
-                  </td>
-                </tr>
-              </tbody>
-            </Table> */}
-            <div className={`d-flex justify-content-end ${co.corsebtn}`}>
-              <button
-                type="button"
-                className={`${co.conBTN} ${co.nxt}`}
-              >
-                Continue
-              </button>
-            </div>
-          </div>
-        </Modal.Header>
-      </Modal>
       </div>
 
 
