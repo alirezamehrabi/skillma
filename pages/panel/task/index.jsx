@@ -62,7 +62,7 @@ const Courses = (props) => {
   useEffect(() => {
     fetchTask();
   }, []);
-  const[cid,setCid]=useState()
+  const [cid, setCid] = useState()
 
   const fetchStu = async (p) => {
     const token = getItem("token");
@@ -81,7 +81,7 @@ const Courses = (props) => {
   useEffect(() => {
     fetchStu(cid);
   }, [cid]);
-console.log(cid)
+  // console.log(cid)
   const fetchcourse = async (p) => {
     const token = getItem("token");
     try {
@@ -105,8 +105,6 @@ console.log(cid)
   const [value, onChange] = useState(new Date());
   const [value1, onChange1] = useState(new Date());
   const [value2, onChange2] = useState(new Date());
-console.log(value1)
-console.log(value2)
   const [delid, setDelid] = useState();
 
   const [show, setShow] = useState(false);
@@ -179,7 +177,7 @@ console.log(value2)
                             <div className={`${co.conholder}`}>
                               {i.studentPics.map((j, index) => {
                                 return (
-                                  <div className={`${co.conpicholder}`}>
+                                  <div className={`${co.conpicholder}`} key={index}>
                                     <Image
                                       src={j.picName}
                                       alt="1"
@@ -237,17 +235,13 @@ console.log(value2)
               startTime: "",
               endTime: "",
               description: "",
-              // isSms: [],
-              // isEmail: [],
             }}
             // validationSchema={ContactSchema}
-            // same shape as initial values
             onSubmit={async (values) => {
-              
-              console.log(stulist.map((i)=>{return i.value}));
+
               const userObj = {
                 title: values.title,
-                users: stulist.map((i)=>{return i.value}),
+                users: stulist.map((i) => { return i.value }),
                 courseId: values.courseList,
                 startDate: value1,
                 endDate: value2,
@@ -255,17 +249,19 @@ console.log(value2)
                 endTime: values.endTime,
                 description: values.description,
                 atachFileName: upoaldboxdt,
-                isSms: values.isSms[0] === 'true' ? true : false,
-                isEmail: values.isEmail[0] === 'true' ? true : false,
+                isSms: values.isSms,
+                isEmail: values.isEmail,
                 subTitle: values.subTitle
               };
               console.log(userObj);
 
-              const user = await addTask(userObj);
-
+              const user = await addTask(userObj).then((r) => {
+                 console.log(r)
+              });
+                console.log(user)
             }}
           >
-            {({ errors, touched,values }) => (
+            {({ errors, touched, values }) => (
               <Form className={co.form}>
                 <label className={`${co.label}`}>
                   Title
@@ -293,36 +289,24 @@ console.log(value2)
                     <div className={co.err}>{errors.subTitle}</div>
                   ) : null}
                 </label>
-                {/* <label className={`${co.label}`}>
-                  People
-                  <Field
-                    name="people"
-                    placeholder="People"
-                    className={`col-12 mx-auto ${co.field}`}
-                  />
-                  {errors.people && touched.people ? (
-                    <div className={co.err}>{errors.people}</div>
-                  ) : null}
-                </label> */}
-                
                 <label htmlFor="courseList" className={`${co.label}`}>Course List</label>
-              <Field
-                as="select"
-                name="courseList"
-                placeholder="Select category"
-                onKeyUp={handleSList}
-                className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`} defaultValue={'DEFAULT'} 
-              >
-              <option hidden value="DEFAULT" >Select Category</option>
-              {courseDt.map((i)=>{
-                return <option value={i.id} key={i.id} onClick={()=>{setCid(i.id)}}>{i.courseName}</option>
-              })}
+                <Field
+                  as="select"
+                  name="courseList"
+                  placeholder="Select category"
+                  onKeyUp={handleSList}
+                  className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`} defaultValue={'DEFAULT'}
+                >
+                  <option hidden value="DEFAULT" >Select Category</option>
+                  {courseDt.map((i) => {
+                    return <option value={i.id} key={i.id} onClick={() => { setCid(i.id) }}>{i.courseName}</option>
+                  })}
                 </Field>
-              {errors.courseList && touched.courseList ? (
-                <div className={co.err}>{errors.courseList}</div>
-              ) : null}
+                {errors.courseList && touched.courseList ? (
+                  <div className={co.err}>{errors.courseList}</div>
+                ) : null}
                 <label htmlFor="courseList" className={`${co.label} mt-3`}>Student List</label>
-              {stDt !== undefined ?<Select
+                {stDt !== undefined ? <Select
                   value={stulist}
                   onChange={handleStList}
                   isMulti
@@ -333,7 +317,7 @@ console.log(value2)
                     label: i.studentMame,
                     value: i.id,
                   }))}
-                />: null}
+                /> : null}
                 <div className={`row d-flex justify-content-between`}>
                   <label className={`col-lg-6 ${co.label} ${co.labelleft}`}>
                     Start Date
@@ -342,7 +326,6 @@ console.log(value2)
                       onChange={onChange1}
                       value={value1}
                       className={`col-12 ${co.datepick}`}
-                      // name="startDate"
                     />
                   </label>
                   <label className={`col-lg-6 ${co.label}`}>
@@ -350,7 +333,6 @@ console.log(value2)
                     <br />
                     <DatePicker
                       className={`col-12 ${co.datepick}`}
-                      // name="endDate"
                       onChange={onChange2}
                       value={value2}
                     />
@@ -362,7 +344,7 @@ console.log(value2)
                       Start Time
                       <Field
                         name="startTime"
-                        placeholder="10:00"
+                        placeholder="10:00:00"
                         className={`${co.field} `}
                       />
                       {errors.startTime && touched.startTime ? (
@@ -375,7 +357,7 @@ console.log(value2)
                       End Time
                       <Field
                         name="endTime"
-                        placeholder="10:00"
+                        placeholder="10:00:00"
                         className={`${co.field} `}
                       />
                       {errors.endTime && touched.endTime ? (
@@ -399,19 +381,19 @@ console.log(value2)
                 <label htmlFor="upload-photo" className={`my-2 fw-bold`}>
                   Attach File
                 </label>
-                <UploadBox handleRandom={(x) => setUpoaldboxdt(x)}/>
+                <UploadBox handleRandom={(x) => setUpoaldboxdt(x)} />
                 <div className={co.divider} />
                 <h6 className={`${co.notify}`}>Notification Setting</h6>
                 <label>
-                <Field type="checkbox" className={`${co.chek}`} name="isSms" value={values.checked ? "true": "true"} />
-                Send SMS
-            </label>
+                  <Field type="checkbox" className={`${co.chek}`} name="isSms"
+                  />
+                  Send SMS
+                </label>
                 <br />
                 <label>
                   <Field
                     type="checkbox"
                     name="isEmail"
-                    value={values.checked ? "true": "true"}
                     className={`${co.chek}`}
                   />
                   Send Email

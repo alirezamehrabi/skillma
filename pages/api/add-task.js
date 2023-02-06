@@ -7,6 +7,9 @@ const addTask =async(obj)=>{
     try{
         const result = await axios.post(`${process.env.webURL}/Task/InsertTask`,obj
         ,{ headers: { Authorization: 'bearer '+  token}
+    }).then((r)=>{
+        // console.log(r.status)
+        return r.status
     })
     }
     catch(error){
