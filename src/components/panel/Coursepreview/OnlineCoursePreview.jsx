@@ -1,14 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState,createRef } from "react";
-import { SSRProvider,Modal,Button   } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { SSRProvider,Modal   } from "react-bootstrap";
 import co from "../../../../styles/panel/course.module.css";
-import { Formik, Form, Field,Table  } from "formik";
+import { Formik, Form, Field,FieldArray  } from "formik";
 import * as Yup from "yup";
 import UploadBox from "../UploadBox/UploadBox";
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic'
+import { toast,ToastContainer } from "react-toastify";
+import React from "react";
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false,
@@ -363,8 +365,21 @@ const Courses = ({prev,sec,data  }) => {
         />
       </svg>
     );
-    const [value, setValue] = useState('');
-      const [formstep, setFormstep] = useState(2)
+    const [editor, setEditor] = useState('');
+    const err=()=>{
+      return toast.error('Please Upload File to Continue', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        })
+    }
+
+      const [formstep, setFormstep] = useState(0)
       const completeFormStep = (value) => {
           setFormstep((formstep) => formstep + 1);
         
@@ -383,26 +398,21 @@ const Courses = ({prev,sec,data  }) => {
         setFormstep1((formstep1) => formstep1 - 1);
         console.log(formstep1)
       };
+const [upoaldboxdt, setUpoaldboxdt] = useState()
+const [upoaldboxdt2, setUpoaldboxdt2] = useState()
+const [upoaldboxdt3, setUpoaldboxdt3] = useState()
 
-
-  return (
+return (
     <SSRProvider>
       <div className={`row ${co.preview}`}>
       <Formik
           initialValues={{
-            discount:"",
-            title:"",
             checked: [],
-            checked2: [],
-            categoryId:"",
             title:"",
-            level:"",
-            whatLearn:"",
-            whatLearn6:"",
-            value:"",
-            price:"",
-            percent:""
-          
+            whatLearn:[{},{}],
+            requirement:[{}],
+            upldb2:"",
+            upldb3:""
           }}
           // validationSchema={ContactSchema}
           onSubmit={(values) => {
@@ -423,9 +433,17 @@ const Courses = ({prev,sec,data  }) => {
             // "whatYouLearn": "string",
             // "status": 0
             // functionHandler(values)
-
             
+            values.categoryId,
+            values.title,
+            values.editor= editor,
+            values.level,
+            values.price,
+            values.upldb2 = upoaldboxdt2,
+            values.upldb3 = upoaldboxdt3,
+
             console.log(values,"val");
+            // console.log(values.whatLearn[0].data ,"upoaldboxdt");
           }}
         >
           {({ errors, touched,values,handleChange ,field}) => (
@@ -488,7 +506,7 @@ const Courses = ({prev,sec,data  }) => {
               This Course is Free
             </label>
               <div className={`col-12 d-flex justify-content-end mt-4`}>
-              {(values.level === "" || values.categoryId === "" || values.title === "") ? <>please fill</> : <button  type="submit" onClick={completeFormStep}  className={`${co.conBTN} ${co.nxt}`}>
+              {(values.level === "" || values.categoryId === "" || values.title === "") ? <button  disabled>Please Fill all Field To Continue</button> : <button  type="submit" onClick={completeFormStep}  className={`${co.conBTN} ${co.nxt}`}>
                 Continue
               </button>}
               </div>
@@ -514,16 +532,6 @@ const Courses = ({prev,sec,data  }) => {
             </div>
             <div className={`${co.border}`} />
             <div className={`col-12 ${co.navName}`}>Intended learners</div>
-          </div>
-          
-          <div className={`col-2 ${co.disable}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Content</div>
           </div>
           <div className={`col-2 ${co.disable}`}>
             <div className={`col-12`}>
@@ -552,68 +560,36 @@ const Courses = ({prev,sec,data  }) => {
                 You must enter at least 4 learning objectives or outcomes that
                 learners can expect to achieve after completing your course
               </label>
-              <Field
-                name="whatLearn"
-                type="text"
-                placeholder="e.g. Learn  ui/ux design"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onKeyUp={handleNameChangewhatLearn}
-                maxLength="160"
-              />
-              <span className={`${co.txtlength} ${co.txtlength2}`}>
-                {160 - f1.length}
-              </span>
-              {errors.email && touched.email ? (
-                <div className={co.err}>{errors.email}</div>
-              ) : null}
-              <Field
-                name="whatLearn2"
-                type="text"
-                placeholder="e.g. Learn  ui/ux design"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onKeyUp={handleNameChangeF13}
-                maxLength="160"
-              />
-              <span className={`${co.txtlength} ${co.txtlength2}`}>
-                {160 - f13.length}
-              </span>
-              <Field
-                name="whatLearn3"
-                type="text"
-                placeholder="e.g. Learn  ui/ux design"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onChange={handleNameChange14}
-                maxLength="160"
-              />
-              <span className={`${co.txtlength} ${co.txtlength2}`}>
-                {160 - f14.length}
-              </span>
-              <Field
-                name="whatLearn4"
-                type="text"
-                placeholder="e.g. Learn  ui/ux design"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onChange={handleNameChange15}
-                maxLength="160"
-              />
-              <span className={`${co.txtlength} ${co.txtlength2}`}>
-                {160 - f15.length}
-              </span>
-              <Field
-                name="whatLearn5"
-                type="text"
-                placeholder="e.g. Learn  ui/ux design"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onChange={handleNameChange16}
-                maxLength="160"
-              />
-              <span className={`${co.txtlength} ${co.txtlength2}`}>
-                {160 - f16.length}
-              </span>
-              <div className={`${co.delBtn}`}>{del}</div>
-              <div className={`col-12 mx-auto text center ${co.addBtn}`}>
+              <div className="form-group">
+              <FieldArray name="whatLearn" render={
+                (arrayHelper)=>{
+                  return(
+                  <div>{values.whatLearn.map((i,index)=>{
+                      return(
+                      <React.Fragment>
+                      <div className="" key={index}>
+                        <div className="float-end">
+                        <button onClick={()=>{arrayHelper.remove(index)}} className={co.newdelbtn}>{del}</button>
+                        </div>
+                        {
+                          <Field className="form-control" placeholder={`What You Learn ${index + 1}`} name={`whatLearn.${index}.data`}></Field>
+                        }
+                      </div>
+                      </React.Fragment>)
+                    }
+                    )}
+                    <button className={`col-12 mx-auto text center ${co.addBtn}`} onClick={()=>arrayHelper.insert(values.whatLearn.length + 1, {})}>
                 {plus}Add more
+              </button>
+                    
+                    </div>
+                    
+                  )
+                  
+                }
+              }/>
               </div>
+              
               <h5 className={`fw-bold`}>
                 What are the requirements or prerequisites for taking your
                 course?
@@ -622,28 +598,41 @@ const Courses = ({prev,sec,data  }) => {
                 List the required skills, experience, tools or equipment
                 learners should have prior to taking your course.
               </label>
-              <Field
-                name="whatLearn6"
-                type="text"
-                placeholder="e.g. Learn  ui/ux design"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onKeyUp={handleNameChangewhatLearn6}
-                maxLength="160"
-              />
-              <span className={`${co.txtlength} ${co.txtlength2}`}>
-                {160 - f5.length}
-              </span>
-              <div className={`col-12 mx-auto text center ${co.addBtn}`}>
+              <div className="form-group">
+              <FieldArray name="requirement" render={
+                (arrayHelper)=>{
+                  return(
+                  <div>{values.requirement.map((i,index)=>{
+                      return(
+                      <React.Fragment>
+                      <div className="" key={index}>
+                        <div className="float-end">
+                        <button onClick={()=>{arrayHelper.remove(index)}} className={co.newdelbtn}>{del}</button>
+                        </div>
+                        {
+                          <Field className="form-control" placeholder={`requirement ${index + 1}`} name={`requirement.${index}.data`}></Field>
+                        }
+                      </div>
+                      </React.Fragment>)
+
+                    }
+                    )}
+                    <button className={`col-12 mx-auto text center ${co.addBtn}`} onClick={()=>arrayHelper.insert(values.requirement.length + 1, {})}>
                 {plus}Add more
+              </button>
+                    </div> 
+                  )
+                }
+              }/>
               </div>
               <h5 className={`fw-bold mb-4`}>Description</h5>
-              <ReactQuill theme="snow" value={value} onChange={setValue} />
+              <ReactQuill theme="snow" name="editor" value={editor} onChange={(e)=>setEditor(e)} />
               <div className="my-2"/>
               <div className={`col-12 d-flex justify-content-end mt-5`}>
               <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
                   Previous
                 </button>
-                {(values.whatLearn === "" || values.whatLearn6 ==="") ? <>please fill</> : <button  type="submit" onClick={completeFormStep}  className={`${co.conBTN} ${co.nxt}`}>
+                {(values.whatLearn.length < 2) ? <button disabled>Please Fill More Field To Continue</button> : <button  type="submit" onClick={completeFormStep}  className={`${co.conBTN} ${co.nxt}`}>
                 Continue
               </button>}
 
@@ -655,7 +644,7 @@ const Courses = ({prev,sec,data  }) => {
 
 
 {/* form4 CourseContent */}
-
+{/* 
 
 <div className={formstep === 2 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row ${co.preview}`}>
@@ -701,18 +690,20 @@ const Courses = ({prev,sec,data  }) => {
         <div className={`col-12  mt-5`}>
         <h6 className={`fw-bold`}>course content</h6>
           <h6 className="mb-4">Here is where you add course topics</h6>
-            <UploadBox />
+            <UploadBox handleRandom={(x) => setUpoaldboxdt(x)}/>
+            <Field type="hidden" name="upldb" value={upoaldboxdt}/>
+            
         </div>
         <div className={`d-flex justify-content-end ${co.corsebtn}`}>
         <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
                   Previous
                 </button>
-          <button type="button" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
+          <button type="submit" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
             Continue
           </button>
         </div>
       </div>
-      </div>
+      </div> */}
 
 
 
@@ -720,7 +711,7 @@ const Courses = ({prev,sec,data  }) => {
 
 {/* form5 CourseLanding */}
 
-<div className={formstep === 3 ? `${co.active}` : `${co.noactive}`}>
+<div className={formstep === 2 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row container mx-auto ${co.redDes}`}>
         <div className={`col-1`}>{notice}</div>
         <div className={`col-11 ${co.noticedes}`}><span>
@@ -740,16 +731,6 @@ const Courses = ({prev,sec,data  }) => {
             </div>
             <div className={`${co.border}`} />
             <div className={`col-12 ${co.navName}`}>Intended learners</div>
-          </div>
-          
-          <div className={`col col-xxl-2 ${co.passed}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Content</div>
           </div>
           <div className={`col col-xxl-2`}>
             <div className={`col-12`}>
@@ -776,46 +757,28 @@ const Courses = ({prev,sec,data  }) => {
         <div className={co.modal}>
           <div className={`row ${co.upholder}`}>
             <div className={`${co.uploadbox}`}>
-              <UploadBox />
+            <UploadBox handleRandom={(x) => setUpoaldboxdt2(x)}/>
+            <Field type="hidden" name="upldb2" value={upoaldboxdt2}/>
             </div>
-            <h6 className={`fw-bold mt-5`}>Your Files</h6>
-            {/* <Table bordered hover responsive size="xl" className={`my-5`}>
-              <thead>
-                <tr className={co.tablehead}>
-                  <th>File Name</th>
-                  <th>Data</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className={co.tablebody}>
-                  <td>{file} production ID_4884238.Pdf</td>
-                  <td>sep 13 , 2022</td>
-                  <td>
-                    {del} {see}
-                  </td>
-                </tr>
-              </tbody>
-            </Table> */}
             <h5 className={`${co.landingCourseTitle}`}>Promotional video</h5>
             <h6 className={`mb-5 ${co.landingDes}`}>Students who watch a well-made promo video are 5X more likely to enroll in your course. <Link href="#">Learn how to make yours awesome!</Link></h6>
             <div className={`${co.uploadbox}`}>
-              <UploadBox />
+            <UploadBox handleRandom={(x) => setUpoaldboxdt3(x)}/>
+            <Field type="hidden" name="upldb3" value={upoaldboxdt3}/>
             </div>
           </div>
         </div>
-
-
-
 
         
         <div className={`d-flex justify-content-end ${co.corsebtn}`}>
         <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
                   Previous
                 </button>
-        <button type="button" className={`${co.conBTN} ${co.nxt}`} onClick={completeFormStep}>
+        {((upoaldboxdt2 === undefined) || (upoaldboxdt3 === undefined) || (values.upldb2 === undefined) || (values.upldb3 === undefined)) ?<><button type="button" className={`${co.conBTN} ${co.nxt}`} onClick={err}>
+                Upload Files To Continue
+              </button><ToastContainer/></>: <button type="button" className={`${co.conBTN} ${co.nxt}`} onClick={completeFormStep}>
                 Continue
-              </button>
+              </button>}
       </div>
       </div>
       </div>
@@ -824,7 +787,7 @@ const Courses = ({prev,sec,data  }) => {
 
 
 {/* form6 CoursePrice */}
-<div className={formstep === 4 ? `${co.active}` : `${co.noactive}`}>
+<div className={formstep === 3 ? `${co.active}` : `${co.noactive}`}>
 <div className={`row ${co.preview}`}>
         <div className={`row mx-auto justify-content-center`}>
           <div className={`col col-xxl-2 ${co.passed}`}>
@@ -835,15 +798,6 @@ const Courses = ({prev,sec,data  }) => {
             </div>
             <div className={`${co.border}`} />
             <div className={`col-12 ${co.navName}`}>Intended learners</div>
-          </div>
-          <div className={`col col-xxl-2 ${co.passed}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Content</div>
           </div>
           <div className={`col col-xxl-2 ${co.passed}`}>
             <div className={`col-12`}>
@@ -881,7 +835,7 @@ const Courses = ({prev,sec,data  }) => {
                 <div className={co.err}>{errors.price}</div>
               ) : null}
               </div>
-              <label className={`${co.label} ${co.chkboxlbl}`}>
+              {/* <label className={`${co.label} ${co.chkboxlbl}`}>
               <Field type="checkbox" name="checked2" value="true" />
               This Course is Free
             </label>
@@ -925,12 +879,12 @@ const Courses = ({prev,sec,data  }) => {
               <DatePicker className={`col-11 ${co.datepick}`} onChange={onChange2} value={value2} />
               </div>
               </div>
-              </div>
+              </div> */}
         <div className={`d-flex justify-content-end ${co.corsebtn}`}>
         <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
                   Previous
                 </button>
-              {(values.price === "" || values.percent === "" || values.discount === "") ? <>please fill</> : <button  type="submit" onClick={handleShow}  className={`${co.conBTN} ${co.nxt}`}>
+              {values.price === "" ? <button disabled>Please Fill all Field To Continue</button> : <button  type="submit" onClick={handleShow}  className={`${co.conBTN} ${co.nxt}`}>
                 Save
               </button>}
               <Modal show={show} onHide={handleClose}>

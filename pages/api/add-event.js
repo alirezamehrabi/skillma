@@ -8,6 +8,7 @@ const addEvent =async(obj)=>{
         const result = await axios.post(`${process.env.webURL}/Event/InsertEvent`,obj
         ,{ headers: { Authorization: 'bearer '+  token}
     })
+    // console.log(result)
     }
     catch(error){
             console.log(error)

@@ -6,6 +6,7 @@ import Moment from "react-moment";
 import { useState } from "react";
 import up from "../../../../styles/panel/Upldcss.module.css"
 import { toast,ToastContainer } from "react-toastify";
+import { useEffect } from "react";
 
 class Thumb extends React.Component {
   state = {
@@ -53,7 +54,10 @@ class Thumb extends React.Component {
   }
 }
 
-const App =()=> {
+const App =({handleRandom})=> {
+  // useEffect(()=>{
+  //   handleRandom
+  // },[filename])
   const file = (
     <svg
       id="Group_21369"
@@ -114,7 +118,8 @@ const now = new Date()
               
               
             if(resD.isSucces === true){
-              console.log(resD.isSucces)
+              console.log(resD.isSucces),
+              handleRandom(resDt)
               return resDt,
               toast.success('File Uploaded Successfully!', {
                 position: "top-center",
@@ -143,8 +148,8 @@ const now = new Date()
 
             })
           }}>
-          {({ values, setFieldValue }) => (
-            <Form>
+          {({ values,handleSubmit, setFieldValue }) => (
+            <div>
             <div className="form-group">
               <label htmlFor="file">File upload</label>
               <input
@@ -158,11 +163,11 @@ const now = new Date()
               />
               <Thumb file={values.file} />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button onClick={() => {handleSubmit()}} className="btn btn-primary">
               submit
             </button>
             <ToastContainer />
-          </Form>
+           </div>
               )}
           </Formik>
         

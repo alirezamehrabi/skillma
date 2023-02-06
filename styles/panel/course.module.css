@@ -148,6 +148,19 @@
   padding: 10px 85px;
   border-radius: 10px;
 }
+.newdelbtn{
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  position: relative;
+  top: 30px;
+  left: 40px;
+}
+.newdelbtn svg{
+  width: 50px;
+  height: 50px;
+}
 .prev {
   border: 1px solid #ff9d14;
   background-color: #fff;
@@ -171,10 +184,12 @@
 }
 .txtlength {
   position: relative;
-  right: 15px;
-  top: -75px;
-  float: right;
+  /* right: 15px; */
+  left: 97%;
+  top: -95px;
+  /* float: right; */
   color: #ccc;
+  height: 0;
 }
 .txtlength2 {
   top: -45px;
@@ -197,7 +212,7 @@
   position: relative;
   float: right;
   top: -60px;
-  right: -80px;
+  left: 100%;
   cursor: pointer;
 }
 .txtfeild2 {

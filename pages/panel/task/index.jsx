@@ -23,7 +23,7 @@ import { getItem } from "../../../src/core/services/storage/storage.js";
 import Loader from "../../../src/components/Loader/Loader.jsx";
 import { addTask } from "../../api/add-task.js";
 import Select from "react-select";
-
+import UploadBox from "../../../src/components/panel/UploadBox/UploadBox"
 const ContactSchema = Yup.object().shape({
   title: Yup.string()
 
@@ -105,7 +105,8 @@ console.log(cid)
   const [value, onChange] = useState(new Date());
   const [value1, onChange1] = useState(new Date());
   const [value2, onChange2] = useState(new Date());
-
+console.log(value1)
+console.log(value2)
   const [delid, setDelid] = useState();
 
   const [show, setShow] = useState(false);
@@ -122,7 +123,7 @@ console.log(cid)
     e.nativeEvent.stopImmediatePropagation();
   };
 
-  const [stulist, setStu] = useState();
+  const [stulist, setStu] = useState([]);
   const handleStList = (e) => {
     setStu(e);
   };
@@ -130,9 +131,7 @@ console.log(cid)
   const handleSList = (e) => {
     setSlist(e.target.value);
   };
-
-  // console.log(courseDt);
-
+  const [upoaldboxdt, setUpoaldboxdt] = useState()
   return (
     <SSRProvider>
       <Head>
@@ -232,36 +231,38 @@ console.log(cid)
           <Formik
             initialValues={{
               title: "",
-              people: "",
+              users: [],
               startDate: "",
               endDate: "",
               startTime: "",
               endTime: "",
               description: "",
-              isSms: [],
-              isEmail: [],
+              // isSms: [],
+              // isEmail: [],
             }}
-            validationSchema={ContactSchema}
+            // validationSchema={ContactSchema}
             // same shape as initial values
             onSubmit={async (values) => {
+              
+              console.log(stulist.map((i)=>{return i.value}));
               const userObj = {
                 title: values.title,
-                users: values.people,
+                users: stulist.map((i)=>{return i.value}),
                 courseId: values.courseList,
                 startDate: value1,
                 endDate: value2,
                 startTime: values.startTime,
                 endTime: values.endTime,
                 description: values.description,
-                atachFileName: values.photo,
-                isSms: [values.isSms],
-                isEmail: [values.isEmail],
-                
+                atachFileName: upoaldboxdt,
+                isSms: values.isSms[0] === 'true' ? true : false,
+                isEmail: values.isEmail[0] === 'true' ? true : false,
+                subTitle: values.subTitle
               };
-              const user = await addTask(userObj);
-              // setUser(user);
+              console.log(userObj);
 
-              console.log(values);
+              const user = await addTask(userObj);
+
             }}
           >
             {({ errors, touched,values }) => (
@@ -277,6 +278,19 @@ console.log(cid)
                   />
                   {errors.title && touched.title ? (
                     <div className={co.err}>{errors.title}</div>
+                  ) : null}
+                </label>
+                <label className={`${co.label}`}>
+                  Breif
+                  <Field
+                    name="subTitle"
+                    id="subTitle"
+                    type="text"
+                    placeholder="Breif"
+                    className={`col-12 mx-auto ${co.field}`}
+                  />
+                  {errors.subTitle && touched.subTitle ? (
+                    <div className={co.err}>{errors.subTitle}</div>
                   ) : null}
                 </label>
                 {/* <label className={`${co.label}`}>
@@ -312,7 +326,7 @@ console.log(cid)
                   value={stulist}
                   onChange={handleStList}
                   isMulti
-                  name="people"
+                  name="users"
                   className="basic-multi-select"
                   classNamePrefix="select"
                   options={stDt.map((i) => ({
@@ -328,6 +342,7 @@ console.log(cid)
                       onChange={onChange1}
                       value={value1}
                       className={`col-12 ${co.datepick}`}
+                      // name="startDate"
                     />
                   </label>
                   <label className={`col-lg-6 ${co.label}`}>
@@ -335,6 +350,7 @@ console.log(cid)
                     <br />
                     <DatePicker
                       className={`col-12 ${co.datepick}`}
+                      // name="endDate"
                       onChange={onChange2}
                       value={value2}
                     />
@@ -380,15 +396,10 @@ console.log(cid)
                     <div className={co.err}>{errors.description}</div>
                   ) : null}
                 </label>
-                <label htmlFor="upload-photo" className={co.uplodlabel}>
+                <label htmlFor="upload-photo" className={`my-2 fw-bold`}>
                   Attach File
                 </label>
-                <input
-                  type="file"
-                  name="photo"
-                  id="upload-photo"
-                  className={co.uplod}
-                />
+                <UploadBox handleRandom={(x) => setUpoaldboxdt(x)}/>
                 <div className={co.divider} />
                 <h6 className={`${co.notify}`}>Notification Setting</h6>
                 <label>
