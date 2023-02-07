@@ -397,6 +397,7 @@
 }
 .upholder {
   padding: 30px 10px;
+  width: 100%;
 }
 .modal > button {
   position: absolute;

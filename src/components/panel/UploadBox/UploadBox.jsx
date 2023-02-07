@@ -118,7 +118,7 @@ const now = new Date()
               
               
             if(resD.isSucces === true){
-              console.log(resD.isSucces),
+              // console.log(resD.isSucces),
               handleRandom(resDt)
               return resDt,
               toast.success('File Uploaded Successfully!', {
