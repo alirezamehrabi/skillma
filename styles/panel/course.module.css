@@ -484,6 +484,30 @@
   opacity: 0;
   transition: 0.5s;
 }
+.radio{
+  position: relative;
+  opacity: 0;
+}
+.radioHolder > div{
+  border: 1px solid #1492e6;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+.radio ~ label span{
+  padding: 0 7px;
+}
+.radio:checked ~ label span{
+  color:blue;
+  padding: 0 15px;
+  font-weight: 600;
+  transition: 0.5s;
+}
+.radio:checked ~ label svg path{
+  fill:blue;
+  transition: 0.5s;
+}
 .input:checked{
   opacity: 1;
 }

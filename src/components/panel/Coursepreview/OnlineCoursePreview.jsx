@@ -197,12 +197,9 @@ const Courses = ({ prev, data }) => {
       <div className={`row ${co.preview}`}>
         <Formik
           initialValues={{
-            checked: [],
             title: "",
-            whatLearn: [{}, {}],
+            whatYouLearn: [{}, {}],
             requirement: [{}],
-            upldb2: "",
-            upldb3: "",
           }}
           // validationSchema={ContactSchema}
           onSubmit={(values) => {
@@ -224,13 +221,18 @@ const Courses = ({ prev, data }) => {
             // "status": 0
             // functionHandler(values)
 
+            values.title,
             values.categoryId,
-              values.title,
-              (values.editor = editor),
-              values.level,
+            values.level,
+            values.whatYouLearn,
+            values.meeting,
+            values.duration,
+            values.status = 1,
+            values.progress = 1,
+              (values.description = editor),
               values.price,
-              (values.upldb2 = upoaldboxdt2),
-              (values.upldb3 = upoaldboxdt3),
+              (values.pictureName = upoaldboxdt2),
+              (values.introductionVideoName = upoaldboxdt3),
               console.log(values, "val");
           }}
         >
@@ -257,6 +259,26 @@ const Courses = ({ prev, data }) => {
                 {errors.title && touched.title ? (
                   <div className={co.err}>{errors.title}</div>
                 ) : null}
+                <label htmlFor="duration" className={`${co.label}`}>
+                  Course Duration
+                </label>
+                <Field
+                  name="duration"
+                  type="text"
+                  placeholder="course duration"
+                  className={`col-12 mx-auto ${co.txtfeild}`}
+                  maxLength="160"
+                />
+                <label htmlFor="meeting" className={`${co.label}`}>
+                  Number of Meeting
+                </label>
+                <Field
+                  name="meeting"
+                  type="text"
+                  placeholder="number of meeting"
+                  className={`col-12 mx-auto ${co.txtfeild}`}
+                  maxLength="160"
+                />
                 <label htmlFor="categoryId" className={`${co.label}`}>
                   What category best fits the knowledge you'll share?
                 </label>
@@ -302,10 +324,6 @@ const Courses = ({ prev, data }) => {
                 {errors.level && touched.level ? (
                   <div className={co.err}>{errors.level}</div>
                 ) : null}
-                <label>
-                  <Field type="checkbox" name="checked" value="true" />
-                  This Course is Free
-                </label>
                 <div className={`col-12 d-flex justify-content-end mt-4`}>
                   {values.level === "" ||
                   values.categoryId === "" ||
@@ -375,7 +393,7 @@ const Courses = ({ prev, data }) => {
                     What will students learn in your course?
                   </h5>
                   <label
-                    htmlFor="whatLearn"
+                    htmlFor="whatYouLearn"
                     className={`${co.label} ${co.lbl1}`}
                   >
                     You must enter at least 4 learning objectives or outcomes
@@ -384,11 +402,11 @@ const Courses = ({ prev, data }) => {
                   </label>
                   <div className="form-group">
                     <FieldArray
-                      name="whatLearn"
+                      name="whatYouLearn"
                       render={(arrayHelper) => {
                         return (
                           <div>
-                            {values.whatLearn.map((i, index) => {
+                            {values.whatYouLearn.map((i, index) => {
                               return (
                                 <React.Fragment>
                                   <div className="" key={index}>
@@ -408,7 +426,7 @@ const Courses = ({ prev, data }) => {
                                         placeholder={`What You Learn ${
                                           index + 1
                                         }`}
-                                        name={`whatLearn.${index}.data`}
+                                        name={`whatYouLearn.${index}.data`}
                                       ></Field>
                                     }
                                   </div>
@@ -419,7 +437,7 @@ const Courses = ({ prev, data }) => {
                               className={`col-12 mx-auto text center ${co.addBtn}`}
                               onClick={() =>
                                 arrayHelper.insert(
-                                  values.whatLearn.length + 1,
+                                  values.whatYouLearn.length + 1,
                                   {}
                                 )
                               }
@@ -490,7 +508,7 @@ const Courses = ({ prev, data }) => {
                   <h5 className={`fw-bold mb-4`}>Description</h5>
                   <ReactQuill
                     theme="snow"
-                    name="editor"
+                    name="description"
                     value={editor}
                     onChange={(e) => setEditor(e)}
                   />
@@ -503,7 +521,7 @@ const Courses = ({ prev, data }) => {
                     >
                       Previous
                     </button>
-                    {values.whatLearn.length < 2 ? (
+                    {values.whatYouLearn.length < 2 ? (
                       <button disabled>
                         Please Fill More Field To Continue
                       </button>
@@ -519,68 +537,6 @@ const Courses = ({ prev, data }) => {
                   </div>
                 </div>
               </div>
-
-              {/* form4 CourseContent */}
-              {/* 
-
-<div className={formstep === 2 ? `${co.active}` : `${co.noactive}`}>
-<div className={`row ${co.preview}`}>
-        <div className={`row mx-auto justify-content-center`}>
-          <div className={`col col-xxl-2 ${co.passed}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Intended learners</div>
-          </div>
-          <div className={`col col-xxl-2`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Content</div>
-          </div>
-          <div className={`col col-xxl-2 ${co.disable}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`${co.border}`} />
-            <div className={`col-12 ${co.navName}`}>Course Landing</div>
-          </div>
-          <div className={`col col-xxl-2 ${co.disable}`}>
-            <div className={`col-12`}>
-              <div className={`${co.firstDiv}`}>
-                <div className={`${co.secDiv}`} />
-              </div>
-            </div>
-            <div className={`col-12 ${co.navName}`}>Price & discount</div>
-          </div>
-        </div>
-      </div>
-      <div className={`row ${co.courseContent}`}>
-        <div className={`col-12  mt-5`}>
-        <h6 className={`fw-bold`}>course content</h6>
-          <h6 className="mb-4">Here is where you add course topics</h6>
-            <UploadBox handleRandom={(x) => setUpoaldboxdt(x)}/>
-            <Field type="hidden" name="upldb" value={upoaldboxdt}/>
-            
-        </div>
-        <div className={`d-flex justify-content-end ${co.corsebtn}`}>
-        <button type="button" onClick={backFormStep} className={`${co.conBTN} ${co.nxt} mx-3`}>
-                  Previous
-                </button>
-          <button type="submit" onClick={completeFormStep} className={`${co.conBTN} ${co.nxt}`}>
-            Continue
-          </button>
-        </div>
-      </div>
-      </div> */}
 
               {/* form5 CourseLanding */}
 
@@ -648,7 +604,7 @@ const Courses = ({ prev, data }) => {
                           <UploadBox handleRandom={(x) => setUpoaldboxdt2(x)} />
                           <Field
                             type="hidden"
-                            name="upldb2"
+                            name="pictureName"
                             value={upoaldboxdt2}
                           />
                         </div>
@@ -664,7 +620,7 @@ const Courses = ({ prev, data }) => {
                           <UploadBox handleRandom={(x) => setUpoaldboxdt3(x)} />
                           <Field
                             type="hidden"
-                            name="upldb3"
+                            name="introductionVideoName"
                             value={upoaldboxdt3}
                           />
                         </div>
@@ -683,8 +639,8 @@ const Courses = ({ prev, data }) => {
                       </button>
                       {upoaldboxdt2 === undefined ||
                       upoaldboxdt3 === undefined ||
-                      values.upldb2 === undefined ||
-                      values.upldb3 === undefined ? (
+                      values.pictureName === undefined ||
+                      values.introductionVideoName === undefined ? (
                         <>
                           <button
                             type="button"
@@ -749,7 +705,7 @@ const Courses = ({ prev, data }) => {
                     </div>
                   </div>
                   <div className={`row `}>
-                    <h6 className={`${co.priceTitle}`}>Price</h6>
+                    <h6 className={`${co.priceTitle}`}>Price <span> (if this course is free, set 0)</span></h6>
 
                     <div className={`col-md-6 position-relative`}>
                       <Field
@@ -766,51 +722,6 @@ const Courses = ({ prev, data }) => {
                         <div className={co.err}>{errors.price}</div>
                       ) : null}
                     </div>
-                    {/* <label className={`${co.label} ${co.chkboxlbl}`}>
-              <Field type="checkbox" name="checked2" value="true" />
-              This Course is Free
-            </label>
-              <div className={`row`}>
-              <div className={`col-md-6 position-relative`}>
-              <label htmlFor="discount" className={`col-12 ${co.label} d-block`}>Discount</label>
-
-              <Field
-                name="discount"
-                type="text"
-                placeholder="discount code"
-                className={`col-12 col-md-11 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                onKeyUp={handleNameChangediscount}
-              />
-              {errors.discount && touched.discount ? (
-                <div className={co.err}>{errors.discount}</div>
-              ) : null}
-              </div>
-              <div className={`col-md-6 position-relative`}>
-              <label htmlFor="percent" className={`col-12 ${co.label} d-block`}>percent discount</label>
-              
-              <Field
-                as="select"
-                name="percent"
-                placeholder="percent discount"
-                className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`} defaultValue={'DEFAULT'} 
-              >
-              <option hidden value="DEFAULT" >percent discount</option>
-              <option value="10%">10%</option>
-              <option value="20%">20%</option>
-              <option value="50%">50%</option>
-              </Field>
-                </div>
-                <div className={`row`}>
-              <div className={`col-md-6 position-relative`}>
-              <label htmlFor="subject" className={`${co.label}`}>Active  time</label>
-              <DatePicker onChange={onChange1} value={value1} className={`col-11 ${co.datepick}`} />
-              </div>
-              <div className={`col-md-6 position-relative mb-5`}>
-              <label htmlFor="subject" className={`${co.label}`}>Expire time</label>
-              <DatePicker className={`col-11 ${co.datepick}`} onChange={onChange2} value={value2} />
-              </div>
-              </div>
-              </div> */}
                     <div
                       className={`d-flex justify-content-end ${co.corsebtn}`}
                     >

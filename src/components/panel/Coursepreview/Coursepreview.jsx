@@ -24,18 +24,13 @@ const ContactSchema = Yup.object().shape({
 });
 
 const Courses = ({ prev, data }) => {
-  
-  const [whatLearn, setWhatLearn] = useState("");
-  const [courseConsist, setCourseConsist] = useState("");
+  const [whatYouLearn, setWhatYouLearn] = useState("");
+  const [courseConsist, setCourseConsist] = useState([]);
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [price, setPrice] = useState("");
-  const [freeinputckb, setFreeinputckb] = useState(false);
   const now = new Date();
-  const handleCkFree = (e) => {
-    console.log(e.target.checked);
-    setFreeinputckb(!freeinputckb);
-  };
+
   const handleNameChangetitle = (event) => {
     setTitle(event.target.value);
   };
@@ -51,10 +46,16 @@ const Courses = ({ prev, data }) => {
 
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
+  const [show4, setShow4] = useState(false);
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
   const handleClose3 = () => setShow3(false);
+  const handleClose4 = () => setShow4(false);
   const handleShow3 = () => setShow3(true);
+  const handleShow4 = (index) => {
+    setShow4(true);
+    setModalObjNum(index);
+  };
 
   const [upoaldboxdt, setUpoaldboxdt] = useState();
   const [upoaldimg, setUpoaldimg] = useState();
@@ -138,7 +139,6 @@ const Courses = ({ prev, data }) => {
       />
     </svg>
   );
-
   const notice = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -250,7 +250,7 @@ const Courses = ({ prev, data }) => {
     });
   };
 
-  const [formstep, setFormstep] = useState(0);
+  const [formstep, setFormstep] = useState(2);
   const completeFormStep = () => {
     setFormstep((formstep) => formstep + 1);
   };
@@ -261,36 +261,55 @@ const Courses = ({ prev, data }) => {
   const [item, setItem] = useState([]);
 
   const [modalObjNum, setModalObjNum] = useState();
-  const [modalObjNum3, setModalObjNum3] = useState();
-  console.log(modalObjNum);
-  const itemdtHandler = () => {
+  const [isEdit, setIsEdit] = useState(false);
+  const [partId, setPartId] = useState();
+  console.log(courseConsist, "courseConsist");
+  const itemdtHandler = (item) => {
+    console.log(courseConsist, "courseConsist");
+    console.log(isEdit, "isEdit");
+    console.log(modalObjNum, "modalObjNum");
+    console.log(partId, "partId");
+    console.log(item, "item");
+
     if (courseConsist[modalObjNum].parts) {
       //courseConsist[modalObjNum].parts.push(itemdt)
     } else {
       courseConsist[modalObjNum].parts = [];
     }
-    courseConsist[modalObjNum].parts.push(itemdt);
+    if (isEdit === true) {
+      courseConsist[modalObjNum].parts[partId] = item;
+    } else {
+      courseConsist[modalObjNum].parts.push(item);
+      // courseConsist.filter((i,index)=> courseConsist[modalObjNum] === modalObjNum).push(itemdt)
+    }
     setCourseConsist(courseConsist);
-    // courseConsist.filter((i,index)=> courseConsist[modalObjNum] === modalObjNum).push(itemdt)
+    setIsEdit(false);
   };
-  const [partId, setPartId] = useState();
-  const handledel = ()=>{
-    console.log(courseConsist[modalObjNum].parts)
-    courseConsist[modalObjNum].parts = courseConsist[modalObjNum].parts.filter((i,index)=> index !== partId)
-    setCourseConsist(courseConsist)
-  }
-  console.log(partId)
- const handleedit = ()=>{
-  console.log(courseConsist[modalObjNum].parts[partId])
 
- }
+  const handledel = () => {
+    console.log(courseConsist[modalObjNum].parts);
+    courseConsist[modalObjNum].parts = courseConsist[modalObjNum].parts.filter(
+      (i, index) => index !== partId
+    );
+    setCourseConsist(courseConsist);
+  };
+  const handledelsection = () => {
+    console.log(modalObjNum);
+    courseConsist = courseConsist.filter((i, index) => index !== modalObjNum);
+    setCourseConsist(courseConsist);
+  };
+  console.log(partId);
+  const handleedit = () => {
+    console.log(courseConsist[modalObjNum].parts[partId]);
+  };
+
   return (
     <SSRProvider>
       <div className={`row ${co.preview}`}>
         <Formik
           initialValues={{
-            checked: [],
-            whatLearn: [{}, {}],
+            // checked: [],
+            whatYouLearn: [{}, {}],
             itemShow: [],
             courseConsist: [{}, {}],
             requirement: [{}],
@@ -315,11 +334,12 @@ const Courses = ({ prev, data }) => {
             // "status": 0
             // functionHandler(values)
 
-            values.itemShow = item;
+            values.title,
             values.categoryId,
-              values.title,
-              (values.editor = editor),
-              values.level,
+            values.level,
+            values.whatYouLearn,
+            values.description = editor,
+            values.itemShow = item,
               values.price,
               (values.upldb = upoaldboxdt),
               upoaldimg === undefined
@@ -330,7 +350,6 @@ const Courses = ({ prev, data }) => {
             console.log(values, "val");
           }}
         >
-
           {({ errors, touched, values, handleChange, field }) => (
             <Form className={co.form}>
               {/* form1 - coursePreview */}
@@ -406,7 +425,7 @@ const Courses = ({ prev, data }) => {
                   <div className={co.err}>{errors.level}</div>
                 ) : null}
                 <label>
-                  <Field type="checkbox" name="checked" value="true" />
+                  <Field type="checkbox" name="checked" value="1" />
                   This Course is Free
                 </label>
                 <div className={`col-12 d-flex justify-content-end mt-4`}>
@@ -484,7 +503,7 @@ const Courses = ({ prev, data }) => {
                     What will students learn in your course?
                   </h5>
                   <label
-                    htmlFor="whatLearn"
+                    htmlFor="whatYouLearn"
                     className={`${co.label} ${co.lbl1}`}
                   >
                     You must enter at least 4 learning objectives or outcomes
@@ -493,11 +512,11 @@ const Courses = ({ prev, data }) => {
                   </label>
                   <div className="form-group">
                     <FieldArray
-                      name="whatLearn"
+                      name="whatYouLearn"
                       render={(arrayHelper) => {
                         return (
                           <div>
-                            {values.whatLearn.map((i, index) => {
+                            {values.whatYouLearn.map((i, index) => {
                               return (
                                 <React.Fragment>
                                   <div className="" key={index}>
@@ -517,7 +536,7 @@ const Courses = ({ prev, data }) => {
                                         placeholder={`What You Learn ${
                                           index + 1
                                         }`}
-                                        name={`whatLearn.${index}.data`}
+                                        name={`whatYouLearn.${index}.data`}
                                       ></Field>
                                     }
                                   </div>
@@ -528,7 +547,7 @@ const Courses = ({ prev, data }) => {
                               className={`col-12 mx-auto text center ${co.addBtn}`}
                               onClick={() =>
                                 arrayHelper.insert(
-                                  values.whatLearn.length + 1,
+                                  values.whatYouLearn.length + 1,
                                   {}
                                 )
                               }
@@ -599,7 +618,7 @@ const Courses = ({ prev, data }) => {
                   <h5 className={`fw-bold mb-4`}>Description</h5>
                   <ReactQuill
                     theme="snow"
-                    name="editor"
+                    name="description"
                     value={editor}
                     onChange={(e) => setEditor(e)}
                   />
@@ -612,7 +631,7 @@ const Courses = ({ prev, data }) => {
                     >
                       Previous
                     </button>
-                    {values.whatLearn.length < 2 ? (
+                    {values.whatYouLearn.length < 2 ? (
                       <button disabled>
                         Please Fill More Field To Continue
                       </button>
@@ -865,12 +884,20 @@ const Courses = ({ prev, data }) => {
                       <div className={`col-12  mt-5`} key={index}>
                         <h6 className={`${co.navtitle}`}>{i.data}</h6>
                         <div className={` mb-4 ${co.icon}`}>
-                          <div onClick={handleShow}>{del}</div>{" "}
-                          <div className="">{edit}</div>
+                          <div
+                            onClick={() => {
+                              handleShow4(index);
+                            }}
+                          >
+                            {del}
+                          </div>{" "}
+                          <div className="" onClick={backFormStep}>
+                            {edit}
+                          </div>
                         </div>
                         <div className={`row ${co.contentcourse}`}>
                           <div
-                            className={`col-3 d-flex justify-content-center ${co.newItem}`}
+                            className={`col-3 d-flex justify-content-center mb-3 ${co.newItem}`}
                             onClick={() => {
                               handleShow2(index);
                               setModalObjNum(index);
@@ -888,9 +915,9 @@ const Courses = ({ prev, data }) => {
                           {i.parts
                             ? i.parts.map((z, zindex) => {
                                 return (
-                                  <>
+                                  <React.Fragment>
                                     <div
-                                      className={`col-3 offset-1 d-flex justify-content-center ${co.newItem} ${co.oldItem}`}
+                                      className={`col-3 mb-3 offset-1 d-flex justify-content-center ${co.newItem} ${co.oldItem}`}
                                     >
                                       <div className="row">
                                         <div
@@ -910,14 +937,32 @@ const Courses = ({ prev, data }) => {
                                         <div
                                           className={`col-12 d-flex justify-content-end ${co.icon}`}
                                         >
-                                          <div onClick={()=>{setModalObjNum(index);setPartId(zindex);handleShow3(zindex);setModalData3(zindex);}}>{del}</div>{" "}
-                                          <div onClick={()=>{setModalObjNum(index);handleShow2(zindex);setPartId(zindex);setModalData3(zindex);handleedit(zindex)}}>
+                                          <div
+                                            onClick={() => {
+                                              setModalObjNum(index);
+                                              setPartId(zindex);
+                                              handleShow3(zindex);
+                                              setModalData3(zindex);
+                                            }}
+                                          >
+                                            {del}
+                                          </div>{" "}
+                                          <div
+                                            onClick={() => {
+                                              setIsEdit(true);
+                                              setModalObjNum(index);
+                                              handleShow2(zindex);
+                                              setPartId(zindex);
+                                              setModalData3(zindex);
+                                              handleedit(zindex);
+                                            }}
+                                          >
                                             {edit}
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </>
+                                  </React.Fragment>
                                 );
                               })
                             : null}
@@ -959,13 +1004,41 @@ const Courses = ({ prev, data }) => {
                 <Modal show={show3} onHide={handleClose3}>
                   <Modal.Body className={`${co.modalbody}`}>
                     {delet} <h5 className={``}>Delete course</h5>
-                    <h6 className={``}>
-                      Are you sure?
-                    </h6>
-                    <Button variant="outline-danger mt-3" onClick={handleClose3}>
+                    <h6 className={``}>Are you sure?</h6>
+                    <Button
+                      variant="outline-danger mt-3"
+                      onClick={handleClose3}
+                    >
                       Cancel
                     </Button>
-                    <Button variant="danger mx-3 mt-3" onClick={()=>{handleClose3();handledel()}}>
+                    <Button
+                      variant="danger mx-3 mt-3"
+                      onClick={() => {
+                        handleClose3();
+                        handledel();
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </Modal.Body>
+                </Modal>
+                <Modal show={show4} onHide={handleClose4}>
+                  <Modal.Body className={`${co.modalbody}`}>
+                    {delet} <h5 className={``}>Delete course</h5>
+                    <h6 className={``}>Are you sure?</h6>
+                    <Button
+                      variant="outline-danger mt-3"
+                      onClick={handleClose4}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      variant="danger mx-3 mt-3"
+                      onClick={() => {
+                        handleClose4();
+                        handledelsection();
+                      }}
+                    >
                       Delete
                     </Button>
                   </Modal.Body>
@@ -975,7 +1048,14 @@ const Courses = ({ prev, data }) => {
                 {/* Modal Box */}
 
                 {modalData !== null ? (
-                  <Modal show={show2} onHide={handleClose2} size="xl">
+                  <Modal
+                    show={show2}
+                    onHide={() => {
+                      handleClose2();
+                      //setIsEdit(false);
+                    }}
+                    size="xl"
+                  >
                     <Modal.Header closeButton className={co.modal}>
                       <div className={`row ${co.upholder}`}>
                         <h5 className={`col-12 ${co.uptitle}`}>
@@ -987,8 +1067,16 @@ const Courses = ({ prev, data }) => {
                         <div className={`col-12`}>
                           <Formik
                             initialValues={{
-                              lecture:partId===undefined?"":courseConsist[modalObjNum].parts[partId].lecture,
-                              upldb:partId===undefined?"":courseConsist[modalObjNum].parts[partId].upldb
+                              lecture:
+                                isEdit === false
+                                  ? ""
+                                  : courseConsist[modalObjNum].parts[partId]
+                                      .lecture,
+                              upldb:
+                                isEdit === false
+                                  ? ""
+                                  : courseConsist[modalObjNum].parts[partId]
+                                      .upldb,
                             }}
                             // validationSchema={ContactSchema}
                             onSubmit={(values) => {
@@ -996,7 +1084,7 @@ const Courses = ({ prev, data }) => {
                               setItemdt(values);
                             }}
                           >
-                            {({ errors, touched }) => (
+                            {({ errors, touched, values }) => (
                               <Form className={co.form}>
                                 <Field
                                   name="lecture"
@@ -1015,7 +1103,15 @@ const Courses = ({ prev, data }) => {
                                     handleRandom={(x) => setUpoaldboxdt(x)}
                                   />
                                 </div>
-                                {partId !== undefined && <div className="my-5">File:  {courseConsist[modalObjNum].parts[partId].upldb}</div>}
+                                {isEdit === true && (
+                                  <div className="my-5">
+                                    File:{" "}
+                                    {
+                                      courseConsist[modalObjNum].parts[partId]
+                                        .upldb
+                                    }
+                                  </div>
+                                )}
                                 <div
                                   className={`d-flex justify-content-end ${co.corsebtn}`}
                                 >
@@ -1023,7 +1119,7 @@ const Courses = ({ prev, data }) => {
                                     type="submit"
                                     onClick={() => {
                                       handleClose2();
-                                      itemdtHandler(modalData);
+                                      itemdtHandler(values);
                                     }}
                                     className={`mt-4 ${co.conBTN} ${co.nxt}`}
                                   >
@@ -1408,7 +1504,9 @@ const Courses = ({ prev, data }) => {
                         Previous
                       </button>
                       {values.price === "" ? (
-                        <>please fill</>
+                        <button disabled>
+                          Please Fill all Field To Continue
+                        </button>
                       ) : (
                         <button
                           type="submit"
