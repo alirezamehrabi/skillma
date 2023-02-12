@@ -15,8 +15,6 @@ import CoursePrice from "../../../src/components/panel/CoursePrice/CoursePrice";
 import CourseOnlineContent from "../../../src/components/panel/CourseOnlineContent/CourseOnlineContent";
 import Menu from "../../../src/components/panel/Menu/Menu.jsx";
 import dash from "../../../styles/panel/Dashboard.module.css";
-import styles from "../../../styles/Home.module.css";
-import co from "../../../styles/panel/course.module.css";
 import men from "../../../styles/panel/Menu.module.css";
 export async function getStaticProps() {
   const res = await fetch(`${process.env.webURL}/Category/GetMainCategories`);
@@ -45,8 +43,6 @@ const Courses = (props) => {
     setFormstep1((formstep1) => formstep1 - 1);
     console.log(formstep1)
   };
-
-  const [coursepreviewData, setCoursepreview] = useState("");
   const prev =(e)=>{
     console.log(e,"gdgfd")
   }

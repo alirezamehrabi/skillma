@@ -21,7 +21,6 @@ export async function getStaticProps() {
   const res1 = await fetch(
     `${process.env.webURL}/Task/GetAllTasks?page=1&pagesize=5`
   );
-  // const posts = await res.json();
   const firstdt = await res1.json();
 
   return {
@@ -29,8 +28,6 @@ export async function getStaticProps() {
   };
 }
 const Courses = (props) => {
-  // const catDt = props.posts.data;
-  // console.log(props.posts)
   const firstdt = props.firstdt.data;
   const [value, onChange] = useState(new Date());
 const val = value.toISOString()
@@ -63,52 +60,6 @@ const val = value.toISOString()
     e.preventDefault();
     e.nativeEvent.stopImmediatePropagation();
   };
-  const line = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="12.5"
-      height="2.5"
-      viewBox="0 0 12.5 2.5"
-    >
-      <line
-        id="Line_92"
-        data-name="Line 92"
-        x2="10"
-        transform="translate(1.25 1.25)"
-        fill="none"
-        stroke="#7a7d7c"
-        strokeLinecap="round"
-        strokeWidth="2.5"
-      />
-    </svg>
-  );
-  const tik = (
-    <svg
-      id="Layer_2"
-      data-name="Layer 2"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-    >
-      <g id="keylines">
-        <rect
-          id="Rectangle_6198"
-          data-name="Rectangle 6198"
-          width="24"
-          height="24"
-          fill="#0092e4"
-          opacity="0"
-        />
-        <path
-          id="Path_82779"
-          data-name="Path 82779"
-          d="M20.59,5.83a1.28,1.28,0,0,0-1.81,0h0L9.23,15.39l-4-4A1.31,1.31,0,1,0,3.4,13.25l4.92,4.92a1.28,1.28,0,0,0,1.81,0h0L20.59,7.72a1.28,1.28,0,0,0,.07-1.81Z"
-          fill="#7a7d7c"
-        />
-      </g>
-    </svg>
-  );
   const delet = (
     <svg
       id="Component_28_1"
@@ -169,7 +120,6 @@ const val = value.toISOString()
         `${process.env.webURL}/Course/GetTeacherCoursesName`,{headers: { Authorization: 'Bearer '+  token}}
       );
       const json = await result.json();
-      // console.log(json.data.pageData)
       setCourseDt(json.data);
       return json.data;
     } catch (error) {

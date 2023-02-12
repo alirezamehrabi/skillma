@@ -1,6 +1,4 @@
 import { createContext, useState, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
-import { loginUser } from "../../pages/api/auth/login-user";
 import {
   clearStorage,
   getItem,
@@ -8,10 +6,8 @@ import {
 } from "../../src/core/services/storage/storage";
 const DataContext = createContext();
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 
 export function DataProvider({ children }) {
-  const router = useRouter();
 
 
   const refreshToken = getItem("refreshToken");
@@ -27,9 +23,6 @@ export function DataProvider({ children }) {
   const isSucces = getItem("isSucces");
   const [user, setUser] = useState(loggedIn ? true : false);
   const[menuCat, setMenuCat] = useState();
-  const[freeCourse, setFreeCourse] = useState();
-  const[topCourse, setTopCourse] = useState();
-  const[tDashboard, setTDashboard] = useState();
   useEffect(() => {
     if (_iSMounted.current) {
       (async (p) => {
@@ -37,20 +30,14 @@ export function DataProvider({ children }) {
 		const result = (
 			await Promise.all([
 			  fetch(`https://skillma-api.shinypi.net/Category/GetAllCategories`),
-			  fetch(`https://skillma-api.shinypi.net/Course/GetFreeCourses`),
-			  fetch(`https://skillma-api.shinypi.net/Course/GetTopCourses`),
-			  fetch(`https://skillma-api.shinypi.net/TeacherDashboard/GetDashboardData?id=${p}`),
 			  ])
 		  ).map((r) => r.json());
 
       // and waiting a bit more - fetch API is cumbersome
-      const [GetAllCategories,GetFreeCourses,GetTopCourses,TeacherDashboard] = await Promise.all(result);
+      const [GetAllCategories] = await Promise.all(result);
 
       // when the data is ready, save it to state
 		  setMenuCat(GetAllCategories);
-      setFreeCourse(GetFreeCourses)
-      setTopCourse(GetTopCourses)
-      setTDashboard(TeacherDashboard)
 		setLoading(false);
       })();
     }
@@ -58,8 +45,6 @@ export function DataProvider({ children }) {
       _iSMounted.current = false;
     };
   }, []);
-
-
 
 useEffect(() => {
   async function fetchData() {
@@ -107,9 +92,6 @@ fetchData();
         isSucces,
         setUser,
         menuCat,
-        freeCourse,
-        topCourse,
-        tDashboard
       }}
     >
       {children}

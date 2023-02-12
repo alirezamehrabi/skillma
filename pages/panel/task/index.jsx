@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SSRProvider } from "react-bootstrap";
+import { SSRProvider, ToastContainer } from "react-bootstrap";
 import Header from "../../../src/components/panel/Header/Header.jsx";
 import Menu from "../../../src/components/panel/Menu/Menu.jsx";
 import dash from "../../../styles/panel/Dashboard.module.css";
@@ -405,6 +405,7 @@ const Courses = (props) => {
                 >
                   Create
                 </Button>
+                <ToastContainer/>
               </Form>
             )}
           </Formik>

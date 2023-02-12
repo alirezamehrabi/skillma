@@ -9,8 +9,8 @@ import { useContext } from "react";
 import DataContext from "../../Context/DataContext";
 import Loader from "../Loader/Loader";
 
-const FreeCourses = () => {
-  const { freeCourse, loading } = useContext(DataContext);
+const FreeCourses = ({freeCourse}) => {
+  const { loading } = useContext(DataContext);
   return !loading ? (
     <div className={`row mx-auto g-2 `}>
       {freeCourse.data.map((i) => {

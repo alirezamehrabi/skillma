@@ -246,8 +246,8 @@ console.log(datacourse , "datacourse")
             <td>{i.contentName}</td>
             <td>{catDt.filter((x)=> x.id === i.categooryId)[0].categoryName}</td>
             <td>{i.type === 0 ? "Short Video" : i.type === 0 ? "Text" :  "Sound"}</td>
-            <td>{i.studentCount}</td>
             <td>{parseFloat(i.rate).toFixed(2)}</td>
+            {/* <td>{parseFloat(i.rate).toFixed(2)}</td> */}
             {i.statusType === "Published" ? (
               <td className={`${co.greenc}`}>{i.statusType}</td>
             ) : i.statusType === "Awaiting" ? (

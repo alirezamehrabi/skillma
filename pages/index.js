@@ -31,15 +31,19 @@ export async function getStaticProps() {
     `${process.env.webURL}/AboutUs/GetAboutUs`
   );
   const whyskill = await res3.json();
+  const res4 = await fetch(
+    `${process.env.webURL}/Course/GetFreeCourses`
+  );
+  const D = await res4.json();
   return {
     props: {
-      ...{ data,shortvideodata,dynamic,whyskill },
+      ...{ data,shortvideodata,dynamic,whyskill,D },
     },
   };
 }
 
 export default function Home(props) {
-  // console.log(props.shortvideodata.data.pageData)
+  console.log(props.D.data)
   const topcourse = props.data
   const dynamic = props.dynamic
   const whyskill = props.whyskill.data
@@ -326,7 +330,7 @@ export default function Home(props) {
                 </>
               </Link>
             </div>
-            <div className={`col-12`}><FreeCourses /></div>
+            <div className={`col-12`}><FreeCourses freeCourse={props.D}/></div>
         </section>
         <section className={`row container mx-auto mb-5 ${styles.topCourses}`}>
         <div className={`col-sm-12 ${styles.discount}`}>Discount</div>

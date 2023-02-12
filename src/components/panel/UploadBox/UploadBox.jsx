@@ -163,7 +163,7 @@ const now = new Date()
               />
               <Thumb file={values.file} />
             </div>
-            <button onClick={() => {handleSubmit()}} className="btn btn-primary">
+            <button type="button" onClick={() => {handleSubmit()}} className="btn btn-primary">
               submit
             </button>
             <ToastContainer />

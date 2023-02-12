@@ -42,7 +42,35 @@ const ContactSchema = Yup.object().shape({
   startTime: Yup.string().required("Required"),
   endTime: Yup.string().required("Required"),
 });
-const Trend = () => {
+export async function getStaticProps() {
+  const res = await fetch(`${process.env.webURL}/Event/GetDashboardEvents`);
+  const posts = await res.json();
+
+  return {
+    props: { posts },
+  };
+}
+const Trend = (props) => {
+  const [courseDt1, setCourseDt1] = useState();
+  console.log(courseDt1);
+  const fetchcourse1 = async () => {
+    const token = getItem("token");
+    try {
+      const result = await fetch(
+        `${process.env.webURL}/Event/GetDashboardEvents`,
+        { headers: { Authorization: "Bearer " + token } }
+      );
+      const json = await result.json();
+      setCourseDt1(json.data);
+      return json.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchcourse1();
+  }, []);
+  console.log(props.posts);
   const [courseDt, setCourseDt] = useState();
   const [stDt, setstDt] = useState();
   const [taskDt, setTaskDt] = useState();
@@ -214,62 +242,23 @@ const Trend = () => {
                 />
               </div>
               <div className={`col-lg-3`}>
-                <div className={`col-md-11 mx-auto ${ca.rightitemholder}`}>
-                  <div className={`col-12 ${ca.timelinepart}`}>
-                    <h6 className={`col-12 mt-4 ${dash.tltitle}`}>
-                      Event List
-                    </h6>
-                    <div className={`col-12 mb-4 ${dash.timelineitem}`}>
-                      <h5 className={`${dash.timelinename}`}>
-                        Lorem Ipsum is simply dummy text
-                        <br />
-                        (Task Title)
-                      </h5>
-                      <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                      <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
-                    </div>
-                    <div className={`col-12 mb-4`}>
-                      <h6 className={`${dash.timelineremain}`}>
-                        //In next 10 minute
-                      </h6>
-                    </div>
-                    <div className={`col-12 mb-4 ${dash.timelineitem}`}>
-                      <h5 className={`${dash.timelinename}`}>
-                        Lorem Ipsum is simply dummy text
-                        <br />
-                        (Task Title)
-                      </h5>
-                      <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                      <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
-                    </div>
-                    <div className={`col-12 mb-4 ${dash.timelineitem}`}>
-                      <h5 className={`${dash.timelinename}`}>
-                        Lorem Ipsum is simply dummy text
-                        <br />
-                        (Task Title)
-                      </h5>
-                      <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                      <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
-                    </div>
-                    <div className={`col-12 mb-4 ${dash.timelineitem}`}>
-                      <h5 className={`${dash.timelinename}`}>
-                        Lorem Ipsum is simply dummy text
-                        <br />
-                        (Task Title)
-                      </h5>
-                      <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                      <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
-                    </div>
-                    <div className={`col-12 mb-4 ${dash.timelineitem}`}>
-                      <h5 className={`${dash.timelinename}`}>
-                        Lorem Ipsum is simply dummy text
-                        <br />
-                        (Task Title)
-                      </h5>
-                      <h6 className={`${dash.timelinetitle}`}>course name</h6>
-                      <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
-                    </div>
-                  </div>
+                <div className={`col-12 mt-5 ${dash.timelinepart}`}>
+                  <h6 className={`col-12 mt-5 ${dash.tltitle}`}>Event List</h6>
+                  {courseDt1.map((i) => {
+                    return (
+                      <div className={`col-12 mb-4 ${dash.timelineitem}`}>
+                        <h5 className={`${dash.timelinename}`}>
+                          {i.eventTitle}
+                        </h5>
+                        <h6 className={`${dash.timelinetitle}`}>
+                          {i.courseName}
+                        </h6>
+                        <h6 className={`${dash.timelineclock}`}>
+                          {i.startTime}
+                        </h6>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -335,7 +324,7 @@ const Trend = () => {
                   </label>
 
                   <label htmlFor="courseList" className={`${co.label}`}>
-                  Type Event
+                    Type Event
                   </label>
                   <Field
                     as="select"
@@ -346,7 +335,7 @@ const Trend = () => {
                     defaultValue={"DEFAULT"}
                   >
                     <option hidden value="DEFAULT">
-                    EventType
+                      EventType
                     </option>
                     {courseDt.map((i) => {
                       return (
@@ -433,7 +422,7 @@ const Trend = () => {
                       <div className={co.err}>{errors.description}</div>
                     ) : null}
                   </label>
-                 
+
                   <div className={co.divider} />
                   <h6 className={`${co.notify}`}>Notification Setting</h6>
                   <label>
