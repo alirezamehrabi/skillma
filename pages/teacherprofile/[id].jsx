@@ -19,8 +19,10 @@ import {FiTwitter} from "react-icons/fi"
 import {FaUserGraduate} from "react-icons/fa"
 import {TiArrowForwardOutline} from "react-icons/ti"
 import Loader from "../../src/components/Loader/Loader";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import DataContext from "../../src/Context/DataContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getLikeFallBack } from "../api/redux/likereducer";
 
 export async function getStaticPaths() {
   return { paths:[], fallback: 'blocking' };
@@ -50,9 +52,17 @@ export async function getStaticProps(context) {
     }
  }
 }
+
 const TeacherProfile = (props) => {
+  const data1= useSelector((like)=>like.like.data1)
+const dispatch = useDispatch()
+const id = props.coursedet.data.teacherId;
+const p=1;
+useEffect(()=>{
+  dispatch(getLikeFallBack({id,p}))
+},[])
   const cd = props.coursedet.data;
-  // console.log(cd.teacherId)
+  console.log(props.comment)
   // console.log(props.coursedet)
   const td = props.coursedet.data
   const datafunc = async (p)=>{
@@ -144,7 +154,7 @@ const TeacherProfile = (props) => {
         </section>
         <Comment
             teacherId={cd.teacherId}
-            commentData={props.comment.data.pageData}
+            commentData={data1}
             totalCount={props.comment.data.totalCount}
             totalPage={props.comment.data.totalPage}
             page={props.comment.data.page}

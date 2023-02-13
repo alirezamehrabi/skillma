@@ -9,15 +9,15 @@ import Comment from "../../src/components/Comment/Comment";
 import Footer from "../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
 import { FaUserGraduate } from "react-icons/fa";
-import {
-  AiOutlineClockCircle
-} from "react-icons/ai";
+import { AiOutlineClockCircle } from "react-icons/ai";
 import { GiLevelEndFlag } from "react-icons/gi";
 import { TbCertificate } from "react-icons/tb";
 import { MdOutlinePriceChange } from "react-icons/md";
 import Loader from "../../src/components/Loader/Loader";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import DataContext from "../../src/Context/DataContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getLikeFallBack, getLikeFallBackOnline } from "../api/redux/likereducer";
 export async function getStaticPaths() {
   return { paths:[], fallback: 'blocking' };
 }
@@ -36,7 +36,7 @@ export async function getStaticProps(context) {
   const comment = await request1.json();
   return {
     props: {
-      ...{ coursedet,comment },
+      ...{ coursedet,comment,paths },
     },
   };
  }
@@ -49,6 +49,15 @@ export async function getStaticProps(context) {
  }
 }
 const onlinecourse = (props) => {
+  const data1= useSelector((like)=>like.like.data2)
+  console.log(data1,"data1")
+  console.log(props.coursedet.data.teacherId,"props.coursedet.data.teacherId")
+const dispatch = useDispatch()
+const id = props.paths;
+const p=1;
+useEffect(()=>{
+  dispatch(getLikeFallBackOnline({id,p}))
+},[])
   const cd = props.coursedet.data;
   // console.log(cd)
   const datafunc = async (p)=>{
@@ -219,7 +228,7 @@ const onlinecourse = (props) => {
           </section>
           <Comment
             teacherId={cd.teacherId}
-            commentData={props.comment.data.pageData}
+            commentData={data1}
             totalCount={props.comment.data.totalCount}
             totalPage={props.comment.data.totalPage}
             page={props.comment.data.page}

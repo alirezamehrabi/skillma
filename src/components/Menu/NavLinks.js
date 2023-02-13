@@ -19,22 +19,22 @@ const NavLinks = (props) => {
                     </motion.a>
                   </Link>
 
-                  <Link passHref href="/courses">
+                  <Link passHref href="/topcourses">
                     <motion.a initial={animateFrom} animate={animateTo} transition={{delay:0.10}} onClick={()=>props.isMobile && props.Close()}
                       className={
-                        currentRoute === "/courses" ? `${styles.active}` : ``
+                        currentRoute === "/topcourses" ? `${styles.active}` : ``
                       }
                     >
                       Courses
                     </motion.a>
                   </Link>
-                  <Link passHref href="/short">
+                  <Link passHref href="/shortvideo">
                     <motion.a initial={animateFrom} animate={animateTo} transition={{delay:0.20}} onClick={()=>props.isMobile && props.Close()}
                       className={
-                        currentRoute === "/short" ? `${styles.active}` : ``
+                        currentRoute === "/shortvideo" ? `${styles.active}` : ``
                       }
                     >
-                      Short Content
+                      Short Video
                     </motion.a>
                   </Link>
                   <Link passHref href="/about">
@@ -43,7 +43,7 @@ const NavLinks = (props) => {
                         currentRoute === "/about" ? `${styles.active}` : ``
                       }
                     >
-                      Call Us
+                      About Us
                     </motion.a>
                   </Link>
                 </ul>

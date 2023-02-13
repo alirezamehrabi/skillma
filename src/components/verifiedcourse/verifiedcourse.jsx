@@ -36,11 +36,11 @@ const [rating, setRating] = useState(0);
   };
   const displayItems = mydata1 !==undefined ? mydata1.pageData.map((i,index) => {
     return(
-        <div className="col-4" key={index}>
+        <div className="col-md-6 col-lg-4 mb-2 mx-auto" key={index}>
         <div className={`col-12 ${styles.courseSlidePic}`} key={index}>
   <Link href="#">
     <>
-      <figure className={`col-10 ${styles.coursePicHolder}`}>
+      <figure className={`col-10 mx-auto ${styles.coursePicHolder}`}>
         <Image
           src={i.coursePic}
           alt="logo"
@@ -59,7 +59,7 @@ const [rating, setRating] = useState(0);
       </figure>: null}
       
 
-      <figure className={`col-10 ${styles.courseContent}`}>
+      <figure className={`col-10 mx-auto ${styles.courseContent}`}>
         <Image
           onClick={handleShow}
           src={require(`../../assets/home/play.png`)}
@@ -181,11 +181,11 @@ const [rating, setRating] = useState(0);
     };
     const displayItems0 = mydata0 !==undefined ? mydata0.pageData.map((i,index) => {
         return(
-            <div className="col-4" key={index}>
+            <div className="col-md-6 col-lg-4 mb-2 mx-auto" key={index}>
             <div className={`col-12 ${styles.courseSlidePic}`} key={index}>
       <Link href="#">
         <>
-          <figure className={`col-10 ${styles.coursePicHolder}`}>
+          <figure className={`col-10 mx-auto ${styles.coursePicHolder}`}>
             <Image
               src={i.coursePic}
               alt="logo"
@@ -204,7 +204,7 @@ const [rating, setRating] = useState(0);
           </figure>: null}
           
 
-          <figure className={`col-10 ${styles.courseContent}`}>
+          <figure className={`col-10 mx-auto ${styles.courseContent}`}>
             <Image
               onClick={handleShow}
               src={require(`../../assets/home/play.png`)}
@@ -326,11 +326,11 @@ const [rating, setRating] = useState(0);
       };
       const displayItems2 = mydata2 !==undefined ? mydata2.pageData.map((i,index) => {
         return(
-            <div className="col-4" key={index}>
+            <div className="col-md-6 col-lg-4 mb-2 mx-auto" key={index}>
             <div className={`col-12 ${styles.courseSlidePic}`} key={index}>
       <Link href="#">
         <>
-          <figure className={`col-10 ${styles.coursePicHolder}`}>
+          <figure className={`col-10 mx-auto ${styles.coursePicHolder}`}>
             <Image
               src={i.coursePic}
               alt="logo"
@@ -349,7 +349,7 @@ const [rating, setRating] = useState(0);
           </figure>: null}
           
 
-          <figure className={`col-10 ${styles.courseContent}`}>
+          <figure className={`col-10 mx-auto ${styles.courseContent}`}>
             <Image
               onClick={handleShow}
               src={require(`../../assets/home/play.png`)}
@@ -470,11 +470,11 @@ const [rating, setRating] = useState(0);
       };
       const displayItems3 = mydata3 !==undefined ? mydata3.pageData.map((i,index) => {
         return(
-            <div className="col-4" key={index}>
+            <div className="col-md-6 col-lg-4 mb-2 mx-auto" key={index}>
             <div className={`col-12 ${styles.courseSlidePic}`} key={index}>
       <Link href="#">
         <>
-          <figure className={`col-10 ${styles.coursePicHolder}`}>
+          <figure className={`col-10 mx-auto ${styles.coursePicHolder}`}>
             <Image
               src={i.coursePic}
               alt="logo"
@@ -493,7 +493,7 @@ const [rating, setRating] = useState(0);
           </figure>: null}
           
 
-          <figure className={`col-10 ${styles.courseContent}`}>
+          <figure className={`col-10 mx-auto ${styles.courseContent}`}>
             <Image
               onClick={handleShow}
               src={require(`../../assets/home/play.png`)}

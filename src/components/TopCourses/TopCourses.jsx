@@ -30,7 +30,7 @@ const [rating, setRating] = useState(0);
   };
   const displayItems = mydata1 !==undefined ? mydata1.map((i,index) => {
     return(
-        <div className="col-4" key={index}>
+        <div className="col-md-6 col-lg-4 mb-2" key={index}>
         <div className={`col-12 ${styles.courseSlidePic}`} key={index}>
   <Link href="#">
     <>

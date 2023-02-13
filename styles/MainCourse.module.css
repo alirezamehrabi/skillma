@@ -32,6 +32,7 @@
 
   .itemWrap{
     background-color: #F1F6F2;
+    border-radius: 14px;
   }
 
   .popularIMG{
@@ -40,7 +41,9 @@
     display: flex;
     align-items: center;
   }
-
+.popularIMG img{
+  border-radius: 14px;
+}
   .popularName{
     font-weight: 600;
     font-size: 18px;

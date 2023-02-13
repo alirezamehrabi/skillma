@@ -63,7 +63,7 @@ const ForgetPass = () => {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <main>
-          <div className={`row ${reg.login} ${reg.for}`}>
+          <div className={`row ${reg.for} ${reg.for}`}>
             <div className={`col-lg-5 ${reg.reg}`}></div>
             <div className={`col-lg-7 ${reg.forg}`}>
               <h6 className={`${reg.forgett}`}>Forget Password</h6>

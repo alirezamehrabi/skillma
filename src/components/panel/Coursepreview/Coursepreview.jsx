@@ -25,7 +25,7 @@ const ContactSchema = Yup.object().shape({
 
 const Courses = ({ prev, data }) => {
   const [whatYouLearn, setWhatYouLearn] = useState("");
-  const [courseConsist, setCourseConsist] = useState([]);
+  const [courseConsist, setCourseConsist] = useState([{},{}]);
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [price, setPrice] = useState("");
@@ -307,11 +307,12 @@ const Courses = ({ prev, data }) => {
     <SSRProvider>
       <div className={`row ${co.preview}`}>
         <Formik
+        enableReinitialize={true}
           initialValues={{
             // checked: [],
             whatYouLearn: [{}, {}],
             itemShow: [],
-            courseConsist: [{}, {}],
+            courseConsist: courseConsist,
             requirement: [{}],
           }}
           // validationSchema={ContactSchema}
@@ -348,6 +349,9 @@ const Courses = ({ prev, data }) => {
               (values.upldbintro = upoaldintro),
               (values.parts = []);
             console.log(values, "val");
+          
+            setCourseConsist(values.courseConsist);
+            // values.courseConsist=courseConsist;
           }}
         >
           {({ errors, touched, values, handleChange, field }) => (
@@ -735,8 +739,9 @@ const Courses = ({ prev, data }) => {
                       render={(arrayHelper) => {
                         return (
                           <div>
-                            {values.courseConsist.map((i, index) => {
+                            {courseConsist.map((i, index) => {
                               return (
+                                // <div>kjhkh</div>
                                 <React.Fragment>
                                   <div className="" key={index}>
                                     <div className="float-end">
@@ -755,6 +760,7 @@ const Courses = ({ prev, data }) => {
                                         placeholder={`course Consist ${
                                           index + 1
                                         }`}
+                                        // onBlur={(x) => {console.log(x);setCourseConsist(h=>[...h, x.target.value])}}
                                         name={`courseConsist.${index}.data`}
                                       ></Field>
                                     }
@@ -764,11 +770,11 @@ const Courses = ({ prev, data }) => {
                             })}
                             <button
                               className={`col-12 mx-auto text center ${co.addBtn}`}
-                              onClick={() =>
+                              onClick={() =>{
                                 arrayHelper.insert(
-                                  values.courseConsist.length + 1,
+                                  courseConsist.length + 1,
                                   {}
-                                )
+                                )}
                               }
                             >
                               {plus}Add more
@@ -786,7 +792,7 @@ const Courses = ({ prev, data }) => {
                     >
                       Previous
                     </button>
-                    {values.courseConsist.length < 2 ? (
+                    {courseConsist.length < 2 ? (
                       <button disabled>
                         Please Fill More Field To Continue
                       </button>
@@ -795,7 +801,7 @@ const Courses = ({ prev, data }) => {
                         type="submit"
                         onClick={() => {
                           completeFormStep();
-                          setCourseConsist(values.courseConsist);
+                          setCourseConsist(courseConsist);
                         }}
                         className={`${co.conBTN} ${co.nxt}`}
                       >
@@ -879,7 +885,7 @@ const Courses = ({ prev, data }) => {
                 {/* Show courseConsist Section in page */}
 
                 <div className={`row ${co.courseContent}`}>
-                  {values.courseConsist.map((i, index) => {
+                  {courseConsist.map((i, index) => {
                     return (
                       <div className={`col-12  mt-5`} key={index}>
                         <h6 className={`${co.navtitle}`}>{i.data}</h6>

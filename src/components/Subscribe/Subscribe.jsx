@@ -9,7 +9,7 @@ const Subscribe = ({count}) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
     return ( 
-        <section className={`row container mx-auto mb-5 ${styles.subscribe}`}>
+        <section className={`row container mx-auto mb-5 p-4 ${styles.subscribe}`}>
         <div className={`col-sm-12 ${styles.subscribeTitle}`}>Subscribe For Get Update Every<br/>New Courses</div>
         <div className={`col-sm-12 ${styles.subscribeDes}`}>{count} Students daily learn with SKillMA. Subscribe for new courses.</div>
         <div className={`col-xl-6 col-sm-11 mx-auto text-center `}>

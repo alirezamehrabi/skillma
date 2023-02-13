@@ -61,7 +61,7 @@ const Menu = () => {
               <MobileNavigation />
             </div>
             <div className="col-lg-1 col-md-1 col-sm-1 order-3 order-lg-3 col-1">
-              <Link href="#">
+              <Link href="/cart">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ const Menu = () => {
                       <div className={`col-auto ${styles.account}`}>
                         <Image
                           src={require(`../../../src/assets/panel/dash/per.png`)}
-                          alt=""
+                          alt="per"
                           width=""
                           height=""
                         />

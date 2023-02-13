@@ -41,7 +41,7 @@ const handleRating = (number) => {
   };
   const displayItems = mydata1 !==undefined ? mydata1.pageData.map((i,index) => {
     return(
-        <div className="col-4" key={index}>
+        <div className="col-md-6 col-lg-4 mb-2" key={index}>
           <div className={`col-11 ${styles.shortSlidePic}`} key={index}>
       <Link href="#" >
         <>
@@ -206,7 +206,7 @@ const handleRating = (number) => {
     };
     const displayItems0 = mydata0 !==undefined ? mydata0.pageData.map((i,index) => {
         return(
-            <div className="col-4" key={index}>
+            <div className="col-md-6 col-lg-4 mb-2" key={index}>
               <div className={`col-11 ${styles.shortSlidePic}`} key={index}>
           <Link href="#" >
             <>
@@ -371,7 +371,7 @@ const handleRating = (number) => {
       };
       const displayItems2 = mydata2 !==undefined ? mydata2.pageData.map((i,index) => {
         return(
-            <div className="col-4" key={index}>
+            <div className="col-md-6 col-lg-4 mb-2" key={index}>
               <div className={`col-11 ${styles.shortSlidePic}`} key={index}>
           <Link href="#" >
             <>
@@ -535,7 +535,7 @@ const handleRating = (number) => {
       };
       const displayItems3 = mydata3 !==undefined ? mydata3.pageData.map((i,index) => {
         return(
-            <div className="col-4" key={index}>
+            <div className="col-md-6 col-lg-4 mb-2" key={index}>
               <div className={`col-11 ${styles.shortSlidePic}`} key={index}>
           <Link href="#" >
             <>

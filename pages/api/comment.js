@@ -55,6 +55,7 @@ const DecreaseDissLike = async (id) => {
   }
 };
 const AddLike = async (id) => {
+  console.log(id,"id")
   try {
     const token = getItem("token")
     const result = await axios.put(

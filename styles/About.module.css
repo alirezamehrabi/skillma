@@ -13,6 +13,7 @@
     padding: 0 50px 30px;
     line-height:40px;
     font-size: 14px;
+    word-wrap: break-word;
   }
   .img > span{
     width: 100% !important;

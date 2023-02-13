@@ -21,7 +21,7 @@ import axios from "axios";
 import pag from "../../../styles/paginate.module.css";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
-import { getLike, getLikeFallBack } from "../../../pages/api/redux/likereducer";
+import { getLike, getLikeFallBack, getLikeFallBackOnline } from "../../../pages/api/redux/likereducer";
 import { useRouter } from "next/router";
 import Loader from "../Loader/Loader";
 const ContactSchema = Yup.object().shape({
@@ -41,56 +41,24 @@ const Comment = ({
   courseId,
   pageName
 }) => {
-  let router = useRouter()
-  let rout = router.query.id
   const disPatch = useDispatch()
-  // console.log(courseId)
-// const {data}= useSelector(({like})=>like);
-// console.log(data)
-// useEffect(() => {
-//   disPatch(getLike(15))
-//   .then((res)=>{
-//     disPatch(AnalyzeByIdApi(item.id));
-// });
-// }, [disPatch])
-
-const [likenum,setLikenum] = useState();
-
-// const [ dt , setDt] = useState()
-// const [ dt1 , setDt1] = useState()
-// const mydt = ()=> disPatch(getLikeFallBack(courseId)).then((r)=> setDt1(r))
-
-// console.log(dt1)
-// const dp = (a)=>{
-//   disPatch(getLike(a)).
-//   then(async(res)=>{
-//     // console.log(res)
-//     await disPatch(await getLikeFallBack(courseId)).then((r)=> setDt1(r))})}
-//     useEffect(()=>{
-//       mydt()
-//     },[dp()])
+  console.log(courseId,"cid")
 
 const [mydata, setMydata] = useState(commentData);
-const [ dt , setDt] = useState()
+let comId;
 const [ dt1 , setDt1] = useState()
-const mydt = ()=> disPatch(getLikeFallBack(courseId)).then((r)=> setDt1(r.payload))
+// const mydt = ()=> disPatch(getLikeFallBack(courseId)).then((r)=> setDt1(r.payload))
 useEffect(()=>{
-  mydt()
-},[])
-console.log(dt1)
+  // mydt()
+},[]);
+const id=courseId;
+let p;
+console.log(commentData,"commentData")
 const dp = (a)=>{
-  disPatch(getLike(a)).
-  then((res)=>{
-    disPatch(getLikeFallBack(courseId)).then((r)=> console.log(r.payload))
-  })}
-  useEffect(()=>{
-    dp()
-  },[dt])
-if(dt1 !== undefined){
-  console.log(dt1.payload)
-}
-else if(dt1 === undefined){
-  <Loader/>
+  console.log(pageNum,"a")
+  p=pageNum+1;
+  disPatch(getLike(a.comId)).then((r)=> disPatch(getLikeFallBack({id,p})))
+  disPatch(getLike(a.comId)).then((r)=> disPatch(getLikeFallBackOnline({id,p})))
 }
   const [rating, setRating] = useState();
   const handleRating = (number) => {
@@ -120,15 +88,20 @@ else if(dt1 === undefined){
   const [replylength, setReplylength] = useState();
 
   const [pageNum, setPageNum] = useState(0);
+  const dispatch = useDispatch()
   const changePage = async ({ selected }) => {
     setPageNum(selected);
 
     setMydata(await datafunc(selected+1));
+    p=selected+1;
+    
+    dispatch(getLikeFallBack({id,p}))
+    dispatch(getLikeFallBackOnline({id,p}))
   };
 const [tcomment , setTcomment] = useState(totalCount)
-
+console.log(mydata)
 const pageCount = totalPage;
-  const datadisplay = mydata.map((i) => {
+  const datadisplay = commentData.map((i) => {
     return (
       <div
         className={
@@ -221,12 +194,12 @@ const pageCount = totalPage;
             </button>
           ) : null}
           <div className={`row ${com.commentItem}`}>
-            <div className={`col-4 ${com.like}`} onClick={() => AddLike(i.commentId)}>
+            <div className={`col-4 ${com.like}`} onClick={() => {AddLike({comId,courseId})}}>
               <AiOutlineLike /> Like({i.likeCount})
             </div>
             <div
               className={`col-4 ${com.dislike}`}
-              onClick={()=>{dp(i.commentId);setDt(i.commentId)}} 
+              onClick={()=>{comId=i.commentId;dp({courseId,comId})}} 
             >
               <AiOutlineDislike /> DisLike({i.dissLikeCount})
             </div>

@@ -295,7 +295,7 @@ export default function Home(props) {
         <section className={`row container mx-auto mb-5 ${styles.topCourses}`}>
         <div className={`col-sm-8 ${styles.titleCourse}`}>Top Courses</div>
           <div className={`col-sm-4 mx-auto ${styles.but} ${styles.but2}`}>
-              <Link href="#">
+              <Link href="/topcourses">
                 <>
                   <button
                     type="button"
@@ -315,7 +315,7 @@ export default function Home(props) {
         <section className={`row container mx-auto mb-5`}>
           <div className={`col-sm-8 ${styles.titleFree}`}>Free Courses</div>
           <div className={`col-sm-4 mx-auto ${styles.but} ${styles.but2}`}>
-              <Link href="#">
+              <Link href="/freecourse">
                 <>
                   <button
                     type="button"

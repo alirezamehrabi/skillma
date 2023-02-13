@@ -44,7 +44,7 @@ export async function getStaticProps(context) {
     const comment = await request1.json();
     return {
       props: {
-        ...{ coursedet, comment },
+        ...{ coursedet, comment,paths },
       },
     };
   } catch (e) {
@@ -57,7 +57,8 @@ export async function getStaticProps(context) {
 }
 
 const detailcourse = (props) => {
-  // console.log(props.coursedet.data)
+
+  console.log(props.paths)
   const disPatch = useDispatch()
 // const {data}= useSelector(({like})=>like);
 // console.log(data)
@@ -355,7 +356,7 @@ let pageName = 1
             page={props.comment.data.page}
             pageTitle={props.coursedet.data.title}
             datafunc={datafunc}
-            courseId={props.coursedet.data.id}
+            courseId={props.paths}
             pageName={pageName}
           />
           <section className={`row container mx-auto mb-5 `}>
