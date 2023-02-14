@@ -24,7 +24,7 @@ import { MdOutlinePriceChange } from "react-icons/md";
 import Moment from "react-moment";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getLike } from "../api/redux/likereducer";
+import { getLike, getLikeFallBackCourse } from "../api/redux/likereducer";
 
 export async function getStaticPaths() {
   return { paths: [], fallback: "blocking" };
@@ -58,14 +58,14 @@ export async function getStaticProps(context) {
 
 const detailcourse = (props) => {
 
-  console.log(props.paths)
-  const disPatch = useDispatch()
-// const {data}= useSelector(({like})=>like);
-// console.log(data)
-// useEffect(() => {
-//   disPatch(getLike(15))
-// }, [disPatch])
-
+  const data1= useSelector((like)=>like.like.data3)
+  console.log(data1,"data1")
+const dispatch = useDispatch()
+const id = props.paths;
+const p=1;
+useEffect(()=>{
+  dispatch(getLikeFallBackCourse({id,p}))
+},[])
 
   const cd = props.coursedet.data;
 
@@ -350,7 +350,7 @@ let pageName = 1
           </section>
           <Comment
             teacherId={cd.teacherId}
-            commentData={props.comment.data.pageData}
+            commentData={data1}
             totalCount={props.comment.data.totalCount}
             totalPage={props.comment.data.totalPage}
             page={props.comment.data.page}

@@ -17,9 +17,12 @@ import Loader from "../../src/components/Loader/Loader";
 import React, { useContext, useEffect } from "react";
 import DataContext from "../../src/Context/DataContext";
 import { useDispatch, useSelector } from "react-redux";
-import { getLikeFallBack, getLikeFallBackOnline } from "../api/redux/likereducer";
+import {
+  getLikeFallBack,
+  getLikeFallBackOnline,
+} from "../api/redux/likereducer";
 export async function getStaticPaths() {
-  return { paths:[], fallback: 'blocking' };
+  return { paths: [], fallback: "blocking" };
 }
 
 export async function getStaticProps(context) {
@@ -31,50 +34,57 @@ export async function getStaticProps(context) {
     `${process.env.webURL}/Comment/GetOnlineCourseComment?CourseId=${paths}&page=1&pagesize=5`
   );
 
- try{
-  const coursedet = await request.json();
-  const comment = await request1.json();
-  return {
-    props: {
-      ...{ coursedet,comment,paths },
-    },
-  };
- }
- catch(e){
-  return {
+  try {
+    const coursedet = await request.json();
+    const comment = await request1.json();
+    return {
+      props: {
+        ...{ coursedet, comment, paths },
+      },
+    };
+  } catch (e) {
+    return {
       redirect: {
         destination: "/404",
       },
-    }
- }
+    };
+  }
 }
 const onlinecourse = (props) => {
-  const data1= useSelector((like)=>like.like.data2)
-  console.log(data1,"data1")
-  console.log(props.coursedet.data.teacherId,"props.coursedet.data.teacherId")
-const dispatch = useDispatch()
-const id = props.paths;
-const p=1;
-useEffect(()=>{
-  dispatch(getLikeFallBackOnline({id,p}))
-},[])
+  const data1 = useSelector((like) => like.like.data2);
+  const dispatch = useDispatch();
+  const id = props.paths;
+  const p = 1;
+  useEffect(() => {
+    dispatch(getLikeFallBackOnline({ id, p }));
+  }, []);
   const cd = props.coursedet.data;
-  // console.log(cd)
-  const datafunc = async (p)=>{
+  const datafunc = async (p) => {
     try {
       const result = await fetch(
         `${process.env.webURL}/Comment/GetOnlineCourseComment?CourseId=${cd.id}&page=${p}&pagesize=5`
-        );
-        const json = await result.json();
-        // console.log(json)
-      return json.data.pageData
+      );
+      const json = await result.json();
+      return json.data.pageData;
     } catch (error) {
-       console.log(error);
+      console.log(error);
     }
-  }
-  const meeting = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{fill:blue;opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="keylines"><rect className="cls-1" width="25" height="25"/><path d="M7.45,10.18H9.27a.91.91,0,0,0,0-1.82H7.45a.91.91,0,1,0,0,1.82ZM20.19,4.72H12.91V3.81a.91.91,0,0,0-1.82,0v.91H3.81a.91.91,0,0,0-.91.91v9.1a2.73,2.73,0,0,0,2.73,2.73H9.81L7.72,19.54a.91.91,0,0,0,0,1.29h0a.9.9,0,0,0,1.28,0H9l2.08-2.09v1.44a.91.91,0,0,0,1.82,0V18.74L15,20.83a.91.91,0,0,0,1.29,0h0a.91.91,0,0,0,0-1.29h0l-2.09-2.08h4.18a2.73,2.73,0,0,0,2.73-2.73V5.63A.91.91,0,0,0,20.19,4.72Zm-.91,10a.91.91,0,0,1-.91.91H5.63a.91.91,0,0,1-.91-.91V6.54H19.28ZM7.45,13.82h5.46a.91.91,0,0,0,0-1.82H7.45a.91.91,0,1,0,0,1.82Z"/></g></g></svg>
+  };
+  const meeting = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <defs>
+        <style>{`.cls-1{fill:blue;opacity:0;}`}</style>
+      </defs>
+      <g id="Layer_2" data-name="Layer 2">
+        <g id="keylines">
+          <rect className="cls-1" width="25" height="25" />
+          <path d="M7.45,10.18H9.27a.91.91,0,0,0,0-1.82H7.45a.91.91,0,1,0,0,1.82ZM20.19,4.72H12.91V3.81a.91.91,0,0,0-1.82,0v.91H3.81a.91.91,0,0,0-.91.91v9.1a2.73,2.73,0,0,0,2.73,2.73H9.81L7.72,19.54a.91.91,0,0,0,0,1.29h0a.9.9,0,0,0,1.28,0H9l2.08-2.09v1.44a.91.91,0,0,0,1.82,0V18.74L15,20.83a.91.91,0,0,0,1.29,0h0a.91.91,0,0,0,0-1.29h0l-2.09-2.08h4.18a2.73,2.73,0,0,0,2.73-2.73V5.63A.91.91,0,0,0,20.19,4.72Zm-.91,10a.91.91,0,0,1-.91.91H5.63a.91.91,0,0,1-.91-.91V6.54H19.28ZM7.45,13.82h5.46a.91.91,0,0,0,0-1.82H7.45a.91.91,0,1,0,0,1.82Z" />
+        </g>
+      </g>
+    </svg>
+  );
   const { loading } = useContext(DataContext);
- let pageName = 2
+  let pageName = 2;
   return !loading ? (
     <SSRProvider>
       <div className={styles.container}>
@@ -82,109 +92,96 @@ useEffect(()=>{
           <title>Online Course Page</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
-
         <main>
           <Menu />
           <section className={`row container mx-auto container`}>
             <div className={`col-12 ${online.cdetail}`}>
-            <figure className={`${online.teacherBadge}`}  >
-                <Image
-                  src={cd.teacherPic}
-                  alt="logo"
-                  width="40"
-                  height="40"
-                />
-                
+              <figure className={`${online.teacherBadge}`}>
+                <Image src={cd.teacherPic} alt="logo" width="40" height="40" />
                 <h5 className={`${online.name}`}>{cd.teacherName}</h5>
                 <h6 className={`${online.rol}`}>{cd.teacherField}</h6>
-                </figure>
-                <h5 className={`${online.work}`}>{cd.title}</h5>
-                <h6 className={`${online.des}`}>{cd.description}</h6>
-                
-                
-                
-                
-                <div className={`col-md-6 ${online.addtocart}`}>
+              </figure>
+              <h5 className={`${online.work}`}>{cd.title}</h5>
+              <h6 className={`${online.des}`}>{cd.description}</h6>
+              <div className={`col-md-6 ${online.addtocart}`}>
                 <div className={`row`}>
                   <div className={`col-xl-6 ${detail.cartItem}`}>
                     <MdOutlinePriceChange />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Price:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.price}$</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.price}$
+                      </span>
                     </h6>
                     <GiLevelEndFlag />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Level:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.level === 1 ? "Begginer" :cd.level === 2 ? "Intermediate" : cd.level === 3 && "Expert" }</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.level === 1
+                          ? "Begginer"
+                          : cd.level === 2
+                          ? "Intermediate"
+                          : cd.level === 3 && "Expert"}
+                      </span>
                     </h6>
                     <TbCertificate />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Certificate:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.hasCertificate === true ? "Yes" : "No"}</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.hasCertificate === true ? "Yes" : "No"}
+                      </span>
                     </h6>
                   </div>
                   <div className={`col-xl-6 ${detail.cartItem}`}>
                     <AiOutlineClockCircle />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Duration:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.duration} h</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.duration} h
+                      </span>
                     </h6>
-                    {meeting} 
+                    {meeting}
                     <h6 className={`col-12 ${detail.normal}`}>
                       Meeting:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.meeting}</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.meeting}
+                      </span>
                     </h6>
                     <FaUserGraduate />
                     <h6 className={`col-12 ${detail.normal}`}>
                       Student:{" "}
-                      <span className={`col-12 ${detail.bold}`}>{cd.students}</span>
+                      <span className={`col-12 ${detail.bold}`}>
+                        {cd.students}
+                      </span>
                     </h6>
                   </div>
                   <div className={`col-12 mx-auto ${detail.cartBut}`}>
                     <div className={`row`}>
-                    <div className={`col-6 g-4`}>
-                    <Link href="#">
-                        <button
-                          type="button"
-                          className={`btn btn-warning ${styles.logBut} ${detail.cartButton}`}
-                        >
-                          register
-                        </button>
-                    </Link>
+                      <div className={`col-6 g-4`}>
+                        <Link href="#">
+                          <button
+                            type="button"
+                            className={`btn btn-warning ${styles.logBut} ${detail.cartButton}`}
+                          >
+                            register
+                          </button>
+                        </Link>
+                      </div>
+                      <div className={`col-6 g-4`}>
+                        <Link href="#">
+                          <button
+                            type="button"
+                            className={`btn btn-outline-warning ${styles.logBut} ${detail.cartButton} ${online.cartButton}`}
+                          >
+                            Download Topics
+                          </button>
+                        </Link>
+                      </div>
                     </div>
-                    <div className={`col-6 g-4`}>
-                    <Link href="#">
-                        <button
-                          type="button"
-                          className={`btn btn-outline-warning ${styles.logBut} ${detail.cartButton} ${online.cartButton}`}
-                        >
-                          Download Topics
-                        </button>
-                    </Link>
-                    </div>
-
-                    </div>
-                    
-                    
                   </div>
                 </div>
-                </div>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                </div>
+              </div>
+            </div>
           </section>
           <section className={`row mx-auto container ${detail.content}`}>
             <div className={`col-xl-12 mx-4`}>
@@ -205,23 +202,22 @@ useEffect(()=>{
                   </svg>
                   {cd.whatYouLearn}
                 </h6>
-
               </div>
               <div className={`col-12 ${detail.content}`}>
                 <h5 className={detail.contentTitle}>requirement</h5>
-                {cd.requirements.map((i)=>{
-                  return(
+                {cd.requirements.map((i) => {
+                  return (
                     <React.Fragment key={i.id}>
                       <div className={detail.circle} />
                       <Link href={i.link}>
-                <h6
-                  className={`${detail.contentDescription} ${detail.contentDescription3}`}
-                >
-                  {i.text}
-                </h6>
-                </Link>
+                        <h6
+                          className={`${detail.contentDescription} ${detail.contentDescription3}`}
+                        >
+                          {i.text}
+                        </h6>
+                      </Link>
                     </React.Fragment>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -239,11 +235,12 @@ useEffect(()=>{
           />
           <section className={`row container mx-auto mb-5 `}>
             <div className={`col-sm-12 ${online.related}`}>Certificate</div>
-            {cd.certificates.map((i)=>{
-              return(
-              <div className={`p-3 text-justify`} key={i.id}>{i.title} </div>
-
-              )
+            {cd.certificates.map((i) => {
+              return (
+                <div className={`p-3 text-justify`} key={i.id}>
+                  {i.title}{" "}
+                </div>
+              );
             })}
             {/* <div className={`row`}>
               <div className={`col-sm-6 p-3 text-justify`}>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Ciceros book. It usually begins with.<br/> The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts </div>
@@ -258,7 +255,9 @@ useEffect(()=>{
         </main>
       </div>
     </SSRProvider>
-  ):(<Loader />)
+  ) : (
+    <Loader />
+  );
 };
 
 export default onlinecourse;

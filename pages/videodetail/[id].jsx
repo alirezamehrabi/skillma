@@ -9,9 +9,11 @@ import Footer from "../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
 import { RiShareForwardLine } from "react-icons/ri";
 import Loader from "../../src/components/Loader/Loader";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import DataContext from "../../src/Context/DataContext";
 import Moment from "react-moment";
+import { useDispatch, useSelector } from "react-redux";
+import { getLikeFallBackVid } from "../api/redux/likereducer";
 
 export async function getStaticPaths() {
   return { paths:[], fallback: 'blocking' };
@@ -29,7 +31,7 @@ export async function getStaticProps(context) {
   const comment = await request1.json();
   return {
     props: {
-      ...{ coursedet,comment },
+      ...{ coursedet,comment,paths },
     },
   };
  }
@@ -42,6 +44,13 @@ export async function getStaticProps(context) {
  }
 }
 const videoDetail = (props) => {
+  const data1 = useSelector((like) => like.like.data4);
+  const dispatch = useDispatch();
+  const id = props.paths;
+  const p = 1;
+  useEffect(() => {
+    dispatch(getLikeFallBackVid({ id, p }));
+  }, []);
   const cd = props.coursedet.data;
   const datafunc = async (p)=>{
     try {
@@ -108,7 +117,6 @@ const videoDetail = (props) => {
                       </svg>
                       {cd.commentCount}
                     </div>
-
                     <div className={`col-4`}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +128,7 @@ const videoDetail = (props) => {
                       >
                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                       </svg>
-                      {cd.rate}/5
+                      {parseFloat(cd.rate).toFixed(1)}/5
                     </div>
                   </div>
                 </div>
@@ -137,10 +145,8 @@ const videoDetail = (props) => {
                 </h6>
               </div>
             </div>
-            
           </section>
             </div>
-            
             <div className={`col-lg-5 ${detail.session}`}>
               <h5 className={`${detail.sessionName}`}>Related</h5>
               {cd.realatedShortVideos.map((i)=>{
@@ -169,17 +175,15 @@ const videoDetail = (props) => {
                     </div>
                     </div>
               </div>
-              
               </div>
                 )
               })}
 
             </div>
           </section>
-          
           <Comment
             teacherId={cd.teacherId}
-            commentData={props.comment.data.pageData}
+            commentData={data1}
             totalCount={props.comment.data.totalCount}
             totalPage={props.comment.data.totalPage}
             page={props.comment.data.page}
@@ -187,6 +191,7 @@ const videoDetail = (props) => {
             datafunc={datafunc}
             shortContentId={cd.id}
             pageName={pageName}
+            courseId={props.paths}
           />
           <Footer />
         </main>

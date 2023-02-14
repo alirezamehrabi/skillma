@@ -9,9 +9,11 @@ import Footer from "../../src/components/Footer/Footer";
 import { SSRProvider } from "react-bootstrap";
 import { RiShareForwardLine } from "react-icons/ri";
 import Loader from "../../src/components/Loader/Loader";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import DataContext from "../../src/Context/DataContext";
 import Moment from "react-moment";
+import { useDispatch, useSelector } from "react-redux";
+import { getLikeFallBackSound } from "../api/redux/likereducer";
 
 export async function getStaticPaths() {
   return { paths:[], fallback: 'blocking' };
@@ -29,7 +31,7 @@ export async function getStaticProps(context) {
   const comment = await request1.json();
   return {
     props: {
-      ...{ coursedet,comment },
+      ...{ coursedet,comment,paths },
     },
   };
  }
@@ -43,9 +45,14 @@ export async function getStaticProps(context) {
 }
 
 const SoundDetail = (props) => {
+  const data1 = useSelector((like) => like.like.data6);
+  const dispatch = useDispatch();
+  const id = props.paths;
+  const p = 1;
+  useEffect(() => {
+    dispatch(getLikeFallBackSound({ id, p }));
+  }, []);
   const cd = props.coursedet.data;
-  // console.log(props.comment.data.pageData)
-  // console.log(cd.pageData.teacherId)
   const datafunc = async (p)=>{
     try {
       const result = await fetch(
@@ -187,7 +194,7 @@ const SoundDetail = (props) => {
           </section>
           <Comment
             teacherId={cd.teacherId}
-            commentData={props.comment.data.pageData}
+            commentData={data1}
             totalCount={props.comment.data.totalCount}
             totalPage={props.comment.data.totalPage}
             page={props.comment.data.page}
@@ -195,6 +202,7 @@ const SoundDetail = (props) => {
             datafunc={datafunc}
             shortContentId={cd.id}
             pageName={pageName}
+            courseId={props.paths}
           />
           <section className={`row container mx-auto mb-5 `}>
           </section>

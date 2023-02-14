@@ -21,7 +21,7 @@ import axios from "axios";
 import pag from "../../../styles/paginate.module.css";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
-import { getLike, getLikeFallBack, getLikeFallBackOnline } from "../../../pages/api/redux/likereducer";
+import { InsetComment,addLike, decreasedislike, decreaselike, getLike, getLikeFallBack, getLikeFallBackCourse, getLikeFallBackOnline, getLikeFallBackSound, getLikeFallBacktxt, getLikeFallBackVid } from "../../../pages/api/redux/likereducer";
 import { useRouter } from "next/router";
 import Loader from "../Loader/Loader";
 const ContactSchema = Yup.object().shape({
@@ -32,33 +32,39 @@ const Comment = ({
   teacherId,
   commentData,
   totalPage,
-  page,
   totalCount,
   pageTitle,
   datafunc,
   shortContentId,
-  onlineCourseId,
   courseId,
   pageName
 }) => {
+  const[userdt,setUserdt] = useState()
   const disPatch = useDispatch()
-  console.log(courseId,"cid")
-
+const router = useRouter()
+console.log(router.route)
 const [mydata, setMydata] = useState(commentData);
 let comId;
-const [ dt1 , setDt1] = useState()
-// const mydt = ()=> disPatch(getLikeFallBack(courseId)).then((r)=> setDt1(r.payload))
-useEffect(()=>{
-  // mydt()
-},[]);
 const id=courseId;
 let p;
-console.log(commentData,"commentData")
 const dp = (a)=>{
-  console.log(pageNum,"a")
   p=pageNum+1;
-  disPatch(getLike(a.comId)).then((r)=> disPatch(getLikeFallBack({id,p})))
-  disPatch(getLike(a.comId)).then((r)=> disPatch(getLikeFallBackOnline({id,p})))
+
+  {router.route === "/teacherprofile/[id]" && disPatch(getLike(a.comId)).then((r)=> {(r.payload[0].isSucces === true) ? disPatch(getLikeFallBack({id,p})): disPatch(decreasedislike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/onlinecourse/[id]" && disPatch(getLike(a.comId)).then((r)=> {(r.payload[0].isSucces === true) ? disPatch(getLikeFallBackOnline({id,p})): disPatch(decreasedislike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/detailcourse/[id]" && disPatch(getLike(a.comId)).then((r)=> {(r.payload[0].isSucces === true) ? disPatch(getLikeFallBackCourse({id,p})): disPatch(decreasedislike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/videodetail/[id]" && disPatch(getLike(a.comId)).then((r)=> {(r.payload[0].isSucces === true) ? disPatch(getLikeFallBackVid({id,p})): disPatch(decreasedislike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/sounddetail/[id]" && disPatch(getLike(a.comId)).then((r)=> {(r.payload[0].isSucces === true) ? disPatch(getLikeFallBackSound({id,p})): disPatch(decreasedislike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/textdetail/[id]" && disPatch(getLike(a.comId)).then((r)=> {(r.payload[0].isSucces === true) ? disPatch(getLikeFallBacktxt({id,p})): disPatch(decreasedislike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+}
+const lp = (a)=>{
+  p=pageNum+1;
+  {router.route === "/teacherprofile/[id]" && disPatch(addLike(a.comId)).then((r)=> {(r.payload.isSucces === true) ? disPatch(getLikeFallBack({id,p})): disPatch(decreaselike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/onlinecourse/[id]" && disPatch(addLike(a.comId)).then((r)=> {(r.payload.isSucces === true) ? disPatch(getLikeFallBackOnline({id,p})): disPatch(decreaselike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/detailcourse/[id]" && disPatch(addLike(a.comId)).then((r)=> {(r.payload.isSucces === true) ? disPatch(getLikeFallBackCourse({id,p})): disPatch(decreaselike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/videodetail/[id]" && disPatch(addLike(a.comId)).then((r)=> {(r.payload.isSucces === true) ? disPatch(getLikeFallBackVid({id,p})): disPatch(decreaselike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/sounddetail/[id]" && disPatch(addLike(a.comId)).then((r)=> {(r.payload.isSucces === true) ? disPatch(getLikeFallBackSound({id,p})): disPatch(decreaselike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
+  {router.route === "/textdetail/[id]" && disPatch(addLike(a.comId)).then((r)=> {(r.payload.isSucces === true) ? disPatch(getLikeFallBacktxt({id,p})): disPatch(decreaselike(a.comId));disPatch(getLikeFallBacktxt({id,p}))})}
 }
   const [rating, setRating] = useState();
   const handleRating = (number) => {
@@ -75,6 +81,7 @@ const dp = (a)=>{
   const funcReply = (id, userName) => {
     setReplyState(id);
     setReplyState2(userName);
+    // dispatch(InsetComment(userdt)).then((r)=>{console.log(r)});
   };
   const funcReplyNull = () => {
     setReplyState(null);
@@ -97,6 +104,10 @@ const dp = (a)=>{
     
     dispatch(getLikeFallBack({id,p}))
     dispatch(getLikeFallBackOnline({id,p}))
+    dispatch(getLikeFallBackCourse({id,p}))
+    dispatch(getLikeFallBackVid({id,p}))
+    dispatch(getLikeFallBackSound({id,p}))
+    dispatch(getLikeFallBacktxt({id,p}))
   };
 const [tcomment , setTcomment] = useState(totalCount)
 console.log(mydata)
@@ -194,7 +205,7 @@ const pageCount = totalPage;
             </button>
           ) : null}
           <div className={`row ${com.commentItem}`}>
-            <div className={`col-4 ${com.like}`} onClick={() => {AddLike({comId,courseId})}}>
+            <div className={`col-4 ${com.like}`} onClick={()=>{comId=i.commentId;lp({courseId,comId})}} >
               <AiOutlineLike /> Like({i.likeCount})
             </div>
             <div
@@ -255,8 +266,6 @@ const pageCount = totalPage;
             )}
             <Formik
               initialValues={{
-                drop: "",
-                textarea: "",
               }}
               validationSchema={ContactSchema}
               onSubmit={async (values) => {
@@ -270,17 +279,25 @@ const pageCount = totalPage;
                   courseId:pageName === 1 ? courseId:null,
                   onlineCourseId:pageName === 2 ? courseId:null,
                   shortContentId:pageName === 3 ? shortContentId:null,
+                  // commentId: replyState
                   // teacherId:pageName === 4 ? teacherId:null,
                 };
-                {
-                  replyState !== 0 && (userObj.commentId = replyState);
-                }
-                const resReply = await comment(userObj);
+                setUserdt(userObj)
+                // const data10 = useSelector((like) => like.like.data5);
+                  
+                  // dispatch(InsetComment(userObj).then((r)=>{r.isSucces && disPatch(getLikeFallBacktxt({id,p}))}));
+                  
+                    replyState !== 0 && (userObj.commentId = replyState);
+                  
+                  p=1;
+                  dispatch(InsetComment(userObj)).then((r)=>{disPatch(getLikeFallBacktxt({id,p}))});
+                
                 setIsSubmitting(false);
-                let tc = tcomment+1
-                {
-                  resReply.isSucces && setMydata(await datafunc(1)), setTcomment(tc) ;
-                }
+                // const resReply = await InsetComment(userObj);
+                // let tc = tcomment+1
+                // {
+                //   resReply.isSucces && setMydata(await datafunc(1)), setTcomment(tc) ;
+                // }
               }}
             >
               {({ errors, touched }) => (
@@ -323,6 +340,7 @@ const pageCount = totalPage;
                       variant="warning"
                       type="submit"
                       className={`${com.addBTN}`}
+                      // onClick={()=>dispatch(InsetComment(userdt).then((r)=>{console.log(r)}))}
                     >
                       {isSubmitting ? (
                         <div className={co.loadspn} />
