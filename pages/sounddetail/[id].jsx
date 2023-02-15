@@ -77,16 +77,8 @@ const SoundDetail = (props) => {
         <main>
           <Menu />
           <section className={`row mx-auto container`}>
-            <div className={`col-xl-6 mx-4 ${detail.videoHolder} ${detail.videoHolder2}`}>
+            <div className={`col-xl-6 `}>
               <div className={` ${styles.introHolder}`}>
-              {/* <div className={` ${styles.spic}`}>
-              <Image
-                      src={require(`../../src/assets/detail/sound.png`)}
-                      alt="logo"
-                      width=""
-                      height=""
-                    />
-                    </div> */}
                 <audio
         controls
         src={cd.filePath}>
@@ -143,6 +135,21 @@ const SoundDetail = (props) => {
                   </div>
                 </div>
               </div>
+              
+          <section className={`row mx-auto container ${detail.content}`}>
+            <div className={`col-xl-12`}>
+              <div className={`col-12 ${detail.content}`}>
+                <h5 className={detail.contentTitle}>
+                  {cd.title}
+                  <span className={`${detail.year}`}><Moment fromNow>{cd.createdAt}</Moment></span>
+                </h5>
+                <h6 className={detail.contentDescription}>
+                  {cd.description}
+                </h6>
+              </div>
+            </div>
+            
+          </section>
             </div>
             <div className={`col-xl-5 ${detail.session} ${detail.soundsession}`}>
               <h5 className={`${detail.sessionName}`}>Related</h5>
@@ -177,20 +184,6 @@ const SoundDetail = (props) => {
                 )
               })}
             </div>
-          </section>
-          <section className={`row mx-auto container ${detail.content}`}>
-            <div className={`col-xl-6 mx-4 ${detail.soundcontent}`}>
-              <div className={`col-12 ${detail.content}`}>
-                <h5 className={detail.contentTitle}>
-                  {cd.title}
-                  <span className={`${detail.year}`}><Moment fromNow>{cd.createdAt}</Moment></span>
-                </h5>
-                <h6 className={detail.contentDescription}>
-                  {cd.description}
-                </h6>
-              </div>
-            </div>
-            
           </section>
           <Comment
             teacherId={cd.teacherId}

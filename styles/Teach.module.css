@@ -141,6 +141,9 @@ fill: yellow !important;
             background-position: 0% 0%;
             background-size: 100%;
         }
+        .about span{
+            display: none;
+        }
     }
     
     @media  only screen and (max-width: 768px) {
@@ -149,6 +152,9 @@ fill: yellow !important;
         }
         .teacherStatistic {
             padding: 0 72px 0px;
+          }
+          .connectbtn{
+            padding: 10px 25px;
           }
     }
     

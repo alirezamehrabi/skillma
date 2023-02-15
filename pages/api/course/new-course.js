@@ -8,7 +8,6 @@ const addShort =async(obj)=>{
         const result = await axios.post(`${process.env.webURL}/ShortContent/InsertShortContent`,obj
         ,{ headers: { Authorization: 'bearer '+  token}
     })
-    // console.log(result)
     }
     catch(error){
             console.log(error)
@@ -21,7 +20,6 @@ const addOnlineCourse =async(obj)=>{
         const result = await axios.post(`${process.env.webURL}/OnlineCourse/InsertOnlineCourse`,obj
         ,{ headers: { Authorization: 'bearer '+  token}
     })
-    // console.log(result)
     }
     catch(error){
             console.log(error)
@@ -34,7 +32,6 @@ const addCourse =async(obj)=>{
         const result = await axios.post(`${process.env.webURL}/Course/InsertCourse`,obj
         ,{ headers: { Authorization: 'bearer '+  token}
     })
-    // console.log(result)
     }
     catch(error){
             console.log(error)

@@ -11,6 +11,7 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { toast, ToastContainer } from "react-toastify";
 import React from "react";
+import { addOnlineCourse } from "../../../../pages/api/course/new-course";
 
 const ReactQuill = dynamic(import("react-quill"), {
   ssr: false,
@@ -202,38 +203,30 @@ const Courses = ({ prev, data }) => {
             requirement: [{}],
           }}
           // validationSchema={ContactSchema}
-          onSubmit={(values) => {
-            // "id": 0,
-            // "categoryId": 0,
-            // "title": title,
-            // "pictureName": "string",
-            // "introductionVideoName": "string",
-            // "createDate": "2023-01-25T11:04:32.674Z",
-            // "teacherId": 0,
-            // "description": "string",
-            // "views": 0,
-            // "price": 0,
-            // "duration": 0,
-            // "isVerified": true,
-            // "level": 0,
-            // "progress": 0,
-            // "whatYouLearn": "string",
-            // "status": 0
-            // functionHandler(values)
+          onSubmit={async(values) => {
+            const userObj = {
 
-            values.title,
-            values.categoryId,
-            values.level,
-            values.whatYouLearn,
-            values.meeting,
-            values.duration,
-            values.status = 1,
-            values.progress = 1,
-              (values.description = editor),
-              values.price,
-              (values.pictureName = upoaldboxdt2),
-              (values.introductionVideoName = upoaldboxdt3),
-              console.log(values, "val");
+
+
+
+            title: values.title,
+            categoryId: parseInt(values.categoryId),
+            level: parseInt(values.level),
+            whatYouLearn: values.whatYouLearn,
+            meeting:parseInt(values.meeting),
+            duration:parseInt(values.duration),
+            price:parseInt(values.price),
+            status : 1,
+            progress : 1,
+              description : editor,
+              pictureName : upoaldboxdt2,
+              introductionVideoName : upoaldboxdt3
+            }
+            console.log(userObj, "userObj");
+            const user = await addOnlineCourse(userObj).then((r) => {
+              console.log(r);
+            });
+            console.log(user,"user");
           }}
         >
           {({ errors, touched, values }) => (
@@ -331,7 +324,7 @@ const Courses = ({ prev, data }) => {
                     <button disabled>Please Fill all Field To Continue</button>
                   ) : (
                     <button
-                      type="submit"
+                      type="button"
                       onClick={completeFormStep}
                       className={`${co.conBTN} ${co.nxt}`}
                     >
@@ -527,7 +520,7 @@ const Courses = ({ prev, data }) => {
                       </button>
                     ) : (
                       <button
-                        type="submit"
+                        type="button"
                         onClick={completeFormStep}
                         className={`${co.conBTN} ${co.nxt}`}
                       >
@@ -637,8 +630,7 @@ const Courses = ({ prev, data }) => {
                       >
                         Previous
                       </button>
-                      {upoaldboxdt2 === undefined ||
-                      upoaldboxdt3 === undefined ||
+                      {/* {
                       values.pictureName === undefined ||
                       values.introductionVideoName === undefined ? (
                         <>
@@ -650,8 +642,9 @@ const Courses = ({ prev, data }) => {
                             Upload Files To Continue
                           </button>
                           <ToastContainer />
-                        </>
-                      ) : (
+                        </> 
+                      ) : */}
+                      
                         <button
                           type="button"
                           className={`${co.conBTN} ${co.nxt}`}
@@ -659,7 +652,8 @@ const Courses = ({ prev, data }) => {
                         >
                           Continue
                         </button>
-                      )}
+                      
+                      {/* } */}
                     </div>
                   </div>
                 </div>

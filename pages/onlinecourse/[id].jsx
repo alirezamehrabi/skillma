@@ -94,7 +94,7 @@ const onlinecourse = (props) => {
         </Head>
         <main>
           <Menu />
-          <section className={`row container mx-auto container`}>
+          <section className={`row container mx-auto overflow-hidden container`}>
             <div className={`col-12 ${online.cdetail}`}>
               <figure className={`${online.teacherBadge}`}>
                 <Image src={cd.teacherPic} alt="logo" width="40" height="40" />
@@ -168,14 +168,14 @@ const onlinecourse = (props) => {
                         </Link>
                       </div>
                       <div className={`col-6 g-4`}>
-                        <Link href="#">
+                        {/* <Link href="#">
                           <button
                             type="button"
                             className={`btn btn-outline-warning ${styles.logBut} ${detail.cartButton} ${online.cartButton}`}
                           >
                             Download Topics
                           </button>
-                        </Link>
+                        </Link> */}
                       </div>
                     </div>
                   </div>

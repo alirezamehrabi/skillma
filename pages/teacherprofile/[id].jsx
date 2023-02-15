@@ -62,8 +62,6 @@ useEffect(()=>{
   dispatch(getLikeFallBack({id,p}))
 },[])
   const cd = props.coursedet.data;
-  console.log(props.comment)
-  // console.log(props.coursedet)
   const td = props.coursedet.data
   const datafunc = async (p)=>{
     try {
@@ -108,7 +106,7 @@ useEffect(()=>{
                   Connect
                 </Button>
             </div>
-            <div className={`col-4 ${teach.about}`}>About me</div>
+            <div className={`col-4 ${teach.about}`}><span>About me</span></div>
             <div className={`col-1 ${teach.social}`}>
                 <Link href={`${td.facebook}`}>
                 <AiOutlineFacebook/>

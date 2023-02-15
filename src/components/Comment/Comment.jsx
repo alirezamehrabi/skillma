@@ -42,7 +42,6 @@ const Comment = ({
   const[userdt,setUserdt] = useState()
   const disPatch = useDispatch()
 const router = useRouter()
-console.log(router.route)
 const [mydata, setMydata] = useState(commentData);
 let comId;
 const id=courseId;
@@ -110,7 +109,6 @@ const lp = (a)=>{
     dispatch(getLikeFallBacktxt({id,p}))
   };
 const [tcomment , setTcomment] = useState(totalCount)
-console.log(mydata)
 const pageCount = totalPage;
   const datadisplay = commentData.map((i) => {
     return (
@@ -132,9 +130,9 @@ const pageCount = totalPage;
             />
             {i.isTeacher === true ? <span className={`${com.isTeacher}`}>T</span>: null}
           </figure>
-          <span className={`${com.comName}`}>{i.userDetail.fullName}</span>
+          <span className={`text-truncate ${com.comName}`}>{i.userDetail.fullName}</span>
         </div>
-        <div className={`col-3`}>
+        <div className={`col-md-3`}>
           <Rating
             onClick={handleRating}
             allowFraction={true}
@@ -142,7 +140,7 @@ const pageCount = totalPage;
             className={com.rating}
           />
         </div>
-        <div className={`col-3 ${com.date}`}>
+        <div className={`col-md-3 ${com.date}`}>
           <Moment fromNow>{i.postDate}</Moment>
         </div>
         <div className={`col-12`}>
@@ -180,7 +178,7 @@ const pageCount = totalPage;
                         height="50"
                       />
                     </figure>
-                    <span className={`${com.comName}`}>{j.userName}</span>
+                    <span className={`text-truncate ${com.comName}`}>{j.userName}</span>
             {i.isTeacher === true ? <span className={`${com.isTeacher} ${com.isTeacher2}`}>T</span>: null}
                   </div>
                   <div className={`col-sm-3`}>
@@ -229,7 +227,7 @@ const pageCount = totalPage;
   });
   return (
     <SSRProvider>
-      <section className={`container mx-auto`}>
+      <section className={`container mx-auto ${com.commentSection}`}>
         <div className={`col-sm-12 ${com.comment}`}>Comment</div>
         <div className={`row ${com.com}`}>
           <div className={`col-xl-8 ${com.commentShow}`}>
@@ -268,7 +266,7 @@ const pageCount = totalPage;
               initialValues={{
               }}
               validationSchema={ContactSchema}
-              onSubmit={async (values) => {
+              onSubmit={ (values) => {
                 setIsSubmitting(true);
 
                 const userObj = {
@@ -279,27 +277,21 @@ const pageCount = totalPage;
                   courseId:pageName === 1 ? courseId:null,
                   onlineCourseId:pageName === 2 ? courseId:null,
                   shortContentId:pageName === 3 ? shortContentId:null,
-                  // commentId: replyState
-                  // teacherId:pageName === 4 ? teacherId:null,
                 };
                 setUserdt(userObj)
-                // const data10 = useSelector((like) => like.like.data5);
-                  
-                  // dispatch(InsetComment(userObj).then((r)=>{r.isSucces && disPatch(getLikeFallBacktxt({id,p}))}));
                   
                     replyState !== 0 && (userObj.commentId = replyState);
-                  
                   p=1;
-                  dispatch(InsetComment(userObj)).then((r)=>{disPatch(getLikeFallBacktxt({id,p}))});
                 
-                setIsSubmitting(false);
-                // const resReply = await InsetComment(userObj);
-                // let tc = tcomment+1
-                // {
-                //   resReply.isSucces && setMydata(await datafunc(1)), setTcomment(tc) ;
-                // }
+                {router.route === "/teacherprofile/[id]" && setIsSubmitting(true);dispatch(InsetComment(userObj)).then((r)=>{setIsSubmitting(false);disPatch(getLikeFallBack({id,p}))})}
+                  {router.route === "/onlinecourse/[id]" && setIsSubmitting(true);dispatch(InsetComment(userObj)).then((r)=>{setIsSubmitting(false);disPatch(getLikeFallBackOnline({id,p}))})}
+                  {router.route === "/detailcourse/[id]" && setIsSubmitting(true);dispatch(InsetComment(userObj)).then((r)=>{setIsSubmitting(false);disPatch(getLikeFallBackCourse({id,p}))})}
+                  {router.route === "/videodetail/[id]" && setIsSubmitting(true);dispatch(InsetComment(userObj)).then((r)=>{setIsSubmitting(false);disPatch(getLikeFallBackVid({id,p}))})}
+                  {router.route === "/sounddetail/[id]" && setIsSubmitting(true);dispatch(InsetComment(userObj)).then((r)=>{setIsSubmitting(false);disPatch(getLikeFallBackSound({id,p}))})}
+                  {router.route === "/textdetail/[id]" && setIsSubmitting(true);dispatch(InsetComment(userObj)).then((r)=>{setIsSubmitting(false);disPatch(getLikeFallBacktxt({id,p}))})}
               }}
             >
+              
               {({ errors, touched }) => (
                 <Form className={co.form}>
                   <Field
@@ -340,7 +332,6 @@ const pageCount = totalPage;
                       variant="warning"
                       type="submit"
                       className={`${com.addBTN}`}
-                      // onClick={()=>dispatch(InsetComment(userdt).then((r)=>{console.log(r)}))}
                     >
                       {isSubmitting ? (
                         <div className={co.loadspn} />

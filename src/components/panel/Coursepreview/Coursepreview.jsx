@@ -25,7 +25,7 @@ const ContactSchema = Yup.object().shape({
 
 const Courses = ({ prev, data }) => {
   const [whatYouLearn, setWhatYouLearn] = useState("");
-  const [courseConsist, setCourseConsist] = useState([{},{}]);
+  const [courseConsist, setCourseConsist] = useState([{}, {}]);
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [price, setPrice] = useState("");
@@ -56,7 +56,7 @@ const Courses = ({ prev, data }) => {
     setShow4(true);
     setModalObjNum(index);
   };
-
+  console.log(courseConsist.length, "cl");
   const [upoaldboxdt, setUpoaldboxdt] = useState();
   const [upoaldimg, setUpoaldimg] = useState();
   const [upoaldintro, setUpoaldintro] = useState();
@@ -250,7 +250,7 @@ const Courses = ({ prev, data }) => {
     });
   };
 
-  const [formstep, setFormstep] = useState(2);
+  const [formstep, setFormstep] = useState(0);
   const completeFormStep = () => {
     setFormstep((formstep) => formstep + 1);
   };
@@ -263,7 +263,6 @@ const Courses = ({ prev, data }) => {
   const [modalObjNum, setModalObjNum] = useState();
   const [isEdit, setIsEdit] = useState(false);
   const [partId, setPartId] = useState();
-  console.log(courseConsist, "courseConsist");
   const itemdtHandler = (item) => {
     console.log(courseConsist, "courseConsist");
     console.log(isEdit, "isEdit");
@@ -272,7 +271,6 @@ const Courses = ({ prev, data }) => {
     console.log(item, "item");
 
     if (courseConsist[modalObjNum].parts) {
-      //courseConsist[modalObjNum].parts.push(itemdt)
     } else {
       courseConsist[modalObjNum].parts = [];
     }
@@ -280,36 +278,31 @@ const Courses = ({ prev, data }) => {
       courseConsist[modalObjNum].parts[partId] = item;
     } else {
       courseConsist[modalObjNum].parts.push(item);
-      // courseConsist.filter((i,index)=> courseConsist[modalObjNum] === modalObjNum).push(itemdt)
     }
     setCourseConsist(courseConsist);
     setIsEdit(false);
   };
 
   const handledel = () => {
-    console.log(courseConsist[modalObjNum].parts);
     courseConsist[modalObjNum].parts = courseConsist[modalObjNum].parts.filter(
       (i, index) => index !== partId
     );
     setCourseConsist(courseConsist);
   };
   const handledelsection = () => {
-    console.log(modalObjNum);
     courseConsist = courseConsist.filter((i, index) => index !== modalObjNum);
     setCourseConsist(courseConsist);
   };
-  console.log(partId);
-  const handleedit = () => {
-    console.log(courseConsist[modalObjNum].parts[partId]);
-  };
+  // const handleedit = () => {
+  //   console.log(courseConsist[modalObjNum].parts[partId]);
+  // };
 
   return (
     <SSRProvider>
       <div className={`row ${co.preview}`}>
         <Formik
-        enableReinitialize={true}
+          enableReinitialize={true}
           initialValues={{
-            // checked: [],
             whatYouLearn: [{}, {}],
             itemShow: [],
             courseConsist: courseConsist,
@@ -317,44 +310,27 @@ const Courses = ({ prev, data }) => {
           }}
           // validationSchema={ContactSchema}
           onSubmit={(values) => {
-            // "id": 0,
-            // "categoryId": 0,
-            // "title": title,
-            // "pictureName": "string",
-            // "introductionVideoName": "string",
-            // "createDate": "2023-01-25T11:04:32.674Z",
-            // "teacherId": 0,
-            // "description": "string",
-            // "views": 0,
-            // "price": 0,
-            // "duration": 0,
-            // "isVerified": true,
-            // "level": 0,
-            // "progress": 0,
-            // "whatYouLearn": "string",
-            // "status": 0
-            // functionHandler(values)
-
             values.title,
-            values.categoryId,
-            values.level,
-            values.whatYouLearn,
-            values.description = editor,
-            values.itemShow = item,
+              values.categoryId,
+              values.level,
+              values.status,
+              values.progress,
+              values.whatYouLearn,
+              (values.description = editor),
+              (values.itemShow = item),
+              (values.seasonNumber = courseConsist.length),
               values.price,
               (values.upldb = upoaldboxdt),
-              upoaldimg === undefined
-                ? (values.upldbimg = values.radio)
-                : (values.upldbimg = upoaldimg),
-              (values.upldbintro = upoaldintro),
+              (values.pictureName =
+                upoaldimg === undefined ? values.radio : upoaldimg),
+              (values.introductionVideoName = upoaldintro),
               (values.parts = []);
             console.log(values, "val");
-          
+
             setCourseConsist(values.courseConsist);
-            // values.courseConsist=courseConsist;
           }}
         >
-          {({ errors, touched, values, handleChange, field }) => (
+          {({ errors, touched, values }) => (
             <Form className={co.form}>
               {/* form1 - coursePreview */}
               {/* form1 - coursePreview */}
@@ -408,6 +384,38 @@ const Courses = ({ prev, data }) => {
                 {errors.categoryId && touched.categoryId ? (
                   <div className={co.err}>{errors.categoryId}</div>
                 ) : null}
+                <label htmlFor="status" className={`${co.label}`}>
+                  Status
+                </label>
+                <Field
+                  as="select"
+                  name="status"
+                  placeholder="Status of your content"
+                  className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`}
+                  defaultValue={"DEFAULT"}
+                >
+                  <option hidden value="DEFAULT">
+                    Status of your content
+                  </option>
+                  <option value="0">Awaiting</option>
+                  <option value="1">Published</option>
+                </Field>
+                <label htmlFor="progress" className={`${co.label}`}>
+                  Progress
+                </label>
+                <Field
+                  as="select"
+                  name="progress"
+                  placeholder="Status of your content"
+                  className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`}
+                  defaultValue={"DEFAULT"}
+                >
+                  <option hidden value="DEFAULT">
+                    Progress
+                  </option>
+                  <option value="0">InProgress</option>
+                  <option value="1">Compelete</option>
+                </Field>
                 <label htmlFor="level" className={`${co.label}`}>
                   select level
                 </label>
@@ -428,10 +436,6 @@ const Courses = ({ prev, data }) => {
                 {errors.level && touched.level ? (
                   <div className={co.err}>{errors.level}</div>
                 ) : null}
-                <label>
-                  <Field type="checkbox" name="checked" value="1" />
-                  This Course is Free
-                </label>
                 <div className={`col-12 d-flex justify-content-end mt-4`}>
                   {values.level === "" ||
                   values.categoryId === "" ||
@@ -770,12 +774,12 @@ const Courses = ({ prev, data }) => {
                             })}
                             <button
                               className={`col-12 mx-auto text center ${co.addBtn}`}
-                              onClick={() =>{
+                              onClick={() => {
                                 arrayHelper.insert(
                                   courseConsist.length + 1,
                                   {}
-                                )}
-                              }
+                                );
+                              }}
                             >
                               {plus}Add more
                             </button>

@@ -101,6 +101,8 @@
 }
 .content {
   color: #444;
+  background: #fff;
+  overflow: hidden;
 }
 .contentDescription svg {
   margin-right: 15px;
@@ -305,7 +307,7 @@
     margin: 0 50px 90px 55px;
   }
   .year {
-    top: 30px;
-    right: 38px;
+    top: 10px;
+    right: 60px;
   }
 }

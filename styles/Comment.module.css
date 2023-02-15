@@ -8,6 +8,9 @@
   background: url(../src/assets/maincourse/comment.png) no-repeat;
   background-position: 1% 40%;
 }
+.commentSection{
+  overflow: hidden;
+}
 .isTeacher {
   display: flex;
   width: 28px;
@@ -250,6 +253,11 @@
   .commentTXT {
     padding: 0;
   }
+  .rating {
+    margin-top: 0;
+    position: relative;
+    top: -15px;
+  }
 }
 
 @media only screen and (max-width: 576px) {
@@ -261,12 +269,10 @@
     width: 40px;
   }
   .date {
-    position: absolute;
     margin-top: 57px;
   }
-  .rating {
-    margin-top: 45px;
-  }
+  
+
   .like,
   .dislike,
   .reply {

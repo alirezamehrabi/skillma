@@ -37,7 +37,6 @@ const Courses = (props) => {
   const data = props.posts.data;
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  const [price, setPrice] = useState("");
 
   const handleNameChangetitle = (event) => {
     setTitle(event.target.value);
@@ -46,18 +45,6 @@ const Courses = (props) => {
     setCategoryId(event.target.value);
   };
   const [editor, setEditor] = useState("");
-  const err = () => {
-    return toast.error("Please Upload File to Continue", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
 
   const [formstep, setFormstep] = useState(0);
   const completeFormStep = () => {
@@ -67,7 +54,6 @@ const Courses = (props) => {
   };
   const backFormStep = () => {
     setFormstep((formstep) => formstep - 1);
-    // console.log(formstep)
   };
   const [upoaldboxdt, setUpoaldboxdt] = useState();
   const [upoaldboxdt2, setUpoaldboxdt2] = useState();
@@ -99,7 +85,6 @@ const Courses = (props) => {
       </g>
     </svg>
   );
-
   const vid = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +118,6 @@ const Courses = (props) => {
       </g>
     </svg>
   );
-
   const snd = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +157,6 @@ const Courses = (props) => {
             <Link href="/panel/dashboard">
               <div className={`${men.logo}`}></div>
             </Link>
-
             <Menu />
           </div>
           <div className={`col-lg-10 ${dash.maincontainer}`}>

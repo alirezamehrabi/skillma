@@ -1,5 +1,4 @@
 .paginationBttns {
-    width: 80%;
     height: 40px;
     list-style: none;
     display: flex;
@@ -30,3 +29,10 @@
     background-color: rgb(243, 182, 91);
     color: #fff !important;
   }
+
+  @media  only screen and (max-width: 576px) {
+    .paginationBttns a {
+      padding: 5px;
+      margin: 2px;
+    }
+}

@@ -43,7 +43,7 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
-  console.log(props.D.data)
+  // console.log(props.D.data)
   const topcourse = props.data
   const dynamic = props.dynamic
   const whyskill = props.whyskill.data
