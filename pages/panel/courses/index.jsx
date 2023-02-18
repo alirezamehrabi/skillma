@@ -15,6 +15,8 @@ import ReactPaginate from "react-paginate";
 import { Button, Modal } from "react-bootstrap";
 import Loader from "../../../src/components/Loader/Loader.jsx";
 import { DeleteCourse } from "../../api/course/course";
+import { useDispatch, useSelector } from "react-redux";
+import { coursedel, courselist } from "../../api/redux/coursereducer.js";
 export async function getStaticProps() {
   const res = await fetch(`${process.env.webURL}/Category/GetMainCategories`);
   const res1 = await fetch(
@@ -28,6 +30,14 @@ export async function getStaticProps() {
   };
 }
 const Courses = (props) => {
+  const disPatch = useDispatch()
+  const data1= useSelector((course)=>course.course.data1)
+  // console.log(data1,"data1")
+  useEffect(()=>{
+    let p=pageNum+1;
+    
+    disPatch(courselist({p,catId,si}))
+},[])
   const catDt = props.posts.data;
   const firstdt = props.firstdt.data;
   const [value, onChange] = useState(new Date());
@@ -36,6 +46,15 @@ const Courses = (props) => {
   const [title2, setTitle2] = useState("State");
   const [title3, setTitle3] = useState("Category");
   const [delid, setDelid] = useState();
+  const [catId, setCatId] = useState("");
+  const [si, setSi] = useState("");
+  const [datacourse, setDatacourse] = useState(firstdt);
+  const [dt, setDt] = useState(firstdt);
+  const [state, setState] = useState(0);
+  const [pageNum, setPageNum] = useState(0);
+  const [pr, setPr] = useState(null);
+  const [st, setSt] = useState(null);
+  const [modalData, setModalData] = useState(null);
 
   const [show, setShow] = useState(false);
 
@@ -186,7 +205,7 @@ const Courses = (props) => {
   const sData = async (p) => {
     try {
       const result = await fetch(
-        `${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=5&CategoryId=${p.catId}&key=${p.si}&PriceType=${p.pr}&status=${p.st}&date=${val}`
+        `${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=100&CategoryId=${p.catId}&key=${p.si}&PriceType=${p.pr}&status=${p.st}&date=${val}`
       );
       const json = await result.json();
       // console.log(json.data.pageData)
@@ -197,17 +216,15 @@ const Courses = (props) => {
       console.log(error);
     }
   };
-  const [catId, setCatId] = useState("");
-  const [si, setSi] = useState("");
-  const [datacourse, setDatacourse] = useState(firstdt);
-  const [dt, setDt] = useState(firstdt);
 
-  const [pageNum, setPageNum] = useState(0);
   const itemPerPage = 5;
 
   const changePage = async ({ selected }) => {
     setPageNum(selected);
     setDt(await fetchData(selected + 1));
+    let p=selected+1;
+    
+    disPatch(courselist({p,catId,si}))
   };
   const pageCount =
     datacourse !== undefined ? datacourse.totalPage : <Loader />;
@@ -215,10 +232,10 @@ const Courses = (props) => {
     datacourse !== undefined ? datacourse.pageData.length : <Loader />;
   const dttotallenght =
     datacourse !== undefined ? datacourse.totalCount : <Loader />;
-  const [pr, setPr] = useState(null);
+
   const prData = () => {
-    dt.pageData !== undefined ? (
-      dt.pageData.map((i) => {
+    data1.pageData !== undefined ? (
+      data1.pageData.map((i) => {
         if (i.price === 0) {
           setPr(0);
         } else if (i.price > 0) {
@@ -232,7 +249,7 @@ const Courses = (props) => {
   useEffect(() => {
     prData();
   }, []);
-  const [st, setSt] = useState(null);
+ 
   if(st === null){
     setSt("")
   }
@@ -254,13 +271,15 @@ const Courses = (props) => {
   useEffect(() => {
     prData();
   }, []);
-  console.log(st);
   useEffect(() => {
     stData();
   }, []);
+  if((data1 === undefined) || (data1.pageData === undefined)) {
+    return <Loader />
+  }
   const displayItems =
-    dt !== undefined ? (
-      dt.pageData.map((i) => {
+   (
+      data1.pageData.map((i) => {
         return (
           <tr key={i.id}>
             <td>{i.id}</td>
@@ -301,7 +320,7 @@ const Courses = (props) => {
             <Button variant="outline-danger mt-3" onClick={handleClose}>
               Cancel
             </Button>
-            <Button variant="danger mx-3 mt-3" onClick={()=>{DeleteCourse(modalData.id);handleClose()}}>
+            <Button variant="danger mx-3 mt-3" onClick={()=>{disPatch(coursedel(modalData.id)).then(()=>{let p=pageNum+1;disPatch(courselist({p,catId,si}))});handleClose()}}>
               Delete
             </Button>
           </Modal.Body>
@@ -313,11 +332,9 @@ const Courses = (props) => {
         );
         
       })
-    ) : (
-      <Loader />
-    );
+    )
   // console.log(sData)
-  const [state, setState] = useState(0);
+
   const submitHandler = (e) => {
     e.preventDefault();
     setState(state + 1);
@@ -325,8 +342,8 @@ const Courses = (props) => {
   };
   // console.log(dt)
 
-  const [modalData, setModalData] = useState(null);
-  
+ 
+  // console.log(pageNum)
   return (
     <SSRProvider>
       <Head>
