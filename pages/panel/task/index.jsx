@@ -81,7 +81,6 @@ const Courses = (props) => {
   useEffect(() => {
     fetchStu(cid);
   }, [cid]);
-  // console.log(cid)
   const fetchcourse = async (p) => {
     const token = getItem("token");
     try {

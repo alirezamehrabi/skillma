@@ -2,7 +2,7 @@ import Head from "next/head";
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/DatePicker.css";
-// import "../styles/Calendar.css";
+import "../styles/Calendar.css";
 import { useEffect, useState } from "react";
 import { DataProvider } from "../src/Context/DataContext";
 import Loader from "../src/components/Loader/Loader2";

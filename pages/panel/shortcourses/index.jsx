@@ -16,6 +16,8 @@ import { Button, Modal } from "react-bootstrap";
 import Loader from "../../../src/components/Loader/Loader.jsx";
 import { DeleteShort } from "../../api/course/course";
 import { getItem } from "../../../src/core/services/storage/storage.js";
+import { shortcourse, shortcoursedel } from "../../api/redux/coursereducer.js";
+import { useDispatch, useSelector } from "react-redux";
 export async function getStaticProps() {
   const token = getItem("token")
   const res = await fetch(`${process.env.webURL}/Category/GetAllCategories`);
@@ -30,22 +32,28 @@ export async function getStaticProps() {
   };
 }
 const Courses = (props) => {
+  const disPatch = useDispatch()
+  const data1= useSelector((course)=>course.course.data3)
+  useEffect(()=>{
+    let p=pageNum+1;
+    disPatch(shortcourse({p,catId,si,pr,st,val}))
+},[])
   const catDt = props.posts.data;
-  const [value, onChange] = useState(new Date());
-  const val = value.toISOString()
+  const [value, onChange] = useState();
+  const val = value === undefined ? "" : value.toISOString()
   const [title, setTitle] = useState("Type");
   const [title2, setTitle2] = useState("State");
   const [title3, setTitle3] = useState("Category");
   const [delid, setDelid] = useState();
-
   const [show, setShow] = useState(false);
-
+  const [st, setSt] = useState(null);
+  const [modalData, setModalData] = useState(null);
+console.log(modalData)
   const handleClose = () => setShow(false);
   const handleShow = (id) => {
     setShow(true);
     setDelid(id);
   };
-
   const dropdown = (event) => {
     setTitle(event.target.textContent);
     event.preventDefault();
@@ -122,124 +130,35 @@ const Courses = (props) => {
   );
   const [catId, setCatId] = useState("");
   const [si, setSi] = useState("");
-  const [datacourse, setDatacourse] = useState();
-  console.log(datacourse)
-  const [dt, setDt] = useState();
-  
-    
-//     if(datacourse.pageData.length > 0 ){
-//     return datacourse.pageData
-//    }
-//    else if(datacourse.pageData.length === 0){
-//     return <Loader/>
-//  }
-
-
-  const fetchData = async (p) => {
-    const token = getItem("token")
-    try {
-      const result = await fetch(
-        `${process.env.webURL}/ShortContent/GetDashboardShortContentTeacher?page=${p}&pagesize=5`
-        ,{ headers: { Authorization: 'Bearer '+  token}}
-      );
-      const json = await result.json();
-      console.log(json.data.pageData,"new data")
-      setDatacourse(json.data);
-      setDt(json.data);
-      return json.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData(1);
-  }, [state]);
-
-  const sData = async (p) => {
-    const token = getItem("token")
-    try {
-      const result = await fetch(
-        `${process.env.webURL}/ShortContent/GetDashboardShortContentTeacher?page=1&pagesize=5&CategoryId=${p.catId}&key=${p.si}&contentType=${p.pr}&status=${p.st}&date=${val}`
-        ,{ headers: { Authorization: 'Bearer '+  token}}
-      );
-      const json = await result.json();
-      // console.log(json.data.pageData)
-      // setDatacourse(json.data);
-      setDatacourse(json.data);
-      setDt(json.data);
-      return json.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-// console.log(firstdt)
-
-
-const [pageNum, setPageNum] = useState(0);
-const itemPerPage = 5;
-
-const changePage = async ({ selected }) => {
-  setPageNum(selected);
-  setDt(await fetchData(selected + 1));
-};
-console.log(datacourse , "datacourse")
-  const pageCount =
-    datacourse !== undefined ? datacourse.totalPage : <Loader />;
-  const dtlenght =
-    datacourse !== undefined ? datacourse.pageData.length : <Loader />;
-  const dttotallenght =
-    datacourse !== undefined ? datacourse.totalCount : <Loader />;
   const [pr, setPr] = useState(null);
   if(pr=== null){
     setPr("")
   }
- 
-  const prData = () => {
-    dt !== undefined ? (
-      dt.pageData.map((i) => {
-        if (i.type === 0) {
-          setPr(0);
-        }
-        else if (i.type === 1) {
-          setPr(1);
-        } else if (i.type > 1) {
-          setPr(2);
-        }
-      })
-    ) : (
-      <Loader />
-    );
-  };
-
-  const [st, setSt] = useState(null);
   if(st === null){
     setSt("")
   }
-  const stData = () => {
-    dt !== undefined ? (
-      dt.pageData.map((i) => {
-        if (i.statusType === 0) {
-          setSt(0);
-        } else if (i.statusType === 1) {
-          setSt(1);
-        } else if (i.statusType === 2) {
-          setSt(2);
-        }
-      })
-    ) : (
-      <Loader />
-    );
-  };
-  useEffect(() => {
-    prData();
-  }, []);
-  useEffect(() => {
-    stData();
-  }, []);
+
+const [pageNum, setPageNum] = useState(0);
+
+const changePage = async ({ selected }) => {
+  setPageNum(selected);
+  let p=selected+1;
+    disPatch(shortcourse({p,catId,si,pr,st,val}))
+};
+if((data1 === undefined) || (data1.pageData === undefined)) {
+  return <Loader />
+}
+
+  const pageCount =
+    data1 !== undefined ? data1.totalPage : <Loader />;
+  const dtlenght =
+    data1 !== undefined ? data1.pageData.length * pageNum : <Loader />;
+  const dttotallenght =
+    data1 !== undefined ? data1.totalCount : <Loader />;
+  
   const displayItems =
-    dt !== undefined ? (
-      dt.pageData.map((i,index) => {
+  data1 !== undefined ? (
+      data1.pageData.map((i,index) => {
         return (
           <tr key={index}>
             <td>{index + 1}</td>
@@ -247,7 +166,6 @@ console.log(datacourse , "datacourse")
             <td>{catDt.filter((x)=> x.id === i.categooryId)[0].categoryName}</td>
             <td>{i.type === 0 ? "Short Video" : i.type === 0 ? "Text" :  "Sound"}</td>
             <td>{parseFloat(i.rate).toFixed(2)}</td>
-            {/* <td>{parseFloat(i.rate).toFixed(2)}</td> */}
             {i.statusType === "Published" ? (
               <td className={`${co.greenc}`}>{i.statusType}</td>
             ) : i.statusType === "Awaiting" ? (
@@ -282,10 +200,7 @@ console.log(datacourse , "datacourse")
                   </Button>
                   <Button
                     variant="danger mx-3 mt-3"
-                    onClick={() => {
-                      DeleteShort(modalData.contentId);
-                      handleClose();
-                    }}
+                    onClick={()=>{disPatch(shortcoursedel(modalData.contentId)).then(()=>{let p=pageNum+1;disPatch(shortcourse({p,catId,si,pr,st,val}))});handleClose()}}
                   >
                     Delete
                   </Button>
@@ -298,16 +213,16 @@ console.log(datacourse , "datacourse")
     ) : (
       <Loader />
     );
-  // console.log(sData)
-  const [state, setState] = useState(0);
+  // const [state, setState] = useState(0);
   const submitHandler = (e) => {
     e.preventDefault();
-    setState(state + 1);
-    sData({ catId, si, pr, st });
+    // setState(state + 1);
+  let p=1;
+
+    disPatch(shortcourse({p,catId,si,pr,st,val}))
   };
   // console.log(dt)
 
-  const [modalData, setModalData] = useState(null);
 
   return (
     <SSRProvider>

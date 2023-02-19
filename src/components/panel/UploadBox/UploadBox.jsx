@@ -1,12 +1,10 @@
 import React from "react";
-import { Form, Formik } from "formik";
-import yup from "yup";
+import { Formik } from "formik";
 import { getItem } from "../../../../src/core/services/storage/storage";
 import Moment from "react-moment";
 import { useState } from "react";
 import up from "../../../../styles/panel/Upldcss.module.css"
 import { toast,ToastContainer } from "react-toastify";
-import { useEffect } from "react";
 
 class Thumb extends React.Component {
   state = {
@@ -21,11 +19,9 @@ class Thumb extends React.Component {
 
     this.setState({ loading: true }, () => {
       let reader = new FileReader();
-
       reader.onloadend = () => {
         this.setState({ loading: false, thumb: reader.result });
       };
-
       reader.readAsDataURL(nextProps.file);
     });
   }
@@ -37,11 +33,9 @@ class Thumb extends React.Component {
     if (!file) {
       return null;
     }
-
     if (loading) {
       return <p>loading...</p>;
     }
-
     return (
       <img
         src={thumb}
@@ -55,9 +49,6 @@ class Thumb extends React.Component {
 }
 
 const App =({handleRandom})=> {
-  // useEffect(()=>{
-  //   handleRandom
-  // },[filename])
   const file = (
     <svg
       id="Group_21369"
@@ -118,7 +109,6 @@ const now = new Date()
               
               
             if(resD.isSucces === true){
-              // console.log(resD.isSucces),
               handleRandom(resDt)
               return resDt,
               toast.success('File Uploaded Successfully!', {
@@ -143,9 +133,7 @@ const now = new Date()
             draggable: true,
             progress: undefined,
             theme: "colored",
-            })
-        }
-
+            })}
             })
           }}>
           {({ values,handleSubmit, setFieldValue }) => (
@@ -170,7 +158,6 @@ const now = new Date()
            </div>
               )}
           </Formik>
-        
       </div>
       
       {st === true ? <>
@@ -179,9 +166,7 @@ const now = new Date()
       <div className={`col-6`}>{file}{filename}</div>
       <div className={`col-6`}><Moment format="MM/DD/YYYY">{now}</Moment></div>
     </div></>: null}
-    
     </React.Fragment>
     );
-  
 }
 export default App;

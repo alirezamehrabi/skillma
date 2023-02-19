@@ -6,15 +6,14 @@ const loginUser =async(obj)=>{
 
     try{
         const result = await axios.post(`${process.env.webURL}/Authentication/LoginUser`,obj)
-
-        
-
         const isSucces = result.data.isSucces
         setItem("isSucces", isSucces)
 
         if(result.data.isSucces === true){
             const token = result.data.data.token
         setItem("token", token)
+        const userData = result.data.data
+        setItem("userData", userData)
         const refreshToken = result.data.data.refreshToken
         const refreshTokenExpireDate = result.data.data.refreshTokenExpireDate
         const expireDate = result.data.data.expireDate

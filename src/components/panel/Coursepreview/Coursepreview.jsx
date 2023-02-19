@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 import { toast, ToastContainer } from "react-toastify";
 import React from "react";
 import Moment from "react-moment";
+import { addCourse } from "../../../../pages/api/course/new-course";
 
 const ReactQuill = dynamic(import("react-quill"), {
   ssr: false,
@@ -237,19 +238,6 @@ const Courses = ({ prev, data }) => {
   const [modalData, setModalData] = useState(null);
   const [modalData3, setModalData3] = useState(null);
   const [editor, setEditor] = useState("");
-  const err = () => {
-    return toast.error("Please Upload File to Continue", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
-
   const [formstep, setFormstep] = useState(0);
   const completeFormStep = () => {
     setFormstep((formstep) => formstep + 1);
@@ -309,25 +297,50 @@ const Courses = ({ prev, data }) => {
             requirement: [{}],
           }}
           // validationSchema={ContactSchema}
-          onSubmit={(values) => {
-            values.title,
-              values.categoryId,
-              values.level,
-              values.status,
-              values.progress,
-              values.whatYouLearn,
-              (values.description = editor),
-              (values.itemShow = item),
-              (values.seasonNumber = courseConsist.length),
-              values.price,
-              (values.upldb = upoaldboxdt),
-              (values.pictureName =
-                upoaldimg === undefined ? values.radio : upoaldimg),
-              (values.introductionVideoName = upoaldintro),
-              (values.parts = []);
-            console.log(values, "val");
-
+          onSubmit={async(values) => {
+            console.log(values)
             setCourseConsist(values.courseConsist);
+            const userObj = {
+            //   values.title,
+            //   values.categoryId,
+            //   values.level,
+            //   values.status,
+            //   values.progress,
+            //   values.whatYouLearn,
+            //   (values.description = editor),
+            //   (values.itemShow = item),
+            //   (values.seasonNumber = courseConsist.length),
+            //   values.price,
+            //   (values.upldb = upoaldboxdt),
+            //   (values.pictureName =
+            //     upoaldimg === undefined ? values.radio : upoaldimg),
+            //   (values.introductionVideoName = upoaldintro),
+            //   (values.parts = []);
+            // console.log(values, "val");
+
+              
+            courseConsist: courseConsist,
+            title: values.title,
+            categoryId: parseInt(values.categoryId),
+            level: parseInt(values.level),
+            whatYouLearn: values.whatYouLearn,
+            // whatYouLearn: values.whatYouLearn.map((i)=> {return i.data}),
+            duration:1,
+            price:parseInt(values.price),
+            status : parseInt(values.status),
+            seasonNumber : courseConsist.length,
+            progress : parseInt(values.progress),
+            upldb : upoaldboxdt,
+              description : editor,
+              pictureName : upoaldimg,
+              introductionVideoName : upoaldintro,
+            }
+            console.log(userObj, "userObj");
+            console.log(courseConsist, "courseConsist");
+            const user = await addCourse(userObj).then((r) => {
+              console.log(r);
+            });
+            console.log(user,"user");
           }}
         >
           {({ errors, touched, values }) => (

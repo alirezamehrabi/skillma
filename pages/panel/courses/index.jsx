@@ -32,11 +32,9 @@ export async function getStaticProps() {
 const Courses = (props) => {
   const disPatch = useDispatch()
   const data1= useSelector((course)=>course.course.data1)
-  // console.log(data1,"data1")
   useEffect(()=>{
     let p=pageNum+1;
-    
-    disPatch(courselist({p,catId,si}))
+    disPatch(courselist({p,catId,si,pr,st,val}))
 },[])
   const catDt = props.posts.data;
   const firstdt = props.firstdt.data;
@@ -63,7 +61,6 @@ const Courses = (props) => {
     setShow(true);
     setDelid(id);
   };
-
   const dropdown = (event) => {
     setTitle(event.target.textContent);
     event.preventDefault();
@@ -185,54 +182,6 @@ const Courses = (props) => {
     </svg>
   );
 
-  const fetchData = async (p) => {
-    try {
-      const result = await fetch(
-        `${process.env.webURL}/Course/GetCoursesDashboard?page=${p}&pagesize=5&CategoryId=${catId}&key=${si}`
-      );
-      const json = await result.json();
-      // console.log(json.data.pageData)
-      setDatacourse(json.data);
-      return json.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchData(1);
-  }, [state]);
-
-  const sData = async (p) => {
-    try {
-      const result = await fetch(
-        `${process.env.webURL}/Course/GetCoursesDashboard?page=1&pagesize=100&CategoryId=${p.catId}&key=${p.si}&PriceType=${p.pr}&status=${p.st}&date=${val}`
-      );
-      const json = await result.json();
-      // console.log(json.data.pageData)
-      setDatacourse(json.data);
-      setDt(json.data);
-      return json.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const itemPerPage = 5;
-
-  const changePage = async ({ selected }) => {
-    setPageNum(selected);
-    setDt(await fetchData(selected + 1));
-    let p=selected+1;
-    
-    disPatch(courselist({p,catId,si}))
-  };
-  const pageCount =
-    datacourse !== undefined ? datacourse.totalPage : <Loader />;
-  const dtlenght =
-    datacourse !== undefined ? datacourse.pageData.length : <Loader />;
-  const dttotallenght =
-    datacourse !== undefined ? datacourse.totalCount : <Loader />;
-
   const prData = () => {
     data1.pageData !== undefined ? (
       data1.pageData.map((i) => {
@@ -246,16 +195,9 @@ const Courses = (props) => {
       <Loader />
     );
   };
-  useEffect(() => {
-    prData();
-  }, []);
- 
-  if(st === null){
-    setSt("")
-  }
   const stData = () => {
-    dt.pageData !== undefined ? (
-      dt.pageData.map((i) => {
+    courselist.pageData !== undefined ? (
+      courselist.pageData.map((i) => {
         if (i.status === 0) {
           setSt(0);
         } else if (i.status === 1) {
@@ -268,21 +210,51 @@ const Courses = (props) => {
       <Loader />
     );
   };
-  useEffect(() => {
-    prData();
-  }, []);
-  useEffect(() => {
-    stData();
-  }, []);
+  
+  if(st === null){
+    setSt("")
+  }
+if(pr === null){
+  setPr("")
+}
+if(st === null){
+  setSt("")
+}
+useEffect(() => {
+  prData();
+}, []);
+useEffect(() => {
+  prData();
+}, []);
+useEffect(() => {
+  stData();
+}, []);
+  const itemPerPage = 5;
+  const changePage = async ({ selected }) => {
+    setPageNum(selected);
+    let p=selected+1;
+    if(val === undefined){
+      return (val === "")
+    }
+    disPatch(courselist({p,catId,si,pr,st,val}))
+  };
   if((data1 === undefined) || (data1.pageData === undefined)) {
     return <Loader />
   }
+ 
+  const pageCount =
+  data1 !== undefined ? data1.totalPage : <Loader />;
+  const dtlenght =
+  data1 !== undefined ? data1.pageData.length * pageNum : <Loader />;
+  const dttotallenght =
+  data1 !== undefined ? data1.totalCount : <Loader />;
+  
   const displayItems =
    (
-      data1.pageData.map((i) => {
+      data1.pageData.map((i,index) => {
         return (
           <tr key={i.id}>
-            <td>{i.id}</td>
+            <td>{index+1}</td>
             <td>{i.title}</td>
             <td>{i.categoryName}</td>
             <td>{i.price === 0 ? "Free" : i.price}</td>
@@ -320,7 +292,7 @@ const Courses = (props) => {
             <Button variant="outline-danger mt-3" onClick={handleClose}>
               Cancel
             </Button>
-            <Button variant="danger mx-3 mt-3" onClick={()=>{disPatch(coursedel(modalData.id)).then(()=>{let p=pageNum+1;disPatch(courselist({p,catId,si}))});handleClose()}}>
+            <Button variant="danger mx-3 mt-3" onClick={()=>{disPatch(coursedel(modalData.id)).then(()=>{let p=pageNum+1;disPatch(courselist({p,catId,si,pr,st,val}))});handleClose()}}>
               Delete
             </Button>
           </Modal.Body>
@@ -330,20 +302,16 @@ const Courses = (props) => {
           </tr>
           
         );
-        
       })
     )
-  // console.log(sData)
 
   const submitHandler = (e) => {
     e.preventDefault();
     setState(state + 1);
-    sData({ catId, si, pr, st });
+    let p = 1
+    disPatch(courselist({p,catId,si,pr,st,val}))
   };
-  // console.log(dt)
 
- 
-  // console.log(pageNum)
   return (
     <SSRProvider>
       <Head>
@@ -355,7 +323,6 @@ const Courses = (props) => {
             <Link href="/panel/dashboard">
               <div className={`${men.logo}`}></div>
             </Link>
-
             <Menu />
           </div>
           <div className={`col-lg-10 ${dash.maincontainer}`}>

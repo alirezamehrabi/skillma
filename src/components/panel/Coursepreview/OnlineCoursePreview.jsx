@@ -208,7 +208,7 @@ const Courses = ({ prev, data }) => {
 
 
 
-
+            courseConsist: values.courseConsist,
             title: values.title,
             categoryId: parseInt(values.categoryId),
             level: parseInt(values.level),
