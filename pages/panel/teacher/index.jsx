@@ -13,9 +13,9 @@ import st from "../../../styles/panel/Teacher.module.css";
 import men from "../../../styles/panel/Menu.module.css";
 import { Button, Modal,Tab, Tabs } from "react-bootstrap";
 import search from "../../../styles/Search.module.css";
-
+import { TagsInput } from "react-tag-input-component";
 const Trend = (props) => {
-
+  const [selected, setSelected] = useState(["papaya"]);
 
   const notify= <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
   <g id="Group_21226" data-name="Group 21226" transform="translate(1)">
@@ -52,7 +52,17 @@ const Trend = (props) => {
 
 
 
-
+        <div>
+      <h1>Add Fruits</h1>
+      <pre>{JSON.stringify(selected)}</pre>
+      <TagsInput
+        value={selected}
+        onChange={setSelected}
+        name="fruits"
+        placeHolder="enter fruits"
+      />
+      <em>press enter or comma to add new tag</em>
+    </div>
 
 
 
