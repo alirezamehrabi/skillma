@@ -15,6 +15,8 @@ import { Button, Modal,Tab, Tabs } from "react-bootstrap";
 import search from "../../../styles/Search.module.css";
 
 const Trend = (props) => {
+
+
   const notify= <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
   <g id="Group_21226" data-name="Group 21226" transform="translate(1)">
     <rect id="Rectangle_6293" data-name="Rectangle 6293" width="40" height="40" transform="translate(-1)" fill="#2d3ddf" opacity="0"/>
@@ -44,6 +46,23 @@ const Trend = (props) => {
                 <div className={`col-1 fw-bold`}>(20%)</div>
                 </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <Tabs
             defaultActiveKey="pop"
             id="uncontrolled-tab-example"

@@ -12,8 +12,14 @@ const loginUser =async(obj)=>{
         if(result.data.isSucces === true){
             const token = result.data.data.token
         setItem("token", token)
-        const userData = result.data.data
-        setItem("userData", userData)
+        const isTeacher = result.data.data.isTeacher
+        const picName = result.data.data.picName
+        const userId = result.data.data.userId
+        const userName = result.data.data.userName
+        setItem("isTeacher", isTeacher)
+        setItem("picName", picName)
+        setItem("userId", userId)
+        setItem("userName", userName)
         const refreshToken = result.data.data.refreshToken
         const refreshTokenExpireDate = result.data.data.refreshTokenExpireDate
         const expireDate = result.data.data.expireDate

@@ -26,11 +26,11 @@
   border-radius:100%;
 }
 .pername{
-  display:inline;
+  /* display:inline; */
   font-size: 15px;
-  padding: 0 10px 10px;
+  padding: 0 5px 0px;
   position: relative;
-  top: -14px;
+  top: 5px;
 }
 .menu {
   padding: 20px 0;
@@ -65,7 +65,7 @@
   z-index: 2;
 }
 .menuWrapper a {
-  padding: 25px 45px 5px;
+  padding: 25px 40px 5px;
   color: #333;
   transition: 0.5s;
   margin-top: 5px;
@@ -935,7 +935,7 @@ margin: 0 auto;
   .slidePic7{
     margin: 100px 220px;
   }
-  .pername{
+  .pernameHolder{
     display:none
   }
 }

@@ -7,13 +7,13 @@ import FavorivteCategory from "../FavorivteCategory/FavorivteCategory";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import DataContext from "../../../src/Context/DataContext";
-import Loader from './../Loader/Loader';
+import Loader from "./../Loader/Loader";
 import { getItem } from "../../core/services/storage/storage";
 
 const Menu = () => {
-  const token = getItem("token")
+  const token = getItem("token");
   const { menuCat, onLogoutUser, loading, isSucces } = useContext(DataContext);
-  const menu = menuCat.data
+  const menu = menuCat.data;
   const down = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <defs>
@@ -25,16 +25,18 @@ const Menu = () => {
       </g>
     </svg>
   );
-
+  const isTeacher = getItem("isTeacher");
+  const picName = getItem("picName");
+  const userId = getItem("userId");
+  const userName = getItem("userName");
   const [state, setState] = useState(false);
   const [searchTXT, setSearchTXT] = useState();
   const searchHandler = (e) => {
-    setSearchTXT(e.target.value)
-  }
+    setSearchTXT(e.target.value);
+  };
   const formsubmit = (e) => {
-    e.preventDefault()
-
-  }
+    e.preventDefault();
+  };
   useEffect(() => {
     window.addEventListener("click", () => setState(false));
 
@@ -48,12 +50,13 @@ const Menu = () => {
             <div className="col-lg-2 col-md-7 col-sm-7 order-2 order-lg-1 col-4">
               <figure className={styles.logo}>
                 <Link href={`/`}>
-                <Image
-                  src={require(`../../assets/home/logo.png`)}
-                  alt="logo"
-                  width="145"
-                  height="42"
-                /></Link>
+                  <Image
+                    src={require(`../../assets/home/logo.png`)}
+                    alt="logo"
+                    width="145"
+                    height="42"
+                  />
+                </Link>
               </figure>
             </div>
             <div className="col-lg-7 col-md-1 col-sm-1 order-1 order-lg-2 col-2 d-flex justify-content-center">
@@ -89,22 +92,34 @@ const Menu = () => {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <div className={`col-auto ${styles.account}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/dash/per.png`)}
-                          alt="per"
-                          width=""
-                          height=""
-                        />
-                        <h6 className={`${styles.pername}`}>Dani Beaumont</h6>
-                        {down}
+                      <div className="row">
+                        <div className={`col-xxl-3 col-8 ${styles.account}`}>
+                          <Image
+                            src={picName}
+                            alt="per"
+                            width="40"
+                            height="40"
+                          />
+                        </div>
+                        <div className={`col-8 ${styles.pernameHolder}`}>
+                          <h6 className={`text-truncate ${styles.pername}`}>
+                            {userName}
+                          </h6>
+                        </div>
+                        <div className={`col-xxl-1 col-4`}>{down}</div>
                       </div>
                     </button>
                     <ul className="dropdown-menu">
                       <li>
-                        <a className="dropdown-item" href="#">
-                          profile
-                        </a>
+                        <Link
+                          href={
+                            isTeacher === true
+                              ? `/panel/teacher/${userId}`
+                              : `/panel/student/${userId}`
+                          }
+                        >
+                          <a className="dropdown-item">profile</a>
+                        </Link>
                       </li>
                       <li>
                         <hr className="dropdown-divider" />
@@ -187,11 +202,11 @@ const Menu = () => {
                     >
                       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                     </svg>
-                  </button></Link>
+                  </button>
+                </Link>
               </div>
             </form>
           </div>
-
         </div>
       </section>
     </>

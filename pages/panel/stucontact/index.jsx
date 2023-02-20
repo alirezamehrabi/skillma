@@ -14,9 +14,22 @@ import DatePicker from "react-date-picker/dist/entry.nostyle";
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
 import { Button } from "react-bootstrap";
+import { useRouter } from "next/router.js";
+import { useDispatch, useSelector } from "react-redux";
+import { conaccept, conlist, conreq } from "../../api/redux/connectlistreducer.js";
+import { useEffect } from "react";
 
 const Courses = () => {
-  const [key, setKey] = useState("home");
+  const router = useRouter()
+const data1= useSelector((profile)=>profile.connection.data.data)
+const dispatch = useDispatch()
+useEffect(()=>{
+dispatch(conreq())
+},[])
+const data= useSelector((profile)=>profile.connection.data1.data)
+useEffect(()=>{
+dispatch(conlist())
+},[])
   const searc = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +56,6 @@ const Courses = () => {
             <Link href="/panel/dashboard">
               <div className={`${men.logo}`}></div>
             </Link>
-
             <Menu />
           </div>
           <div className={`col-lg-10 ${dash.maincontainer}`}>
@@ -63,19 +75,23 @@ const Courses = () => {
                     {searc}
                   </div>
                   <div className={`${ch.conreqSec}`}>
-                    <div className={`row ${ch.conreq}`}>
+                    {data1 !== undefined && data1.map((i)=>{
+                      return(
+                      <div className={`row ${ch.conreq}`} key={i.id}>
                       <div className={`col-3 ${ch.conreqPic}`}>
                         <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
+                          src={i.picName}
                           alt=""
+                          width="50"
+                          height="50"
                         />
                       </div>
                       <div className={`col-9`}>
                         <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
+                          {i.userName}
                         </h6>
                         <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
+                          {i.field}
                         </h6>
                       </div>
                       <div
@@ -84,147 +100,16 @@ const Courses = () => {
                         <Button
                           variant="success"
                           className={`${ch.conreqConfirm}`}
+                          onClick={() => {dispatch(conaccept(i.id)).then((r)=>{r.payload.isSucces === true && dispatch(conreq());dispatch(conlist())})}}
                         >
                           Confirm
                         </Button>
-                        <Button variant="outline-danger">Delete</Button>
+                        <Button variant="outline-danger">Reject</Button>
                       </div>
                     </div>
-                    <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-9`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div
-                        className={`col-12 d-flex mx-auto my-3 justify-content-center ${ch.conreqBTN}`}
-                      >
-                        <Button
-                          variant="success"
-                          className={`${ch.conreqConfirm}`}
-                        >
-                          Confirm
-                        </Button>
-                        <Button variant="outline-danger">Delete</Button>
-                      </div>
-                    </div>
-                    <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-9`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div
-                        className={`col-12 d-flex mx-auto my-3 justify-content-center ${ch.conreqBTN}`}
-                      >
-                        <Button
-                          variant="success"
-                          className={`${ch.conreqConfirm}`}
-                        >
-                          Confirm
-                        </Button>
-                        <Button variant="outline-danger">Delete</Button>
-                      </div>
-                    </div>
-                    <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-9`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div
-                        className={`col-12 d-flex mx-auto my-3 justify-content-center ${ch.conreqBTN}`}
-                      >
-                        <Button
-                          variant="success"
-                          className={`${ch.conreqConfirm}`}
-                        >
-                          Confirm
-                        </Button>
-                        <Button variant="outline-danger">Delete</Button>
-                      </div>
-                    </div>
-                    <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-9`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div
-                        className={`col-12 d-flex mx-auto my-3 justify-content-center ${ch.conreqBTN}`}
-                      >
-                        <Button
-                          variant="success"
-                          className={`${ch.conreqConfirm}`}
-                        >
-                          Confirm
-                        </Button>
-                        <Button variant="outline-danger">Delete</Button>
-                      </div>
-                    </div>
-                    <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-9`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div
-                        className={`col-12 d-flex mx-auto my-3 justify-content-center ${ch.conreqBTN}`}
-                      >
-                        <Button
-                          variant="success"
-                          className={`${ch.conreqConfirm}`}
-                        >
-                          Confirm
-                        </Button>
-                        <Button variant="outline-danger">Delete</Button>
-                      </div>
-                    </div>
+                      )
+                    })}
+                    
                   </div>
                 </div>
               </div>
@@ -245,20 +130,24 @@ const Courses = () => {
                     </div>
                   </div>
                 </div>
-                <div className={`col-12 p-3`}>
+                {data !== undefined && data.pageData.map((i)=>{
+                  return(
+                    <div className={`col-12 p-3`} key={i.id}>
                 <div className={`row ${ch.conreq}`}>
                       <div className={`col-3 ${ch.conreqPic}`}>
                         <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
+                          src={i.picName}
                           alt=""
+                          width="50"
+                          height="50"
                         />
                       </div>
                       <div className={`col-5`}>
                         <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
+                          {i.userName}
                         </h6>
                         <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
+                          {i.field}
                         </h6>
                       </div>
                       <div className={`col-4 align-self-center`}>
@@ -266,153 +155,9 @@ const Courses = () => {
                       </div>
                     </div>
                 </div>
-                <div className={`col-12 p-3`}>
-                <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-5`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div className={`col-4 align-self-center`}>
-                      <Button variant="secondary py-2" className={`${ch.conBTN}`}>Connected</Button>
-                      </div>
-                    </div>
-                </div>
-                <div className={`col-12 p-3`}>
-                <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-5`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div className={`col-4 align-self-center`}>
-                      <Button variant="secondary py-2" className={`${ch.conBTN}`}>Connected</Button>
-                      </div>
-                    </div>
-                </div>
-                <div className={`col-12 p-3`}>
-                <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-5`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div className={`col-4 align-self-center`}>
-                      <Button variant="secondary py-2" className={`${ch.conBTN}`}>Connected</Button>
-                      </div>
-                    </div>
-                </div>
-                <div className={`col-12 p-3`}>
-                <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-5`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div className={`col-4 align-self-center`}>
-                      <Button variant="secondary py-2" className={`${ch.conBTN}`}>Connected</Button>
-                      </div>
-                    </div>
-                </div>
-                <div className={`col-12 p-3`}>
-                <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-5`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div className={`col-4 align-self-center`}>
-                      <Button variant="secondary py-2" className={`${ch.conBTN}`}>Connected</Button>
-                      </div>
-                    </div>
-                </div>
-                <div className={`col-12 p-3`}>
-                <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-5`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div className={`col-4 align-self-center`}>
-                      <Button variant="secondary py-2" className={`${ch.conBTN}`}>Connected</Button>
-                      </div>
-                    </div>
-                </div>
-                <div className={`col-12 p-3`}>
-                <div className={`row ${ch.conreq}`}>
-                      <div className={`col-3 ${ch.conreqPic}`}>
-                        <Image
-                          src={require(`../../../src/assets/panel/chat/2.png`)}
-                          alt=""
-                        />
-                      </div>
-                      <div className={`col-5`}>
-                        <h6 className={`fw-bold ${ch.conreqName}`}>
-                          User Name
-                        </h6>
-                        <h6 className={`${ch.conreqDes}`}>
-                          User Expeience Design User Interface
-                        </h6>
-                      </div>
-                      <div className={`col-4 align-self-center`}>
-                      <Button variant="secondary py-2" className={`${ch.conBTN}`}>Connected</Button>
-                      </div>
-                    </div>
-                </div>
+                  )
+                })}
+                
               </div>
               </div>
             </div>

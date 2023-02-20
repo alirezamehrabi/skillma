@@ -167,21 +167,9 @@ const Courses = ({ prev, data }) => {
     </svg>
   );
   const [editor, setEditor] = useState("");
-  const err = () => {
-    return toast.error("Please Upload File to Continue", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
 
   const [formstep, setFormstep] = useState(0);
-  const completeFormStep = (value) => {
+  const completeFormStep = () => {
     setFormstep((formstep) => formstep + 1);
 
     console.log(formstep + "normal");
@@ -205,9 +193,6 @@ const Courses = ({ prev, data }) => {
           // validationSchema={ContactSchema}
           onSubmit={async(values) => {
             const userObj = {
-
-
-
             courseConsist: values.courseConsist,
             title: values.title,
             categoryId: parseInt(values.categoryId),
