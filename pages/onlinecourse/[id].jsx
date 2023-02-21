@@ -168,14 +168,6 @@ const onlinecourse = (props) => {
                         </Link>
                       </div>
                       <div className={`col-6 g-4`}>
-                        {/* <Link href="#">
-                          <button
-                            type="button"
-                            className={`btn btn-outline-warning ${styles.logBut} ${detail.cartButton} ${online.cartButton}`}
-                          >
-                            Download Topics
-                          </button>
-                        </Link> */}
                       </div>
                     </div>
                   </div>

@@ -13,10 +13,11 @@ import st from "../../../styles/panel/Teacher.module.css";
 import men from "../../../styles/panel/Menu.module.css";
 import { Button, Modal,Tab, Tabs } from "react-bootstrap";
 import search from "../../../styles/Search.module.css";
-import { TagsInput } from "react-tag-input-component";
-const Trend = (props) => {
-  const [selected, setSelected] = useState(["papaya"]);
+import { getItem } from "../../../src/core/services/storage/storage.js";
+import TeacherChangePass from "../../../src/components/panel/TeacherChangePass/TeacherChangePass"
 
+const TeacherMain = (props) => {
+const name = getItem("userName")
   const notify= <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
   <g id="Group_21226" data-name="Group 21226" transform="translate(1)">
     <rect id="Rectangle_6293" data-name="Rectangle 6293" width="40" height="40" transform="translate(-1)" fill="#2d3ddf" opacity="0"/>
@@ -42,38 +43,10 @@ const Trend = (props) => {
             <div className={`col-md-8 mx-auto ${st.not}`}>
                 <div className={`row`}>
                 <div className={`col-1`}>{notify}</div>
-                <div className={`col-10`}>Wellcom back  Dani Beaumont... complete your profile</div>
-                <div className={`col-1 fw-bold`}>(20%)</div>
+                <div className={`col-11`}>Wellcom back  {name}... complete your profile</div>
                 </div>
         </div>
-
-
-
-
-
-
-        <div>
-      <h1>Add Fruits</h1>
-      <pre>{JSON.stringify(selected)}</pre>
-      <TagsInput
-        value={selected}
-        onChange={setSelected}
-        name="fruits"
-        placeHolder="enter fruits"
-      />
-      <em>press enter or comma to add new tag</em>
-    </div>
-
-
-
-
-
-
-
-
-
-
-            <Tabs
+        <Tabs
             defaultActiveKey="pop"
             id="uncontrolled-tab-example"
             className={`mb-5 ${search.tabs} ${search.tabs2} changeTab1`}
@@ -85,7 +58,7 @@ const Trend = (props) => {
             </Tab>
             <Tab eventKey="new" title="profile public">
               <div className={`col-12`}>
-                
+                <TeacherChangePass/>
               </div>
             </Tab>
             <Tab eventKey="pay" title="Payment method">
@@ -107,4 +80,4 @@ const Trend = (props) => {
     </SSRProvider>
   );
 };
-export default Trend;
+export default TeacherMain;

@@ -4,6 +4,14 @@
   background-color: #fff;
   margin: 30px auto 25px;
 }
+.inputimg input{
+  display: none !important;
+}
+.inputimg img{
+  border-radius: 100% !important;
+  width: 130px;
+  height: 130px;
+}
 .preview > .form > div{
   display:none
 }

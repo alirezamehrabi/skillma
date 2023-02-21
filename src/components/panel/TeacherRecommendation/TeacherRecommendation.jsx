@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SSRProvider } from "react-bootstrap";
 import st from "../../../../styles/panel/Teacher.module.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import co from "../../../../styles/panel/course.module.css";
+import { getItem } from "../../../core/services/storage/storage";
 
 const ContactSchema = Yup.object().shape({
     title: Yup.string().min(2, "Too Short!").required("Required"),
@@ -29,7 +30,43 @@ const StuProfile = () => {
   const handleNameChange5 = (event) => {
     setF5(event.target.value);
   };
+  const fetchcourse = async (p) => {
+    const token = getItem("token");
+    try {
+      const result = await fetch(
+        `${process.env.webURL}/Course/GetTeacherCoursesName`,
+        { headers: { Authorization: "Bearer " + token } }
+      );
+      const json = await result.json();
+      // console.log(json.data.pageData)
+      setCourseDt(json.data);
+      return json.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchcourse();
+  }, []);
+  const [cid, setCid] = useState()
 
+  const fetchStu = async (p) => {
+    const token = getItem("token");
+    try {
+      const result = await fetch(`${process.env.webURL}/Course/GetStudentOfCourseByCourseId?id=${cid}`, {
+        headers: { Authorization: "Bearer " + token },
+      });
+      const json = await result.json();
+      // console.log(json.data);
+      setstDt(json.data);
+      return json.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchStu(cid);
+  }, [cid]);
     return (
       <SSRProvider>
         
@@ -54,7 +91,7 @@ const StuProfile = () => {
           {({ errors, touched }) => (
             <Form className={co.form}>
               <label htmlFor="email" className={`${co.label} ${co.lbl1}`}>
-              For how
+              For Who
               </label>
               <Field
                 name="email"

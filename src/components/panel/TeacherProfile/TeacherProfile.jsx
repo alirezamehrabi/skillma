@@ -1,101 +1,250 @@
+import React, { useEffect } from "react";
+import { getItem } from "../../../../src/core/services/storage/storage";
+import Moment from "react-moment";
+import { useState } from "react";
+import up from "../../../../styles/panel/Upldcss.module.css";
+import { toast, ToastContainer } from "react-toastify";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, createRef } from "react";
 import { SSRProvider, Button } from "react-bootstrap";
-import st from "../../../../styles/panel/Teacher.module.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import co from "../../../../styles/panel/course.module.css";
+import st from "../../../../styles/panel/Teacher.module.css";
+import { TagsInput } from "react-tag-input-component";
+import axios from "axios";
+import Loader from "../../Loader/Loader";
 
+class Thumb extends React.Component {
+  state = {
+    loading: false,
+    thumb: undefined,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.file) {
+      return;
+    }
+
+    this.setState({ loading: true }, () => {
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        this.setState({ loading: false, thumb: reader.result });
+      };
+      reader.readAsDataURL(nextProps.file);
+    });
+  }
+
+  render() {
+    const { file } = this.props;
+    const { loading, thumb } = this.state;
+
+    if (!file) {
+      return null;
+    }
+    if (loading) {
+      return <p>loading...</p>;
+    }
+    return (
+      <img
+        src={thumb}
+        alt={file.name}
+        className="img-thumbnail mt-2"
+        height={200}
+        width={200}
+      />
+    );
+  }
+}
 const ContactSchema = Yup.object().shape({
   title: Yup.string().min(2, "Too Short!").required("Required"),
   category: Yup.string().min(2, "Too Short!").required("Required"),
   level: Yup.string().min(4, "Too Short!").required("Required"),
 });
-
-const StuProfile = () => {
+const TeacherProfile = ({ handleRandom }) => {
   const [passwordShown, setPasswordShown] = useState(false);
+  const[pic,setpic] = useState()
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
+  const [filename, setfilename] = useState();
+  const [st, setSt] = useState();
+  const [dt,setDt]= useState();
+ 
+  const userId = getItem("userId");
+  const defaultdt = async()=>{
+    const token = getItem("token")
+    try{
+        const result = await axios.get(`${process.env.webURL}/TeacherDetail/GetTeacherDetailById?id=${userId}`
+        ,{ headers: { Authorization: 'bearer '+  token}
+    }).then((r)=>{
+      setDt(r.data.data)
+    })
+    }
+    catch(error){
+            console.log(error)
+    }
+  }
+  useEffect(()=>{
+    defaultdt()
+  },[])
+  const d = dt !== undefined && dt.feild
+  console.log(d,"d")
+  const [selected, setSelected] = useState(d);
+  console.log(selected,"selected")
 
-  const [f1, setF1] = useState("");
-  const [f2, setF2] = useState("");
-  const [f3, setF3] = useState("");
-  const [f4, setF4] = useState("");
-  const [f5, setF5] = useState("");
-  const [f6, setF6] = useState("");
-  const [f7, setF7] = useState("");
-  const [f8, setF8] = useState("");
+  // console.log(dt !== undefined && dt.feild)
+  // console.log(selected)
+  // console.log([ dt !== undefined && dt.feild.map((i)=>{return i}) ])
+  if(dt === undefined){
+    return <Loader/>
+  }
+  // if(dt !== undefined){
+  //   setSelected(dt.feild)
+  // }
+  const p = dt.pic === null ? require(`../../../assets/panel/profile/avatar.png`) : dt.pic
+  // console.log(dt)
+  //   if(dt.pic !== null){
+  //   setpic(dt.pic)
+  //   console.log(dt.pic)
 
-  const handleNameChange = (event) => {
-    setF1(event.target.value);
-  };
-  const handleNameChange2 = (event) => {
-    setF2(event.target.value);
-  };
-  const handleNameChange3 = (event) => {
-    setF3(event.target.value);
-  };
-  const handleNameChange4 = (event) => {
-    setF4(event.target.value);
-  };
-  const handleNameChange5 = (event) => {
-    setF5(event.target.value);
-  };
-  const handleNameChange6 = (event) => {
-    setF6(event.target.value);
-  };
-  const handleNameChange7 = (event) => {
-    setF7(event.target.value);
-  };
-  const handleNameChange8 = (event) => {
-    setF8(event.target.value);
-  };
-
+  // }
+  // else{
+  //   setpic(require(`../../../assets/panel/profile/avatar.png`))
+  // }
   return (
     <SSRProvider>
-      <div className={`row ${st.container}`}>
-        <div className={`col-12 ${st.pdetail}`}>
-          <Image
-            src={require(`../../../assets/panel/profile/avatar.png`)}
-            alt=""
-          />
-          <h5 className={``}>Name</h5>
-          <h6 className={``}>Skill</h6>
-        </div>
+      <div className={`row p-3`}>
         <div className={``}>
           <Formik
+          
             initialValues={{
-              subject: "",
-
-              email: "",
-
-              message: "",
+              
+              file: null,
+              FullName: dt !== undefined && dt.name,
+              message: dt !== undefined && dt.aboutTeacher,
+              Field: dt !== undefined && dt.feild,
+              Twitter: dt !== undefined && dt.twitter,
+              Instagram: dt !== undefined && dt.insta,
+              Facebook: dt !== undefined && dt.facebook,
+              email: dt !== undefined && dt.email,
             }}
-            validationSchema={ContactSchema}
+            // validationSchema={ContactSchema}
             onSubmit={(values) => {
-              // same shape as initial values
+              let formData = new FormData();
 
+              const token = getItem("token");
+              formData.append("TeacherId", userId);
+              formData.append("file", values.file);
+              formData.append("AboutMe", values.message);
+              formData.append("FullName", values.FullName);
+              formData.append("Field", JSON.stringify(selected));
+              formData.append("Twiter", values.Twitter);
+              formData.append("Instagram", values.Instagram);
+              formData.append("FaceBook", values.Facebook);
+              formData.append("email", values.Email);
+
+              fetch(
+                "https://skillma-api.shinypi.net/TeacherDetail/InsertTeacherDetail",
+                {
+                  method: "POST",
+                  body: formData,
+                  headers: {
+                    Authorization: "bearer " + token,
+                    accept: "application/json",
+                  },
+                }
+              ).then(async (r) => {
+                const resD = await r.json();
+                const resDt = resD.uploadMessage;
+                setSt(resD.isSucces);
+                setfilename(resDt);
+
+                if (resD.isSucces === true) {
+                  // handleRandom(resDt);
+                  return (
+                    resDt,
+                    toast.success("Done Successfully!", {
+                      position: "top-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "colored",
+                    })
+                  );
+                } else if (resD.status !== 200) {
+                  return (
+                    resDt,
+                    toast.error("Some thing went wrong", {
+                      position: "top-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "colored",
+                    })
+                  );
+                }
+              });
               console.log(values);
             }}
           >
-            {({ errors, touched }) => (
+            {({ errors, touched, values, setFieldValue }) => (
               <Form className={co.form}>
-                <label htmlFor="email" className={`${co.label} ${co.lbl1}`}>
+                <div className={`form-group ${co.inputimg}`}>
+                  <label>
+                    <div className={values.file !== null ? `d-none` : ""}>
+                      <Image
+                        src={p}
+                        alt=""
+                        width="135"
+                        height="135"
+                      />
+                    </div>
+                    <input
+                      id="file"
+                      name="file"
+                      type="file"
+                      onChange={(event) => {
+                        setFieldValue("file", event.currentTarget.files[0]);
+                      }}
+                      className="form-control"
+                    />
+                    <Thumb file={values.file} />
+                  </label>
+                </div>
+                <label htmlFor="FullName" className={`${co.label} ${co.lbl1}`}>
                   Name
                 </label>
                 <Field
-                  name="email"
-                  type="email"
+                  name="FullName"
+                  type="text"
                   placeholder="Name"
                   className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f1}
-                  onChange={handleNameChange}
                 />
-                {errors.email && touched.email ? (
-                  <div className={co.err}>{errors.email}</div>
+                {errors.FullName && touched.FullName ? (
+                  <div className={co.err}>{errors.FullName}</div>
                 ) : null}
+                <div>
+                  <label htmlFor="Field" className={`${co.label} ${co.lbl1}`}>
+                    Field
+                  </label>
+                  {/* <pre>{JSON.stringify(selected)}</pre> */}
+                  <TagsInput
+                    value={selected}
+                    onChange={setSelected}
+                    name="Field"
+                    placeHolder="enter Field"
+                  />
+                  <h6 className="text-secondary">
+                    press enter or comma to add new tag
+                  </h6>
+                </div>
                 <label htmlFor="email" className={`${co.label} ${co.lbl1}`}>
                   Email
                 </label>
@@ -104,112 +253,57 @@ const StuProfile = () => {
                   type="email"
                   placeholder="abcd@gmaill.com"
                   className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f2}
-                  onChange={handleNameChange2}
                 />
                 {errors.email && touched.email ? (
                   <div className={co.err}>{errors.email}</div>
                 ) : null}
-                <label htmlFor="email" className={`${co.label} ${co.lbl1}`}>
-                  Password
-                </label>
-                <Field
-                  name="email"
-                  type={passwordShown ? "text" : "password"}
-                  placeholder="e.g. Learn  ui/ux design"
-                  className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f3}
-                  onChange={handleNameChange3}
-                />
-                <Button className={`${st.eye}`} onClick={togglePassword}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="blue"
-                    className="bi bi-eye"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                  </svg>
-                </Button>
-                {errors.email && touched.email ? (
-                  <div className={co.err}>{errors.email}</div>
-                ) : null}
-                <label
-                  htmlFor="email"
-                  className={`${co.label} ${co.lbl1} ${co.lbl2}`}
-                >
-                  Skill
-                </label>
-                <Field
-                  as="select"
-                  name="subject"
-                  placeholder="percent discount"
-                  className={`col-12 d-block mx-auto ${co.txtfeild} ${co.selectFeild}`}
-                >
-                  <option value="" disabled defaultValue hidden>
-                    Select Type
-                  </option>
-                  <option value="red">10%</option>
-                  <option value="green">20%</option>
-                  <option value="blue">50%</option>
-                </Field>
-                <label htmlFor="email" className={`${co.label} ${co.lbl1}`}>
+                <label htmlFor="AboutMe" className={`${co.label} ${co.lbl1}`}>
                   bio
                 </label>
                 <Field
                   placeholder="Description"
+                  name="message"
                   as="textarea"
-                  type="email"
                   className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f5}
-                  onChange={handleNameChange5}
                 />
                 {errors.email && touched.email ? (
                   <div className={co.err}>{errors.email}</div>
                 ) : null}
                 <label className={`${co.label} ${co.lbl1}`}>Facebook</label>
                 <Field
-                  name="email"
-                  type="email"
+                  name="Facebook"
+                  type="text"
                   placeholder="Copy Link"
                   className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f6}
-                  onChange={handleNameChange6}
                 />
-                {errors.email && touched.email ? (
-                  <div className={co.err}>{errors.email}</div>
+                {errors.Facebook && touched.Facebook ? (
+                  <div className={co.err}>{errors.Facebook}</div>
                 ) : null}
                 <label className={`${co.label} ${co.lbl1}`}>Twitter</label>
                 <Field
-                  name="email"
-                  type="email"
+                  name="Twitter"
+                  type="text"
                   placeholder="Copy Link"
                   className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f7}
-                  onChange={handleNameChange7}
                 />
                 {errors.email && touched.email ? (
                   <div className={co.err}>{errors.email}</div>
                 ) : null}
                 <label className={`${co.label} ${co.lbl1}`}>Instagram</label>
                 <Field
-                  name="email"
-                  type="email"
+                  name="Instagram"
+                  type="text"
                   placeholder="Copy Link"
                   className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
-                  value={f8}
-                  onChange={handleNameChange8}
                 />
                 {errors.email && touched.email ? (
                   <div className={co.err}>{errors.email}</div>
                 ) : null}
                 <div className={`col-12 d-flex justify-content-end mt-4`}>
-                  <button type="button" className={`${co.conBTN} ${co.nxt}`}>
+                  <button type="submit" className={`${co.conBTN} ${co.nxt}`}>
                     Save
                   </button>
+                  <ToastContainer/>
                 </div>
               </Form>
             )}
@@ -219,4 +313,4 @@ const StuProfile = () => {
     </SSRProvider>
   );
 };
-export default StuProfile;
+export default TeacherProfile;
