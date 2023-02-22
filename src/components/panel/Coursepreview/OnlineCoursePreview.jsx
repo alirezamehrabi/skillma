@@ -258,7 +258,7 @@ const Courses = ({ prev, data }) => {
                   maxLength="160"
                 />
                 <label htmlFor="categoryId" className={`${co.label}`}>
-                  What category best fits the knowledge you'll share?
+                  What category best fits the knowledge you`&apos;`ll share?
                 </label>
                 <Field
                   as="select"
@@ -386,8 +386,8 @@ const Courses = ({ prev, data }) => {
                           <div>
                             {values.whatYouLearn.map((i, index) => {
                               return (
-                                <React.Fragment>
-                                  <div className="" key={index}>
+                                <React.Fragment key={index}>
+                                  <div className="">
                                     <div className="float-end">
                                       <button
                                         onClick={() => {
@@ -444,8 +444,8 @@ const Courses = ({ prev, data }) => {
                           <div>
                             {values.requirement.map((i, index) => {
                               return (
-                                <React.Fragment>
-                                  <div className="" key={index}>
+                                <React.Fragment key={index}>
+                                  <div className="">
                                     <div className="float-end">
                                       <button
                                         onClick={() => {

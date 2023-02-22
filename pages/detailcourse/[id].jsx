@@ -56,10 +56,9 @@ export async function getStaticProps(context) {
   }
 }
 
-const detailcourse = (props) => {
+const Detailcourse = (props) => {
 
   const data1= useSelector((like)=>like.like.data3)
-  console.log(data1,"data1")
 const dispatch = useDispatch()
 const id = props.paths;
 const p=1;
@@ -69,7 +68,6 @@ useEffect(()=>{
 
   const cd = props.coursedet.data;
 
-  // console.log(props.coursedet.data);
   const { loading } = useContext(DataContext);
 
   const datafunc = async (p)=>{
@@ -374,4 +372,4 @@ let pageName = 1
   );
 };
 
-export default detailcourse;
+export default Detailcourse;

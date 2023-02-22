@@ -50,11 +50,10 @@ export async function getStaticProps() {
   };
 }
 
-const detailcourse = (props) => {
-  console.log(props.data.data)
+const Detailcourse = (props) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const data = props.data.data
   const { loading } = useContext(DataContext);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const meeting = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -322,4 +321,4 @@ const detailcourse = (props) => {
   ):(<Loader />)
 };
 
-export default detailcourse;
+export default Detailcourse;

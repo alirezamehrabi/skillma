@@ -50,7 +50,7 @@ export async function getStaticProps(context) {
     };
   }
 }
-const onlinecourse = (props) => {
+const Onlinecourse = (props) => {
   const data1 = useSelector((like) => like.like.data2);
   const dispatch = useDispatch();
   const id = props.paths;
@@ -252,4 +252,4 @@ const onlinecourse = (props) => {
   );
 };
 
-export default onlinecourse;
+export default Onlinecourse;

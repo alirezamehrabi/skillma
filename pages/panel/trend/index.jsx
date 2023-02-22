@@ -42,7 +42,7 @@ const Trend = () => {
                 <h5 className={`${tr.trTitle}`}>Trend Title</h5>
                 <h6 className={`${tr.trDes}`}>
                   Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
+                  typesetting industry. Lorem Ipsum has been the industry`&apos;`s
                   standard. Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry
                 </h6>

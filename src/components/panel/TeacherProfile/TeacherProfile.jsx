@@ -88,21 +88,36 @@ const TeacherProfile = ({ handleRandom }) => {
   useEffect(()=>{
     defaultdt()
   },[])
-  const d = dt !== undefined && dt.feild
-  console.log(d,"d")
-  const [selected, setSelected] = useState(d);
+  // const d = (dt !== undefined) && (dt !== false) && dt.feild
+  // console.log(d,"d")
+  const [selected, setSelected] = useState([JSON.stringify(dt !== undefined && dt.feild)]);
+  // const [selected, setSelected] = useState([]);
+  // if(dt === undefined){
+  //   return <Loader/>
+  // }
+  // else if(dt ===false){
+  //   return <Loader/>
+  // }
+ 
+  // else{
+  //   setSelected(JSON.stringify(d))
+  // }
   console.log(selected,"selected")
 
-  // console.log(dt !== undefined && dt.feild)
+  // console.log(dt !== null && dt.feild)
   // console.log(selected)
-  // console.log([ dt !== undefined && dt.feild.map((i)=>{return i}) ])
+  // console.log([ dt !== null && dt.feild.map((i)=>{return i}) ])
   if(dt === undefined){
     return <Loader/>
   }
-  // if(dt !== undefined){
+  else if(dt === false){
+    return <Loader/>
+  }
+  // if(dt !== null){
   //   setSelected(dt.feild)
   // }
-  const p = dt.pic === null ? require(`../../../assets/panel/profile/avatar.png`) : dt.pic
+
+  const p = dt === null ? require(`../../../assets/panel/profile/avatar.png`) : dt.pic
   // console.log(dt)
   //   if(dt.pic !== null){
   //   setpic(dt.pic)
@@ -121,13 +136,13 @@ const TeacherProfile = ({ handleRandom }) => {
             initialValues={{
               
               file: null,
-              FullName: dt !== undefined && dt.name,
-              message: dt !== undefined && dt.aboutTeacher,
-              Field: dt !== undefined && dt.feild,
-              Twitter: dt !== undefined && dt.twitter,
-              Instagram: dt !== undefined && dt.insta,
-              Facebook: dt !== undefined && dt.facebook,
-              email: dt !== undefined && dt.email,
+              FullName: dt !== null ? dt.name : "",
+              message: dt !== null ? dt.aboutTeacher : "",
+              Field: dt !== null ? dt.feild : "",
+              Twitter: dt !== null ? dt.twitter : "",
+              Instagram: dt !== null ? dt.insta : "",
+              Facebook: dt !== null ? dt.facebook : "",
+              Email: dt !== null ? dt.email : "",
             }}
             // validationSchema={ContactSchema}
             onSubmit={(values) => {
@@ -142,7 +157,8 @@ const TeacherProfile = ({ handleRandom }) => {
               formData.append("Twiter", values.Twitter);
               formData.append("Instagram", values.Instagram);
               formData.append("FaceBook", values.Facebook);
-              formData.append("email", values.Email);
+              formData.append("Email", values.Email);
+              // formData.append("OldPicName", dt.pic);
 
               fetch(
                 "https://skillma-api.shinypi.net/TeacherDetail/InsertTeacherDetail",
@@ -245,17 +261,17 @@ const TeacherProfile = ({ handleRandom }) => {
                     press enter or comma to add new tag
                   </h6>
                 </div>
-                <label htmlFor="email" className={`${co.label} ${co.lbl1}`}>
+                <label htmlFor="Email" className={`${co.label} ${co.lbl1}`}>
                   Email
                 </label>
                 <Field
-                  name="email"
+                  name="Email"
                   type="email"
                   placeholder="abcd@gmaill.com"
                   className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
                 />
-                {errors.email && touched.email ? (
-                  <div className={co.err}>{errors.email}</div>
+                {errors.Email && touched.Email ? (
+                  <div className={co.err}>{errors.Email}</div>
                 ) : null}
                 <label htmlFor="AboutMe" className={`${co.label} ${co.lbl1}`}>
                   bio
@@ -266,9 +282,6 @@ const TeacherProfile = ({ handleRandom }) => {
                   as="textarea"
                   className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
                 />
-                {errors.email && touched.email ? (
-                  <div className={co.err}>{errors.email}</div>
-                ) : null}
                 <label className={`${co.label} ${co.lbl1}`}>Facebook</label>
                 <Field
                   name="Facebook"
@@ -286,9 +299,6 @@ const TeacherProfile = ({ handleRandom }) => {
                   placeholder="Copy Link"
                   className={`col-12 mx-auto ${co.txtfeild} ${co.txtfeild2}`}
                 />
-                {errors.email && touched.email ? (
-                  <div className={co.err}>{errors.email}</div>
-                ) : null}
                 <label className={`${co.label} ${co.lbl1}`}>Instagram</label>
                 <Field
                   name="Instagram"

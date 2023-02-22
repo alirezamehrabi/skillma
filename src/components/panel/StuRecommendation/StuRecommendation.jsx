@@ -94,7 +94,7 @@ const StuRecommendation = () => {
                 {plus}Add more
               </div>
               <h6 className={`fw-bold`}>Request preview</h6>
-              <h6 className={`${st.recDes}`}>Lorem ipsum, or lipsum as it is sometimes known, is text used in laying out print, graphic or web designs. passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts Cicero's De Finibus Bonorum et Malorum for use in a specimen book. It usually begins with:</h6>
+              <h6 className={`${st.recDes}`}>Lorem ipsum, or lipsum as it is sometimes known, is text used in laying out print, graphic or web designs. passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts Cicero`&apos;`s De Finibus Bonorum et Malorum for use in a specimen book. It usually begins with:</h6>
               <div className={`${st.recPer}`}>
                   <Image src={require(`../../../assets/panel/dash/per.png`)} alt=""/>
                   <h6 className={``}>Dani Beaumont</h6>

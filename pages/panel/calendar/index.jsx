@@ -244,9 +244,9 @@ const Trend = (props) => {
               <div className={`col-lg-3`}>
                 <div className={`col-12 mt-5 ${dash.timelinepart}`}>
                   <h6 className={`col-12 mt-5 ${dash.tltitle}`}>Event List</h6>
-                  {courseDt1 !== undefined && courseDt1.map((i) => {
+                  {courseDt1 !== undefined && courseDt1.map((i,index) => {
                     return (
-                      <div className={`col-12 mb-4 ${dash.timelineitem}`}>
+                      <div className={`col-12 mb-4 ${dash.timelineitem}`} key={index}>
                         <h5 className={`${dash.timelinename}`}>
                           {i.eventTitle}
                         </h5>

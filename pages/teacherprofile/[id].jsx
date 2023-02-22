@@ -272,7 +272,12 @@ const TeacherProfile = (props) => {
     </SSRProvider>
   ) : (
     <Loader />
-  );
+  )
+  
+
+  
+  
+  
 };
 
 export default TeacherProfile;

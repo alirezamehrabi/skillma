@@ -34,7 +34,7 @@ const Help = (props) => {
           <Menu />
           <section className={`row container mx-auto ${help.search}`}>
           <h5 className={`${help.searchDes}`}>Hello, how can we help?</h5>
-          <h5 className={`${help.searchDes}`}>You searched "{props.data.data[0].searchedKey}"</h5>
+          <h5 className={`${help.searchDes}`}>You searched `&quot;` {props.data.data[0].searchedKey} `&quot;`</h5>
           {props.data.data.map((i)=>{
             return(
               <>

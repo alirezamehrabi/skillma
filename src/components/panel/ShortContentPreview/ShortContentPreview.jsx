@@ -79,7 +79,7 @@ const audio = <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" vie
               {errors.email && touched.email ? (
                 <div className={co.err}>{errors.email}</div>
               ) : null}
-              <label htmlFor="subject" className={`${co.label}`}>What category best fits the knowledge you'll share?</label>
+              <label htmlFor="subject" className={`${co.label}`}>What category best fits the knowledge you`&apos;`ll share?</label>
               <Field
                 as="select"
                 name="subject"

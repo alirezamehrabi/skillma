@@ -55,7 +55,7 @@ const Student = () => {
                                             <StuSlider/></div>
                                         <div className={`col-12`}>
                                         <h6 className={`fw-bold`}>New course</h6>
-                                        <h6 className={`${stu.stuDes}`}>Let's learn something new today!</h6>
+                                        <h6 className={`${stu.stuDes}`}>Let`&apos;`s learn something new today!</h6>
                                         <StuSlider2/>
                                         </div>
                                         <div className={`col-12`}>
@@ -108,7 +108,7 @@ const Student = () => {
                                             <h6 className={`${dash.timelineclock}`}>10:00 AM</h6>
                                         </div>
                                         <div className={`col-12 mb-4`}>
-                                        <h6 className={`${dash.timelineremain}`}>//In next 10 minute</h6>
+                                        <h6 className={`${dash.timelineremain}`}>In next 10 minute</h6>
                                         </div>
                                         <div className={`col-12 mb-4 ${dash.timelineitem}`}><h5 className={`${dash.timelinename}`}>Lorem Ipsum is simply dummy text<br />(Task Title)</h5>
                                             <h6 className={`${dash.timelinetitle}`}>course name</h6>

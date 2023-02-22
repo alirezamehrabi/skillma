@@ -212,7 +212,7 @@ const Courses = (props) => {
                         <div className={co.err}>{errors.title}</div>
                       ) : null}
                       <label htmlFor="categoryId" className={`${co.label}`}>
-                        What category best fits the knowledge you'll share?
+                        What category best fits the knowledge you`&apos;`ll share?
                       </label>
                       <Field
                         as="select"

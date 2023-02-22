@@ -1,18 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, createRef } from "react";
+import { useState } from "react";
 import { SSRProvider, Modal, Button } from "react-bootstrap";
-import co from "../../../../styles/panel/course.module.css";
+import co from "../../../styles/panel/course.module.css";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import UploadBox from "../UploadBox/UploadBox";
-import DatePicker from "react-date-picker/dist/entry.nostyle";
+import UploadBox from "../../../src/components/panel/UploadBox/UploadBox";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
-import { toast, ToastContainer } from "react-toastify";
 import React from "react";
 import Moment from "react-moment";
-import { addCourse } from "../../../../pages/api/course/new-course";
+import { addCourse } from "../../api/course/new-course";
 
 const ReactQuill = dynamic(import("react-quill"), {
   ssr: false,
@@ -24,8 +22,39 @@ const ContactSchema = Yup.object().shape({
   level: Yup.string().min(4, "Too Short!").required("Required"),
 });
 
-const Courses = ({ prev, data }) => {
-  const [whatYouLearn, setWhatYouLearn] = useState("");
+export async function getStaticPaths() {
+  return { paths: [], fallback: "blocking" };
+}
+
+export async function getStaticProps(context) {
+  const paths = context.params.id;
+  const request1 = await fetch(
+    `${process.env.webURL}/Course/GetCourseDetail?id=${paths}`
+  );
+  const dt = await request1.json()
+  
+  const res = await fetch(`${process.env.webURL}/Category/GetMainCategories`);
+    const posts = await res.json();
+  try {
+    
+    return {
+      props: {
+        ...{  dt, posts,paths },
+      },
+    };
+  } catch (e) {
+    return {
+      redirect: {
+        destination: "/404",
+      },
+    };
+  }
+}
+
+const Courses = (props) => {
+  console.log(props.dt.data)
+  const dt = props.dt.data
+  const data = props.posts.data
   const [courseConsist, setCourseConsist] = useState([{}, {}]);
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -246,7 +275,6 @@ const Courses = ({ prev, data }) => {
     setFormstep((formstep) => formstep - 1);
   };
   const [itemdt, setItemdt] = useState([]);
-  const [item, setItem] = useState([]);
 
   const [modalObjNum, setModalObjNum] = useState();
   const [isEdit, setIsEdit] = useState(false);
@@ -281,16 +309,15 @@ const Courses = ({ prev, data }) => {
     courseConsist = courseConsist.filter((i, index) => index !== modalObjNum);
     setCourseConsist(courseConsist);
   };
-  // const handleedit = () => {
-  //   console.log(courseConsist[modalObjNum].parts[partId]);
-  // };
-
   return (
     <SSRProvider>
       <div className={`row ${co.preview}`}>
         <Formik
           enableReinitialize={true}
           initialValues={{
+            categoryId : dt.categoryId,
+            title: dt.title,
+            level: dt.level,
             whatYouLearn: [{}, {}],
             itemShow: [],
             courseConsist: courseConsist,
@@ -298,7 +325,6 @@ const Courses = ({ prev, data }) => {
           }}
           // validationSchema={ContactSchema}
           onSubmit={async(values) => {
-            console.log(values)
             setCourseConsist(values.courseConsist);
             const userObj = {
             //   values.title,
@@ -947,7 +973,7 @@ const Courses = ({ prev, data }) => {
                                           className={`col-12 ${co.courseIMG}`}
                                         >
                                           <Image
-                                            src={require(`../../../assets/panel/course/1p.png`)}
+                                            src={require(`../../../src/assets/panel/course/1p.png`)}
                                             alt="course pic"
                                           />
                                         </div>
@@ -1262,7 +1288,7 @@ const Courses = ({ prev, data }) => {
                             <label className="form-check-label" htmlFor="e1">
                               <figure className={`${co.catImg}`}>
                                 <Image
-                                  src={require(`../../../assets/panel/course/1p.png`)}
+                                  src={require(`../../../src/assets/panel/course/1p.png`)}
                                   alt="logo"
                                   width=""
                                   height=""
@@ -1285,7 +1311,7 @@ const Courses = ({ prev, data }) => {
                             <label className="form-check-label" htmlFor="e2">
                               <figure className={`${co.catImg}`}>
                                 <Image
-                                  src={require(`../../../assets/panel/course/2p.png`)}
+                                  src={require(`../../../src/assets/panel/course/2p.png`)}
                                   alt="logo"
                                   width=""
                                   height=""
@@ -1308,7 +1334,7 @@ const Courses = ({ prev, data }) => {
                             <label className="form-check-label" htmlFor="e3">
                               <figure className={`${co.catImg}`}>
                                 <Image
-                                  src={require(`../../../assets/panel/course/3p.png`)}
+                                  src={require(`../../../src/assets/panel/course/3p.png`)}
                                   alt="logo"
                                   width=""
                                   height=""
@@ -1331,7 +1357,7 @@ const Courses = ({ prev, data }) => {
                             <label className="form-check-label" htmlFor="e4">
                               <figure className={`${co.catImg}`}>
                                 <Image
-                                  src={require(`../../../assets/panel/course/4p.png`)}
+                                  src={require(`../../../src/assets/panel/course/4p.png`)}
                                   alt="logo"
                                   width=""
                                   height=""
@@ -1354,7 +1380,7 @@ const Courses = ({ prev, data }) => {
                             <label className="form-check-label" htmlFor="e5">
                               <figure className={`${co.catImg}`}>
                                 <Image
-                                  src={require(`../../../assets/panel/course/5p.png`)}
+                                  src={require(`../../../src/assets/panel/course/5p.png`)}
                                   alt="logo"
                                   width=""
                                   height=""
@@ -1377,7 +1403,7 @@ const Courses = ({ prev, data }) => {
                             <label className="form-check-label" htmlFor="e6">
                               <figure className={`${co.catImg}`}>
                                 <Image
-                                  src={require(`../../../assets/panel/course/6p.png`)}
+                                  src={require(`../../../src/assets/panel/course/6p.png`)}
                                   alt="logo"
                                   width=""
                                   height=""

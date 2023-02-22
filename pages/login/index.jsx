@@ -92,8 +92,10 @@ const Login = () => {
   );
 
   const { setUser,loading } = useContext(DataContext);
-
-  return !loading ? (
+if(loading){
+  return <Loader/>
+}
+  return  (
     <SSRProvider>
       <div className={styles.container}>
         <Head>
@@ -207,7 +209,7 @@ const Login = () => {
         </main>
       </div>
     </SSRProvider>
-  ):(<Loader />)
+  )
 };
 
 export default Login;

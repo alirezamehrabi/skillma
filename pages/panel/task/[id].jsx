@@ -142,9 +142,8 @@ const Courses = (props) => {
     try {
       const result = await fetch(
         `${process.env.webURL}/Task/GetToDoTaskByTaskId?page=${p}&pagesize=5`
-      );
+      )
       const json = await result.json();
-      // console.log(json.data.pageData)
       setDatacourse(json.data);
       return json.data;
     } catch (error) {
@@ -254,7 +253,6 @@ const Courses = (props) => {
             <Link href="/panel/dashboard">
               <div className={`${men.logo}`}></div>
             </Link>
-
             <Menu />
           </div>
           <div className={`col-lg-10 ${dash.maincontainer}`}>
@@ -262,7 +260,7 @@ const Courses = (props) => {
             <div className={`col-12 ${co.coursetitle}`}>
               <div className={`row`}>
                 <div className={`col-3`}>
-              <span className={`fw-bolder p-3 mt-3`}>{(dt.pageData[0] !== undefined) ? dt.pageData[0].taskName : <>Can't Find This Task</>}</span>
+              <span className={`fw-bolder p-3 mt-3`}>{(dt.pageData[0] !== undefined) ? dt.pageData[0].taskName : <>Can`&apos;`t Find This Task</>}</span>
                 </div>
                 <div className={`col-9`}>
               <span className={`fw-bolder p-3 mt-3`}>{(dt.pageData[0] !== undefined) ? dt.pageData[0].description : null}</span>

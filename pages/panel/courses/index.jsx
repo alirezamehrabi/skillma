@@ -280,7 +280,7 @@ useEffect(() => {
                         }}>
                 {delet}
               </div>
-              <div className={`${co.edit}`}><Link href={`/panel/newcourses?id=${i.id}`}>{edit}</Link></div>
+              <div className={`${co.edit}`}><Link href={`/panel/editcourse/${i.id}`}>{edit}</Link></div>
             </td>
             {modalData !== null ? (
           <Modal show={show} onHide={handleClose}>

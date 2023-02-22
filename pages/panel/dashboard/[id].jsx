@@ -105,9 +105,9 @@ const Dashboard = (props) => {
                                     <div className={`col-12 mb-5`}><Calendar onChange={onChange} value={value} /></div>
                                     <div className={`col-12 mt-5 ${dash.timelinepart}`}>
                                         <h6 className={`col-12 mt-5 ${dash.tltitle}`}>TimeLine</h6>
-                                        {dt.timeLine.map((i)=>{
+                                        {dt.timeLine.map((i,index)=>{
                                             return(
-                                                <div className={`col-12 mb-4 ${dash.timelineitem}`}><h5 className={`${dash.timelinename}`}>{i.title}</h5>
+                                                <div className={`col-12 mb-4 ${dash.timelineitem}`} key={index}><h5 className={`${dash.timelinename}`}>{i.title}</h5>
                                             <h6 className={`${dash.timelinetitle}`}>{i.courseName}</h6>
                                             <h6 className={`${dash.timelineclock}`}>{i.time}</h6>
                                         </div>

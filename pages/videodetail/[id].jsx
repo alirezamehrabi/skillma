@@ -43,7 +43,7 @@ export async function getStaticProps(context) {
     }
  }
 }
-const videoDetail = (props) => {
+const VideoDetail = (props) => {
   const data1 = useSelector((like) => like.like.data4);
   const dispatch = useDispatch();
   const id = props.paths;
@@ -200,4 +200,4 @@ const videoDetail = (props) => {
   ):(<Loader />)
 };
 
-export default videoDetail;
+export default VideoDetail;

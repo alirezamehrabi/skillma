@@ -38,8 +38,6 @@ const StuProfile = () => {
         { headers: { Authorization: "Bearer " + token } }
       );
       const json = await result.json();
-      // console.log(json.data.pageData)
-      setCourseDt(json.data);
       return json.data;
     } catch (error) {
       console.log(error);
@@ -57,8 +55,6 @@ const StuProfile = () => {
         headers: { Authorization: "Bearer " + token },
       });
       const json = await result.json();
-      // console.log(json.data);
-      setstDt(json.data);
       return json.data;
     } catch (error) {
       console.log(error);

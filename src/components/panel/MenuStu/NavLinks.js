@@ -18,7 +18,7 @@ const Menu = () => {
   <path id="Path_83086" data-name="Path 83086" d="M7.5,14.25h2.7a.9.9,0,1,0,0-1.8H7.5a.9.9,0,1,0,0,1.8Zm10.8-9H5.7A2.7,2.7,0,0,0,3,7.95v8.1a2.7,2.7,0,0,0,2.7,2.7H18.3a2.7,2.7,0,0,0,2.7-2.7V7.95A2.7,2.7,0,0,0,18.3,5.25Zm.9,10.8a.9.9,0,0,1-.9.9H5.7a.9.9,0,0,1-.9-.9v-5.4H19.2Zm0-7.2H4.8v-.9a.9.9,0,0,1,.9-.9H18.3a.9.9,0,0,1,.9.9Z" fill="#7a7d7c"/>
 </svg>
 const task = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>{`.cls-1{opacity:0;}`}</style></defs><g id="Layer_2" data-name="Layer 2"><rect className="cls-1" width="24" height="24" /><path d="M21,7.47a.9.9,0,0,0-.26-.64L16.92,3a.92.92,0,0,0-1.28,0L13.1,5.56h0L3.26,15.39A.9.9,0,0,0,3,16v3.82a.9.9,0,0,0,.9.9H7.72a.91.91,0,0,0,.68-.26l9.78-9.84h0l2.56-2.5a1.21,1.21,0,0,0,.2-.3V7.51ZM7.35,19H4.8V16.4l8.94-8.93L16.28,10ZM17.55,8.74,15,6.2l1.27-1.27,2.54,2.54Z" /></g></svg>
-    const cart = <svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+    const cart = <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24">
     <defs>
       <clipPath id="clipPath">
         <rect id="Rectangle_2205" data-name="Rectangle 2205" width="24" height="24" fill="#7a7d7c"/>

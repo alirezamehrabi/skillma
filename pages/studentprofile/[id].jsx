@@ -111,9 +111,9 @@ dispatch(userprofile(router.query.id))
           <section className={`row container mx-auto mb-5 ${stu.skill}`}>
             <div className={`${stu.skilltitle}`}>Skills</div>
             <div className={`row ${stu.skillholder}`}>
-              {data1 !== undefined && data1.skills.split(",").map((i)=>{
+              {data1 !== undefined && data1.skills.split(",").map((i,index)=>{
                 return(
-                  <div className={`col-md-4 mx-auto`}>{bookmark} <span className={``}>{i}</span></div>
+                  <div className={`col-md-4 mx-auto`} key={index}>{bookmark} <span className={``}>{i}</span></div>
                 )
               })}
             </div>
