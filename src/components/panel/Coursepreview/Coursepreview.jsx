@@ -27,6 +27,7 @@ const ContactSchema = Yup.object().shape({
 const Courses = ({ prev, data }) => {
   const [whatYouLearn, setWhatYouLearn] = useState("");
   const [courseConsist, setCourseConsist] = useState([{}, {}]);
+  // let [courseConsist] = useState([{}, {}]);
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [price, setPrice] = useState("");
@@ -57,7 +58,7 @@ const Courses = ({ prev, data }) => {
     setShow4(true);
     setModalObjNum(index);
   };
-  console.log(courseConsist.length, "cl");
+
   const [upoaldboxdt, setUpoaldboxdt] = useState();
   const [upoaldimg, setUpoaldimg] = useState();
   const [upoaldintro, setUpoaldintro] = useState();
@@ -284,7 +285,7 @@ const Courses = ({ prev, data }) => {
   // const handleedit = () => {
   //   console.log(courseConsist[modalObjNum].parts[partId]);
   // };
-
+   
   return (
     <SSRProvider>
       <div className={`row ${co.preview}`}>
@@ -297,53 +298,46 @@ const Courses = ({ prev, data }) => {
             requirement: [{}],
           }}
           // validationSchema={ContactSchema}
-          onSubmit={async(values) => {
-            console.log(values)
-            setCourseConsist(values.courseConsist);
-            const userObj = {
-            //   values.title,
-            //   values.categoryId,
-            //   values.level,
-            //   values.status,
-            //   values.progress,
-            //   values.whatYouLearn,
-            //   (values.description = editor),
-            //   (values.itemShow = item),
-            //   (values.seasonNumber = courseConsist.length),
-            //   values.price,
-            //   (values.upldb = upoaldboxdt),
-            //   (values.pictureName =
-            //     upoaldimg === undefined ? values.radio : upoaldimg),
-            //   (values.introductionVideoName = upoaldintro),
-            //   (values.parts = []);
-            // console.log(values, "val");
+          onSubmit={async(values,actions) => {
+            console.log(values,"val")
+            if(values.categoryId){
+              setCourseConsist(values.courseConsist);
+              setItem(values);
+            }
+            
+            //actions.setSubmitting(false);
+            
+            console.log(item);
 
-              
+            const userObj = {
+            
             courseConsist: courseConsist,
-            title: values.title,
-            categoryId: parseInt(values.categoryId),
-            level: parseInt(values.level),
-            whatYouLearn: values.whatYouLearn,
+            title: item.title,
+            categoryId: parseInt(item.categoryId),
+            level: parseInt(item.level),
+            whatYouLearn: item.whatYouLearn,
             // whatYouLearn: values.whatYouLearn.map((i)=> {return i.data}),
             duration:1,
             price:parseInt(values.price),
-            status : parseInt(values.status),
+            status : parseInt(item.status),
             seasonNumber : courseConsist.length,
-            progress : parseInt(values.progress),
+            progress : parseInt(item.progress),
             upldb : upoaldboxdt,
               description : editor,
               pictureName : upoaldimg,
               introductionVideoName : upoaldintro,
+              requirements : item.requirement
             }
             console.log(userObj, "userObj");
             console.log(courseConsist, "courseConsist");
-            const user = await addCourse(userObj).then((r) => {
-              console.log(r);
-            });
+            const user = await addCourse(userObj);
             console.log(user,"user");
+            if(user.is){
+
+            }
           }}
         >
-          {({ errors, touched, values }) => (
+          {({ errors, touched, values, handleSubmit }) => (
             <Form className={co.form}>
               {/* form1 - coursePreview */}
               {/* form1 - coursePreview */}
@@ -456,8 +450,8 @@ const Courses = ({ prev, data }) => {
                     <button disabled>Please Fill all Field To Continue</button>
                   ) : (
                     <button
-                      type="submit"
-                      onClick={completeFormStep}
+                      type="button"
+                      onClick={()=>{completeFormStep()}}
                       className={`${co.conBTN} ${co.nxt}`}
                     >
                       Continue
@@ -658,8 +652,8 @@ const Courses = ({ prev, data }) => {
                       </button>
                     ) : (
                       <button
-                        type="submit"
-                        onClick={completeFormStep}
+                      type="button"
+                      onClick={()=>{completeFormStep()}}
                         className={`${co.conBTN} ${co.nxt}`}
                       >
                         Continue
@@ -750,7 +744,6 @@ const Courses = ({ prev, data }) => {
                     {/* Add courseConsist */}
                     {/* Add courseConsist */}
                     {/* Add courseConsist */}
-
                     <FieldArray
                       name="courseConsist"
                       render={(arrayHelper) => {
@@ -758,13 +751,23 @@ const Courses = ({ prev, data }) => {
                           <div>
                             {courseConsist.map((i, index) => {
                               return (
-                                // <div>kjhkh</div>
-                                <React.Fragment key={index}>
-                                  <div className="">
+                                <React.Fragment>
+                                  <div className="" key={index}>
                                     <div className="float-end">
                                       <button
+                                      type="button"
                                         onClick={() => {
+                                          //courseConsist.remo({});
                                           arrayHelper.remove(index);
+                                        
+                                         var temp= courseConsist;
+                                         //courseConsist = courseConsist.filter((i, inde) => index !== inde);
+                                         temp.splice(index, 1);
+                                      
+                                         courseConsist = temp;
+                                          //courseConsist = courseConsist.filter( (x, i)=> i!==(index));
+                                            setCourseConsist(courseConsist);
+                                          
                                         }}
                                         className={co.newdelbtn}
                                       >
@@ -777,7 +780,6 @@ const Courses = ({ prev, data }) => {
                                         placeholder={`course Consist ${
                                           index + 1
                                         }`}
-                                        // onBlur={(x) => {console.log(x);setCourseConsist(h=>[...h, x.target.value])}}
                                         name={`courseConsist.${index}.data`}
                                       ></Field>
                                     }
@@ -786,12 +788,17 @@ const Courses = ({ prev, data }) => {
                               );
                             })}
                             <button
+                             type="button"
                               className={`col-12 mx-auto text center ${co.addBtn}`}
                               onClick={() => {
+                                console.log(arrayHelper);
                                 arrayHelper.insert(
                                   courseConsist.length + 1,
                                   {}
                                 );
+                                courseConsist.push({});
+                                setCourseConsist(courseConsist);
+                                console.log(courseConsist);
                               }}
                             >
                               {plus}Add more
@@ -815,17 +822,15 @@ const Courses = ({ prev, data }) => {
                       </button>
                     ) : (
                       <button
-                        type="submit"
-                        onClick={() => {
-                          completeFormStep();
-                          setCourseConsist(courseConsist);
-                        }}
+                      type="submit"
+                      onClick={()=>{setCourseConsist(courseConsist);console.log(courseConsist); completeFormStep();}}
                         className={`${co.conBTN} ${co.nxt}`}
                       >
                         Continue
                       </button>
                     )}
                   </div>
+                  
                 </div>
               </div>
 
@@ -1002,8 +1007,8 @@ const Courses = ({ prev, data }) => {
                       Previous
                     </button>
                     <button
-                      type="submit"
-                      onClick={completeFormStep}
+                      type="button"
+                      onClick={()=>{completeFormStep()}}
                       className={`${co.conBTN} ${co.nxt}`}
                     >
                       Continue
@@ -1014,7 +1019,7 @@ const Courses = ({ prev, data }) => {
                   <Modal.Body className={`${co.modalbody}`}>
                     {delet} <h5 className={``}>Delete course</h5>
                     <h6 className={``}>
-                      Lorem ipsum, or lipsum as it is sometimes known
+                    Delete course?
                     </h6>
                     <Button variant="outline-danger mt-3" onClick={handleClose}>
                       Close
@@ -1139,11 +1144,9 @@ const Courses = ({ prev, data }) => {
                                   className={`d-flex justify-content-end ${co.corsebtn}`}
                                 >
                                   <button
-                                    type="submit"
-                                    onClick={() => {
-                                      handleClose2();
-                                      itemdtHandler(values);
-                                    }}
+                                    type="button"
+                                    onClick={()=>{handleClose2();
+                                      itemdtHandler(values);}}
                                     className={`mt-4 ${co.conBTN} ${co.nxt}`}
                                   >
                                     Continue
@@ -1422,8 +1425,8 @@ const Courses = ({ prev, data }) => {
                       </button>
                       <button
                         type="button"
-                        className={`${co.conBTN} ${co.nxt}`}
                         onClick={completeFormStep}
+                        className={`${co.conBTN} ${co.nxt}`}
                       >
                         Continue
                       </button>

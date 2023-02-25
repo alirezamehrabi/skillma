@@ -317,7 +317,7 @@ let pageName = 1
                           </h6>
                           {i.link === null ? (
                             <Link
-                              href={`asdasdsdfsdffgdghfghjnghjghjdggsdffgsd`}
+                              href={`${cd.link}`}
                             >
                               <button
                                 type="button"
@@ -328,7 +328,7 @@ let pageName = 1
                             </Link>
                           ) : (
                             <Link
-                              href={`asdasdsdfsdffgdghfghjnghjghjdggsdffgsd`}
+                              href={`${cd.link}`}
                             >
                               <button
                                 type="button"

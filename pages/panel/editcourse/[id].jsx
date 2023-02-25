@@ -362,6 +362,7 @@ const Courses = (props) => {
               description : editor,
               pictureName : upoaldimg,
               introductionVideoName : upoaldintro,
+              requirement: values.requirement
             }
             console.log(userObj, "userObj");
             console.log(courseConsist, "courseConsist");
