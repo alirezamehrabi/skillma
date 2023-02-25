@@ -10,7 +10,7 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import React from "react";
 import Moment from "react-moment";
-import { addCourse } from "../../api/course/new-course";
+import { updatecourse } from "../../api/edit-course";
 
 const ReactQuill = dynamic(import("react-quill"), {
   ssr: false,
@@ -86,7 +86,6 @@ const Courses = (props) => {
     setShow4(true);
     setModalObjNum(index);
   };
-  console.log(courseConsist.length, "cl");
   const [upoaldboxdt, setUpoaldboxdt] = useState();
   const [upoaldimg, setUpoaldimg] = useState();
   const [upoaldintro, setUpoaldintro] = useState();
@@ -266,7 +265,7 @@ const Courses = (props) => {
   );
   const [modalData, setModalData] = useState(null);
   const [modalData3, setModalData3] = useState(null);
-  const [editor, setEditor] = useState("");
+  const [editor, setEditor] = useState(dt.description);
   const [formstep, setFormstep] = useState(0);
   const completeFormStep = () => {
     setFormstep((formstep) => formstep + 1);
@@ -318,10 +317,13 @@ const Courses = (props) => {
             categoryId : dt.categoryId,
             title: dt.title,
             level: dt.level,
-            whatYouLearn: [{}, {}],
+            whatYouLearn: [dt.whatYouLearn],
             itemShow: [],
             courseConsist: courseConsist,
-            requirement: [{}],
+            requirement: [dt.requirement],
+            description: editor,
+            price: dt.price,
+            introductionVideoName: dt.videoPath
           }}
           // validationSchema={ContactSchema}
           onSubmit={async(values) => {
@@ -363,7 +365,7 @@ const Courses = (props) => {
             }
             console.log(userObj, "userObj");
             console.log(courseConsist, "courseConsist");
-            const user = await addCourse(userObj).then((r) => {
+            const user = await updatecourse(userObj).then((r) => {
               console.log(r);
             });
             console.log(user,"user");
@@ -1432,6 +1434,10 @@ const Courses = (props) => {
                         </h6>
                         <div className={`${co.uploadbox}`}>
                           <UploadBox handleRandom={(x) => setUpoaldintro(x)} />
+                          <br/><br/>
+                          video Path: {dt.videoPath}
+                          <br/><br/>
+                          For Change Promotional video, Upload New video
                         </div>
                       </div>
                     </div>

@@ -12,6 +12,9 @@
   color: orange !important;
   font-weight: bold;
 }
+.modalbodyy{
+  text-align: left;
+}
 .coursetitle > span {
   float: left;
   font-weight: 600;
@@ -114,6 +117,9 @@
   margin: auto;
   text-align: center;
   padding: 50px 50px;
+}
+.modalbodyy {
+  text-align: left;
 }
 .modalbody2 {
   text-align: left;

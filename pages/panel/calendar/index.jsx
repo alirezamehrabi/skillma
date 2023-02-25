@@ -12,7 +12,7 @@ import dash from "../../../styles/panel/Dashboard.module.css";
 import ca from "../../../styles/panel/Calendar.module.css";
 import re from "../../../styles/panel/Report.module.css";
 import styles from "../../../styles/Home.module.css";
-import co from "../../../styles/panel/Course.module.css";
+import co from "../../../styles/panel/Courses.module.css";
 import men from "../../../styles/panel/Menu.module.css";
 import tr from "../../../styles/panel/Trend.module.css";
 import Table from "react-bootstrap/Table";
@@ -154,6 +154,9 @@ const Trend = (props) => {
   const handleSList = (e) => {
     setSlist(e.target.value);
   };
+  if(courseDt === undefined){
+    return <Loader/>
+  }
   return (
     <SSRProvider>
       <Head>
@@ -188,53 +191,53 @@ const Trend = (props) => {
               <div className={`col-lg-9`}>
                 <Cal
                   month={10}
-                  year={2021}
+                  year={2023}
                   preloadedEvents={[
                     {
                       id: 1,
                       name: "Holiday",
-                      dateFrom: "2021-09-29T12:00",
-                      dateTo: "2021-10-03T08:45",
+                      dateFrom: "2023-09-29T12:00",
+                      dateTo: "2023-10-03T08:45",
                       //meta: SAMPLE_META,
                       type: "Holiday",
                     },
                     {
                       id: 2,
                       name: "Meeting",
-                      dateFrom: "2021-10-01T09:45",
-                      dateTo: "2021-10-04T22:00",
+                      dateFrom: "2023-10-01T09:45",
+                      dateTo: "2023-10-04T22:00",
                       //meta: SAMPLE_META,
                       type: "Standard",
                     },
                     {
                       id: 3,
                       name: "Away",
-                      dateFrom: "2021-10-01T01:00",
-                      dateTo: "2021-10-01T23:59",
+                      dateFrom: "2023-10-01T01:00",
+                      dateTo: "2023-10-01T23:59",
                       //meta: SAMPLE_META,
                       type: "Busy",
                     },
                     {
                       id: 4,
                       name: "Inspection",
-                      dateFrom: "2021-10-19T07:30",
-                      dateTo: "2021-10-21T23:59",
+                      dateFrom: "2023-10-19T07:30",
+                      dateTo: "2023-10-21T23:59",
                       //meta: SAMPLE_META,
                       type: "Standard",
                     },
                     {
                       id: 5,
                       name: "Holiday - Greece",
-                      dateFrom: "2021-10-14T08:00",
-                      dateTo: "2021-10-16T23:59",
+                      dateFrom: "2023-10-14T08:00",
+                      dateTo: "2023-10-16T23:59",
                       //meta: SAMPLE_META,
                       type: "Holiday",
                     },
                     {
                       id: 6,
                       name: "Holiday - Spain",
-                      dateFrom: "2021-10-29T08:00",
-                      dateTo: "2021-10-31T23:59",
+                      dateFrom: "2023-10-29T08:00",
+                      dateTo: "2023-10-31T23:59",
                       //meta: SAMPLE_META,
                       type: "Holiday",
                     },
@@ -270,7 +273,7 @@ const Trend = (props) => {
           onHide={handleClose}
           className={`${co.modalholder}`}
         >
-          <Modal.Body className={`${co.modalbody} ${co.modalbody2}`}>
+          <Modal.Body className={`${co.modalbody} ${co.modalbodyy}`}>
             <h5 className={``}>Create new task</h5>
 
             <Formik
@@ -285,7 +288,7 @@ const Trend = (props) => {
                 isSms: [],
                 isEmail: [],
               }}
-              validationSchema={ContactSchema}
+              // validationSchema={ContactSchema}
               // same shape as initial values
               onSubmit={async (values) => {
                 const userObj = {
@@ -324,18 +327,18 @@ const Trend = (props) => {
                   </label>
 
                   <label htmlFor="courseList" className={`${co.label}`}>
-                    Type Event
+                    Course
                   </label>
                   <Field
                     as="select"
                     name="courseList"
-                    placeholder="EventType"
+                    placeholder="Course"
                     onKeyUp={handleSList}
                     className={`col-12 mx-auto ${co.txtfeild} ${co.selectFeild}`}
                     defaultValue={"DEFAULT"}
                   >
                     <option hidden value="DEFAULT">
-                      EventType
+                      Choose Course
                     </option>
                     {courseDt.map((i) => {
                       return (
@@ -444,6 +447,7 @@ const Trend = (props) => {
                     />
                     Send Email
                   </label>
+                  <br/><br/><br/><br/>
                   <Button
                     variant="warning mt-4 mb-3"
                     className={`${co.frmBTN}`}
