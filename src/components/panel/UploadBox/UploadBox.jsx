@@ -12,7 +12,7 @@ class Thumb extends React.Component {
     thumb: undefined,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!nextProps.file) {
       return;
     }
@@ -85,11 +85,12 @@ const now = new Date()
       <Formik
           initialValues={{ file: null }}
           onSubmit={ (values) => {
-            console.log("form submited");
+            // console.log("form submited");
             let formData = new FormData();
 
             const token = getItem("token");
             formData.append("File", values.file);
+            console.log(formData,",mm,m");
 
             fetch(
               "https://skillma-api.shinypi.net/Course/UploadFile",
@@ -97,8 +98,10 @@ const now = new Date()
                 method: "POST",
                 body: formData,
                 headers: {
-                  Authorization: "bearer " + token,
-                  accept: "application/json"
+                  "Access-Control-Allow-Origin": "*",
+                  'Authorization': "bearer " + token,
+                  "accept": "application/json",
+        
                 },
               }
             ).then(async(r)=>{

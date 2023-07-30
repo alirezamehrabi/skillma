@@ -63,6 +63,7 @@ export async function getStaticProps(context) {
 
 const TeacherProfile = (props) => {
   const [res, setRes] = useState();
+  const { loading } = useContext(DataContext);
 
   const data1 = useSelector((like) => like.like.data1);
   const dispatch = useDispatch();
@@ -117,7 +118,6 @@ const TeacherProfile = (props) => {
     return <Loader />;
   }
   let pageName = 4;
-  const { loading } = useContext(DataContext);
   return !loading ? (
     <SSRProvider>
       <div className={styles.container}>

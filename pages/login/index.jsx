@@ -24,14 +24,15 @@ const ContactSchema = Yup.object().shape({
 
 const Login = () => {
   const router = useRouter();
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const { setUser,loading } = useContext(DataContext);
   let token = getItem("token");
   if (token) {
     router.push({ pathname: "/" });
     return;
   }
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [passwordShown, setPasswordShown] = useState(false);
+
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
@@ -91,7 +92,6 @@ const Login = () => {
     </svg>
   );
 
-  const { setUser,loading } = useContext(DataContext);
 if(loading){
   return <Loader/>
 }

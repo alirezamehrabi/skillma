@@ -751,8 +751,8 @@ const Courses = ({ prev, data }) => {
                           <div>
                             {courseConsist.map((i, index) => {
                               return (
-                                <React.Fragment>
-                                  <div className="" key={index}>
+                                <React.Fragment key={index}>
+                                  <div className="">
                                     <div className="float-end">
                                       <button
                                       type="button"
