@@ -1,0 +1,673 @@
+.courseTitle {
+  padding: 30px 15px;
+  border-radius: 15px;
+  background-color: #fff;
+  margin: 30px auto 25px;
+}
+.inputimg input{
+  display: none !important;
+}
+.inputimg img{
+  border-radius: 100% !important;
+  width: 130px;
+  height: 130px;
+}
+.preview > .form > div{
+  display:none
+}
+.preview > .form > div.active{
+  display:block
+}
+.active{
+  display: block;
+}
+.noactive{
+  display: none;
+}
+.loadspn{
+  border-radius: 100%;
+  border: 5px solid #ccc;
+  border-right: 5px solid rgb(41, 118, 235);
+  animation: rotating 2s linear infinite;
+  width:25px;
+  height: 25px;
+  text-align: center;
+  margin: auto;
+}
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
+}
+.courseTitle h6 {
+  font-weight: 600;
+  font-size: 22px;
+}
+.courseSecTitle {
+  font-weight: bold;
+  text-align: center;
+  margin: 20px auto 50px;
+}
+.courseSec {
+  background-color: #fff;
+  padding: 20px;
+}
+.courseit {
+  padding: 13px;
+  background-color: #d6ebff;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.onlinecourseit {
+  padding: 13px;
+  background-color: #ffe9d6;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.onlinecourseit svg,
+.courseit svg {
+  display: block;
+  margin: 20px auto;
+}
+.courseit h5 {
+  font-weight: 600;
+  color: #1d7dd8;
+  text-align: center;
+}
+.onlinecourseit h5 {
+  font-weight: 600;
+  color: #ed7208;
+  text-align: center;
+}
+.courseit h6,
+.onlinecourseit h6 {
+  color: #707070;
+  text-align: center;
+  line-height: 25px;
+}
+.preview {
+  background-color: #fff;
+  padding: 55px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+.prevTitle {
+  font-weight: 600;
+  margin-bottom: 60px;
+}
+.label {
+  margin: 20px 0;
+  color: #1a1c36;
+}
+.txtfeild {
+  border-radius: 7px;
+  border: 1px solid #2d3ddf;
+  padding: 10px 50px 10px 10px;
+  color: #b2b2b2;
+  margin-bottom: 40px;
+}
+.selectFeild {
+  background-color: #fff;
+}
+.chkbox {
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
+  margin-right: 15px;
+}
+.chkboxlbl {
+  position: relative;
+  top: 3px;
+}
+.conBTN {
+  padding: 10px 85px;
+  border-radius: 10px;
+}
+.newdelbtn{
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  position: relative;
+  top: 30px;
+  left: 40px;
+}
+.newdelbtn svg{
+  width: 50px;
+  height: 50px;
+}
+.prev {
+  border: 1px solid #ff9d14;
+  background-color: #fff;
+  color: #ff9d14;
+  margin-right: 15px;
+  transition: 0.5s;
+}
+.prev:hover {
+  background-color: #ff9d14;
+  color: #fff;
+}
+.nxt {
+  border: 1px solid #ff9d14;
+  background-color: #ff9d14;
+  color: #fff;
+  transition: 0.5s;
+}
+.nxt:hover {
+  background-color: #fff;
+  color: #ff9d14;
+}
+.txtlength {
+  position: relative;
+  /* right: 15px; */
+  left: 97%;
+  top: -95px;
+  /* float: right; */
+  color: #ccc;
+  height: 0;
+}
+.txtlength2 {
+  top: -45px;
+}
+.blueDes {
+  background-color: #d6ebff;
+  color: #1d7dd8;
+  padding: 25px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+.noticedes {
+  padding: 10px 20px;
+  font-size: 18px;
+}
+.lbl1 {
+  color: #7a7d7c;
+}
+.delBtn {
+  position: relative;
+  float: right;
+  top: -60px;
+  left: 100%;
+  cursor: pointer;
+}
+.txtfeild2 {
+  margin-bottom: 10px;
+}
+.addBtn {
+  border: 3px dashed #aaaead;
+  border-radius: 10px;
+  background-color: #fafafa;
+  text-align: center;
+  padding: 10px;
+  margin: 20px auto 70px;
+  color: #7a7d7c;
+  cursor: pointer;
+}
+.addBtn svg {
+  margin-right: 7px;
+}
+.ckHolder {
+  padding: 50px;
+  margin: 40px auto;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+.secDiv {
+  background-color: #fa9600;
+  padding: 14px;
+  border-radius: 50%;
+  margin: 7px;
+}
+.firstDiv {
+  background-color: #fff;
+  border: 1px solid #fa9600;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+.border {
+  border: 1px solid #fa9600;
+  width: 50%;
+  position: relative;
+  top: -15%;
+  left: 30%;
+}
+.navName {
+  color: #fa9600;
+  margin: 20px 0 60px -40px;
+}
+.disable .secDiv {
+  background-color: #e9e9fe;
+  padding: 14px;
+  border-radius: 50%;
+  margin: 7px;
+}
+.disable .firstDiv {
+  background-color: #fff;
+  border: 1px solid #e9e9fe;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+.disable .border {
+  border: 1px solid #e9e9fe;
+  width: 50%;
+  position: relative;
+  top: -15%;
+  left: 30%;
+}
+.disable .navName {
+  color: #e9e9fe;
+  margin: 20px 0 60px -40px;
+}
+.passed .secDiv {
+  background-color: #2fbc9e;
+  padding: 14px;
+  border-radius: 50%;
+  margin: 7px;
+}
+.passed .firstDiv {
+  background-color: #fff;
+  border: 1px solid #2fbc9e;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+.passed .border {
+  border: 1px solid #2fbc9e;
+  width: 50%;
+  position: relative;
+  top: -15%;
+  left: 30%;
+}
+.passed .navName {
+  color: #2fbc9e;
+  margin: 20px 0 60px -40px;
+}
+.courseContent > div {
+  background-color: #fff;
+  padding: 55px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+.navtitle {
+  float: left;
+  color: #2d3ddf;
+  font-weight: 600;
+  font-size: 18px;
+}
+.icon {
+  float: right;
+}
+.newItem {
+  background-color: #fafafa;
+  color: #7a7d7c;
+  padding: 10px;
+  min-height: 250px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.newItem svg {
+  margin-right: 10px;
+}
+.contentcourse {
+  margin-top: 70px;
+  border-radius: 15px;
+}
+.courseIMG span {
+  width: 100% !important;
+  height: 100% !important;
+}
+.oldItem {
+  cursor: auto;
+}
+.icon svg {
+  cursor: pointer;
+}
+.corsebtn {
+  padding: 0 !important;
+  background: transparent !important;
+}
+.delsvg path,
+.editsvg path {
+  transition: 0.5s;
+}
+.delsvg:hover path {
+  fill: red;
+}
+.editsvg:hover path {
+  fill: blue;
+}
+.icon > div {
+  float: right;
+}
+.modalbody {
+  margin: auto;
+  text-align: center;
+  padding: 50px 50px;
+}
+.modalbody svg {
+  width: 50px;
+  height: 50px;
+  fill: red;
+}
+.modalbody path {
+  fill: red;
+}
+.modalbody h5 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 60px;
+}
+.modalbody h5 {
+  font-size: 16px;
+  line-height: 40px;
+}
+.err {
+  color: red;
+  margin-bottom: 15px;
+}
+.uptitle {
+  font-weight: 600;
+}
+.upholder {
+  padding: 30px 10px;
+  width: 100%;
+}
+.modal > button {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+.upLblName {
+  font-size: 14px;
+  margin: 30px 0 20px;
+}
+.uploadbox {
+  border-radius: 15px;
+  border: 3px dashed #1492e6;
+  background-color: #f5f8fc;
+  padding: 30px 10px;
+}
+.uppic > span {
+  width: 300px !important;
+  height: 300px !important;
+  display: block !important;
+  margin: auto !important;
+}
+.uppic p {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: #7a7d7c;
+  display: block;
+  margin: auto;
+}
+.uppic p span {
+  color: #2d3ddf;
+}
+.uppic h6 {
+  text-align: center;
+  font-size: 22px;
+  color: #7a7d7c;
+  display: block;
+  margin: auto;
+  line-height: 60px;
+}
+.uppic h6 span {
+  color: #2d3ddf;
+  text-decoration: underline;
+}
+.upBTN {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 15px;
+  border: 2px dashed #2d3ddf;
+  padding: 30px 160px;
+  background-color: transparent;
+  color: #2d3ddf;
+}
+.tablebody td{
+  padding: 20px 10px;
+}
+.redDes {
+  background-color: #F8D5D5;
+  color: #DE2F2F;
+  padding: 25px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+.redDes a{
+  text-decoration: underline !important;
+  display: block;
+  margin-top: 10px;
+}
+
+.landingBg span,
+.landingBg label{
+  width: 100% !important;
+  height: 100% !important;
+}
+.input{
+  position: relative;
+  left: 54%;
+  z-index: 5;
+  width: 30px;
+  height: 30px;
+  top: 60px;
+  opacity: 0;
+  transition: 0.5s;
+}
+.radio{
+  position: relative;
+  opacity: 0;
+}
+.radioHolder > div{
+  border: 1px solid #1492e6;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+.radio ~ label span{
+  padding: 0 7px;
+}
+.radio:checked ~ label span{
+  color:blue;
+  padding: 0 15px;
+  font-weight: 600;
+  transition: 0.5s;
+}
+.radio:checked ~ label svg path{
+  fill:blue;
+  transition: 0.5s;
+}
+.input:checked{
+  opacity: 1;
+}
+.courseLanding{
+  background-color: #fff;
+  border-radius: 15px;
+  border: 1px solid red;
+}
+.landingTitle{
+  font-weight: bold;
+  margin: 40px 0 60px
+}
+.landingCourseTitle{
+  font-weight: 600;
+  margin: 10px 0 30px;
+}
+.landingDes{
+  margin-bottom: 20px;
+  color: #7A7D7C;
+}
+.landingDes a{
+  text-decoration: underline !important;
+}
+.form{
+  position: relative;
+}
+.datepick > div{
+  border: 1px solid #2d3ddf !important;
+  padding: 5px;
+  border-radius: 10px;
+}
+.datepick input{
+  color:#777;
+}
+.datepick svg{
+  width:26px;
+  height:26px;
+  fill:#777
+}
+.datepick path{
+  fill:#777
+}
+.stepModal{
+  display: block;
+margin: auto;
+text-align: center;
+}
+.stepModal svg{
+  margin-bottom: 30px;
+}
+.stepModal h6{
+  line-height: 30px;
+}
+.shortType{
+  border: 1px solid #acb2ec;
+  border-radius: 15px;
+  padding: 20px 0;
+  text-align: center;
+}
+.shortType > div{
+  padding: 0;
+}
+.TypeName{
+  margin-top: 20px;
+}
+.input1{
+  display: none;
+}
+.input1:checked ~ label{
+  color:blue
+}
+.input1:checked ~ label path{
+  fill:blue
+}
+.shortTypeHolder{
+  display: flex;
+  align-items: stretch;
+}
+.shortType{
+  margin: 10px;
+  flex-grow: 1;
+}
+.lbl2{
+  position: relative;
+  right: 40px;
+}
+@media only screen and (max-width: 1400px) {
+  .preview {
+    padding: 50px;
+    border-radius: 15px;
+    margin-top: 30px;
+  }
+  .firstDiv {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+  }
+  .secDiv {
+    padding: 14px;
+    border-radius: 50%;
+    margin: 7px;
+  }
+  .navName {
+    margin: 20px 0 60px -40px;
+    font-size: 14px;
+  }
+  .border,.passed .border,.disable .border {
+    width: 50%;
+    position: relative;
+    top: -15%;
+    left: 40%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+}
+
+@media only screen and (max-width: 992px) {
+}
+
+@media only screen and (max-width: 768px) {
+  .preview {
+    padding: 45px;
+    border-radius: 15px;
+    margin-top: 30px;
+  }
+  .firstDiv, .disable .firstDiv, .passed .firstDiv {
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+  }
+  .secDiv, .disable .secDiv , .passed .secDiv {
+    padding: 9px;
+    border-radius: 50%;
+    margin: 7px;
+  }
+  .navName {
+    margin: 20px 0 60px -40px;
+    font-size: 9px;
+    text-align: center;
+  }
+  .border,.passed .border,.disable .border {
+    width: 50%;
+    position: relative;
+    top: -15%;
+    left: 40%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .conBTN {
+    padding: 9px 20px;
+    border-radius: 7px;
+  }
+}
